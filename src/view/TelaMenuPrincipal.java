@@ -5,8 +5,7 @@
  */
 package view;
 
-import controller.ControllerCadHospede;
-import controller.ControllerCadServico;
+import controller.*;
 
 /**
  *
@@ -37,7 +36,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         jMenuItemSair = new javax.swing.JMenuItem();
@@ -54,11 +53,21 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
 
         jMenuItemProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Bomb.png"))); // NOI18N
         jMenuItemProduto.setText("Produto");
+        jMenuItemProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemProdutoActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItemProduto);
         jMenu2.add(jSeparator1);
 
         jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Boss.png"))); // NOI18N
         jMenuItem4.setText("Fornecedor");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem4);
 
         jMenuItem5.setText("Hóspede");
@@ -69,8 +78,13 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem5);
 
-        jMenuItem6.setText("Funcionário");
-        jMenu2.add(jMenuItem6);
+        jMenuItem7.setText("Funcionário");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem7);
 
         jMenuItem1.setText("Serviço");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -138,6 +152,24 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         telaCadastroServico.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        TelaCadastroFornecedor telaCadastroFornecedor = new TelaCadastroFornecedor(null,true);
+        ControllerCadFornecedor controllerCadFornecedor = new ControllerCadFornecedor(telaCadastroFornecedor);
+        telaCadastroFornecedor.setVisible(true);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        TelaCadastroFuncionario telaCadastroFuncionario = new TelaCadastroFuncionario(null,true);
+        ControllerCadFuncionario controllerCadFuncionario = new ControllerCadFuncionario(telaCadastroFuncionario);
+        telaCadastroFuncionario.setVisible(true);
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItemProdutoActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        TelaCadastroProduto telaCadastroProduto = new TelaCadastroProduto(null,true);
+        ControllerCadProduto controllerCadProduto = new ControllerCadProduto(telaCadastroProduto);
+        telaCadastroProduto.setVisible(true);
+    }                                                
+
     /**
      * @param args the command line arguments
      */
@@ -183,7 +215,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItemProduto;
     private javax.swing.JMenuItem jMenuItemSair;
     private javax.swing.JPopupMenu.Separator jSeparator1;
