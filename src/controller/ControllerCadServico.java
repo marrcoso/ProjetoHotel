@@ -11,7 +11,7 @@ public class ControllerCadServico implements ActionListener {
 
     public ControllerCadServico(TelaCadastroServico telaCadastroServico) {
 
-        this.telaCadastroServico = this.telaCadastroServico;
+        this.telaCadastroServico = telaCadastroServico;
 
         this.telaCadastroServico.getjButtonNovo().addActionListener(this);
         this.telaCadastroServico.getjButtonCancelar().addActionListener(this);
