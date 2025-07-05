@@ -39,6 +39,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItemHospede = new javax.swing.JMenuItem();
         jMenuItemQuarto = new javax.swing.JMenuItem();
+        jMenuItemVeiculo1 = new javax.swing.JMenuItem();
         jMenuItemVeiculo = new javax.swing.JMenuItem();
         jMenuItemModelo = new javax.swing.JMenuItem();
         jMenuItemMarca = new javax.swing.JMenuItem();
@@ -109,6 +110,15 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu2.add(jMenuItemQuarto);
+
+        jMenuItemVeiculo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Blue pin.png"))); // NOI18N
+        jMenuItemVeiculo1.setText("Vaga");
+        jMenuItemVeiculo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemVeiculo1ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItemVeiculo1);
 
         jMenuItemVeiculo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Delivery.png"))); // NOI18N
         jMenuItemVeiculo.setText("Veiculo");
@@ -231,6 +241,12 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         telaCadastroServico.setVisible(true);
     }//GEN-LAST:event_jMenuItemServicoActionPerformed
 
+    private void jMenuItemVeiculo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemVeiculo1ActionPerformed
+        TelaCadastroVagaEstacionamento telaCadastroVagaEstacionamento = new TelaCadastroVagaEstacionamento(null,true);
+        ControllerCadVagaEstacionamento controllerCadVagaEstacionamento = new ControllerCadVagaEstacionamento(telaCadastroVagaEstacionamento);
+        telaCadastroVagaEstacionamento.setVisible(true);
+    }//GEN-LAST:event_jMenuItemVeiculo1ActionPerformed
+
     private void jMenuItemProdutoActionPerformed(java.awt.event.ActionEvent evt) {                                           
         TelaCadastroProduto telaCadastroProduto = new TelaCadastroProduto(null,true);
         ControllerCadProduto controllerCadProduto = new ControllerCadProduto(telaCadastroProduto);
@@ -289,6 +305,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemSair;
     private javax.swing.JMenuItem jMenuItemServico;
     private javax.swing.JMenuItem jMenuItemVeiculo;
+    private javax.swing.JMenuItem jMenuItemVeiculo1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     // End of variables declaration//GEN-END:variables
