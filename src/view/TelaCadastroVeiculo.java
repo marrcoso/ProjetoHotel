@@ -81,7 +81,7 @@ public class TelaCadastroVeiculo extends javax.swing.JDialog {
         jButtonSair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cadastro de Hóspedes");
+        setTitle("Cadastro de Veiculos");
         setResizable(false);
 
         jPanelTitulo.setBackground(new java.awt.Color(204, 0, 0));
