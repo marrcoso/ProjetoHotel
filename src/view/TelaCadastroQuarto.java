@@ -73,6 +73,15 @@ public class TelaCadastroQuarto extends javax.swing.JDialog {
         jTextFieldObservacao = new javax.swing.JTextField();
         jLabelStatus = new javax.swing.JLabel();
         jComboBoxStatus = new javax.swing.JComboBox<>();
+        jFormattedTextFieldCapacidade = new javax.swing.JFormattedTextField();
+        jLabelCapacidade = new javax.swing.JLabel();
+        jFormattedTextFieldMetragem = new javax.swing.JFormattedTextField();
+        jLabelMetragem = new javax.swing.JLabel();
+        jFormattedTextFieldAndar = new javax.swing.JFormattedTextField();
+        jLabelAndar = new javax.swing.JLabel();
+        jCheckBoxFlagAnimais = new javax.swing.JCheckBox();
+        jLabelDescricaoIdentificacao = new javax.swing.JLabel();
+        jTextFieldDescricaoidentificacao = new javax.swing.JTextField();
         jPanelBotoes = new javax.swing.JPanel();
         jButtonNovo = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
@@ -128,6 +137,38 @@ public class TelaCadastroQuarto extends javax.swing.JDialog {
 
         jComboBoxStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ativo", "Inativo" }));
 
+        jFormattedTextFieldCapacidade.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+
+        jLabelCapacidade.setText("Capacidade");
+
+        jFormattedTextFieldMetragem.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+
+        jLabelMetragem.setText("Metragem");
+
+        jFormattedTextFieldAndar.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        jFormattedTextFieldAndar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFormattedTextFieldAndarActionPerformed(evt);
+            }
+        });
+
+        jLabelAndar.setText("Andar");
+
+        jCheckBoxFlagAnimais.setText("Permite animais");
+        jCheckBoxFlagAnimais.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxFlagAnimaisActionPerformed(evt);
+            }
+        });
+
+        jLabelDescricaoIdentificacao.setText("Identificacao");
+
+        jTextFieldDescricaoidentificacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldDescricaoidentificacaoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelDadosLayout = new javax.swing.GroupLayout(jPanelDados);
         jPanelDados.setLayout(jPanelDadosLayout);
         jPanelDadosLayout.setHorizontalGroup(
@@ -139,7 +180,7 @@ public class TelaCadastroQuarto extends javax.swing.JDialog {
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelId)
                             .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 480, Short.MAX_VALUE)
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jComboBoxStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanelDadosLayout.createSequentialGroup()
@@ -147,10 +188,27 @@ public class TelaCadastroQuarto extends javax.swing.JDialog {
                                 .addGap(156, 156, 156))))
                     .addComponent(jTextFieldDescricao)
                     .addComponent(jTextFieldObservacao)
+                    .addComponent(jTextFieldDescricaoidentificacao)
                     .addGroup(jPanelDadosLayout.createSequentialGroup()
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelDescricao)
-                            .addComponent(jLabelObservacao))
+                            .addComponent(jLabelObservacao)
+                            .addGroup(jPanelDadosLayout.createSequentialGroup()
+                                .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelCapacidade)
+                                    .addComponent(jFormattedTextFieldCapacidade, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(30, 30, 30)
+                                .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelMetragem)
+                                    .addComponent(jFormattedTextFieldMetragem, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(27, 27, 27)
+                                .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelAndar)
+                                    .addGroup(jPanelDadosLayout.createSequentialGroup()
+                                        .addComponent(jFormattedTextFieldAndar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jCheckBoxFlagAnimais))))
+                            .addComponent(jLabelDescricaoIdentificacao))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -178,7 +236,28 @@ public class TelaCadastroQuarto extends javax.swing.JDialog {
                 .addComponent(jLabelObservacao)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldObservacao, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelMetragem)
+                    .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelDadosLayout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jFormattedTextFieldAndar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jCheckBoxFlagAnimais)))
+                            .addComponent(jLabelAndar))
+                        .addGroup(jPanelDadosLayout.createSequentialGroup()
+                            .addComponent(jLabelCapacidade)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jFormattedTextFieldCapacidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jFormattedTextFieldMetragem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelDescricaoIdentificacao)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextFieldDescricaoidentificacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(107, Short.MAX_VALUE))
         );
 
         jPanelBotoes.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -246,6 +325,18 @@ public class TelaCadastroQuarto extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldIdActionPerformed
 
+    private void jCheckBoxFlagAnimaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxFlagAnimaisActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBoxFlagAnimaisActionPerformed
+
+    private void jTextFieldDescricaoidentificacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDescricaoidentificacaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldDescricaoidentificacaoActionPerformed
+
+    private void jFormattedTextFieldAndarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldAndarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFormattedTextFieldAndarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -294,9 +385,17 @@ public class TelaCadastroQuarto extends javax.swing.JDialog {
     private javax.swing.JButton jButtonGravar;
     private javax.swing.JButton jButtonNovo;
     private javax.swing.JButton jButtonSair;
+    private javax.swing.JCheckBox jCheckBoxFlagAnimais;
     private javax.swing.JComboBox<String> jComboBoxStatus;
+    private javax.swing.JFormattedTextField jFormattedTextFieldAndar;
+    private javax.swing.JFormattedTextField jFormattedTextFieldCapacidade;
+    private javax.swing.JFormattedTextField jFormattedTextFieldMetragem;
+    private javax.swing.JLabel jLabelAndar;
+    private javax.swing.JLabel jLabelCapacidade;
     private javax.swing.JLabel jLabelDescricao;
+    private javax.swing.JLabel jLabelDescricaoIdentificacao;
     private javax.swing.JLabel jLabelId;
+    private javax.swing.JLabel jLabelMetragem;
     private javax.swing.JLabel jLabelObservacao;
     private javax.swing.JLabel jLabelStatus;
     private javax.swing.JLabel jLabelTitulo;
@@ -304,6 +403,7 @@ public class TelaCadastroQuarto extends javax.swing.JDialog {
     private javax.swing.JPanel jPanelDados;
     private javax.swing.JPanel jPanelTitulo;
     private javax.swing.JTextField jTextFieldDescricao;
+    private javax.swing.JTextField jTextFieldDescricaoidentificacao;
     private javax.swing.JTextField jTextFieldId;
     private javax.swing.JTextField jTextFieldObservacao;
     // End of variables declaration//GEN-END:variables
