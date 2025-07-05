@@ -69,7 +69,7 @@ public class TelaCadastroMarca extends javax.swing.JDialog {
         jTextFieldId = new javax.swing.JTextField();
         jLabelDescricao = new javax.swing.JLabel();
         jTextFieldDescricao = new javax.swing.JTextField();
-        jLabelSexo = new javax.swing.JLabel();
+        jLabelStatus = new javax.swing.JLabel();
         jComboBoxStatus = new javax.swing.JComboBox<>();
         jPanelBotoes = new javax.swing.JPanel();
         jButtonNovo = new javax.swing.JButton();
@@ -104,6 +104,8 @@ public class TelaCadastroMarca extends javax.swing.JDialog {
 
         jLabelId.setText("ID");
 
+        jTextFieldId.setEditable(false);
+        jTextFieldId.setText("123");
         jTextFieldId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldIdActionPerformed(evt);
@@ -118,7 +120,7 @@ public class TelaCadastroMarca extends javax.swing.JDialog {
             }
         });
 
-        jLabelSexo.setText("Status");
+        jLabelStatus.setText("Status");
 
         jComboBoxStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ativo", "Inativo" }));
 
@@ -131,13 +133,13 @@ public class TelaCadastroMarca extends javax.swing.JDialog {
                 .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelDadosLayout.createSequentialGroup()
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelId))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 509, Short.MAX_VALUE)
+                            .addComponent(jLabelId)
+                            .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jComboBoxStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanelDadosLayout.createSequentialGroup()
-                                .addComponent(jLabelSexo)
+                                .addComponent(jLabelStatus)
                                 .addGap(156, 156, 156))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelDadosLayout.createSequentialGroup()
                         .addComponent(jLabelDescricao)
@@ -158,7 +160,7 @@ public class TelaCadastroMarca extends javax.swing.JDialog {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelDadosLayout.createSequentialGroup()
-                                .addComponent(jLabelSexo)
+                                .addComponent(jLabelStatus)
                                 .addGap(28, 28, 28))
                             .addComponent(jComboBoxStatus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -206,7 +208,7 @@ public class TelaCadastroMarca extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanelDados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanelBotoes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanelBotoes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 758, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -284,7 +286,7 @@ public class TelaCadastroMarca extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> jComboBoxStatus;
     private javax.swing.JLabel jLabelDescricao;
     private javax.swing.JLabel jLabelId;
-    private javax.swing.JLabel jLabelSexo;
+    private javax.swing.JLabel jLabelStatus;
     private javax.swing.JLabel jLabelTitulo;
     private javax.swing.JPanel jPanelBotoes;
     private javax.swing.JPanel jPanelDados;

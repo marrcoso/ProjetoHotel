@@ -111,25 +111,25 @@
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jComboBoxStatus" alignment="0" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jLabelSexo" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelStatus" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="156" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jTextFieldDescricao" alignment="0" min="-2" pref="162" max="-2" attributes="0"/>
-                              <Component id="jLabelDescricao1" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jTextFieldPlaca" alignment="0" min="-2" pref="162" max="-2" attributes="0"/>
+                              <Component id="jLabelPlaca" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabelDescricao" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTextFieldDescricao1" min="-2" pref="162" max="-2" attributes="0"/>
+                              <Component id="jLabelCor" min="-2" max="-2" attributes="0"/>
+                              <Component id="jTextFieldCor" min="-2" pref="162" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabelSexo1" min="-2" max="-2" attributes="0"/>
-                              <Component id="jComboBoxStatus1" min="-2" pref="202" max="-2" attributes="0"/>
+                              <Component id="jLabelModelo" min="-2" max="-2" attributes="0"/>
+                              <Component id="jComboBoxModelo" min="-2" pref="202" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
@@ -152,7 +152,7 @@
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
-                                  <Component id="jLabelSexo" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelStatus" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                               </Group>
                               <Component id="jComboBoxStatus" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -161,15 +161,15 @@
                   </Group>
                   <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabelDescricao" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabelDescricao1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabelSexo1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelCor" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelPlaca" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelModelo" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTextFieldDescricao" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextFieldDescricao1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jComboBoxStatus1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextFieldPlaca" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextFieldCor" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jComboBoxModelo" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="22" max="32767" attributes="0"/>
               </Group>
@@ -187,17 +187,17 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldIdActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabelDescricao">
+        <Component class="javax.swing.JLabel" name="jLabelCor">
           <Properties>
             <Property name="text" type="java.lang.String" value="Cor"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextFieldDescricao">
+        <Component class="javax.swing.JTextField" name="jTextFieldPlaca">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldDescricaoActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldPlacaActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabelSexo">
+        <Component class="javax.swing.JLabel" name="jLabelStatus">
           <Properties>
             <Property name="text" type="java.lang.String" value="Status"/>
           </Properties>
@@ -215,22 +215,22 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabelDescricao1">
+        <Component class="javax.swing.JLabel" name="jLabelPlaca">
           <Properties>
             <Property name="text" type="java.lang.String" value="Placa"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextFieldDescricao1">
+        <Component class="javax.swing.JTextField" name="jTextFieldCor">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldDescricao1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldCorActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabelSexo1">
+        <Component class="javax.swing.JLabel" name="jLabelModelo">
           <Properties>
             <Property name="text" type="java.lang.String" value="Modelo"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBoxStatus1">
+        <Component class="javax.swing.JComboBox" name="jComboBoxModelo">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="3">

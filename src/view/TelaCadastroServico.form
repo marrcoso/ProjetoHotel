@@ -30,7 +30,7 @@
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="jPanelTitulo" max="32767" attributes="0"/>
                   <Component id="jPanelDados" max="32767" attributes="0"/>
-                  <Component id="jPanelBotoes" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jPanelBotoes" alignment="0" pref="758" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -104,28 +104,27 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jTextFieldId" min="-2" pref="35" max="-2" attributes="0"/>
-                              <Component id="jLabelId" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabelId" min="-2" max="-2" attributes="0"/>
+                              <Component id="jTextFieldId" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jComboBoxStatus" alignment="0" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jLabelSexo" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelStatus" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="156" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="jLabelDescricao" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextFieldDescricao" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jTextFieldObservacao" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabelDescricao" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabelObservacao" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="jTextFieldDescricao" alignment="0" max="32767" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabelObservacao" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="112" pref="658" max="32767" attributes="0"/>
-                      </Group>
-                      <Component id="jTextFieldObservacao" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -145,7 +144,7 @@
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
-                                  <Component id="jLabelSexo" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelStatus" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                               </Group>
                               <Component id="jComboBoxStatus" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -172,6 +171,10 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldId">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="text" type="java.lang.String" value="123"/>
+          </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldIdActionPerformed"/>
           </Events>
@@ -193,7 +196,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldObservacao">
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabelSexo">
+        <Component class="javax.swing.JLabel" name="jLabelStatus">
           <Properties>
             <Property name="text" type="java.lang.String" value="Status"/>
           </Properties>
@@ -201,14 +204,11 @@
         <Component class="javax.swing.JComboBox" name="jComboBoxStatus">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
+              <StringArray count="2">
+                <StringItem index="0" value="Ativo"/>
+                <StringItem index="1" value="Inativo"/>
               </StringArray>
             </Property>
-            <Property name="selectedIndex" type="int" value="-1"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
