@@ -137,6 +137,7 @@ public class TelaCadastroVeiculo extends javax.swing.JDialog {
         jLabelModelo.setText("Modelo");
 
         jComboBoxModelo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gol", "Corsa", "Uno" }));
+        jComboBoxModelo.setSelectedIndex(-1);
 
         javax.swing.GroupLayout jPanelDadosLayout = new javax.swing.GroupLayout(jPanelDados);
         jPanelDados.setLayout(jPanelDadosLayout);

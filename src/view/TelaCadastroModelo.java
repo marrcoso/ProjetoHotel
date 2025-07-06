@@ -127,6 +127,7 @@ public class TelaCadastroModelo extends javax.swing.JDialog {
         jComboBoxStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ativo", "Inativo" }));
 
         jComboBoxMarca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Volkswagen", "Fiat", "Chevrolet", " " }));
+        jComboBoxMarca.setSelectedIndex(-1);
 
         jLabelMarca.setText("Marca");
 
