@@ -1,20 +1,28 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package model;
 
-
-public class Servico {
+/**
+ *
+ * @author MarcusVinicius
+ */
+public class VagaEstacionamento {
     private int id;
     private String descricao;
     private String obs;
+    private float metragemVaga;
     private char status;
 
-    public Servico() {
+    public VagaEstacionamento() {
     }
-
-    public Servico(int id, String descricao, String obs, char status) {
+    
+    public VagaEstacionamento(int id, String descricao, String obs, float metragemVaga, char status) {
         this.id = id;
         this.descricao = descricao;
         this.obs = obs;
+        this.metragemVaga = metragemVaga;
         this.status = status;
     }
 
@@ -42,6 +50,14 @@ public class Servico {
         this.obs = obs;
     }
 
+    public float getMetragemVaga() {
+        return metragemVaga;
+    }
+
+    public void setMetragemVaga(float metragemVaga) {
+        this.metragemVaga = metragemVaga;
+    }
+
     public char getStatus() {
         return status;
     }
@@ -57,10 +73,11 @@ public class Servico {
     @Override
     public String toString() {
         return 
-        "id          = " + this.id + 
-        "\ndescricao = " + this.descricao + 
-        "\nobs       = " + this.obs + 
-        "\nstatus    = " + this.status;
+        "id             = " + id + 
+        "\ndescricao    = " + descricao + 
+        "\nobs          = " + obs + 
+        "\nmetragemVaga = " + metragemVaga + 
+        "\nstatus       = " + status;
     }
     
     
