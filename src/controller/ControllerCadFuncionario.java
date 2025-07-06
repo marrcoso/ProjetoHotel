@@ -3,6 +3,8 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import view.TelaBuscaFornecedor;
+import view.TelaBuscaFuncionario;
 import view.TelaCadastroFuncionario;
 
 public class ControllerCadFuncionario implements ActionListener {
@@ -37,6 +39,11 @@ public class ControllerCadFuncionario implements ActionListener {
         } else if (evento.getSource() == this.telaCadastroFuncionario.getjButtonGravar()) {
             utilities.Utilities.ativaDesativa(this.telaCadastroFuncionario.getjPanelBotoes(), true);
         } else if (evento.getSource() == this.telaCadastroFuncionario.getjButtonBuscar()) {
+            
+            TelaBuscaFuncionario telaBuscaFuncionario = new TelaBuscaFuncionario(null, true);
+            ControllerBuscaFuncionario controllerBuscaFuncionario = new ControllerBuscaFuncionario(telaBuscaFuncionario);
+            telaBuscaFuncionario.setVisible(true);
+            
         } else if (evento.getSource() == this.telaCadastroFuncionario.getjButtonSair()) {
             this.telaCadastroFuncionario.dispose();
         }
