@@ -5,6 +5,7 @@ import view.TelaCadastroVagaEstacionamento;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import view.buscas.TelaBuscaVaga;
 
 public class ControllerCadVagaEstacionamento implements ActionListener {
 
@@ -38,6 +39,11 @@ public class ControllerCadVagaEstacionamento implements ActionListener {
         } else if (evento.getSource() == this.telaCadastroVagaEstacionamento.getjButtonGravar()) {
             utilities.Utilities.ativaDesativa(this.telaCadastroVagaEstacionamento.getjPanelBotoes(), true);
         } else if (evento.getSource() == this.telaCadastroVagaEstacionamento.getjButtonBuscar()) {
+            
+            TelaBuscaVaga telaBuscaVaga = new TelaBuscaVaga(null, true);
+            ControllerBuscaVagaEstacionamento controllerBuscaVagaEstacionamento = new ControllerBuscaVagaEstacionamento(telaBuscaVaga);
+            telaBuscaVaga.setVisible(true);
+            
         } else if (evento.getSource() == this.telaCadastroVagaEstacionamento.getjButtonSair()) {
             this.telaCadastroVagaEstacionamento.dispose();
         }

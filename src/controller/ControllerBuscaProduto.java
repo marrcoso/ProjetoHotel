@@ -39,9 +39,11 @@ public class ControllerBuscaProduto implements ActionListener {
                     JOptionPane.showMessageDialog(null, "Filtrando por ID");
 
                 } else if (this.telaBuscaProduto.getjCBFiltro().getSelectedIndex() == 1) {
-                    JOptionPane.showMessageDialog(null, "Filtrando por Nome");
+                    JOptionPane.showMessageDialog(null, "Filtrando por Descrição");
                 } else if (this.telaBuscaProduto.getjCBFiltro().getSelectedIndex() == 2) {
-                    JOptionPane.showMessageDialog(null, "Filtrando por CPF");
+                    JOptionPane.showMessageDialog(null, "Filtrando por Observação");
+                } else if (this.telaBuscaProduto.getjCBFiltro().getSelectedIndex() == 3) {
+                    JOptionPane.showMessageDialog(null, "Filtrando por Valor");
                 }
             }
         } else if (evento.getSource() == this.telaBuscaProduto.getjButtonSair()) {

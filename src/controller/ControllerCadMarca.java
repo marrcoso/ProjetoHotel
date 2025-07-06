@@ -5,6 +5,7 @@ import view.TelaCadastroMarca;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import view.buscas.TelaBuscaMarca;
 
 public class ControllerCadMarca implements ActionListener {
 
@@ -38,6 +39,11 @@ public class ControllerCadMarca implements ActionListener {
         } else if (evento.getSource() == this.telaCadastroMarca.getjButtonGravar()) {
             utilities.Utilities.ativaDesativa(this.telaCadastroMarca.getjPanelBotoes(), true);
         } else if (evento.getSource() == this.telaCadastroMarca.getjButtonBuscar()) {
+            
+            TelaBuscaMarca telaBuscaMarca = new TelaBuscaMarca(null, true);
+            ControllerBuscaMarca controllerBuscaMarca = new ControllerBuscaMarca(telaBuscaMarca);
+            telaBuscaMarca.setVisible(true);
+            
         } else if (evento.getSource() == this.telaCadastroMarca.getjButtonSair()) {
             this.telaCadastroMarca.dispose();
         }

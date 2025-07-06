@@ -39,9 +39,7 @@ public class ControllerBuscaMarca implements ActionListener {
                     JOptionPane.showMessageDialog(null, "Filtrando por ID");
 
                 } else if (this.telaBuscaMarca.getjCBFiltro().getSelectedIndex() == 1) {
-                    JOptionPane.showMessageDialog(null, "Filtrando por Nome");
-                } else if (this.telaBuscaMarca.getjCBFiltro().getSelectedIndex() == 2) {
-                    JOptionPane.showMessageDialog(null, "Filtrando por CPF");
+                    JOptionPane.showMessageDialog(null, "Filtrando por Descrição");
                 }
             }
         } else if (evento.getSource() == this.telaBuscaMarca.getjButtonSair()) {

@@ -5,6 +5,7 @@ import view.TelaCadastroVeiculo;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import view.buscas.TelaBuscaVeiculo;
 
 public class ControllerCadVeiculo implements ActionListener {
 
@@ -38,6 +39,11 @@ public class ControllerCadVeiculo implements ActionListener {
         } else if (evento.getSource() == this.telaCadastroVeiculo.getjButtonGravar()) {
             utilities.Utilities.ativaDesativa(this.telaCadastroVeiculo.getjPanelBotoes(), true);
         } else if (evento.getSource() == this.telaCadastroVeiculo.getjButtonBuscar()) {
+            
+            TelaBuscaVeiculo telaBuscaVeiculo = new TelaBuscaVeiculo(null, true);
+            ControllerBuscaVeiculo controllerBuscaVeiculo = new ControllerBuscaVeiculo(telaBuscaVeiculo);
+            telaBuscaVeiculo.setVisible(true);
+            
         } else if (evento.getSource() == this.telaCadastroVeiculo.getjButtonSair()) {
             this.telaCadastroVeiculo.dispose();
         }

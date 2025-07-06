@@ -4,6 +4,7 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import view.TelaCadastroServico;
+import view.buscas.TelaBuscaServico;
 
 public class ControllerCadServico implements ActionListener {
 
@@ -37,6 +38,11 @@ public class ControllerCadServico implements ActionListener {
         } else if (evento.getSource() == this.telaCadastroServico.getjButtonGravar()) {
             utilities.Utilities.ativaDesativa(this.telaCadastroServico.getjPanelBotoes(), true);
         } else if (evento.getSource() == this.telaCadastroServico.getjButtonBuscar()) {
+            
+            TelaBuscaServico telaBuscaServico = new TelaBuscaServico(null, true);
+            ControllerBuscaServico controllerBuscaServico = new ControllerBuscaServico(telaBuscaServico);
+            telaBuscaServico.setVisible(true);
+            
         } else if (evento.getSource() == this.telaCadastroServico.getjButtonSair()) {
             this.telaCadastroServico.dispose();
         }

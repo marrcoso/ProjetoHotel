@@ -39,9 +39,11 @@ public class ControllerBuscaVeiculo implements ActionListener {
                     JOptionPane.showMessageDialog(null, "Filtrando por ID");
 
                 } else if (this.telaBuscaVeiculo.getjCBFiltro().getSelectedIndex() == 1) {
-                    JOptionPane.showMessageDialog(null, "Filtrando por Nome");
+                    JOptionPane.showMessageDialog(null, "Filtrando por Placa");
                 } else if (this.telaBuscaVeiculo.getjCBFiltro().getSelectedIndex() == 2) {
-                    JOptionPane.showMessageDialog(null, "Filtrando por CPF");
+                    JOptionPane.showMessageDialog(null, "Filtrando por Cor");
+                } else if (this.telaBuscaVeiculo.getjCBFiltro().getSelectedIndex() == 3) {
+                    JOptionPane.showMessageDialog(null, "Filtrando por Modelo");
                 }
             }
         } else if (evento.getSource() == this.telaBuscaVeiculo.getjButtonSair()) {

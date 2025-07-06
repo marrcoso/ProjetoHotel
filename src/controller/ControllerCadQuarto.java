@@ -5,6 +5,7 @@ import view.TelaCadastroQuarto;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import view.buscas.TelaBuscaQuarto;
 
 public class ControllerCadQuarto implements ActionListener {
 
@@ -38,6 +39,11 @@ public class ControllerCadQuarto implements ActionListener {
         } else if (evento.getSource() == this.telaCadastroQuarto.getjButtonGravar()) {
             utilities.Utilities.ativaDesativa(this.telaCadastroQuarto.getjPanelBotoes(), true);
         } else if (evento.getSource() == this.telaCadastroQuarto.getjButtonBuscar()) {
+            
+            TelaBuscaQuarto telaBuscaQuarto = new TelaBuscaQuarto(null, true);
+            ControllerBuscaQuarto controllerBuscaQuarto = new ControllerBuscaQuarto(telaBuscaQuarto);
+            telaBuscaQuarto.setVisible(true);
+            
         } else if (evento.getSource() == this.telaCadastroQuarto.getjButtonSair()) {
             this.telaCadastroQuarto.dispose();
         }

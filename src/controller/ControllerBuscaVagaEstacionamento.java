@@ -39,9 +39,11 @@ public class ControllerBuscaVagaEstacionamento implements ActionListener {
                     JOptionPane.showMessageDialog(null, "Filtrando por ID");
 
                 } else if (this.telaBuscaVaga.getjCBFiltro().getSelectedIndex() == 1) {
-                    JOptionPane.showMessageDialog(null, "Filtrando por Nome");
+                    JOptionPane.showMessageDialog(null, "Filtrando por Descrição");
                 } else if (this.telaBuscaVaga.getjCBFiltro().getSelectedIndex() == 2) {
-                    JOptionPane.showMessageDialog(null, "Filtrando por CPF");
+                    JOptionPane.showMessageDialog(null, "Filtrando por Observação");
+                } else if (this.telaBuscaVaga.getjCBFiltro().getSelectedIndex() == 3) {
+                    JOptionPane.showMessageDialog(null, "Filtrando por Metragem");
                 }
             }
         } else if (evento.getSource() == this.telaBuscaVaga.getjButtonSair()) {

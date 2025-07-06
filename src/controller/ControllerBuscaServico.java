@@ -39,9 +39,9 @@ public class ControllerBuscaServico implements ActionListener {
                     JOptionPane.showMessageDialog(null, "Filtrando por ID");
 
                 } else if (this.telaBuscaServico.getjCBFiltro().getSelectedIndex() == 1) {
-                    JOptionPane.showMessageDialog(null, "Filtrando por Nome");
+                    JOptionPane.showMessageDialog(null, "Filtrando por Descrição");
                 } else if (this.telaBuscaServico.getjCBFiltro().getSelectedIndex() == 2) {
-                    JOptionPane.showMessageDialog(null, "Filtrando por CPF");
+                    JOptionPane.showMessageDialog(null, "Filtrando por Observação");
                 }
             }
         } else if (evento.getSource() == this.telaBuscaServico.getjButtonSair()) {

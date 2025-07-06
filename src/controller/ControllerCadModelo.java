@@ -5,6 +5,7 @@ import view.TelaCadastroModelo;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import view.buscas.TelaBuscaModelo;
 
 public class ControllerCadModelo implements ActionListener {
 
@@ -38,6 +39,11 @@ public class ControllerCadModelo implements ActionListener {
         } else if (evento.getSource() == this.telaCadastroModelo.getjButtonGravar()) {
             utilities.Utilities.ativaDesativa(this.telaCadastroModelo.getjPanelBotoes(), true);
         } else if (evento.getSource() == this.telaCadastroModelo.getjButtonBuscar()) {
+            
+            TelaBuscaModelo telaBuscaModelo = new TelaBuscaModelo(null, true);
+            ControllerBuscaModelo controllerBuscaModelo = new ControllerBuscaModelo(telaBuscaModelo);
+            telaBuscaModelo.setVisible(true);
+            
         } else if (evento.getSource() == this.telaCadastroModelo.getjButtonSair()) {
             this.telaCadastroModelo.dispose();
         }

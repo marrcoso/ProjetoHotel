@@ -39,9 +39,19 @@ public class ControllerBuscaQuarto implements ActionListener {
                     JOptionPane.showMessageDialog(null, "Filtrando por ID");
 
                 } else if (this.telaBuscaQuarto.getjCBFiltro().getSelectedIndex() == 1) {
-                    JOptionPane.showMessageDialog(null, "Filtrando por Nome");
+                    JOptionPane.showMessageDialog(null, "Filtrando por Descrição");
                 } else if (this.telaBuscaQuarto.getjCBFiltro().getSelectedIndex() == 2) {
-                    JOptionPane.showMessageDialog(null, "Filtrando por CPF");
+                    JOptionPane.showMessageDialog(null, "Filtrando por Capacidade");
+                } else if (this.telaBuscaQuarto.getjCBFiltro().getSelectedIndex() == 3) {
+                    JOptionPane.showMessageDialog(null, "Filtrando por Metragem");
+                } else if (this.telaBuscaQuarto.getjCBFiltro().getSelectedIndex() == 4) {
+                    JOptionPane.showMessageDialog(null, "Filtrando por Identificação");
+                } else if (this.telaBuscaQuarto.getjCBFiltro().getSelectedIndex() == 5) {
+                    JOptionPane.showMessageDialog(null, "Filtrando por Andar");
+                } else if (this.telaBuscaQuarto.getjCBFiltro().getSelectedIndex() == 6) {
+                    JOptionPane.showMessageDialog(null, "Filtrando por Animais");
+                } else if (this.telaBuscaQuarto.getjCBFiltro().getSelectedIndex() == 7) {
+                    JOptionPane.showMessageDialog(null, "Filtrando por Observação");
                 }
             }
         } else if (evento.getSource() == this.telaBuscaQuarto.getjButtonSair()) {
