@@ -25,7 +25,7 @@ public class ControllerBuscaHospede implements ActionListener {
         if (evento.getSource() == this.telaBuscaHospede.getjButtonCarregar()) {
             JOptionPane.showMessageDialog(null, "Botão Carregar Pressionado...");
             if (this.telaBuscaHospede.getjTableDados().getRowCount() == 0) {
-                JOptionPane.showMessageDialog(null, "Errrrooooooouuu. \nNão Existem Dados Selecionados!");
+                JOptionPane.showMessageDialog(null, "Não Existem Dados Selecionados!");
             } else {
                 JOptionPane.showMessageDialog(null, "Carregando Dados para Edição....");
             }
