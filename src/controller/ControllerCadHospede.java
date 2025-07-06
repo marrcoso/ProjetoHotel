@@ -2,6 +2,7 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import view.TelaBuscaHospede;
 import view.TelaCadastroHospede;
 
 public class ControllerCadHospede implements ActionListener {
@@ -25,17 +26,28 @@ public class ControllerCadHospede implements ActionListener {
         this.telaCadastroHospede.getjButtonBuscar().setEnabled(true);
         this.telaCadastroHospede.getjButtonSair().setEnabled(true);*/
         utilities.Utilities.ativaDesativa(this.telaCadastroHospede.getjPanelBotoes(), true);
+        utilities.Utilities.limpaComponentes(this.telaCadastroHospede.getjPanelDados(), false);
     }
 
     @Override
     public void actionPerformed(ActionEvent evento) {
         if (evento.getSource() == this.telaCadastroHospede.getjButtonNovo()) {
             utilities.Utilities.ativaDesativa(this.telaCadastroHospede.getjPanelBotoes(), false);
+            utilities.Utilities.limpaComponentes(this.telaCadastroHospede.getjPanelDados(), true);
+
         } else if (evento.getSource() == this.telaCadastroHospede.getjButtonCancelar()) {
             utilities.Utilities.ativaDesativa(this.telaCadastroHospede.getjPanelBotoes(), true);
+            utilities.Utilities.limpaComponentes(this.telaCadastroHospede.getjPanelDados(), false);
         } else if (evento.getSource() == this.telaCadastroHospede.getjButtonGravar()) {
             utilities.Utilities.ativaDesativa(this.telaCadastroHospede.getjPanelBotoes(), true);
+            utilities.Utilities.limpaComponentes(this.telaCadastroHospede.getjPanelDados(), false);
+
         } else if (evento.getSource() == this.telaCadastroHospede.getjButtonBuscar()) {
+            
+            TelaBuscaHospede telaBuscaHospede = new TelaBuscaHospede(null, true);
+            ControllerBuscaHospede controllerBuscaHospede = new ControllerBuscaHospede(telaBuscaHospede);
+            telaBuscaHospede.setVisible(true);
+            
         } else if (evento.getSource() == this.telaCadastroHospede.getjButtonSair()) {
             this.telaCadastroHospede.dispose();
         }
