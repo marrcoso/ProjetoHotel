@@ -2,7 +2,7 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import view.TelaBuscaHospede;
+import view.buscas.TelaBuscaHospede;
 import view.TelaCadastroHospede;
 
 public class ControllerCadHospede implements ActionListener {

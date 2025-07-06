@@ -3,8 +3,7 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import view.TelaBuscaFornecedor;
-import view.TelaBuscaHospede;
+import view.buscas.TelaBuscaFornecedor;
 import view.TelaCadastroFornecedor;
 
 public class ControllerCadFornecedor implements ActionListener {
