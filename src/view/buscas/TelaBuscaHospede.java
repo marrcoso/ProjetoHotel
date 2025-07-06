@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view;
+package view.buscas;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -118,7 +118,7 @@ public class TelaBuscaHospede extends javax.swing.JDialog {
         if (jTableDados.getColumnModel().getColumnCount() > 0) {
             jTableDados.getColumnModel().getColumn(0).setMaxWidth(40);
             jTableDados.getColumnModel().getColumn(1).setMaxWidth(270);
-            jTableDados.getColumnModel().getColumn(2).setMaxWidth(150);
+            jTableDados.getColumnModel().getColumn(2).setMaxWidth(130);
             jTableDados.getColumnModel().getColumn(3).setMaxWidth(60);
         }
 
@@ -136,6 +136,7 @@ public class TelaBuscaHospede extends javax.swing.JDialog {
         jPanelFiltros.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jCBFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Id", "Nome", "CPF" }));
+        jCBFiltro.setSelectedIndex(-1);
 
         jLabelFiltrar.setText("Filtrar Por");
 

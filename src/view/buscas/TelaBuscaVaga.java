@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view;
+package view.buscas;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -14,12 +14,12 @@ import javax.swing.JTextField;
  *
  * @author house
  */
-public class TelaBuscaFornecedor extends javax.swing.JDialog {
+public class TelaBuscaVaga extends javax.swing.JDialog {
 
     /**
      * Creates new form ModeloBuscas_2024
      */
-    public TelaBuscaFornecedor(java.awt.Frame parent, boolean modal) {
+    public TelaBuscaVaga(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -89,7 +89,7 @@ public class TelaBuscaFornecedor extends javax.swing.JDialog {
         jLabelTitulo.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabelTitulo.setForeground(new java.awt.Color(0, 51, 204));
         jLabelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelTitulo.setText("Fornecedores");
+        jLabelTitulo.setText("Vagas");
         jLabelTitulo.setToolTipText("");
 
         javax.swing.GroupLayout jPaneltituloLayout = new javax.swing.GroupLayout(jPaneltitulo);
@@ -110,16 +110,17 @@ public class TelaBuscaFornecedor extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Id", "Nome", "CPF", "Status"
+                "Id", "Descrição", "Observação", "Metragem", "Status"
             }
         ));
         jTableDados.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jTableDados);
         if (jTableDados.getColumnModel().getColumnCount() > 0) {
             jTableDados.getColumnModel().getColumn(0).setMaxWidth(40);
-            jTableDados.getColumnModel().getColumn(1).setMaxWidth(270);
+            jTableDados.getColumnModel().getColumn(1).setMaxWidth(150);
             jTableDados.getColumnModel().getColumn(2).setMaxWidth(150);
-            jTableDados.getColumnModel().getColumn(3).setMaxWidth(60);
+            jTableDados.getColumnModel().getColumn(3).setMaxWidth(100);
+            jTableDados.getColumnModel().getColumn(4).setMaxWidth(60);
         }
 
         javax.swing.GroupLayout jPanelDadosLayout = new javax.swing.GroupLayout(jPanelDados);
@@ -135,7 +136,8 @@ public class TelaBuscaFornecedor extends javax.swing.JDialog {
 
         jPanelFiltros.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jCBFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Id", "Nome", "CPF" }));
+        jCBFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Id", "Descrição", "Observação", "Metragem" }));
+        jCBFiltro.setSelectedIndex(-1);
         jCBFiltro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCBFiltroActionPerformed(evt);
@@ -252,14 +254,30 @@ public class TelaBuscaFornecedor extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaBuscaFornecedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaBuscaVaga.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaBuscaFornecedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaBuscaVaga.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaBuscaFornecedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaBuscaVaga.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaBuscaFornecedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaBuscaVaga.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -280,7 +298,7 @@ public class TelaBuscaFornecedor extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                TelaBuscaFornecedor dialog = new TelaBuscaFornecedor(new javax.swing.JFrame(), true);
+                TelaBuscaVaga dialog = new TelaBuscaVaga(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
