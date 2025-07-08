@@ -143,7 +143,6 @@ public class TelaCadastroFornecedor extends javax.swing.JDialog {
         jLabelId.setText("ID");
 
         jTextFieldId.setEditable(false);
-        jTextFieldId.setText("123");
         jTextFieldId.setToolTipText("");
 
         jLabelNomeFantasia.setText("Nome Fantasia");

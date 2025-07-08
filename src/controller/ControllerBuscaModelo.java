@@ -3,7 +3,7 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
-import view.buscas.TelaBuscaModelo;
+import view.TelaBuscaModelo;
 
 public class ControllerBuscaModelo implements ActionListener {
 

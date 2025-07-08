@@ -46,6 +46,9 @@ public class TelaCadastroQuarto extends javax.swing.JDialog {
         return jPanelBotoes;
     }
     
+    public JPanel getjPanelDados() {
+        return jPanelDados;
+    }
     
     
     

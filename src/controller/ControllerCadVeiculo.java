@@ -5,7 +5,7 @@ import view.TelaCadastroVeiculo;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import view.buscas.TelaBuscaVeiculo;
+import view.TelaBuscaVeiculo;
 
 public class ControllerCadVeiculo implements ActionListener {
 
@@ -28,16 +28,20 @@ public class ControllerCadVeiculo implements ActionListener {
         this.telaCadastroVeiculo.getjButtonBuscar().setEnabled(true);
         this.telaCadastroVeiculo.getjButtonSair().setEnabled(true);*/
         utilities.Utilities.ativaDesativa(this.telaCadastroVeiculo.getjPanelBotoes(), true);
+        utilities.Utilities.limpaComponentes(this.telaCadastroVeiculo.getjPanelDados(), false);
     }
 
     @Override
     public void actionPerformed(ActionEvent evento) {
         if (evento.getSource() == this.telaCadastroVeiculo.getjButtonNovo()) {
             utilities.Utilities.ativaDesativa(this.telaCadastroVeiculo.getjPanelBotoes(), false);
+        utilities.Utilities.limpaComponentes(this.telaCadastroVeiculo.getjPanelDados(), true);
         } else if (evento.getSource() == this.telaCadastroVeiculo.getjButtonCancelar()) {
             utilities.Utilities.ativaDesativa(this.telaCadastroVeiculo.getjPanelBotoes(), true);
+        utilities.Utilities.limpaComponentes(this.telaCadastroVeiculo.getjPanelDados(), false);
         } else if (evento.getSource() == this.telaCadastroVeiculo.getjButtonGravar()) {
             utilities.Utilities.ativaDesativa(this.telaCadastroVeiculo.getjPanelBotoes(), true);
+        utilities.Utilities.limpaComponentes(this.telaCadastroVeiculo.getjPanelDados(), false);
         } else if (evento.getSource() == this.telaCadastroVeiculo.getjButtonBuscar()) {
             
             TelaBuscaVeiculo telaBuscaVeiculo = new TelaBuscaVeiculo(null, true);

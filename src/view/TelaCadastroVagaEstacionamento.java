@@ -46,6 +46,9 @@ public class TelaCadastroVagaEstacionamento extends javax.swing.JDialog {
         return jPanelBotoes;
     }
     
+    public JPanel getjPanelDados() {
+        return jPanelDados;
+    }
     
     
     

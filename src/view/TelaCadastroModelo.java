@@ -46,6 +46,10 @@ public class TelaCadastroModelo extends javax.swing.JDialog {
         return jPanelBotoes;
     }
     
+    public JPanel getjPanelDados() {
+        return jPanelDados;
+    }
+    
     
     
     
@@ -127,7 +131,6 @@ public class TelaCadastroModelo extends javax.swing.JDialog {
         jComboBoxStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ativo", "Inativo" }));
 
         jComboBoxMarca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Volkswagen", "Fiat", "Chevrolet", " " }));
-        jComboBoxMarca.setSelectedIndex(-1);
 
         jLabelMarca.setText("Marca");
 

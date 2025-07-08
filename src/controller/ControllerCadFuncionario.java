@@ -3,7 +3,7 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import view.buscas.TelaBuscaFuncionario;
+import view.TelaBuscaFuncionario;
 import view.TelaCadastroFuncionario;
 
 public class ControllerCadFuncionario implements ActionListener {
@@ -27,16 +27,20 @@ public class ControllerCadFuncionario implements ActionListener {
         this.telaCadastroFuncionario.getjButtonBuscar().setEnabled(true);
         this.telaCadastroFuncionario.getjButtonSair().setEnabled(true);*/
         utilities.Utilities.ativaDesativa(this.telaCadastroFuncionario.getjPanelBotoes(), true);
+        utilities.Utilities.limpaComponentes(this.telaCadastroFuncionario.getjPanelDados(), false);
     }
 
     @Override
     public void actionPerformed(ActionEvent evento) {
         if (evento.getSource() == this.telaCadastroFuncionario.getjButtonNovo()) {
             utilities.Utilities.ativaDesativa(this.telaCadastroFuncionario.getjPanelBotoes(), false);
+        utilities.Utilities.limpaComponentes(this.telaCadastroFuncionario.getjPanelDados(), true);
         } else if (evento.getSource() == this.telaCadastroFuncionario.getjButtonCancelar()) {
             utilities.Utilities.ativaDesativa(this.telaCadastroFuncionario.getjPanelBotoes(), true);
+        utilities.Utilities.limpaComponentes(this.telaCadastroFuncionario.getjPanelDados(), false);
         } else if (evento.getSource() == this.telaCadastroFuncionario.getjButtonGravar()) {
             utilities.Utilities.ativaDesativa(this.telaCadastroFuncionario.getjPanelBotoes(), true);
+        utilities.Utilities.limpaComponentes(this.telaCadastroFuncionario.getjPanelDados(), false);
         } else if (evento.getSource() == this.telaCadastroFuncionario.getjButtonBuscar()) {
             
             TelaBuscaFuncionario telaBuscaFuncionario = new TelaBuscaFuncionario(null, true);

@@ -46,6 +46,11 @@ public class TelaCadastroMarca extends javax.swing.JDialog {
         return jPanelBotoes;
     }
     
+    public JPanel getjPanelDados() {
+        return jPanelDados;
+    }
+    
+    
     
     
     
@@ -294,4 +299,5 @@ public class TelaCadastroMarca extends javax.swing.JDialog {
     private javax.swing.JTextField jTextFieldDescricao;
     private javax.swing.JTextField jTextFieldId;
     // End of variables declaration//GEN-END:variables
+
 }
