@@ -96,7 +96,7 @@ public class TelaCadastroQuarto extends javax.swing.JDialog {
         setTitle("Cadastro de Quarto");
         setResizable(false);
 
-        jPanelTitulo.setBackground(new java.awt.Color(204, 0, 0));
+        jPanelTitulo.setBackground(new java.awt.Color(153, 153, 255));
         jPanelTitulo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabelTitulo.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N

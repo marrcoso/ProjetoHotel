@@ -37,6 +37,7 @@ public class Utilities {
                 componenteAtual.setEnabled(ativa);
             } else if (componenteAtual instanceof JComboBox) {
                 ((JComboBox) componenteAtual).setSelectedIndex(-1);
+                componenteAtual.setEnabled(ativa);
             } else if (componenteAtual instanceof JCheckBox) {
                 ((JCheckBox) componenteAtual).setSelected(false);
                 componenteAtual.setEnabled(ativa);
