@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import io.github.cdimascio.dotenv.Dotenv;
 
 public class ConnectionFactory {
 
@@ -14,10 +15,13 @@ public class ConnectionFactory {
     private static final String senha;
 
     static {
-        driver = System.getenv("DB_DRIVER");
-        banco = System.getenv("DB_URL");
-        usuario = System.getenv("DB_USER");
-        senha = System.getenv("DB_PASS");
+        Dotenv dotenv = Dotenv.configure()
+            .directory("./")
+            .load();
+        driver = dotenv.get("DB_DRIVER");
+        banco = dotenv.get("DB_URL");
+        usuario = dotenv.get("DB_USER");
+        senha = dotenv.get("DB_PASS");
     }
 
     public static Connection getConnection() {

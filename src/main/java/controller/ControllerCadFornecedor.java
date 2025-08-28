@@ -3,8 +3,10 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import model.DAO.ConnectionFactory;
 import view.TelaBuscaFornecedor;
 import view.TelaCadastroFornecedor;
+import java.sql.Connection;
 
 public class ControllerCadFornecedor implements ActionListener {
 
@@ -19,7 +21,7 @@ public class ControllerCadFornecedor implements ActionListener {
         this.telaCadastroFornecedor.getjButtonGravar().addActionListener(this);
         this.telaCadastroFornecedor.getjButtonBuscar().addActionListener(this);
         this.telaCadastroFornecedor.getjButtonSair().addActionListener(this);
-
+        
         //Desenvolver as setagens de situação inicial dos componentes
         /*this.telaCadastroFornecedor.getjButtonNovo().setEnabled(true);
         this.telaCadastroFornecedor.getjButtonCancelar().setEnabled(false);
