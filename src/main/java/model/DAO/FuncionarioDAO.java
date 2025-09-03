@@ -1,44 +1,42 @@
 package model.DAO;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import model.Funcionario;
 
-
-public class FuncionarioDAO implements InterfaceDAO<Funcionario>{
-
+public class FuncionarioDAO implements InterfaceDAO<Funcionario> {
+    
     @Override
     public void Create(Funcionario objeto) {
-        String sqlInstrucao = "Insert into hospede("
-            + "nome, "
-            + "fone, "
-            + "fone2, "
-            + "email, "
-            + "cep, "
-            + "logradouro, "
-            + "bairro, "
-            + "cidade, "
-            + "complemento, "
-            + "data_cadastro, "
-            + "cpf, "
-            + "rg, "
-            + "obs, "
-            + "status, "
-            + "razao_social, "
-            + "cnpj, "
-            + "inscricao_estadual, "
-            + "contato) "
-            + "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-    
+
+        String sqlInstrucao = "Insert Into funcionario("
+                + " nome, "
+                + " fone, "
+                + " fone2,"
+                + " email, "
+                + " cep, "
+                + " logradouro,"
+                + " bairro, "
+                + " cidade, "
+                + " complemento, "
+                + " data_cadastro, "
+                + " cpf, "
+                + " rg, "
+                + " obs, "
+                + " status, "
+                + " usuario, "
+                + " senha) "
+                + " Values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
+        Connection conexao = model.DAO.ConnectionFactory.getConnection();
         PreparedStatement pstm = null;
-        
+
         try {
-            Connection conexao = ConnectionFactory.getConnection();
             pstm = conexao.prepareStatement(sqlInstrucao);
-            
             pstm.setString(1, objeto.getNome());
             pstm.setString(2, objeto.getFone1());
             pstm.setString(3, objeto.getFone2());
@@ -53,36 +51,91 @@ public class FuncionarioDAO implements InterfaceDAO<Funcionario>{
             pstm.setString(12, objeto.getRg());
             pstm.setString(13, objeto.getObs());
             pstm.setString(14, String.valueOf(objeto.getStatus()));
-            pstm.setString(15, objeto.getRazaoSocial());
-            pstm.setString(16, objeto.getCnpj());
-            pstm.setString(17, objeto.getInscricaoEstdual());
-            pstm.setString(18, objeto.getContato());
-            
-            
+            pstm.setString(15, objeto.getUsuario());
+            pstm.setString(16, objeto.getSenha());
+
             pstm.execute();
+
         } catch (SQLException ex) {
             ex.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(conexao, pstm);
         }
     }
 
     @Override
     public Funcionario Retrieve(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+        String sqlInstrucao = "Select "
+                + " id,"
+                + " nome, "
+                + " fone, "
+                + " fone2,"
+                + " email, "
+                + " cep, "
+                + " logradouro,"
+                + " bairro, "
+                + " cidade, "
+                + " complemento, "
+                + " data_cadastro, "
+                + " cpf, "
+                + " rg, "
+                + " obs, "
+                + " status, "
+                + " usuario, "
+                + " senha "
+                + " From funcionario"
+                + " Where id = ? ";
+
+        Connection conexao = model.DAO.ConnectionFactory.getConnection();
+        PreparedStatement pstm = null;
+        ResultSet rst = null;
+        Funcionario funcionario = new Funcionario();
+
+        try {
+            pstm = conexao.prepareStatement(sqlInstrucao);
+            pstm.setInt(1, id);
+            rst = pstm.executeQuery();
+
+            while (!rst.next()) {
+                funcionario.setId(rst.getInt("id"));
+                funcionario.setNome(rst.getString(2));
+                funcionario.setFone1(rst.getString("fone"));     
+                funcionario.setFone2(rst.getString("fone2"));     
+                funcionario.setEmail(rst.getString("email"));     
+                funcionario.setCep(rst.getString("cep"));     
+                funcionario.setLogradouro(rst.getString("logradouro"));     
+                funcionario.setBairro(rst.getString("bairro"));     
+                funcionario.setCidade(rst.getString("cidade"));     
+                funcionario.setComplemento(rst.getString("complemento"));     
+                funcionario.setDataCadastro(rst.getString("data_cadastro"));     
+                funcionario.setCpf(rst.getString("cpf"));     
+                funcionario.setRg(rst.getString("rg"));     
+                funcionario.setObs(rst.getString("obs"));     
+                funcionario.setUsuario(rst.getString("usuario"));     
+                funcionario.setSenha(rst.getString("senha"));    
+                funcionario.setStatus(rst.getString("status").charAt(0));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(conexao, pstm, rst);
+            return funcionario;
+        }
     }
 
     @Override
     public List<Funcionario> Retrieve(String atributo, String valor) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void Update(Funcionario objeto) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void Delete(Funcionario objeto) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
 }

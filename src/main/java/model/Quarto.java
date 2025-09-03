@@ -10,7 +10,7 @@ package model;
  */
 public class Quarto {
     private int id;
-    private int descricao;
+    private String descricao;
     private int capacidadeHospedes;
     private float metragem;
     private String identificacao;
@@ -22,7 +22,7 @@ public class Quarto {
     public Quarto() {
     }
 
-    public Quarto(int id, int descricao, int capacidadeHospedes, float metragem, String identificacao, int andar, boolean flagAnimais, String obs, char status) {
+    public Quarto(int id, String descricao, int capacidadeHospedes, float metragem, String identificacao, int andar, boolean flagAnimais, String obs, char status) {
         this.id = id;
         this.descricao = descricao;
         this.capacidadeHospedes = capacidadeHospedes;
@@ -42,11 +42,11 @@ public class Quarto {
         this.id = id;
     }
 
-    public int getDescricao() {
+    public String getDescricao() {
         return descricao;
     }
 
-    public void setDescricao(int descricao) {
+    public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
 

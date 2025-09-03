@@ -9,8 +9,4 @@ public interface InterfaceDAO<T> {
     public abstract List<T> Retrieve(String atributo, String valor);
     public abstract void Update(T objeto);
     public abstract void Delete(T objeto);
-    
-    
-    
-    
 }
