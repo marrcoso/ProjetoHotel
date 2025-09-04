@@ -24,6 +24,20 @@ public class ConnectionFactory {
         senha = dotenv.get("DB_PASS");
     }
 
+
+    public static Connection getConnection() {
+
+        try {
+            return DriverManager.getConnection(banco + "?verifyServerCertificate=false"
+                    + "&useSSL=false"
+                    + "&requireSSL=false"
+                    + "&USER=" + usuario + "&password=" + senha + "&serverTimezone=UTC");
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
     public static void closeConnection(Connection conexao) {
         try {
             conexao.close();
