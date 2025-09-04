@@ -5,25 +5,23 @@ import java.sql.SQLException;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import io.github.cdimascio.dotenv.Dotenv;
 
 public class ConnectionFactory {
 
-    private static final String driver = "com.mysql.jdbc.Driver";
-    private static final String banco = "jdbc:mysql://localhost:3306/hotel";
-    private static final String usuario = "root";
-    private static final String senha = "rober";
+    private static final String driver;
+    private static final String banco;
+    private static final String usuario;
+    private static final String senha;
 
-    public static Connection getConnection() {
-
-        try {
-            return DriverManager.getConnection(banco + "?verifyServerCertificate=false"
-                    + "&useSSL=false"
-                    + "&requireSSL=false"
-                    + "&USER=" + usuario + "&password=" + senha + "&serverTimezone=UTC");
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return null;
-        }
+    static {
+        Dotenv dotenv = Dotenv.configure()
+            .directory("./")
+            .load();
+        driver = dotenv.get("DB_DRIVER");
+        banco = dotenv.get("DB_URL");
+        usuario = dotenv.get("DB_USER");
+        senha = dotenv.get("DB_PASS");
     }
 
     public static void closeConnection(Connection conexao) {
