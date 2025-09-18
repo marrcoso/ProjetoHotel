@@ -73,12 +73,65 @@ public class ServicoDAO implements InterfaceDAO<Servico> {
 
     @Override
     public List<Servico> Retrieve(String atributo, String valor) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sqlInstrucao = "Select "
+                + " id, "
+                + " descricao, "
+                + " obs, "
+                + " status "
+                + " From veiculo"
+                + " Where " + atributo + " like ?";
+
+        Connection conexao = model.DAO.ConnectionFactory.getConnection();
+        PreparedStatement pstm = null;
+        ResultSet rst = null;
+        List<Servico> listaServicos = new java.util.ArrayList<>();
+
+        try {
+            pstm = conexao.prepareStatement(sqlInstrucao);
+            pstm.setString(1, "%" + valor + "%");
+            rst = pstm.executeQuery();
+
+            while (rst.next()) {
+                Servico servico = new Servico();
+                servico.setId(rst.getInt("id"));
+                servico.setDescricao(rst.getString("descricao"));
+                servico.setObs(rst.getString("obs"));
+                servico.setStatus(rst.getString("status").charAt(0));
+                listaServicos.add(servico);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(conexao, pstm, rst);
+            return listaServicos;
+        }
     }
 
     @Override
     public void Update(Servico objeto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sqlInstrucao = "Update veiculo "
+                + " Set"
+                + " descricao = ?, "
+                + " obs = ?, "
+                + " status = ? "
+                + " Where id = ? ";
+
+        Connection conexao = model.DAO.ConnectionFactory.getConnection();
+        PreparedStatement pstm = null;
+
+        try {
+            pstm = conexao.prepareStatement(sqlInstrucao);
+            pstm.setString(1, objeto.getDescricao());
+            pstm.setString(2, objeto.getObs());
+            pstm.setString(3, String.valueOf(objeto.getStatus()));
+            pstm.setInt(4, objeto.getId());
+
+            pstm.execute();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(conexao, pstm);
+        }
     }
 
     @Override

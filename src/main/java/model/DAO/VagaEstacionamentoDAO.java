@@ -77,12 +77,69 @@ public class VagaEstacionamentoDAO implements InterfaceDAO<VagaEstacionamento> {
 
     @Override
     public List<VagaEstacionamento> Retrieve(String atributo, String valor) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sqlInstrucao = "Select "
+                + " id, "
+                + " descricao, "
+                + " obs, "
+                + " metragemvaga, "
+                + " status "
+                + " From vaga_estacionamento"
+                + " Where " + atributo + " like ?";
+
+        Connection conexao = model.DAO.ConnectionFactory.getConnection();
+        PreparedStatement pstm = null;
+        ResultSet rst = null;
+        List<VagaEstacionamento> listaVagas = new java.util.ArrayList<>();
+
+        try {
+            pstm = conexao.prepareStatement(sqlInstrucao);
+            pstm.setString(1, "%" + valor + "%");
+            rst = pstm.executeQuery();
+
+            while (rst.next()) {
+                VagaEstacionamento vaga = new VagaEstacionamento();
+                vaga.setId(rst.getInt("id"));
+                vaga.setDescricao(rst.getString("descricao"));
+                vaga.setObs(rst.getString("obs"));
+                vaga.setMetragemVaga(rst.getFloat("metragemvaga"));
+                vaga.setStatus(rst.getString("status").charAt(0));
+                listaVagas.add(vaga);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(conexao, pstm, rst);
+            return listaVagas;
+        }
     }
 
     @Override
     public void Update(VagaEstacionamento objeto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sqlInstrucao = "Update vaga_estacionamento "
+                + " Set"
+                + " descricao = ?, "
+                + " obs = ?, "
+                + " metragemvaga = ?, "
+                + " status = ? "
+                + " Where id = ? ";
+
+        Connection conexao = model.DAO.ConnectionFactory.getConnection();
+        PreparedStatement pstm = null;
+
+        try {
+            pstm = conexao.prepareStatement(sqlInstrucao);
+            pstm.setString(1, objeto.getDescricao());
+            pstm.setString(2, objeto.getObs());
+            pstm.setFloat(3, objeto.getMetragemVaga());
+            pstm.setString(4, String.valueOf(objeto.getStatus()));
+            pstm.setInt(5, objeto.getId());
+
+            pstm.execute();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            ConnectionFactory.closeConnection(conexao, pstm);
+        }
     }
 
     @Override
