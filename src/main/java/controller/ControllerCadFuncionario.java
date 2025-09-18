@@ -9,6 +9,7 @@ import view.TelaCadastroFuncionario;
 public class ControllerCadFuncionario implements ActionListener {
 
     TelaCadastroFuncionario telaCadastroFuncionario;
+    public static int codigo;
 
     public ControllerCadFuncionario(TelaCadastroFuncionario telaCadastroFuncionario) {
 

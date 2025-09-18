@@ -30,3 +30,4 @@ public class FornecedorService {
         FornecedorDAO fornecedorDAO = new FornecedorDAO();
         fornecedorDAO.Delete(objeto);
     }
+}

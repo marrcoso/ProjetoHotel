@@ -28,11 +28,12 @@ public class HospedeDAO implements InterfaceDAO<Hospede> {
                 + " rg, "
                 + " obs, "
                 + " status, "
+                + " sexo, "
                 + " razao_social, "
                 + " cnpj, "
                 + " inscricao_estadual, "
                 + " contato ) "
-                + " Values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                + " Values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         Connection conexao = model.DAO.ConnectionFactory.getConnection();
         PreparedStatement pstm = null;
@@ -53,10 +54,11 @@ public class HospedeDAO implements InterfaceDAO<Hospede> {
             pstm.setString(12, objeto.getRg());
             pstm.setString(13, objeto.getObs());
             pstm.setString(14, String.valueOf(objeto.getStatus()));
-            pstm.setString(15, objeto.getRazaoSocial());
-            pstm.setString(16, objeto.getCnpj());
-            pstm.setString(17, objeto.getInscricaoEstadual());
-            pstm.setString(18, objeto.getContato());
+            pstm.setString(15, String.valueOf(objeto.getSexo()));
+            pstm.setString(16, objeto.getRazaoSocial());
+            pstm.setString(17, objeto.getCnpj());
+            pstm.setString(18, objeto.getInscricaoEstadual());
+            pstm.setString(19, objeto.getContato());
 
             pstm.execute();
 
@@ -86,6 +88,7 @@ public class HospedeDAO implements InterfaceDAO<Hospede> {
                 + " rg, "
                 + " obs, "
                 + " status, "
+                + " sexo, "
                 + " razao_social, "
                 + " cnpj, "
                 + " inscricao_estadual, "
@@ -120,6 +123,7 @@ public class HospedeDAO implements InterfaceDAO<Hospede> {
                 hospede.setObs(rst.getString("obs"));
                 hospede.setRazaoSocial(rst.getString("razao_social"));
                 hospede.setCnpj(rst.getString("cnpj"));
+                hospede.setSexo(rst.getString("sexo").charAt(0));
                 hospede.setInscricaoEstadual(rst.getString("inscricao_estadual"));
                 hospede.setContato(rst.getString("contato"));
                 hospede.setStatus(rst.getString("status").charAt(0));
@@ -151,6 +155,7 @@ public class HospedeDAO implements InterfaceDAO<Hospede> {
                 + " rg, "
                 + " obs, "
                 + " status, "
+                + " sexo, "
                 + " razao_social, "
                 + " cnpj, "
                 + " inscricao_estadual, "
@@ -184,6 +189,7 @@ public class HospedeDAO implements InterfaceDAO<Hospede> {
                 hospede.setCpf(rst.getString("cpf"));
                 hospede.setRg(rst.getString("rg"));
                 hospede.setObs(rst.getString("obs"));
+                hospede.setSexo(rst.getString("sexo").charAt(0));
                 hospede.setRazaoSocial(rst.getString("razao_social"));
                 hospede.setCnpj(rst.getString("cnpj"));
                 hospede.setInscricaoEstadual(rst.getString("inscricao_estadual"));
@@ -218,6 +224,7 @@ public class HospedeDAO implements InterfaceDAO<Hospede> {
                 + " rg = ?, "
                 + " obs = ?, "
                 + " status = ?, "
+                + " sexo = ?, "
                 + " razao_social = ?, "
                 + " cnpj = ?, "
                 + " inscricao_estadual = ?, "
@@ -243,6 +250,7 @@ public class HospedeDAO implements InterfaceDAO<Hospede> {
         pstm.setString(12, objeto.getRg());
         pstm.setString(13, objeto.getObs());
         pstm.setString(14, String.valueOf(objeto.getStatus()));
+        pstm.setString(15, String.valueOf(objeto.getSexo()));
         pstm.setString(15, objeto.getRazaoSocial());
         pstm.setString(16, objeto.getCnpj());
         pstm.setString(17, objeto.getInscricaoEstadual());

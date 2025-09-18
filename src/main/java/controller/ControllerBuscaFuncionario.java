@@ -2,7 +2,14 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+import model.Funcionario;
+import model.Hospede;
 import view.TelaBuscaFuncionario;
 
 public class ControllerBuscaFuncionario implements ActionListener {
@@ -27,7 +34,9 @@ public class ControllerBuscaFuncionario implements ActionListener {
             if (this.telaBuscaFuncionario.getjTableDados().getRowCount() == 0) {
                 JOptionPane.showMessageDialog(null, "Não Existem Dados Selecionados!");
             } else {
-                JOptionPane.showMessageDialog(null, "Carregando Dados para Edição....");
+                ControllerCadFuncionario.codigo = (int) this.telaBuscaFuncionario.getjTableDados().
+                        getValueAt(this.telaBuscaFuncionario.getjTableDados().getSelectedRow(), 0);
+                this.telaBuscaFuncionario.dispose();
             }
         } else if (evento.getSource() == this.telaBuscaFuncionario.getjButtonFiltar()) {
             JOptionPane.showMessageDialog(null, "Botão Filtrar Pressionado...");
@@ -36,12 +45,53 @@ public class ControllerBuscaFuncionario implements ActionListener {
             } else {
                 JOptionPane.showMessageDialog(null, "Filtrando informações...");
                 if (this.telaBuscaFuncionario.getjCBFiltro().getSelectedIndex() == 0) {
-                    JOptionPane.showMessageDialog(null, "Filtrando por ID");
+                    // Criando objeto para receber o dado que virá do banco de dados
+                    Funcionario funcionario = new Funcionario();
+
+                    //Carregando o registro do hospede na entidade para o objeto hospede
+                    funcionario = service.FuncionarioService.Carregar(Integer.parseInt(this.telaBuscaFuncionario.getjTFFiltro().getText()));
+
+                    //Criando um objeto tabela do tipo defaulttablemodel e atribuindo o nosso modelo de tabela a ele
+                    DefaultTableModel tabela = (DefaultTableModel) this.telaBuscaFuncionario.getjTableDados().getModel();
+                    tabela.setRowCount(0);
+
+                    //Adicionado o hospede na tabela
+                    tabela.addRow(new Object[]{funcionario.getId(), funcionario.getNome(), funcionario.getCpf(), funcionario.getStatus()});
 
                 } else if (this.telaBuscaFuncionario.getjCBFiltro().getSelectedIndex() == 1) {
-                    JOptionPane.showMessageDialog(null, "Filtrando por Nome");
+                    //Criando a lista para receber os funcionarios
+                    List<Funcionario> listaFuncionarios = new ArrayList<>();
+                    //Carregando os hospedes via sl para dentro da lista
+                    listaFuncionarios = service.FuncionarioService.Carregar("nome", this.telaBuscaFuncionario.getjTFFiltro().getText());
+
+                    //Criando um objeto tabela do tipo defaulttablemodel e atribuindo o nosso modelo de tabela a ele
+                    DefaultTableModel tabela = (DefaultTableModel) this.telaBuscaFuncionario.getjTableDados().getModel();
+                    tabela.setRowCount(0);
+
+                    for (Funcionario funcionarioAtualDaLista : listaFuncionarios) {
+                        //Adicionado o hospede na tabela
+                        tabela.addRow(new Object[]{funcionarioAtualDaLista.getId(),
+                            funcionarioAtualDaLista.getNome(),
+                            funcionarioAtualDaLista.getCpf(),
+                            funcionarioAtualDaLista.getStatus()});
+                    }
                 } else if (this.telaBuscaFuncionario.getjCBFiltro().getSelectedIndex() == 2) {
-                    JOptionPane.showMessageDialog(null, "Filtrando por CPF");
+                    //Criando a lista para receber os hospedes
+                    List<Funcionario> listaFuncionarios = new ArrayList<>();
+                    //Carregando os hospedes via sl para dentro da lista
+                    listaFuncionarios = service.FuncionarioService.Carregar("cpf", this.telaBuscaFuncionario.getjTFFiltro().getText());
+
+                    //Criando um objeto tabela do tipo defaulttablemodel e atribuindo o nosso modelo de tabela a ele
+                    DefaultTableModel tabela = (DefaultTableModel) this.telaBuscaFuncionario.getjTableDados().getModel();
+                    tabela.setRowCount(0);
+
+                    for (Funcionario funcionarioAtualDaLista : listaFuncionarios) {
+                        //Adicionado o hospede na tabela
+                        tabela.addRow(new Object[]{funcionarioAtualDaLista.getId(),
+                            funcionarioAtualDaLista.getNome(),
+                            funcionarioAtualDaLista.getCpf(),
+                            funcionarioAtualDaLista.getStatus()});
+                    }
                 }
             }
         } else if (evento.getSource() == this.telaBuscaFuncionario.getjButtonSair()) {

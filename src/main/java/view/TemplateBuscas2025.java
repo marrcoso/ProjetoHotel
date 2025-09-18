@@ -5,56 +5,20 @@
  */
 package view;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-
 /**
  *
  * @author house
  */
-public class TelaBuscaHospede extends javax.swing.JDialog {
+public class TemplateBuscas2025 extends javax.swing.JDialog {
 
     /**
      * Creates new form ModeloBuscas_2024
      */
-    public TelaBuscaHospede(java.awt.Frame parent, boolean modal) {
+    public TemplateBuscas2025(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
 
-    public JButton getjButtonCarregar() {
-        return jButtonCarregar;
-    }
-
-    public JButton getjButtonFiltar() {
-        return jButtonFiltar;
-    }
-
-    public JButton getjButtonSair() {
-        return jButtonSair;
-    }
-
-    public JTable getjTableDados() {
-        return jTableDados;
-    }
-
-    public JTextField getjTFFiltro() {
-        return jTFFiltro;
-    }
-
-    public void setjTFFiltro(JTextField jTFFiltro) {
-        this.jTFFiltro = jTFFiltro;
-    }
-
-    public JComboBox<String> getjCBFiltro() {
-        return jCBFiltro;
-    }
-
-    
-    
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -79,7 +43,7 @@ public class TelaBuscaHospede extends javax.swing.JDialog {
         jButtonFiltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Projeto de Gestão Hoteleira");
+        setTitle("Projeto de Gestão Hospitalar");
         setAlwaysOnTop(true);
         setResizable(false);
 
@@ -89,7 +53,7 @@ public class TelaBuscaHospede extends javax.swing.JDialog {
         jLabelTitulo.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabelTitulo.setForeground(new java.awt.Color(0, 51, 204));
         jLabelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelTitulo.setText("Hóspedes");
+        jLabelTitulo.setText("Titulo");
         jLabelTitulo.setToolTipText("");
 
         javax.swing.GroupLayout jPaneltituloLayout = new javax.swing.GroupLayout(jPaneltitulo);
@@ -110,17 +74,10 @@ public class TelaBuscaHospede extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Id", "Nome", "CPf", "Status"
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jTableDados.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jTableDados);
-        if (jTableDados.getColumnModel().getColumnCount() > 0) {
-            jTableDados.getColumnModel().getColumn(0).setMaxWidth(40);
-            jTableDados.getColumnModel().getColumn(1).setMaxWidth(270);
-            jTableDados.getColumnModel().getColumn(2).setMaxWidth(150);
-            jTableDados.getColumnModel().getColumn(3).setMaxWidth(60);
-        }
 
         javax.swing.GroupLayout jPanelDadosLayout = new javax.swing.GroupLayout(jPanelDados);
         jPanelDados.setLayout(jPanelDadosLayout);
@@ -130,12 +87,10 @@ public class TelaBuscaHospede extends javax.swing.JDialog {
         );
         jPanelDadosLayout.setVerticalGroup(
             jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         jPanelFiltros.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        jCBFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Id", "Nome", "CPF" }));
 
         jLabelFiltrar.setText("Filtrar Por");
 
@@ -173,12 +128,11 @@ public class TelaBuscaHospede extends javax.swing.JDialog {
                         .addGroup(jPanelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelFiltrosLayout.createSequentialGroup()
                                 .addGap(8, 8, 8)
-                                .addComponent(jLabelValor)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addComponent(jLabelValor))
                             .addGroup(jPanelFiltrosLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTFFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(jTFFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButtonFiltar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -214,10 +168,9 @@ public class TelaBuscaHospede extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPaneltitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelDados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanelDados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(2, 2, 2))
+                .addComponent(jPanelFiltros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -245,13 +198,13 @@ public class TelaBuscaHospede extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaBuscaHospede.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TemplateBuscas2025.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaBuscaHospede.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TemplateBuscas2025.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaBuscaHospede.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TemplateBuscas2025.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaBuscaHospede.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TemplateBuscas2025.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -261,7 +214,7 @@ public class TelaBuscaHospede extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                TelaBuscaHospede dialog = new TelaBuscaHospede(new javax.swing.JFrame(), true);
+                TemplateBuscas2025 dialog = new TemplateBuscas2025(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
