@@ -28,11 +28,12 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor> {
                 + " rg, "
                 + " obs, "
                 + " status, "
+                + " sexo, "
                 + " razao_social, "
                 + " cnpj, "
                 + " inscricao_estadual, "
                 + " contato) "
-                + " Values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                + " Values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         Connection conexao = model.DAO.ConnectionFactory.getConnection();
         PreparedStatement pstm = null;
@@ -53,10 +54,11 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor> {
             pstm.setString(12, objeto.getRg());
             pstm.setString(13, objeto.getObs());
             pstm.setString(14, String.valueOf(objeto.getStatus()));
-            pstm.setString(15, objeto.getRazaoSocial());
-            pstm.setString(16, objeto.getCnpj());
-            pstm.setString(17, objeto.getInscricaoEstadual());
-            pstm.setString(18, objeto.getContato());
+            pstm.setString(15, String.valueOf(objeto.getSexo()));
+            pstm.setString(16, objeto.getRazaoSocial());
+            pstm.setString(17, objeto.getCnpj());
+            pstm.setString(18, objeto.getInscricaoEstadual());
+            pstm.setString(19, objeto.getContato());
 
             pstm.execute();
 
@@ -86,6 +88,7 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor> {
                 + " rg, "
                 + " obs, "
                 + " status, "
+                + " sexo, "
                 + " razao_social, "
                 + " cnpj, "
                 + " inscricao_estadual, "
@@ -103,7 +106,7 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor> {
             pstm.setInt(1, id);
             rst = pstm.executeQuery();
 
-            while (!rst.next()) {
+            while (rst.next()) {
                 fornecedor.setId(rst.getInt("id"));
                 fornecedor.setNome(rst.getString(2));
                 fornecedor.setFone1(rst.getString("fone"));     
@@ -123,6 +126,7 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor> {
                 fornecedor.setInscricaoEstadual(rst.getString("inscricao_estadual"));    
                 fornecedor.setContato(rst.getString("contato"));    
                 fornecedor.setStatus(rst.getString("status").charAt(0));
+                fornecedor.setSexo(rst.getString("sexo").charAt(0));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -150,6 +154,7 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor> {
                 + " rg, "
                 + " obs, "
                 + " status, "
+                + " sexo, "
                 + " razao_social, "
                 + " cnpj, "
                 + " inscricao_estadual, "
@@ -188,6 +193,7 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor> {
                 fornecedor.setInscricaoEstadual(rst.getString("inscricao_estadual"));
                 fornecedor.setContato(rst.getString("contato"));
                 fornecedor.setStatus(rst.getString("status").charAt(0));
+                fornecedor.setSexo(rst.getString("sexo").charAt(0));
                 listaFornecedores.add(fornecedor);
             }
         } catch (SQLException ex) {
@@ -216,6 +222,7 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor> {
                 + " rg = ?, "
                 + " obs = ?, "
                 + " status = ?, "
+                + " sexo = ?, "
                 + " razao_social = ?, "
                 + " cnpj = ?, "
                 + " inscricao_estadual = ?, "
@@ -241,11 +248,12 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor> {
             pstm.setString(12, objeto.getRg());
             pstm.setString(13, objeto.getObs());
             pstm.setString(14, String.valueOf(objeto.getStatus()));
-            pstm.setString(15, objeto.getRazaoSocial());
-            pstm.setString(16, objeto.getCnpj());
-            pstm.setString(17, objeto.getInscricaoEstadual());
-            pstm.setString(18, objeto.getContato());
-            pstm.setInt(19, objeto.getId());
+            pstm.setString(15, String.valueOf(objeto.getSexo()));
+            pstm.setString(16, objeto.getRazaoSocial());
+            pstm.setString(17, objeto.getCnpj());
+            pstm.setString(18, objeto.getInscricaoEstadual());
+            pstm.setString(19, objeto.getContato());
+            pstm.setInt(20, objeto.getId());
 
             pstm.execute();
         } catch (SQLException ex) {

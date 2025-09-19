@@ -6,7 +6,11 @@
 package view;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JFormattedTextField;
+import javax.swing.JTextField;
 
 /**
  *
@@ -50,12 +54,144 @@ public class TelaCadastroFuncionario extends javax.swing.JDialog {
         return jPanelDados;
     }
     
-    
-    
-    
-    
-    
+    // Adicione os métodos getters e setters para os componentes, igual ao TelaCadastroHospede
 
+    public JTextField getjTextFieldId() {
+        return jTextFieldId;
+    }
+
+    public void setjTextFieldId(JTextField jTextFieldId) {
+        this.jTextFieldId = jTextFieldId;
+    }
+
+    public JTextField getjTextFieldRg() {
+        return jTextFieldRg;
+    }
+
+    public void setjTextFieldRg(JTextField jTextFieldRg) {
+        this.jTextFieldRg = jTextFieldRg;
+    }
+
+    public JFormattedTextField getjFormattedTextFieldCpf() {
+        return jFormattedTextFieldCpf;
+    }
+
+    public void setjFormattedTextFieldCpf(JFormattedTextField jFormattedTextFieldCpf) {
+        this.jFormattedTextFieldCpf = jFormattedTextFieldCpf;
+    }
+
+    public JTextField getjTextFieldObs() {
+        return jTextFieldObs;
+    }
+
+    public void setjTextFieldObs(JTextField jTextFieldObs) {
+        this.jTextFieldObs = jTextFieldObs;
+    }
+
+    public JTextField getjTextFieldNome() {
+        return jTextFieldNome;
+    }
+
+    public void setjTextFieldNome(JTextField jTextFieldNome) {
+        this.jTextFieldNome = jTextFieldNome;
+    }
+
+    public JComboBox<String> getjComboBoxSexo() {
+        return jComboBoxSexo;
+    }
+
+    public void setjComboBoxSexo(JComboBox<String> jComboBoxSexo) {
+        this.jComboBoxSexo = jComboBoxSexo;
+    }
+
+    public JComboBox<String> getjComboBoxStatus() {
+        return jComboBoxStatus;
+    }
+
+    public void setjComboBoxStatus(JComboBox<String> jComboBoxStatus) {
+        this.jComboBoxStatus = jComboBoxStatus;
+    }
+
+    public JPasswordField getjPasswordFieldSenha() {
+        return jPasswordFieldSenha;
+    }
+
+    public void setjPasswordFieldSenha(JPasswordField jPasswordFieldSenha) {
+        this.jPasswordFieldSenha = jPasswordFieldSenha;
+    }
+
+    public JFormattedTextField getjFormattedTextFieldFone1() {
+        return jFormattedTextFieldFone1;
+    }
+
+    public void setjFormattedTextFieldFone1(JFormattedTextField jFormattedTextFieldFone1) {
+        this.jFormattedTextFieldFone1 = jFormattedTextFieldFone1;
+    }
+
+    public JFormattedTextField getjFormattedTextFieldFone2() {
+        return jFormattedTextFieldFone2;
+    }
+
+    public void setjFormattedTextFieldFone2(JFormattedTextField jFormattedTextFieldFone2) {
+        this.jFormattedTextFieldFone2 = jFormattedTextFieldFone2;
+    }
+
+    public JTextField getjTextFieldEmail() {
+        return jTextFieldEmail;
+    }
+
+    public void setjTextFieldEmail(JTextField jTextFieldEmail) {
+        this.jTextFieldEmail = jTextFieldEmail;
+    }
+
+    public JFormattedTextField getjFormattedTextFieldCep() {
+        return jFormattedTextFieldCep;
+    }
+
+    public void setjFormattedTextFieldCep(JFormattedTextField jFormattedTextFieldCep) {
+        this.jFormattedTextFieldCep = jFormattedTextFieldCep;
+    }
+
+    public JTextField getjTextFieldBairro() {
+        return jTextFieldBairro;
+    }
+
+    public void setjTextFieldBairro(JTextField jTextFieldBairro) {
+        this.jTextFieldBairro = jTextFieldBairro;
+    }
+
+    public JTextField getjTextFieldCidade() {
+        return jTextFieldCidade;
+    }
+
+    public void setjTextFieldCidade(JTextField jTextFieldCidade) {
+        this.jTextFieldCidade = jTextFieldCidade;
+    }
+
+    public JTextField getjTextFieldLogradouro() {
+        return jTextFieldLogradouro;
+    }
+
+    public void setjTextFieldLogradouro(JTextField jTextFieldLogradouro) {
+        this.jTextFieldLogradouro = jTextFieldLogradouro;
+    }
+
+    public JTextField getjTextFieldComplemento() {
+        return jTextFieldComplemento;
+    }
+
+    public void setjTextFieldComplemento(JTextField jTextFieldComplemento) {
+        this.jTextFieldComplemento = jTextFieldComplemento;
+    }
+
+    public JFormattedTextField getjFormattedTextFieldDataCadastro() {
+        return jFormattedTextField5;
+    }
+
+    public void setjFormattedTextFieldDataCadastro(JFormattedTextField jFormattedTextFieldDataCadastro) {
+        this.jFormattedTextField5 = jFormattedTextFieldDataCadastro;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -98,8 +234,8 @@ public class TelaCadastroFuncionario extends javax.swing.JDialog {
         jLabelObs = new javax.swing.JLabel();
         jLabelSexo1 = new javax.swing.JLabel();
         jComboBoxStatus = new javax.swing.JComboBox<>();
-        jLabelDescricao = new javax.swing.JLabel();
-        jTextFieldDescricao = new javax.swing.JTextField();
+        jLabelNome = new javax.swing.JLabel();
+        jTextFieldNome = new javax.swing.JTextField();
         jPasswordFieldSenha = new javax.swing.JPasswordField();
         jLabelSenha = new javax.swing.JLabel();
         jPanelBotoes = new javax.swing.JPanel();
@@ -185,7 +321,7 @@ public class TelaCadastroFuncionario extends javax.swing.JDialog {
 
         jLabelSexo.setText("Sexo");
 
-        jComboBoxSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Feminino" }));
         jComboBoxSexo.setSelectedIndex(-1);
 
         jLabelObs.setText("OBS.:");
@@ -194,11 +330,11 @@ public class TelaCadastroFuncionario extends javax.swing.JDialog {
 
         jComboBoxStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ativo", "Inativo" }));
 
-        jLabelDescricao.setText("Descrição");
+        jLabelNome.setText("Descrição");
 
-        jTextFieldDescricao.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldDescricaoActionPerformed(evt);
+                jTextFieldNomeActionPerformed(evt);
             }
         });
 
@@ -280,9 +416,9 @@ public class TelaCadastroFuncionario extends javax.swing.JDialog {
                             .addComponent(jTextFieldObs)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelDadosLayout.createSequentialGroup()
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldDescricao)
+                            .addComponent(jTextFieldNome)
                             .addGroup(jPanelDadosLayout.createSequentialGroup()
-                                .addComponent(jLabelDescricao)
+                                .addComponent(jLabelNome)
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -323,9 +459,9 @@ public class TelaCadastroFuncionario extends javax.swing.JDialog {
                         .addGap(30, 30, 30))
                     .addComponent(jComboBoxSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanelDadosLayout.createSequentialGroup()
-                        .addComponent(jLabelDescricao)
+                        .addComponent(jLabelNome)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanelDadosLayout.createSequentialGroup()
@@ -438,9 +574,9 @@ public class TelaCadastroFuncionario extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldDescricaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDescricaoActionPerformed
+    private void jTextFieldNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldDescricaoActionPerformed
+    }//GEN-LAST:event_jTextFieldNomeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -503,7 +639,7 @@ public class TelaCadastroFuncionario extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelCidade;
     private javax.swing.JLabel jLabelComplemento;
     private javax.swing.JLabel jLabelCpf;
-    private javax.swing.JLabel jLabelDescricao;
+    private javax.swing.JLabel jLabelNome;
     private javax.swing.JLabel jLabelEmail;
     private javax.swing.JLabel jLabelFone1;
     private javax.swing.JLabel jLabelFone2;
@@ -522,7 +658,7 @@ public class TelaCadastroFuncionario extends javax.swing.JDialog {
     private javax.swing.JTextField jTextFieldBairro;
     private javax.swing.JTextField jTextFieldCidade;
     private javax.swing.JTextField jTextFieldComplemento;
-    private javax.swing.JTextField jTextFieldDescricao;
+    private javax.swing.JTextField jTextFieldNome;
     private javax.swing.JTextField jTextFieldEmail;
     private javax.swing.JTextField jTextFieldId;
     private javax.swing.JTextField jTextFieldLogradouro;

@@ -28,9 +28,10 @@ public class FuncionarioDAO implements InterfaceDAO<Funcionario> {
                 + " rg, "
                 + " obs, "
                 + " status, "
+                + " sexo, "
                 + " usuario, "
                 + " senha) "
-                + " Values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                + " Values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         Connection conexao = model.DAO.ConnectionFactory.getConnection();
         PreparedStatement pstm = null;
@@ -51,8 +52,9 @@ public class FuncionarioDAO implements InterfaceDAO<Funcionario> {
             pstm.setString(12, objeto.getRg());
             pstm.setString(13, objeto.getObs());
             pstm.setString(14, String.valueOf(objeto.getStatus()));
-            pstm.setString(15, objeto.getUsuario());
-            pstm.setString(16, objeto.getSenha());
+            pstm.setString(15, String.valueOf(objeto.getSexo())); // Adicionado sexo
+            pstm.setString(16, objeto.getUsuario());
+            pstm.setString(17, objeto.getSenha());
 
             pstm.execute();
 
@@ -82,6 +84,7 @@ public class FuncionarioDAO implements InterfaceDAO<Funcionario> {
                 + " rg, "
                 + " obs, "
                 + " status, "
+                + " sexo, "
                 + " usuario, "
                 + " senha "
                 + " From funcionario"
@@ -97,7 +100,7 @@ public class FuncionarioDAO implements InterfaceDAO<Funcionario> {
             pstm.setInt(1, id);
             rst = pstm.executeQuery();
 
-            while (!rst.next()) {
+            while (rst.next()) {
                 funcionario.setId(rst.getInt("id"));
                 funcionario.setNome(rst.getString(2));
                 funcionario.setFone1(rst.getString("fone"));     
@@ -115,6 +118,7 @@ public class FuncionarioDAO implements InterfaceDAO<Funcionario> {
                 funcionario.setUsuario(rst.getString("usuario"));     
                 funcionario.setSenha(rst.getString("senha"));    
                 funcionario.setStatus(rst.getString("status").charAt(0));
+                funcionario.setSexo(rst.getString("sexo").charAt(0)); // Adicionado sexo
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -142,6 +146,7 @@ public class FuncionarioDAO implements InterfaceDAO<Funcionario> {
                 + " rg, "
                 + " obs, "
                 + " status, "
+                + " sexo, "
                 + " usuario, "
                 + " senha "
                 + " From funcionario"
@@ -176,6 +181,7 @@ public class FuncionarioDAO implements InterfaceDAO<Funcionario> {
                 funcionario.setUsuario(rst.getString("usuario"));
                 funcionario.setSenha(rst.getString("senha"));
                 funcionario.setStatus(rst.getString("status").charAt(0));
+                funcionario.setSexo(rst.getString("sexo").charAt(0)); // Adicionado sexo
                 listaFuncionarios.add(funcionario);
             }
         } catch (SQLException ex) {
@@ -204,6 +210,7 @@ public class FuncionarioDAO implements InterfaceDAO<Funcionario> {
                 + " rg = ?, "
                 + " obs = ?, "
                 + " status = ?, "
+                + " sexo = ?, "
                 + " usuario = ?, "
                 + " senha = ? "
                 + " Where id = ? ";
@@ -227,9 +234,10 @@ public class FuncionarioDAO implements InterfaceDAO<Funcionario> {
             pstm.setString(12, objeto.getRg());
             pstm.setString(13, objeto.getObs());
             pstm.setString(14, String.valueOf(objeto.getStatus()));
-            pstm.setString(15, objeto.getUsuario());
-            pstm.setString(16, objeto.getSenha());
-            pstm.setInt(17, objeto.getId());
+            pstm.setString(15, String.valueOf(objeto.getSexo())); // Adicionado sexo
+            pstm.setString(16, objeto.getUsuario());
+            pstm.setString(17, objeto.getSenha());
+            pstm.setInt(18, objeto.getId());
 
             pstm.execute();
         } catch (SQLException ex) {

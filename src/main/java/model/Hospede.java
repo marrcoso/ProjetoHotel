@@ -1,6 +1,5 @@
 package model;
 public class Hospede extends Pessoa{
-    private char sexo;
     private String razaoSocial;
     private String cnpj;
     private String inscricaoEstadual;
@@ -10,8 +9,7 @@ public class Hospede extends Pessoa{
     }
 
     public Hospede( int id, String nome, String fone1, String fone2, String email, String cep, String logradouro, String bairro, String cidade, String complemento, String dataCadastro, String cpf, String rg, char sexo, String razaoSocial, String cnpj, String inscricaoEstadual, String contato, String obs, char status) {
-        super(id, nome, fone1, fone2, email, cep, logradouro, bairro, cidade, complemento, dataCadastro, cpf, rg, obs, status);
-        this.sexo = sexo;
+        super(id, nome, fone1, fone2, email, cep, logradouro, bairro, cidade, complemento, dataCadastro, cpf, rg, obs, status, sexo);
         this.razaoSocial = razaoSocial;
         this.cnpj = cnpj;
         this.inscricaoEstadual = inscricaoEstadual;
@@ -34,14 +32,6 @@ public class Hospede extends Pessoa{
         this.cnpj = cnpj;
     }
 
-    public char getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(char sexo) {
-        this.sexo = sexo;
-    }
-
     public String getInscricaoEstadual() {
         return inscricaoEstadual;
     }
@@ -61,7 +51,6 @@ public class Hospede extends Pessoa{
     @Override
     public String toString() {
         return  super.toString() + 
-                "\nSexo   = " + this.getSexo()+
                 "\nRazao Social = " + this.getRazaoSocial()+
                 "\ncnpj   = " + this.getCnpj()+
                 "\nCep    = " + this.getCep()+

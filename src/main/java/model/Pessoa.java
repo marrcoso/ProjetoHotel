@@ -17,11 +17,12 @@ public class Pessoa {
     private String rg;
     private String obs;
     private char status;
+    private char sexo;
 
     public Pessoa() {
     }
 
-    public Pessoa(int id, String nome, String fone1, String fone2, String email, String cep, String logradouro, String bairro, String cidade, String complemento, String dataCadastro, String cpf, String rg, String obs, char status) {
+    public Pessoa(int id, String nome, String fone1, String fone2, String email, String cep, String logradouro, String bairro, String cidade, String complemento, String dataCadastro, String cpf, String rg, String obs, char status, char sexo) {
         this.id = id;
         this.nome = nome;
         this.fone1 = fone1;
@@ -37,6 +38,7 @@ public class Pessoa {
         this.rg = rg;
         this.obs = obs;
         this.status = status;
+        this.sexo = sexo;
     }
     public int getId() {
         return id;
@@ -164,6 +166,19 @@ public class Pessoa {
         
     }
 
+
+    public char getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(char sexo) {
+        if ( (sexo == 'M') || (sexo == 'F') || (sexo == 'm') || (sexo == 'f') ) {
+            this.sexo = sexo;
+        }else {
+            this.sexo = 'M';
+        }
+    }
+
     @Override
     public String toString() {
         return  "id      = " + this.id + 
@@ -174,7 +189,8 @@ public class Pessoa {
                 "\nrg     = " + this.rg +
                 "\ncpf    = " + this.cpf +
                 "\nobs    = " + this.obs +
-                "\nstatus = " + this.status  ;
+                "\nstatus = " + this.status +
+                "\nsexo   = " + this.sexo;
     }
 
 }

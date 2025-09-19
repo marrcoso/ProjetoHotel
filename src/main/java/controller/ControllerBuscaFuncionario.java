@@ -9,7 +9,6 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import model.Funcionario;
-import model.Hospede;
 import view.TelaBuscaFuncionario;
 
 public class ControllerBuscaFuncionario implements ActionListener {
@@ -48,20 +47,20 @@ public class ControllerBuscaFuncionario implements ActionListener {
                     // Criando objeto para receber o dado que virá do banco de dados
                     Funcionario funcionario = new Funcionario();
 
-                    //Carregando o registro do hospede na entidade para o objeto hospede
+                    //Carregando o registro do funcionario na entidade para o objeto funcionario
                     funcionario = service.FuncionarioService.Carregar(Integer.parseInt(this.telaBuscaFuncionario.getjTFFiltro().getText()));
 
                     //Criando um objeto tabela do tipo defaulttablemodel e atribuindo o nosso modelo de tabela a ele
                     DefaultTableModel tabela = (DefaultTableModel) this.telaBuscaFuncionario.getjTableDados().getModel();
                     tabela.setRowCount(0);
 
-                    //Adicionado o hospede na tabela
+                    //Adicionado o funcionario na tabela
                     tabela.addRow(new Object[]{funcionario.getId(), funcionario.getNome(), funcionario.getCpf(), funcionario.getStatus()});
 
                 } else if (this.telaBuscaFuncionario.getjCBFiltro().getSelectedIndex() == 1) {
                     //Criando a lista para receber os funcionarios
                     List<Funcionario> listaFuncionarios = new ArrayList<>();
-                    //Carregando os hospedes via sl para dentro da lista
+                    //Carregando os funcionarios via sl para dentro da lista
                     listaFuncionarios = service.FuncionarioService.Carregar("nome", this.telaBuscaFuncionario.getjTFFiltro().getText());
 
                     //Criando um objeto tabela do tipo defaulttablemodel e atribuindo o nosso modelo de tabela a ele
@@ -69,16 +68,16 @@ public class ControllerBuscaFuncionario implements ActionListener {
                     tabela.setRowCount(0);
 
                     for (Funcionario funcionarioAtualDaLista : listaFuncionarios) {
-                        //Adicionado o hospede na tabela
+                        //Adicionado o funcionario na tabela
                         tabela.addRow(new Object[]{funcionarioAtualDaLista.getId(),
                             funcionarioAtualDaLista.getNome(),
                             funcionarioAtualDaLista.getCpf(),
                             funcionarioAtualDaLista.getStatus()});
                     }
                 } else if (this.telaBuscaFuncionario.getjCBFiltro().getSelectedIndex() == 2) {
-                    //Criando a lista para receber os hospedes
+                    //Criando a lista para receber os funcionarios
                     List<Funcionario> listaFuncionarios = new ArrayList<>();
-                    //Carregando os hospedes via sl para dentro da lista
+                    //Carregando os funcionarios via sl para dentro da lista
                     listaFuncionarios = service.FuncionarioService.Carregar("cpf", this.telaBuscaFuncionario.getjTFFiltro().getText());
 
                     //Criando um objeto tabela do tipo defaulttablemodel e atribuindo o nosso modelo de tabela a ele
@@ -86,7 +85,7 @@ public class ControllerBuscaFuncionario implements ActionListener {
                     tabela.setRowCount(0);
 
                     for (Funcionario funcionarioAtualDaLista : listaFuncionarios) {
-                        //Adicionado o hospede na tabela
+                        //Adicionado o funcionario na tabela
                         tabela.addRow(new Object[]{funcionarioAtualDaLista.getId(),
                             funcionarioAtualDaLista.getNome(),
                             funcionarioAtualDaLista.getCpf(),
