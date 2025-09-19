@@ -185,11 +185,11 @@ public class TelaCadastroFuncionario extends javax.swing.JDialog {
     }
 
     public JFormattedTextField getjFormattedTextFieldDataCadastro() {
-        return jFormattedTextField5;
+        return jFormattedTextFieldCadastro;
     }
 
     public void setjFormattedTextFieldDataCadastro(JFormattedTextField jFormattedTextFieldDataCadastro) {
-        this.jFormattedTextField5 = jFormattedTextFieldDataCadastro;
+        this.jFormattedTextFieldCadastro = jFormattedTextFieldDataCadastro;
     }
     
     /**
@@ -216,7 +216,7 @@ public class TelaCadastroFuncionario extends javax.swing.JDialog {
         jLabelEmail = new javax.swing.JLabel();
         jTextFieldEmail = new javax.swing.JTextField();
         jFormattedTextFieldFone1 = new javax.swing.JFormattedTextField();
-        jFormattedTextField5 = new javax.swing.JFormattedTextField();
+        jFormattedTextFieldCadastro = new javax.swing.JFormattedTextField();
         jLabelCadastro = new javax.swing.JLabel();
         jLabelCep = new javax.swing.JLabel();
         jFormattedTextFieldCep = new javax.swing.JFormattedTextField();
@@ -289,17 +289,27 @@ public class TelaCadastroFuncionario extends javax.swing.JDialog {
 
         jLabelFone2.setText("Fone 2");
 
-        jLabelEmail.setText("Email");
-
         try {
-            jFormattedTextFieldFone1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(0##) #####-####")));
+            jFormattedTextFieldFone2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) #####-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
 
-        jFormattedTextField5.setEditable(false);
-        jFormattedTextField5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jFormattedTextField5.setText("08/07/2025");
+        jLabelEmail.setText("Email");
+
+        try {
+            jFormattedTextFieldFone1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) #####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        jFormattedTextFieldCadastro.setEditable(false);
+        try {
+            jFormattedTextFieldCadastro.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jFormattedTextFieldCadastro.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jLabelCadastro.setText("Data de Cadastro");
 
@@ -322,7 +332,6 @@ public class TelaCadastroFuncionario extends javax.swing.JDialog {
         jLabelSexo.setText("Sexo");
 
         jComboBoxSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Feminino" }));
-        jComboBoxSexo.setSelectedIndex(-1);
 
         jLabelObs.setText("OBS.:");
 
@@ -400,7 +409,7 @@ public class TelaCadastroFuncionario extends javax.swing.JDialog {
                                 .addGap(156, 156, 156)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jFormattedTextField5, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jFormattedTextFieldCadastro, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabelCadastro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanelDadosLayout.createSequentialGroup()
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -443,7 +452,7 @@ public class TelaCadastroFuncionario extends javax.swing.JDialog {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelDadosLayout.createSequentialGroup()
                                 .addComponent(jLabelCadastro)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jFormattedTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jFormattedTextFieldCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelDadosLayout.createSequentialGroup()
                                 .addComponent(jLabelSexo1)
                                 .addGap(28, 28, 28))
@@ -628,7 +637,7 @@ public class TelaCadastroFuncionario extends javax.swing.JDialog {
     private javax.swing.JButton jButtonSair;
     private javax.swing.JComboBox<String> jComboBoxSexo;
     private javax.swing.JComboBox<String> jComboBoxStatus;
-    private javax.swing.JFormattedTextField jFormattedTextField5;
+    private javax.swing.JFormattedTextField jFormattedTextFieldCadastro;
     private javax.swing.JFormattedTextField jFormattedTextFieldCep;
     private javax.swing.JFormattedTextField jFormattedTextFieldCpf;
     private javax.swing.JFormattedTextField jFormattedTextFieldFone1;
@@ -639,12 +648,12 @@ public class TelaCadastroFuncionario extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelCidade;
     private javax.swing.JLabel jLabelComplemento;
     private javax.swing.JLabel jLabelCpf;
-    private javax.swing.JLabel jLabelNome;
     private javax.swing.JLabel jLabelEmail;
     private javax.swing.JLabel jLabelFone1;
     private javax.swing.JLabel jLabelFone2;
     private javax.swing.JLabel jLabelId;
     private javax.swing.JLabel jLabelLogradouro;
+    private javax.swing.JLabel jLabelNome;
     private javax.swing.JLabel jLabelObs;
     private javax.swing.JLabel jLabelSenha;
     private javax.swing.JLabel jLabelSexo;
@@ -658,10 +667,10 @@ public class TelaCadastroFuncionario extends javax.swing.JDialog {
     private javax.swing.JTextField jTextFieldBairro;
     private javax.swing.JTextField jTextFieldCidade;
     private javax.swing.JTextField jTextFieldComplemento;
-    private javax.swing.JTextField jTextFieldNome;
     private javax.swing.JTextField jTextFieldEmail;
     private javax.swing.JTextField jTextFieldId;
     private javax.swing.JTextField jTextFieldLogradouro;
+    private javax.swing.JTextField jTextFieldNome;
     private javax.swing.JTextField jTextFieldObs;
     private javax.swing.JTextField jTextFieldRg;
     // End of variables declaration//GEN-END:variables

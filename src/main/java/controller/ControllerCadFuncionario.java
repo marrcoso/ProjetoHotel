@@ -33,6 +33,7 @@ public class ControllerCadFuncionario implements ActionListener {
             utilities.Utilities.ativaDesativa(this.telaCadastroFuncionario.getjPanelBotoes(), false);
             utilities.Utilities.limpaComponentes(this.telaCadastroFuncionario.getjPanelDados(), true);
             this.telaCadastroFuncionario.getjTextFieldId().setEnabled(false);
+            this.telaCadastroFuncionario.getjFormattedTextFieldDataCadastro().setEnabled(false);
             this.telaCadastroFuncionario.getjTextFieldNome().requestFocus();
 
         } else if (evento.getSource() == this.telaCadastroFuncionario.getjButtonCancelar()) {
@@ -94,8 +95,11 @@ public class ControllerCadFuncionario implements ActionListener {
                 this.telaCadastroFuncionario.getjTextFieldId().setText(codigo + "");
                 this.telaCadastroFuncionario.getjTextFieldId().setEnabled(false);
 
+
                 Funcionario funcionario = FuncionarioService.Carregar(codigo);
 
+                this.telaCadastroFuncionario.getjFormattedTextFieldDataCadastro().setText(funcionario.getDataCadastro());
+                this.telaCadastroFuncionario.getjFormattedTextFieldDataCadastro().setEnabled(false);
                 this.telaCadastroFuncionario.getjTextFieldNome().setText(funcionario.getNome());
                 this.telaCadastroFuncionario.getjFormattedTextFieldCpf().setText(funcionario.getCpf());
                 this.telaCadastroFuncionario.getjTextFieldRg().setText(funcionario.getRg());
@@ -115,7 +119,6 @@ public class ControllerCadFuncionario implements ActionListener {
                 this.telaCadastroFuncionario.getjTextFieldCidade().setText(funcionario.getCidade());
                 this.telaCadastroFuncionario.getjTextFieldLogradouro().setText(funcionario.getLogradouro());
                 this.telaCadastroFuncionario.getjTextFieldComplemento().setText(funcionario.getComplemento());
-                this.telaCadastroFuncionario.getjFormattedTextFieldDataCadastro().setText(funcionario.getDataCadastro());
 
                 this.telaCadastroFuncionario.getjTextFieldNome().requestFocus();
             }

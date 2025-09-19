@@ -336,6 +336,7 @@ public class TelaCadastroHospede extends javax.swing.JDialog {
             ex.printStackTrace();
         }
 
+        jFormattedTextFieldDataCadastro.setEditable(false);
         try {
             jFormattedTextFieldDataCadastro.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
