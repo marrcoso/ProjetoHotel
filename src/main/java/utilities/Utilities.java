@@ -108,4 +108,12 @@ public class Utilities {
         java.time.format.DateTimeFormatter formatter = java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return hoje.format(formatter);
     }
+
+    public static String formatarDataFromSqlData(String data) {
+        if (data != null && data.matches("\\d{4}-\\d{2}-\\d{2}")) {
+            String[] partes = data.split("-");
+            return String.format("%s/%s/%s", partes[2], partes[1], partes[0]);
+        }
+        return data;
+    }
 }

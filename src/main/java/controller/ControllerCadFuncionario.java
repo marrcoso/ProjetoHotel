@@ -106,8 +106,14 @@ public class ControllerCadFuncionario implements ActionListener {
             return false;
         }
         if (!utilities.ValidadorCampos.validarFone(telaCadastroFuncionario.getjFormattedTextFieldFone1().getText())) {
-            JOptionPane.showMessageDialog(null, "O Telefone 1 é obrigatório.");
+            JOptionPane.showMessageDialog(null, "O campo Fone1 é inválido.");
             telaCadastroFuncionario.getjFormattedTextFieldFone1().requestFocus();
+            return false;
+        }
+        boolean fone2Preenchido = utilities.Utilities.apenasNumeros(telaCadastroFuncionario.getjFormattedTextFieldFone2().getText()).length() > 0;
+        if (fone2Preenchido && !utilities.ValidadorCampos.validarFone(telaCadastroFuncionario.getjFormattedTextFieldFone2().getText())) {
+            JOptionPane.showMessageDialog(null, "O campo Fone2 é inválido.");
+            telaCadastroFuncionario.getjFormattedTextFieldFone2().requestFocus();
             return false;
         }
         if (!utilities.ValidadorCampos.validarCampoEmail(telaCadastroFuncionario.getjTextFieldEmail().getText())) {
@@ -192,7 +198,7 @@ public class ControllerCadFuncionario implements ActionListener {
 
             Funcionario funcionario = FuncionarioService.Carregar(codigo);
 
-            telaCadastroFuncionario.getjFormattedTextFieldDataCadastro().setText(funcionario.getDataCadastro());
+            telaCadastroFuncionario.getjFormattedTextFieldDataCadastro().setText(utilities.Utilities.formatarDataFromSqlData(funcionario.getDataCadastro()));
             telaCadastroFuncionario.getjFormattedTextFieldDataCadastro().setEnabled(false);
             telaCadastroFuncionario.getjTextFieldNome().setText(funcionario.getNome());
             telaCadastroFuncionario.getjFormattedTextFieldCpf().setText(funcionario.getCpf());
