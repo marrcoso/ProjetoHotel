@@ -105,6 +105,7 @@ public class TelaBuscaFuncionario extends javax.swing.JDialog {
 
         jPanelDados.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        jTableDados.setAutoCreateRowSorter(true);
         jTableDados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -113,6 +114,7 @@ public class TelaBuscaFuncionario extends javax.swing.JDialog {
                 "Id", "Nome", "CPF", "Status"
             }
         ));
+        jTableDados.setDefaultEditor(Object.class, null);
         jTableDados.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jTableDados);
         if (jTableDados.getColumnModel().getColumnCount() > 0) {

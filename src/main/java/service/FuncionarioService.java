@@ -4,7 +4,6 @@ import java.util.List;
 
 import model.DAO.FuncionarioDAO;
 import model.Funcionario;
-import model.Hospede;
 
 public class FuncionarioService {
 
