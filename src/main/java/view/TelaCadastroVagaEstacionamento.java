@@ -6,7 +6,11 @@
 package view;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -49,6 +53,102 @@ public class TelaCadastroVagaEstacionamento extends javax.swing.JDialog {
     public JPanel getjPanelDados() {
         return jPanelDados;
     }
+
+    public JComboBox<String> getjComboBoxStatus() {
+        return jComboBoxStatus;
+    }
+
+    public void setjComboBoxStatus(JComboBox<String> jComboBoxStatus) {
+        this.jComboBoxStatus = jComboBoxStatus;
+    }
+
+    public JFormattedTextField getjFormattedTextFieldMetragem() {
+        return jFormattedTextFieldMetragem;
+    }
+
+    public void setjFormattedTextFieldMetragem(JFormattedTextField jFormattedTextFieldMetragem) {
+        this.jFormattedTextFieldMetragem = jFormattedTextFieldMetragem;
+    }
+
+    public JLabel getjLabelDescricao() {
+        return jLabelDescricao;
+    }
+
+    public void setjLabelDescricao(JLabel jLabelDescricao) {
+        this.jLabelDescricao = jLabelDescricao;
+    }
+
+    public JLabel getjLabelId() {
+        return jLabelId;
+    }
+
+    public void setjLabelId(JLabel jLabelId) {
+        this.jLabelId = jLabelId;
+    }
+
+    public JLabel getjLabelMetragem() {
+        return jLabelMetragem;
+    }
+
+    public void setjLabelMetragem(JLabel jLabelMetragem) {
+        this.jLabelMetragem = jLabelMetragem;
+    }
+
+    public JLabel getjLabelStatus() {
+        return jLabelStatus;
+    }
+
+    public void setjLabelStatus(JLabel jLabelStatus) {
+        this.jLabelStatus = jLabelStatus;
+    }
+
+    public JLabel getjLabelTitulo() {
+        return jLabelTitulo;
+    }
+
+    public void setjLabelTitulo(JLabel jLabelTitulo) {
+        this.jLabelTitulo = jLabelTitulo;
+    }
+
+    public JPanel getjPanelTitulo() {
+        return jPanelTitulo;
+    }
+
+    public void setjPanelTitulo(JPanel jPanelTitulo) {
+        this.jPanelTitulo = jPanelTitulo;
+    }
+
+    public JTextField getjTextFieldDescricao() {
+        return jTextFieldDescricao;
+    }
+
+    public void setjTextFieldDescricao(JTextField jTextFieldDescricao) {
+        this.jTextFieldDescricao = jTextFieldDescricao;
+    }
+
+    public JTextField getjTextFieldId() {
+        return jTextFieldId;
+    }
+
+    public void setjTextFieldId(JTextField jTextFieldId) {
+        this.jTextFieldId = jTextFieldId;
+    }
+
+    public JLabel getjLabelObservacao() {
+        return jLabelObservacao;
+    }
+
+    public void setjLabelObservacao(JLabel jLabelObservacao) {
+        this.jLabelObservacao = jLabelObservacao;
+    }
+
+    public JTextField getjTextFieldObservacao() {
+        return jTextFieldObservacao;
+    }
+
+    public void setjTextFieldObservacao(JTextField jTextFieldObservacao) {
+        this.jTextFieldObservacao = jTextFieldObservacao;
+    }
     
     
     
@@ -76,6 +176,8 @@ public class TelaCadastroVagaEstacionamento extends javax.swing.JDialog {
         jComboBoxStatus = new javax.swing.JComboBox<>();
         jLabelMetragem = new javax.swing.JLabel();
         jFormattedTextFieldMetragem = new javax.swing.JFormattedTextField();
+        jTextFieldObservacao = new javax.swing.JTextField();
+        jLabelObservacao = new javax.swing.JLabel();
         jPanelBotoes = new javax.swing.JPanel();
         jButtonNovo = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
@@ -133,6 +235,8 @@ public class TelaCadastroVagaEstacionamento extends javax.swing.JDialog {
 
         jFormattedTextFieldMetragem.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
 
+        jLabelObservacao.setText("Observação:");
+
         javax.swing.GroupLayout jPanelDadosLayout = new javax.swing.GroupLayout(jPanelDados);
         jPanelDados.setLayout(jPanelDadosLayout);
         jPanelDadosLayout.setHorizontalGroup(
@@ -144,7 +248,7 @@ public class TelaCadastroVagaEstacionamento extends javax.swing.JDialog {
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelId))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 383, Short.MAX_VALUE)
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelMetragem)
                             .addComponent(jFormattedTextFieldMetragem, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -154,10 +258,13 @@ public class TelaCadastroVagaEstacionamento extends javax.swing.JDialog {
                             .addGroup(jPanelDadosLayout.createSequentialGroup()
                                 .addComponent(jLabelStatus)
                                 .addGap(156, 156, 156))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelDadosLayout.createSequentialGroup()
-                        .addComponent(jLabelDescricao)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jTextFieldDescricao))
+                    .addComponent(jTextFieldDescricao)
+                    .addComponent(jTextFieldObservacao)
+                    .addGroup(jPanelDadosLayout.createSequentialGroup()
+                        .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelDescricao)
+                            .addComponent(jLabelObservacao))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanelDadosLayout.setVerticalGroup(
@@ -184,7 +291,11 @@ public class TelaCadastroVagaEstacionamento extends javax.swing.JDialog {
                 .addComponent(jLabelDescricao)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelObservacao)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextFieldObservacao, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jPanelBotoes.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -305,6 +416,7 @@ public class TelaCadastroVagaEstacionamento extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelDescricao;
     private javax.swing.JLabel jLabelId;
     private javax.swing.JLabel jLabelMetragem;
+    private javax.swing.JLabel jLabelObservacao;
     private javax.swing.JLabel jLabelStatus;
     private javax.swing.JLabel jLabelTitulo;
     private javax.swing.JPanel jPanelBotoes;
@@ -312,5 +424,6 @@ public class TelaCadastroVagaEstacionamento extends javax.swing.JDialog {
     private javax.swing.JPanel jPanelTitulo;
     private javax.swing.JTextField jTextFieldDescricao;
     private javax.swing.JTextField jTextFieldId;
+    private javax.swing.JTextField jTextFieldObservacao;
     // End of variables declaration//GEN-END:variables
 }

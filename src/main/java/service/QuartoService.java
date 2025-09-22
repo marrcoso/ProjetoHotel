@@ -1,33 +1,41 @@
 package service;
 
+import java.sql.SQLException;
 import java.util.List;
+
 import model.DAO.QuartoDAO;
 import model.Quarto;
 
-public class QuartoService {
+public class QuartoService implements InterfaceService<Quarto> {
 
-    public static void Criar(Quarto objeto) {
-        QuartoDAO quartoDAO = new QuartoDAO();
+    private final QuartoDAO quartoDAO;
+
+    public QuartoService() {
+        this.quartoDAO = new QuartoDAO();
+    }
+
+    @Override
+    public void Criar(Quarto objeto) throws SQLException {
         quartoDAO.Create(objeto);
     }
 
-    public static Quarto Carregar(int id) {
-        QuartoDAO quartoDAO = new QuartoDAO();
+    @Override
+    public Quarto Carregar(int id) throws SQLException {
         return quartoDAO.Retrieve(id);
     }
 
-    public static List<Quarto> Carregar(String atributo, String valor) {
-        QuartoDAO quartoDAO = new QuartoDAO();
+    @Override
+    public List<Quarto> Carregar(String atributo, String valor) throws SQLException {
         return quartoDAO.Retrieve(atributo, valor);
     }
 
-    public static void Atualizar(Quarto objeto) {
-        QuartoDAO quartoDAO = new QuartoDAO();
+    @Override
+    public void Atualizar(Quarto objeto) throws SQLException {
         quartoDAO.Update(objeto);
     }
 
-    public static void Apagar(Quarto objeto) {
-        QuartoDAO quartoDAO = new QuartoDAO();
+    @Override
+    public void Apagar(Quarto objeto) throws SQLException {
         quartoDAO.Delete(objeto);
     }
 }

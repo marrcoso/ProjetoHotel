@@ -7,12 +7,12 @@ import java.sql.SQLException;
 import java.util.List;
 
 import model.Fornecedor;
+import util.AppLogger;
 
 public class FornecedorDAO implements InterfaceDAO<Fornecedor> {
     
     @Override
-    public void Create(Fornecedor objeto) {
-
+    public void Create(Fornecedor objeto) throws SQLException {
         String sqlInstrucao = "Insert Into fornecedor("
                 + " nome, "
                 + " fone, "
@@ -35,11 +35,10 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor> {
                 + " contato) "
                 + " Values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
-        Connection conexao = model.DAO.ConnectionFactory.getConnection();
-        PreparedStatement pstm = null;
-
         try {
-            pstm = conexao.prepareStatement(sqlInstrucao);
+            Connection conexao = model.DAO.ConnectionFactory.getConnection();
+            PreparedStatement pstm = conexao.prepareStatement(sqlInstrucao);
+
             pstm.setString(1, objeto.getNome());
             pstm.setString(2, objeto.getFone1());
             pstm.setString(3, objeto.getFone2());
@@ -62,16 +61,15 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor> {
 
             pstm.execute();
 
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
             ConnectionFactory.closeConnection(conexao, pstm);
+        } catch (SQLException ex) {
+            AppLogger.error("Erro ao criar fornecedor", ex);
+            throw new SQLException("Erro ao criar fornecedor");
         }
     }
 
     @Override
-    public Fornecedor Retrieve(int id) {
-
+    public Fornecedor Retrieve(int id) throws SQLException {
         String sqlInstrucao = "Select "
                 + " id,"
                 + " nome, "
@@ -96,15 +94,12 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor> {
                 + " From fornecedor"
                 + " Where id = ? ";
 
-        Connection conexao = model.DAO.ConnectionFactory.getConnection();
-        PreparedStatement pstm = null;
-        ResultSet rst = null;
-        Fornecedor fornecedor = new Fornecedor();
-
         try {
-            pstm = conexao.prepareStatement(sqlInstrucao);
+            Connection conexao = model.DAO.ConnectionFactory.getConnection();
+            PreparedStatement pstm = conexao.prepareStatement(sqlInstrucao);
             pstm.setInt(1, id);
-            rst = pstm.executeQuery();
+            ResultSet rst = pstm.executeQuery();
+            Fornecedor fornecedor = new Fornecedor();
 
             while (rst.next()) {
                 fornecedor.setId(rst.getInt("id"));
@@ -128,16 +123,16 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor> {
                 fornecedor.setStatus(rst.getString("status").charAt(0));
                 fornecedor.setSexo(rst.getString("sexo").charAt(0));
             }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
             ConnectionFactory.closeConnection(conexao, pstm, rst);
             return fornecedor;
+        } catch (SQLException ex) {
+            AppLogger.error("Erro ao carregar fornecedor", ex);
+            throw new SQLException("Erro ao carregar fornecedor");
         }
     }
 
     @Override
-    public List<Fornecedor> Retrieve(String atributo, String valor) {
+    public List<Fornecedor> Retrieve(String atributo, String valor) throws SQLException {
         String sqlInstrucao = "Select "
                 + " id,"
                 + " nome, "
@@ -162,15 +157,13 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor> {
                 + " From fornecedor"
                 + " Where " + atributo + " like ?";
 
-        Connection conexao = model.DAO.ConnectionFactory.getConnection();
-        PreparedStatement pstm = null;
-        ResultSet rst = null;
-        List<Fornecedor> listaFornecedores = new java.util.ArrayList<>();
-
         try {
-            pstm = conexao.prepareStatement(sqlInstrucao);
+            Connection conexao = model.DAO.ConnectionFactory.getConnection();
+            PreparedStatement pstm = conexao.prepareStatement(sqlInstrucao);
             pstm.setString(1, "%" + valor + "%");
-            rst = pstm.executeQuery();
+            ResultSet rst = pstm.executeQuery();
+            List<Fornecedor> listaFornecedores = new java.util.ArrayList<>();
+
 
             while (rst.next()) {
                 Fornecedor fornecedor = new Fornecedor();
@@ -196,16 +189,16 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor> {
                 fornecedor.setSexo(rst.getString("sexo").charAt(0));
                 listaFornecedores.add(fornecedor);
             }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
             ConnectionFactory.closeConnection(conexao, pstm, rst);
             return listaFornecedores;
+        } catch (SQLException ex) {
+            AppLogger.error("Erro ao buscar fornecedores", ex);
+            throw new SQLException("Erro ao buscar fornecedores");
         }
     }
 
     @Override
-    public void Update(Fornecedor objeto) {
+    public void Update(Fornecedor objeto) throws SQLException {
         String sqlInstrucao = "Update fornecedor "
                 + " Set"
                 + " nome = ?, "
@@ -229,11 +222,10 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor> {
                 + " contato = ? "
                 + " Where id = ? ";
 
-        Connection conexao = model.DAO.ConnectionFactory.getConnection();
-        PreparedStatement pstm = null;
-
         try {
-            pstm = conexao.prepareStatement(sqlInstrucao);
+            Connection conexao = model.DAO.ConnectionFactory.getConnection();
+            PreparedStatement pstm = conexao.prepareStatement(sqlInstrucao);
+
             pstm.setString(1, objeto.getNome());
             pstm.setString(2, objeto.getFone1());
             pstm.setString(3, objeto.getFone2());
@@ -256,15 +248,16 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor> {
             pstm.setInt(20, objeto.getId());
 
             pstm.execute();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
             ConnectionFactory.closeConnection(conexao, pstm);
+        } catch (SQLException ex) {
+            AppLogger.error("Erro ao atualizar fornecedor", ex);
+            throw new SQLException("Erro ao atualizar fornecedor");
         }
     }
 
     @Override
-    public void Delete(Fornecedor objeto) {
+    public void Delete(Fornecedor objeto) throws SQLException {
+        // Implemente aqui se necessário, seguindo o mesmo padrão das demais operações
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

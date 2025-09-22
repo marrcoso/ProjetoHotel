@@ -10,6 +10,10 @@ import javax.swing.JPanel;
 import javax.swing.text.NumberFormatter;
 import java.text.NumberFormat;
 import java.util.Locale;
+import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -51,6 +55,102 @@ public class TelaCadastroProduto extends javax.swing.JDialog {
     
     public JPanel getjPanelDados() {
         return jPanelDados;
+    }
+
+    public JComboBox<String> getjComboBoxStatus() {
+        return jComboBoxStatus;
+    }
+
+    public void setjComboBoxStatus(JComboBox<String> jComboBoxStatus) {
+        this.jComboBoxStatus = jComboBoxStatus;
+    }
+
+    public JFormattedTextField getjFormattedTextFieldValor() {
+        return jFormattedTextFieldValor;
+    }
+
+    public void setjFormattedTextFieldValor(JFormattedTextField jFormattedTextFieldValor) {
+        this.jFormattedTextFieldValor = jFormattedTextFieldValor;
+    }
+
+    public JLabel getjLabelDescricao() {
+        return jLabelDescricao;
+    }
+
+    public void setjLabelDescricao(JLabel jLabelDescricao) {
+        this.jLabelDescricao = jLabelDescricao;
+    }
+
+    public JLabel getjLabelId() {
+        return jLabelId;
+    }
+
+    public void setjLabelId(JLabel jLabelId) {
+        this.jLabelId = jLabelId;
+    }
+
+    public JLabel getjLabelObservacao() {
+        return jLabelObservacao;
+    }
+
+    public void setjLabelObservacao(JLabel jLabelObservacao) {
+        this.jLabelObservacao = jLabelObservacao;
+    }
+
+    public JLabel getjLabelStatus() {
+        return jLabelStatus;
+    }
+
+    public void setjLabelStatus(JLabel jLabelStatus) {
+        this.jLabelStatus = jLabelStatus;
+    }
+
+    public JLabel getjLabelTitulo() {
+        return jLabelTitulo;
+    }
+
+    public void setjLabelTitulo(JLabel jLabelTitulo) {
+        this.jLabelTitulo = jLabelTitulo;
+    }
+
+    public JLabel getjLabelValor() {
+        return jLabelValor;
+    }
+
+    public void setjLabelValor(JLabel jLabelValor) {
+        this.jLabelValor = jLabelValor;
+    }
+
+    public JPanel getjPanelTitulo() {
+        return jPanelTitulo;
+    }
+
+    public void setjPanelTitulo(JPanel jPanelTitulo) {
+        this.jPanelTitulo = jPanelTitulo;
+    }
+
+    public JTextField getjTextFieldDescricao() {
+        return jTextFieldDescricao;
+    }
+
+    public void setjTextFieldDescricao(JTextField jTextFieldDescricao) {
+        this.jTextFieldDescricao = jTextFieldDescricao;
+    }
+
+    public JTextField getjTextFieldId() {
+        return jTextFieldId;
+    }
+
+    public void setjTextFieldId(JTextField jTextFieldId) {
+        this.jTextFieldId = jTextFieldId;
+    }
+
+    public JTextField getjTextFieldObservacao() {
+        return jTextFieldObservacao;
+    }
+
+    public void setjTextFieldObservacao(JTextField jTextFieldObservacao) {
+        this.jTextFieldObservacao = jTextFieldObservacao;
     }
     
     

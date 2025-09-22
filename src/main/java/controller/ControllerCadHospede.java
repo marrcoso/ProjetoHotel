@@ -2,30 +2,37 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
 import model.Hospede;
 import service.HospedeService;
+import service.InterfaceService;
 import view.TelaBuscaHospede;
 import view.TelaCadastroHospede;
 
-public class ControllerCadHospede implements ActionListener {
+public class ControllerCadHospede implements ActionListener, InterfaceControllerCad<Hospede> {
 
     TelaCadastroHospede telaCadastroHospede;
+    InterfaceService<Hospede> hospedeService;
     public static int codigo;
 
     public ControllerCadHospede(TelaCadastroHospede telaCadastroHospede) {
         this.telaCadastroHospede = telaCadastroHospede;
+        this.hospedeService = new HospedeService();
+        utilities.Utilities.ativaDesativa(this.telaCadastroHospede.getjPanelBotoes(), true);
+        utilities.Utilities.limpaComponentes(this.telaCadastroHospede.getjPanelDados(), false);
 
+        initListeners();
+    }
+
+    private void initListeners() {
         this.telaCadastroHospede.getjButtonNovo().addActionListener(this);
         this.telaCadastroHospede.getjButtonCancelar().addActionListener(this);
         this.telaCadastroHospede.getjButtonGravar().addActionListener(this);
         this.telaCadastroHospede.getjButtonBuscar().addActionListener(this);
         this.telaCadastroHospede.getjButtonSair().addActionListener(this);
-
-        utilities.Utilities.ativaDesativa(this.telaCadastroHospede.getjPanelBotoes(), true);
-        utilities.Utilities.limpaComponentes(this.telaCadastroHospede.getjPanelDados(), false);
     }
 
     @Override
@@ -133,7 +140,6 @@ public class ControllerCadHospede implements ActionListener {
             telaCadastroHospede.getjComboBoxSexo().requestFocus();
             return false;
         }
-        // Os campos complemento, fone2, contato e obs podem ser opcionais
         return true;
     }
 
@@ -141,6 +147,35 @@ public class ControllerCadHospede implements ActionListener {
         if (!isFormularioValido()) {
             return;
         }
+        Hospede hospede = construirDoFormulario();
+
+        boolean isNovoCadastro = telaCadastroHospede.getjTextFieldId().getText().trim().isEmpty();
+
+        if (isNovoCadastro) {
+            try {
+                hospedeService.Criar(hospede);
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(telaCadastroHospede, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            utilities.Utilities.ativaDesativa(telaCadastroHospede.getjPanelBotoes(), true);
+            utilities.Utilities.limpaComponentes(telaCadastroHospede.getjPanelDados(), false);
+            return;
+        }
+
+        hospede.setId(Integer.parseInt(telaCadastroHospede.getjTextFieldId().getText()));
+        try {
+            hospedeService.Atualizar(hospede);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(telaCadastroHospede, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        utilities.Utilities.ativaDesativa(telaCadastroHospede.getjPanelBotoes(), true);
+        utilities.Utilities.limpaComponentes(telaCadastroHospede.getjPanelDados(), false);
+    }
+
+    private Hospede construirDoFormulario() {
         Hospede hospede = new Hospede();
         hospede.setNome(telaCadastroHospede.getjTextFieldNomeFantasia().getText());
         hospede.setRazaoSocial(telaCadastroHospede.getjTextFieldRazaoSocial().getText());
@@ -159,28 +194,23 @@ public class ControllerCadHospede implements ActionListener {
         hospede.setContato(telaCadastroHospede.getjTextFieldContato().getText());
         hospede.setObs(telaCadastroHospede.getjTextFieldObs().getText());
 
+        Object sexoSelecionado = telaCadastroHospede.getjComboBoxSexo().getSelectedItem();
         hospede.setSexo(
-            telaCadastroHospede.getjComboBoxSexo().getSelectedItem().equals("Masculino") ? 'M' : 'F'
+            sexoSelecionado != null && sexoSelecionado.equals("Masculino") ? 'M' : 'F'
         );
-       
+
+        Object statusSelecionado = telaCadastroHospede.getjComboBoxStatus().getSelectedItem();
         hospede.setStatus(
-            telaCadastroHospede.getjComboBoxStatus().getSelectedItem().equals("Ativo") ? 'A' : 'I'
+            statusSelecionado != null && statusSelecionado.equals("Ativo") ? 'A' : 'I'
         );
 
-        if (telaCadastroHospede.getjTextFieldId().getText().trim().isEmpty()) {
-            HospedeService.Criar(hospede);
-        } else {
-            hospede.setId(Integer.parseInt(telaCadastroHospede.getjTextFieldId().getText()));
-            HospedeService.Atualizar(hospede);
-        }
-
-        utilities.Utilities.ativaDesativa(telaCadastroHospede.getjPanelBotoes(), true);
-        utilities.Utilities.limpaComponentes(telaCadastroHospede.getjPanelDados(), false);
+        return hospede;
     }
 
     private void handleBuscar() {
         codigo = 0;
         TelaBuscaHospede telaBuscaHospede = new TelaBuscaHospede(null, true);
+        @SuppressWarnings("unused")
         ControllerBuscaHospede controllerBuscaHospede = new ControllerBuscaHospede(telaBuscaHospede);
         telaBuscaHospede.setVisible(true);
 
@@ -191,7 +221,13 @@ public class ControllerCadHospede implements ActionListener {
             telaCadastroHospede.getjTextFieldId().setText(String.valueOf(codigo));
             telaCadastroHospede.getjTextFieldId().setEnabled(false);
 
-            Hospede hospede = HospedeService.Carregar(codigo);
+            Hospede hospede;
+            try {
+                hospede = new HospedeService().Carregar(codigo);
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(telaCadastroHospede, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
             telaCadastroHospede.getjFormattedTextFieldDataCadastro().setText(utilities.Utilities.formatarDataFromSqlData(hospede.getDataCadastro()));
             telaCadastroHospede.getjFormattedTextFieldDataCadastro().setEnabled(false);

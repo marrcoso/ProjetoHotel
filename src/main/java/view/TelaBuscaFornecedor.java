@@ -7,6 +7,9 @@ package view;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
@@ -50,6 +53,62 @@ public class TelaBuscaFornecedor extends javax.swing.JDialog {
 
     public JComboBox<String> getjCBFiltro() {
         return jCBFiltro;
+    }
+
+    public JLabel getjLabelFiltrar() {
+        return jLabelFiltrar;
+    }
+
+    public void setjLabelFiltrar(JLabel jLabelFiltrar) {
+        this.jLabelFiltrar = jLabelFiltrar;
+    }
+
+    public JLabel getjLabelTitulo() {
+        return jLabelTitulo;
+    }
+
+    public void setjLabelTitulo(JLabel jLabelTitulo) {
+        this.jLabelTitulo = jLabelTitulo;
+    }
+
+    public JLabel getjLabelValor() {
+        return jLabelValor;
+    }
+
+    public void setjLabelValor(JLabel jLabelValor) {
+        this.jLabelValor = jLabelValor;
+    }
+
+    public JPanel getjPanelDados() {
+        return jPanelDados;
+    }
+
+    public void setjPanelDados(JPanel jPanelDados) {
+        this.jPanelDados = jPanelDados;
+    }
+
+    public JPanel getjPanelFiltros() {
+        return jPanelFiltros;
+    }
+
+    public void setjPanelFiltros(JPanel jPanelFiltros) {
+        this.jPanelFiltros = jPanelFiltros;
+    }
+
+    public JPanel getjPaneltitulo() {
+        return jPaneltitulo;
+    }
+
+    public void setjPaneltitulo(JPanel jPaneltitulo) {
+        this.jPaneltitulo = jPaneltitulo;
+    }
+
+    public JScrollPane getjScrollPane1() {
+        return jScrollPane1;
+    }
+
+    public void setjScrollPane1(JScrollPane jScrollPane1) {
+        this.jScrollPane1 = jScrollPane1;
     }
 
     

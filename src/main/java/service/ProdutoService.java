@@ -1,33 +1,41 @@
 package service;
 
+import java.sql.SQLException;
 import java.util.List;
+
 import model.DAO.ProdutoDAO;
 import model.Produto;
 
-public class ProdutoService {
+public class ProdutoService implements InterfaceService<Produto> {
 
-    public static void Criar(Produto objeto) {
-        ProdutoDAO produtoDAO = new ProdutoDAO();
+    private final ProdutoDAO produtoDAO;
+
+    public ProdutoService() {
+        this.produtoDAO = new ProdutoDAO();
+    }
+
+    @Override
+    public void Criar(Produto objeto) throws SQLException {
         produtoDAO.Create(objeto);
     }
 
-    public static Produto Carregar(int id) {
-        ProdutoDAO produtoDAO = new ProdutoDAO();
+    @Override
+    public Produto Carregar(int id) throws SQLException {
         return produtoDAO.Retrieve(id);
     }
 
-    public static List<Produto> Carregar(String atributo, String valor) {
-        ProdutoDAO produtoDAO = new ProdutoDAO();
+    @Override
+    public List<Produto> Carregar(String atributo, String valor) throws SQLException {
         return produtoDAO.Retrieve(atributo, valor);
     }
 
-    public static void Atualizar(Produto objeto) {
-        ProdutoDAO produtoDAO = new ProdutoDAO();
+    @Override
+    public void Atualizar(Produto objeto) throws SQLException {
         produtoDAO.Update(objeto);
     }
 
-    public static void Apagar(Produto objeto) {
-        ProdutoDAO produtoDAO = new ProdutoDAO();
+    @Override
+    public void Apagar(Produto objeto) throws SQLException {
         produtoDAO.Delete(objeto);
     }
 }

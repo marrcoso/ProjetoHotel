@@ -1,33 +1,41 @@
 package service;
 
+import java.sql.SQLException;
 import java.util.List;
+
 import model.DAO.ModeloDAO;
 import model.Modelo;
 
-public class ModeloService {
+public class ModeloService implements InterfaceService<Modelo> {
 
-    public static void Criar(Modelo objeto) {
-        ModeloDAO modeloDAO = new ModeloDAO();
+    private final ModeloDAO modeloDAO;
+
+    public ModeloService() {
+        this.modeloDAO = new ModeloDAO();
+    }
+
+    @Override
+    public void Criar(Modelo objeto) throws SQLException {
         modeloDAO.Create(objeto);
     }
 
-    public static Modelo Carregar(int id) {
-        ModeloDAO modeloDAO = new ModeloDAO();
+    @Override
+    public Modelo Carregar(int id) throws SQLException {
         return modeloDAO.Retrieve(id);
     }
 
-    public static List<Modelo> Carregar(String atributo, String valor) {
-        ModeloDAO modeloDAO = new ModeloDAO();
+    @Override
+    public List<Modelo> Carregar(String atributo, String valor) throws SQLException {
         return modeloDAO.Retrieve(atributo, valor);
     }
 
-    public static void Atualizar(Modelo objeto) {
-        ModeloDAO modeloDAO = new ModeloDAO();
+    @Override
+    public void Atualizar(Modelo objeto) throws SQLException {
         modeloDAO.Update(objeto);
     }
 
-    public static void Apagar(Modelo objeto) {
-        ModeloDAO modeloDAO = new ModeloDAO();
+    @Override
+    public void Apagar(Modelo objeto) throws SQLException {
         modeloDAO.Delete(objeto);
     }
 }

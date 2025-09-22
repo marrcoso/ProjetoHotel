@@ -2,21 +2,24 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import model.Funcionario;
+import service.FuncionarioService;
 import view.TelaBuscaFuncionario;
 
-public class ControllerBuscaFuncionario implements ActionListener {
+public class ControllerBuscaFuncionario implements ActionListener, InterfaceControllerBusca {
 
     TelaBuscaFuncionario telaBuscaFuncionario;
+    private final FuncionarioService funcionarioService;
 
     public ControllerBuscaFuncionario(TelaBuscaFuncionario telaBuscaFuncionario) {
-
         this.telaBuscaFuncionario = telaBuscaFuncionario;
+        this.funcionarioService = new FuncionarioService();
         initListeners();
     }
 
@@ -78,25 +81,29 @@ public class ControllerBuscaFuncionario implements ActionListener {
 
         FiltroFuncionario filtro = FiltroFuncionario.fromIndex(filtroIndex);
 
-        switch (filtro) {
-            case ID:
-                Funcionario funcionario = service.FuncionarioService.Carregar(Integer.parseInt(filtroTexto));
-                if (funcionario != null) {
-                    tabela.addRow(new Object[]{funcionario.getId(), funcionario.getNome(), funcionario.getCpf(), funcionario.getStatus()});
-                }
-                break;
-            case NOME:
-                List<Funcionario> listaPorNome = service.FuncionarioService.Carregar("nome", filtroTexto);
-                for (Funcionario f : listaPorNome) {
-                    tabela.addRow(new Object[]{f.getId(), f.getNome(), f.getCpf(), f.getStatus()});
-                }
-                break;
-            case CPF:
-                List<Funcionario> listaPorCpf = service.FuncionarioService.Carregar("cpf", filtroTexto);
-                for (Funcionario f : listaPorCpf) {
-                    tabela.addRow(new Object[]{f.getId(), f.getNome(), f.getCpf(), f.getStatus()});
-                }
-                break;
+        try {
+            switch (filtro) {
+                case ID:
+                    Funcionario funcionario = funcionarioService.Carregar(Integer.parseInt(filtroTexto));
+                    if (funcionario != null) {
+                        tabela.addRow(new Object[]{funcionario.getId(), funcionario.getNome(), funcionario.getCpf(), funcionario.getStatus()});
+                    }
+                    break;
+                case NOME:
+                    List<Funcionario> listaPorNome = funcionarioService.Carregar("nome", filtroTexto);
+                    for (Funcionario f : listaPorNome) {
+                        tabela.addRow(new Object[]{f.getId(), f.getNome(), f.getCpf(), f.getStatus()});
+                    }
+                    break;
+                case CPF:
+                    List<Funcionario> listaPorCpf = funcionarioService.Carregar("cpf", filtroTexto);
+                    for (Funcionario f : listaPorCpf) {
+                        tabela.addRow(new Object[]{f.getId(), f.getNome(), f.getCpf(), f.getStatus()});
+                    }
+                    break;
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(telaBuscaFuncionario, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 

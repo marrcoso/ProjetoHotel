@@ -107,7 +107,7 @@
                               <Component id="jTextFieldId" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabelId" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="383" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabelMetragem" min="-2" max="-2" attributes="0"/>
                               <Component id="jFormattedTextFieldMetragem" min="-2" pref="90" max="-2" attributes="0"/>
@@ -121,11 +121,15 @@
                               </Group>
                           </Group>
                       </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="jLabelDescricao" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextFieldDescricao" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jTextFieldObservacao" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabelDescricao" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabelObservacao" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="jTextFieldDescricao" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -162,7 +166,11 @@
                   <Component id="jLabelDescricao" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jTextFieldDescricao" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="16" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="jLabelObservacao" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jTextFieldObservacao" min="-2" pref="75" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -220,6 +228,13 @@
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
               <Format subtype="1" type="0"/>
             </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jTextFieldObservacao">
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabelObservacao">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Observa&#xe7;&#xe3;o:"/>
           </Properties>
         </Component>
       </SubComponents>

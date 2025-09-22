@@ -2,52 +2,112 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JOptionPane;
-import view.TelaBuscaFornecedor;
-import java.sql.Connection;
-import model.DAO.ConnectionFactory;
+import java.sql.SQLException;
+import java.util.List;
 
-public class ControllerBuscaFornecedor implements ActionListener {
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+import model.Fornecedor;
+import service.FornecedorService;
+import view.TelaBuscaFornecedor;
+
+public class ControllerBuscaFornecedor implements ActionListener, InterfaceControllerBusca {
 
     TelaBuscaFornecedor telaBuscaFornecedor;
+    private final FornecedorService fornecedorService;
 
     public ControllerBuscaFornecedor(TelaBuscaFornecedor telaBuscaFornecedor) {
-
         this.telaBuscaFornecedor = telaBuscaFornecedor;
+        this.fornecedorService = new FornecedorService();
+        initListeners();
+    }
 
+    private void initListeners() {
         this.telaBuscaFornecedor.getjButtonCarregar().addActionListener(this);
         this.telaBuscaFornecedor.getjButtonFiltar().addActionListener(this);
         this.telaBuscaFornecedor.getjButtonSair().addActionListener(this);
-
     }
 
     @Override
     public void actionPerformed(ActionEvent evento) {
-
-        if (evento.getSource() == this.telaBuscaFornecedor.getjButtonCarregar()) {
-            JOptionPane.showMessageDialog(null, "Botão Carregar Pressionado...");
-            if (this.telaBuscaFornecedor.getjTableDados().getRowCount() == 0) {
-                JOptionPane.showMessageDialog(null, "Não Existem Dados Selecionados!");
-            } else {
-                JOptionPane.showMessageDialog(null, "Carregando Dados para Edição....");
-            }
-        } else if (evento.getSource() == this.telaBuscaFornecedor.getjButtonFiltar()) {
-            JOptionPane.showMessageDialog(null, "Botão Filtrar Pressionado...");
-            if (this.telaBuscaFornecedor.getjTFFiltro().getText().trim().equalsIgnoreCase("")) {
-                JOptionPane.showMessageDialog(null, "Sem Dados para a Seleção...");
-            } else {
-                JOptionPane.showMessageDialog(null, "Filtrando informações...");
-                if (this.telaBuscaFornecedor.getjCBFiltro().getSelectedIndex() == 0) {
-                    JOptionPane.showMessageDialog(null, "Filtrando por ID");
-
-                } else if (this.telaBuscaFornecedor.getjCBFiltro().getSelectedIndex() == 1) {
-                    JOptionPane.showMessageDialog(null, "Filtrando por Nome");
-                } else if (this.telaBuscaFornecedor.getjCBFiltro().getSelectedIndex() == 2) {
-                    JOptionPane.showMessageDialog(null, "Filtrando por CPF");
-                }
-            }
-        } else if (evento.getSource() == this.telaBuscaFornecedor.getjButtonSair()) {
-            this.telaBuscaFornecedor.dispose();
+        Object source = evento.getSource();
+        if (source == telaBuscaFornecedor.getjButtonCarregar()) {
+            handleCarregar();
+            return;
         }
+        if (source == telaBuscaFornecedor.getjButtonFiltar()) {
+            handleFiltrar();
+            return;
+        }
+        if (source == telaBuscaFornecedor.getjButtonSair()) {
+            handleSair();
+        }
+    }
+
+    private void handleCarregar() {
+        if (telaBuscaFornecedor.getjTableDados().getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Não Existem Dados Selecionados para Edição!");
+        } else {
+            ControllerCadFornecedor.codigo = (int) telaBuscaFornecedor.getjTableDados()
+                .getValueAt(telaBuscaFornecedor.getjTableDados().getSelectedRow(), 0);
+            telaBuscaFornecedor.dispose();
+        }
+    }
+
+    private enum FiltroFornecedor {
+        ID, NOME, CPF;
+
+        public static FiltroFornecedor fromIndex(int index) {
+            switch (index) {
+                case 0: return ID;
+                case 1: return NOME;
+                case 2: return CPF;
+                default: throw new IllegalArgumentException("Filtro inválido");
+            }
+        }
+    }
+
+    private void handleFiltrar() {
+        if (telaBuscaFornecedor.getjTFFiltro().getText().trim().equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(null, "Sem Dados para a Seleção...");
+            return;
+        }
+        DefaultTableModel tabela = (DefaultTableModel) telaBuscaFornecedor.getjTableDados().getModel();
+        tabela.setRowCount(0);
+
+        int filtroIndex = telaBuscaFornecedor.getjCBFiltro().getSelectedIndex();
+        String filtroTexto = telaBuscaFornecedor.getjTFFiltro().getText();
+
+        FiltroFornecedor filtro = FiltroFornecedor.fromIndex(filtroIndex);
+
+        try {
+            switch (filtro) {
+                case ID:
+                    Fornecedor fornecedor = fornecedorService.Carregar(Integer.parseInt(filtroTexto));
+                    if (fornecedor != null) {
+                        tabela.addRow(new Object[]{fornecedor.getId(), fornecedor.getNome(), fornecedor.getCpf(), fornecedor.getStatus()});
+                    }
+                    break;
+                case NOME:
+                    List<Fornecedor> listaPorNome = fornecedorService.Carregar("nome", filtroTexto);
+                    for (Fornecedor f : listaPorNome) {
+                        tabela.addRow(new Object[]{f.getId(), f.getNome(), f.getCpf(), f.getStatus()});
+                    }
+                    break;
+                case CPF:
+                    List<Fornecedor> listaPorCpf = fornecedorService.Carregar("cpf", filtroTexto);
+                    for (Fornecedor f : listaPorCpf) {
+                        tabela.addRow(new Object[]{f.getId(), f.getNome(), f.getCpf(), f.getStatus()});
+                    }
+                    break;
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(telaBuscaFornecedor, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void handleSair() {
+        this.telaBuscaFornecedor.dispose();
     }
 }

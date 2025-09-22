@@ -1,56 +1,168 @@
-
 package controller;
-
-import view.TelaCadastroMarca;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import view.TelaBuscaMarca;
+import java.sql.SQLException;
 
-public class ControllerCadMarca implements ActionListener {
+import javax.swing.JOptionPane;
+
+import model.Marca;
+import service.InterfaceService;
+import service.MarcaService;
+import view.TelaBuscaMarca;
+import view.TelaCadastroMarca;
+
+public class ControllerCadMarca implements ActionListener, InterfaceControllerCad<Marca> {
 
     TelaCadastroMarca telaCadastroMarca;
+    InterfaceService<Marca> marcaService;
+    public static int codigo;
 
     public ControllerCadMarca(TelaCadastroMarca telaCadastroMarca) {
-
         this.telaCadastroMarca = telaCadastroMarca;
+        this.marcaService = new MarcaService();
+        utilities.Utilities.ativaDesativa(this.telaCadastroMarca.getjPanelBotoes(), true);
+        utilities.Utilities.limpaComponentes(this.telaCadastroMarca.getjPanelDados(), false);
 
+        initListeners();
+    }
+
+    private void initListeners() {
         this.telaCadastroMarca.getjButtonNovo().addActionListener(this);
         this.telaCadastroMarca.getjButtonCancelar().addActionListener(this);
         this.telaCadastroMarca.getjButtonGravar().addActionListener(this);
         this.telaCadastroMarca.getjButtonBuscar().addActionListener(this);
         this.telaCadastroMarca.getjButtonSair().addActionListener(this);
-
-        //Desenvolver as setagens de situação inicial dos componentes
-        /*this.telaCadastroMarca.getjButtonNovo().setEnabled(true);
-        this.telaCadastroMarca.getjButtonCancelar().setEnabled(false);
-        this.telaCadastroMarca.getjButtonGravar().setEnabled(false);
-        this.telaCadastroMarca.getjButtonBuscar().setEnabled(true);
-        this.telaCadastroMarca.getjButtonSair().setEnabled(true);*/
-        utilities.Utilities.ativaDesativa(this.telaCadastroMarca.getjPanelBotoes(), true);
-        utilities.Utilities.limpaComponentes(this.telaCadastroMarca.getjPanelDados(), false);
-        
     }
 
     @Override
     public void actionPerformed(ActionEvent evento) {
-        if (evento.getSource() == this.telaCadastroMarca.getjButtonNovo()) {
-            utilities.Utilities.ativaDesativa(this.telaCadastroMarca.getjPanelBotoes(), false);
-        utilities.Utilities.limpaComponentes(this.telaCadastroMarca.getjPanelDados(), true);
-        } else if (evento.getSource() == this.telaCadastroMarca.getjButtonCancelar()) {
-            utilities.Utilities.ativaDesativa(this.telaCadastroMarca.getjPanelBotoes(), true);
-        utilities.Utilities.limpaComponentes(this.telaCadastroMarca.getjPanelDados(), false);
-        } else if (evento.getSource() == this.telaCadastroMarca.getjButtonGravar()) {
-            utilities.Utilities.ativaDesativa(this.telaCadastroMarca.getjPanelBotoes(), true);
-        utilities.Utilities.limpaComponentes(this.telaCadastroMarca.getjPanelDados(), false);
-        } else if (evento.getSource() == this.telaCadastroMarca.getjButtonBuscar()) {
-            
-            TelaBuscaMarca telaBuscaMarca = new TelaBuscaMarca(null, true);
-            ControllerBuscaMarca controllerBuscaMarca = new ControllerBuscaMarca(telaBuscaMarca);
-            telaBuscaMarca.setVisible(true);
-            
-        } else if (evento.getSource() == this.telaCadastroMarca.getjButtonSair()) {
-            this.telaCadastroMarca.dispose();
+        Object source = evento.getSource();
+        if (source == telaCadastroMarca.getjButtonNovo()) {
+            handleNovo();
+            return;
         }
+        if (source == telaCadastroMarca.getjButtonCancelar()) {
+            handleCancelar();
+            return;
+        }
+        if (source == telaCadastroMarca.getjButtonGravar()) {
+            handleGravar();
+            return;
+        }
+        if (source == telaCadastroMarca.getjButtonBuscar()) {
+            handleBuscar();
+            return;
+        }
+        if (source == telaCadastroMarca.getjButtonSair()) {
+            handleSair();
+        }
+    }
+
+    private void handleNovo() {
+        utilities.Utilities.ativaDesativa(this.telaCadastroMarca.getjPanelBotoes(), false);
+        utilities.Utilities.limpaComponentes(this.telaCadastroMarca.getjPanelDados(), true);
+        this.telaCadastroMarca.getjTextFieldId().setEnabled(false);
+        this.telaCadastroMarca.getjTextFieldDescricao().requestFocus();
+        this.telaCadastroMarca.getjComboBoxStatus().setSelectedItem("Ativo");
+        this.telaCadastroMarca.getjComboBoxStatus().setEnabled(false);
+    }
+
+    private void handleCancelar() {
+        utilities.Utilities.ativaDesativa(this.telaCadastroMarca.getjPanelBotoes(), true);
+        utilities.Utilities.limpaComponentes(this.telaCadastroMarca.getjPanelDados(), false);
+    }
+
+    private boolean isFormularioValido() {
+        if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroMarca.getjTextFieldDescricao().getText())) {
+            JOptionPane.showMessageDialog(null, "O campo Descrição é obrigatório.");
+            telaCadastroMarca.getjTextFieldDescricao().requestFocus();
+            return false;
+        }
+        if (!utilities.ValidadorCampos.validarStatus(telaCadastroMarca.getjComboBoxStatus().getSelectedItem().toString())) {
+            JOptionPane.showMessageDialog(null, "Selecione um Status válido.");
+            telaCadastroMarca.getjComboBoxStatus().requestFocus();
+            return false;
+        }
+        return true;
+    }
+
+    private void handleGravar() {
+        if (!isFormularioValido()) {
+            return;
+        }
+        Marca marca = construirDoFormulario();
+
+        boolean isNovoCadastro = telaCadastroMarca.getjTextFieldId().getText().trim().isEmpty();
+
+        if (isNovoCadastro) {
+            try {
+                marcaService.Criar(marca);
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(telaCadastroMarca, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            utilities.Utilities.ativaDesativa(telaCadastroMarca.getjPanelBotoes(), true);
+            utilities.Utilities.limpaComponentes(telaCadastroMarca.getjPanelDados(), false);
+            return;
+        }
+
+        marca.setId(Integer.parseInt(telaCadastroMarca.getjTextFieldId().getText()));
+        try {
+            marcaService.Atualizar(marca);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(telaCadastroMarca, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        utilities.Utilities.ativaDesativa(telaCadastroMarca.getjPanelBotoes(), true);
+        utilities.Utilities.limpaComponentes(telaCadastroMarca.getjPanelDados(), false);
+    }
+
+    private Marca construirDoFormulario() {
+        Marca marca = new Marca();
+        marca.setDescricao(telaCadastroMarca.getjTextFieldDescricao().getText());
+
+        Object statusSelecionado = telaCadastroMarca.getjComboBoxStatus().getSelectedItem();
+        marca.setStatus(
+            statusSelecionado != null && statusSelecionado.equals("Ativo") ? 'A' : 'I'
+        );
+
+        return marca;
+    }
+
+    private void handleBuscar() {
+        codigo = 0;
+        TelaBuscaMarca telaBuscaMarca = new TelaBuscaMarca(null, true);
+        @SuppressWarnings("unused")
+        ControllerBuscaMarca controllerBuscaMarca = new ControllerBuscaMarca(telaBuscaMarca);
+        telaBuscaMarca.setVisible(true);
+
+        if (codigo != 0) {
+            utilities.Utilities.ativaDesativa(telaCadastroMarca.getjPanelBotoes(), false);
+            utilities.Utilities.limpaComponentes(telaCadastroMarca.getjPanelDados(), true);
+
+            telaCadastroMarca.getjTextFieldId().setText(String.valueOf(codigo));
+            telaCadastroMarca.getjTextFieldId().setEnabled(false);
+
+            Marca marca;
+            try {
+                marca = new MarcaService().Carregar(codigo);
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(telaCadastroMarca, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            telaCadastroMarca.getjTextFieldDescricao().setText(marca.getDescricao());
+            telaCadastroMarca.getjComboBoxStatus().setSelectedItem(
+                marca.getStatus() == 'A' ? "Ativo" : "Inativo"
+            );
+
+            telaCadastroMarca.getjTextFieldDescricao().requestFocus();
+        }
+    }
+
+    private void handleSair() {
+        telaCadastroMarca.dispose();
     }
 }
