@@ -7,11 +7,11 @@ import java.sql.SQLException;
 import java.util.List;
 
 import model.Produto;
+import util.AppLogger;
 
 public class ProdutoDAO implements InterfaceDAO<Produto> {
     @Override
-    public void Create(Produto objeto) {
-
+    public void Create(Produto objeto) throws SQLException {
         String sqlInstrucao = "Insert Into produto("
                 + " descricao, "
                 + " valor, "
@@ -19,28 +19,23 @@ public class ProdutoDAO implements InterfaceDAO<Produto> {
                 + " status) "
                 + " Values (?,?,?,?)";
 
-        Connection conexao = model.DAO.ConnectionFactory.getConnection();
-        PreparedStatement pstm = null;
-
         try {
-            pstm = conexao.prepareStatement(sqlInstrucao);
+            Connection conexao = model.DAO.ConnectionFactory.getConnection();
+            PreparedStatement pstm = conexao.prepareStatement(sqlInstrucao);
             pstm.setString(1, objeto.getDescricao());
             pstm.setString(2, String.valueOf(objeto.getValor()));
             pstm.setString(3, objeto.getObs());
             pstm.setString(4, String.valueOf(objeto.getStatus()));
-
             pstm.execute();
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
             ConnectionFactory.closeConnection(conexao, pstm);
+        } catch (SQLException ex) {
+            AppLogger.error("Erro ao criar produto", ex);
+            throw new SQLException("Erro ao criar produto");
         }
     }
 
     @Override
-    public Produto Retrieve(int id) {
-
+    public Produto Retrieve(int id) throws SQLException {
         String sqlInstrucao = "Select "
                 + " id, "
                 + " descricao, "
@@ -50,33 +45,30 @@ public class ProdutoDAO implements InterfaceDAO<Produto> {
                 + " From produto"
                 + " Where id = ? ";
 
-        Connection conexao = model.DAO.ConnectionFactory.getConnection();
-        PreparedStatement pstm = null;
-        ResultSet rst = null;
-        Produto produto = new Produto();
-
         try {
-            pstm = conexao.prepareStatement(sqlInstrucao);
+            Connection conexao = model.DAO.ConnectionFactory.getConnection();
+            PreparedStatement pstm = conexao.prepareStatement(sqlInstrucao);
             pstm.setInt(1, id);
-            rst = pstm.executeQuery();
+            ResultSet rst = pstm.executeQuery();
+            Produto produto = new Produto();
 
-            while (!rst.next()) {
+            while (rst.next()) {
                 produto.setId(rst.getInt("id"));
                 produto.setDescricao(rst.getString("descricao"));
                 produto.setValor(rst.getFloat("valor"));
                 produto.setObs(rst.getString("obs"));
                 produto.setStatus(rst.getString("status").charAt(0));
             }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
             ConnectionFactory.closeConnection(conexao, pstm, rst);
             return produto;
+        } catch (SQLException ex) {
+            AppLogger.error("Erro ao carregar produto", ex);
+            throw new SQLException("Erro ao carregar produto");
         }
     }
 
     @Override
-    public List<Produto> Retrieve(String atributo, String valor) {
+    public List<Produto> Retrieve(String atributo, String valor) throws SQLException {
         String sqlInstrucao = "Select "
                 + " id, "
                 + " descricao, "
@@ -86,15 +78,12 @@ public class ProdutoDAO implements InterfaceDAO<Produto> {
                 + " From produto"
                 + " Where " + atributo + " like ?";
 
-        Connection conexao = model.DAO.ConnectionFactory.getConnection();
-        PreparedStatement pstm = null;
-        ResultSet rst = null;
-        List<Produto> listaProdutos = new java.util.ArrayList<>();
-
         try {
-            pstm = conexao.prepareStatement(sqlInstrucao);
+            Connection conexao = model.DAO.ConnectionFactory.getConnection();
+            PreparedStatement pstm = conexao.prepareStatement(sqlInstrucao);
             pstm.setString(1, "%" + valor + "%");
-            rst = pstm.executeQuery();
+            ResultSet rst = pstm.executeQuery();
+            List<Produto> listaProdutos = new java.util.ArrayList<>();
 
             while (rst.next()) {
                 Produto produto = new Produto();
@@ -105,16 +94,16 @@ public class ProdutoDAO implements InterfaceDAO<Produto> {
                 produto.setStatus(rst.getString("status").charAt(0));
                 listaProdutos.add(produto);
             }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
             ConnectionFactory.closeConnection(conexao, pstm, rst);
             return listaProdutos;
+        } catch (SQLException ex) {
+            AppLogger.error("Erro ao buscar produtos", ex);
+            throw new SQLException("Erro ao buscar produtos");
         }
     }
 
     @Override
-    public void Update(Produto objeto) {
+    public void Update(Produto objeto) throws SQLException {
         String sqlInstrucao = "Update produto "
                 + " Set"
                 + " descricao = ?, "
@@ -123,27 +112,24 @@ public class ProdutoDAO implements InterfaceDAO<Produto> {
                 + " status = ? "
                 + " Where id = ? ";
 
-        Connection conexao = model.DAO.ConnectionFactory.getConnection();
-        PreparedStatement pstm = null;
-
         try {
-            pstm = conexao.prepareStatement(sqlInstrucao);
+            Connection conexao = model.DAO.ConnectionFactory.getConnection();
+            PreparedStatement pstm = conexao.prepareStatement(sqlInstrucao);
             pstm.setString(1, objeto.getDescricao());
             pstm.setFloat(2, objeto.getValor());
             pstm.setString(3, objeto.getObs());
             pstm.setString(4, String.valueOf(objeto.getStatus()));
             pstm.setInt(5, objeto.getId());
-
             pstm.execute();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
             ConnectionFactory.closeConnection(conexao, pstm);
+        } catch (SQLException ex) {
+            AppLogger.error("Erro ao atualizar produto", ex);
+            throw new SQLException("Erro ao atualizar produto");
         }
     }
 
     @Override
-    public void Delete(Produto objeto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void Delete(Produto objeto) throws SQLException {
+        // Implemente aqui se necessário, seguindo o mesmo padrão.
     }
 }

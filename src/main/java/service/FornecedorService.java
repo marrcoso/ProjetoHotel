@@ -1,33 +1,36 @@
 package service;
 
+import java.sql.SQLException;
 import java.util.List;
+
 import model.DAO.FornecedorDAO;
 import model.Fornecedor;
 
 public class FornecedorService {
 
-    public static void Criar(Fornecedor objeto) {
-        FornecedorDAO fornecedorDAO = new FornecedorDAO();
+    private final FornecedorDAO fornecedorDAO;
+
+    public FornecedorService() {
+        this.fornecedorDAO = new FornecedorDAO();
+    }
+
+    public void Criar(Fornecedor objeto) throws SQLException {
         fornecedorDAO.Create(objeto);
     }
 
-    public static Fornecedor Carregar(int id) {
-        FornecedorDAO fornecedorDAO = new FornecedorDAO();
+    public Fornecedor Carregar(int id) throws SQLException {
         return fornecedorDAO.Retrieve(id);
     }
 
-    public static List<Fornecedor> Carregar(String atributo, String valor) {
-        FornecedorDAO fornecedorDAO = new FornecedorDAO();
+    public List<Fornecedor> Carregar(String atributo, String valor) throws SQLException {
         return fornecedorDAO.Retrieve(atributo, valor);
     }
 
-    public static void Atualizar(Fornecedor objeto) {
-        FornecedorDAO fornecedorDAO = new FornecedorDAO();
+    public void Atualizar(Fornecedor objeto) throws SQLException {
         fornecedorDAO.Update(objeto);
     }
 
-    public static void Apagar(Fornecedor objeto) {
-        FornecedorDAO fornecedorDAO = new FornecedorDAO();
+    public void Apagar(Fornecedor objeto) throws SQLException {
         fornecedorDAO.Delete(objeto);
     }
 }

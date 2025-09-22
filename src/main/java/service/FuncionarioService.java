@@ -1,35 +1,41 @@
 package service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import model.DAO.FuncionarioDAO;
 import model.Funcionario;
 
-public class FuncionarioService {
+public class FuncionarioService implements InterfaceService<Funcionario> {
 
-    public static void Criar(Funcionario objeto) {
-        FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+    private final FuncionarioDAO funcionarioDAO;
+
+    public FuncionarioService() {
+        this.funcionarioDAO = new FuncionarioDAO();
+    }
+
+    @Override
+    public void Criar(Funcionario objeto) throws SQLException {
         funcionarioDAO.Create(objeto);
     }
 
-    public static Funcionario Carregar(int id) {
-
-        FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+    @Override
+    public Funcionario Carregar(int id) throws SQLException {
         return funcionarioDAO.Retrieve(id);
     }
 
-    public static List<Funcionario> Carregar(String atributo, String valor) {
-        FuncionarioDAO hospedeDAO = new FuncionarioDAO();
-        return hospedeDAO.Retrieve(atributo, valor);
+    @Override
+    public List<Funcionario> Carregar(String atributo, String valor) throws SQLException {
+        return funcionarioDAO.Retrieve(atributo, valor);
     }
 
-    public static void Atualizar(Funcionario objeto) {
-        FuncionarioDAO hospedeDAO = new FuncionarioDAO();
-        hospedeDAO.Update(objeto);
+    @Override
+    public void Atualizar(Funcionario objeto) throws SQLException {
+        funcionarioDAO.Update(objeto);
     }
 
-    public static void Apagar(Funcionario objeto) {
-        FuncionarioDAO hospedeDAO = new FuncionarioDAO();
-        hospedeDAO.Delete(objeto);
+    @Override
+    public void Apagar(Funcionario objeto) throws SQLException {
+        funcionarioDAO.Delete(objeto);
     }
 }

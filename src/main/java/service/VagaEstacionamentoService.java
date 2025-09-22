@@ -1,33 +1,41 @@
 package service;
 
+import java.sql.SQLException;
 import java.util.List;
+
 import model.DAO.VagaEstacionamentoDAO;
 import model.VagaEstacionamento;
 
-public class VagaEstacionamentoService {
+public class VagaEstacionamentoService implements InterfaceService<VagaEstacionamento> {
 
-    public static void Criar(VagaEstacionamento objeto) {
-        VagaEstacionamentoDAO vagaDAO = new VagaEstacionamentoDAO();
+    private final VagaEstacionamentoDAO vagaDAO;
+
+    public VagaEstacionamentoService() {
+        this.vagaDAO = new VagaEstacionamentoDAO();
+    }
+
+    @Override
+    public void Criar(VagaEstacionamento objeto) throws SQLException {
         vagaDAO.Create(objeto);
     }
 
-    public static VagaEstacionamento Carregar(int id) {
-        VagaEstacionamentoDAO vagaDAO = new VagaEstacionamentoDAO();
+    @Override
+    public VagaEstacionamento Carregar(int id) throws SQLException {
         return vagaDAO.Retrieve(id);
     }
 
-    public static List<VagaEstacionamento> Carregar(String atributo, String valor) {
-        VagaEstacionamentoDAO vagaDAO = new VagaEstacionamentoDAO();
+    @Override
+    public List<VagaEstacionamento> Carregar(String atributo, String valor) throws SQLException {
         return vagaDAO.Retrieve(atributo, valor);
     }
 
-    public static void Atualizar(VagaEstacionamento objeto) {
-        VagaEstacionamentoDAO vagaDAO = new VagaEstacionamentoDAO();
+    @Override
+    public void Atualizar(VagaEstacionamento objeto) throws SQLException {
         vagaDAO.Update(objeto);
     }
 
-    public static void Apagar(VagaEstacionamento objeto) {
-        VagaEstacionamentoDAO vagaDAO = new VagaEstacionamentoDAO();
+    @Override
+    public void Apagar(VagaEstacionamento objeto) throws SQLException {
         vagaDAO.Delete(objeto);
     }
 }

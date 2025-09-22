@@ -2,31 +2,37 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
 import model.Funcionario;
 import service.FuncionarioService;
+import service.InterfaceService;
 import view.TelaBuscaFuncionario;
 import view.TelaCadastroFuncionario;
 
-public class ControllerCadFuncionario implements ActionListener {
+public class ControllerCadFuncionario implements ActionListener, InterfaceControllerCad<Funcionario> {
 
     TelaCadastroFuncionario telaCadastroFuncionario;
+    InterfaceService<Funcionario> funcionarioService;
     public static int codigo;
 
     public ControllerCadFuncionario(TelaCadastroFuncionario telaCadastroFuncionario) {
-
         this.telaCadastroFuncionario = telaCadastroFuncionario;
+        this.funcionarioService = new FuncionarioService();
+        utilities.Utilities.ativaDesativa(this.telaCadastroFuncionario.getjPanelBotoes(), true);
+        utilities.Utilities.limpaComponentes(this.telaCadastroFuncionario.getjPanelDados(), false);
 
+        initListeners();
+    }
+
+    private void initListeners() {
         this.telaCadastroFuncionario.getjButtonNovo().addActionListener(this);
         this.telaCadastroFuncionario.getjButtonCancelar().addActionListener(this);
         this.telaCadastroFuncionario.getjButtonGravar().addActionListener(this);
         this.telaCadastroFuncionario.getjButtonBuscar().addActionListener(this);
         this.telaCadastroFuncionario.getjButtonSair().addActionListener(this);
-
-        utilities.Utilities.ativaDesativa(this.telaCadastroFuncionario.getjPanelBotoes(), true);
-        utilities.Utilities.limpaComponentes(this.telaCadastroFuncionario.getjPanelDados(), false);
     }
 
     @Override
@@ -149,17 +155,51 @@ public class ControllerCadFuncionario implements ActionListener {
         if (!isFormularioValido()) {
             return;
         }
+        Funcionario funcionario = construirDoFormulario();
+
+        boolean isNovoCadastro = telaCadastroFuncionario.getjTextFieldId().getText().trim().isEmpty();
+
+        if (isNovoCadastro) {
+            try {
+                funcionarioService.Criar(funcionario);
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(telaCadastroFuncionario, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            utilities.Utilities.ativaDesativa(telaCadastroFuncionario.getjPanelBotoes(), true);
+            utilities.Utilities.limpaComponentes(telaCadastroFuncionario.getjPanelDados(), false);
+            return;
+        }
+
+        funcionario.setId(Integer.parseInt(telaCadastroFuncionario.getjTextFieldId().getText()));
+        try {
+            funcionarioService.Atualizar(funcionario);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(telaCadastroFuncionario, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        utilities.Utilities.ativaDesativa(telaCadastroFuncionario.getjPanelBotoes(), true);
+        utilities.Utilities.limpaComponentes(telaCadastroFuncionario.getjPanelDados(), false);
+    }
+
+    private Funcionario construirDoFormulario() {
         Funcionario funcionario = new Funcionario();
         funcionario.setNome(telaCadastroFuncionario.getjTextFieldNome().getText());
         funcionario.setCpf(utilities.Utilities.apenasNumeros(telaCadastroFuncionario.getjFormattedTextFieldCpf().getText()));
         funcionario.setRg(telaCadastroFuncionario.getjTextFieldRg().getText());
         funcionario.setObs(telaCadastroFuncionario.getjTextFieldObs().getText());
+
+        Object sexoSelecionado = telaCadastroFuncionario.getjComboBoxSexo().getSelectedItem();
         funcionario.setSexo(
-                telaCadastroFuncionario.getjComboBoxSexo().getSelectedItem().equals("Masculino") ? 'M' : 'F'
+            sexoSelecionado != null && sexoSelecionado.equals("Masculino") ? 'M' : 'F'
         );
+
+        Object statusSelecionado = telaCadastroFuncionario.getjComboBoxStatus().getSelectedItem();
         funcionario.setStatus(
-                telaCadastroFuncionario.getjComboBoxStatus().getSelectedItem().equals("Ativo") ? 'A' : 'I'
+            statusSelecionado != null && statusSelecionado.equals("Ativo") ? 'A' : 'I'
         );
+
         funcionario.setUsuario(telaCadastroFuncionario.getjTextFieldUsuario().getText());
         funcionario.setSenha(new String(telaCadastroFuncionario.getjPasswordFieldSenha().getPassword()));
         funcionario.setFone1(utilities.Utilities.apenasNumeros(telaCadastroFuncionario.getjFormattedTextFieldFone1().getText()));
@@ -171,21 +211,13 @@ public class ControllerCadFuncionario implements ActionListener {
         funcionario.setLogradouro(telaCadastroFuncionario.getjTextFieldLogradouro().getText());
         funcionario.setComplemento(telaCadastroFuncionario.getjTextFieldComplemento().getText());
 
-        if (telaCadastroFuncionario.getjTextFieldId().getText().trim().equalsIgnoreCase("")) {
-            funcionario.setStatus('A');
-            FuncionarioService.Criar(funcionario);
-        } else {
-            funcionario.setId(Integer.parseInt(telaCadastroFuncionario.getjTextFieldId().getText()));
-            FuncionarioService.Atualizar(funcionario);
-        }
-
-        utilities.Utilities.ativaDesativa(telaCadastroFuncionario.getjPanelBotoes(), true);
-        utilities.Utilities.limpaComponentes(telaCadastroFuncionario.getjPanelDados(), false);
+        return funcionario;
     }
 
     private void handleBuscar() {
         codigo = 0;
         TelaBuscaFuncionario telaBuscaFuncionario = new TelaBuscaFuncionario(null, true);
+        @SuppressWarnings("unused")
         ControllerBuscaFuncionario controllerBuscaFuncionario = new ControllerBuscaFuncionario(telaBuscaFuncionario);
         telaBuscaFuncionario.setVisible(true);
 
@@ -193,10 +225,16 @@ public class ControllerCadFuncionario implements ActionListener {
             utilities.Utilities.ativaDesativa(telaCadastroFuncionario.getjPanelBotoes(), false);
             utilities.Utilities.limpaComponentes(telaCadastroFuncionario.getjPanelDados(), true);
 
-            telaCadastroFuncionario.getjTextFieldId().setText(codigo + "");
+            telaCadastroFuncionario.getjTextFieldId().setText(String.valueOf(codigo));
             telaCadastroFuncionario.getjTextFieldId().setEnabled(false);
 
-            Funcionario funcionario = FuncionarioService.Carregar(codigo);
+            Funcionario funcionario;
+            try {
+                funcionario = funcionarioService.Carregar(codigo);
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(telaCadastroFuncionario, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
             telaCadastroFuncionario.getjFormattedTextFieldDataCadastro().setText(utilities.Utilities.formatarDataFromSqlData(funcionario.getDataCadastro()));
             telaCadastroFuncionario.getjFormattedTextFieldDataCadastro().setEnabled(false);

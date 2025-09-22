@@ -2,17 +2,18 @@ package model.DAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.List;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
+
 import model.Hospede;
+import util.AppLogger;
 
 public class HospedeDAO implements InterfaceDAO<Hospede> {
 
     @Override
-    public void Create(Hospede objeto) {
-
+    public void Create(Hospede objeto) throws SQLException {
         String sqlInstrucao = "Insert Into hospede("
                 + " nome, "
                 + " fone, "
@@ -35,11 +36,10 @@ public class HospedeDAO implements InterfaceDAO<Hospede> {
                 + " contato ) "
                 + " Values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
-        Connection conexao = model.DAO.ConnectionFactory.getConnection();
-        PreparedStatement pstm = null;
-
         try {
-            pstm = conexao.prepareStatement(sqlInstrucao);
+            Connection conexao = model.DAO.ConnectionFactory.getConnection();
+            PreparedStatement pstm = conexao.prepareStatement(sqlInstrucao);
+
             pstm.setString(1, objeto.getNome());
             pstm.setString(2, objeto.getFone1());
             pstm.setString(3, objeto.getFone2());
@@ -62,16 +62,15 @@ public class HospedeDAO implements InterfaceDAO<Hospede> {
 
             pstm.execute();
 
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
             ConnectionFactory.closeConnection(conexao, pstm);
+        } catch (SQLException ex) {
+            AppLogger.error("Erro ao criar hóspede", ex);
+            throw new SQLException("Erro ao criar hóspede");
         }
     }
 
     @Override
-    public Hospede Retrieve(int id) {
-
+    public Hospede Retrieve(int id) throws SQLException {
         String sqlInstrucao = "Select "
                 + " id,"
                 + " nome, "
@@ -96,15 +95,12 @@ public class HospedeDAO implements InterfaceDAO<Hospede> {
                 + " From hospede"
                 + " Where id = ? ";
 
-        Connection conexao = model.DAO.ConnectionFactory.getConnection();
-        PreparedStatement pstm = null;
-        ResultSet rst = null;
-        Hospede hospede = new Hospede();
-
         try {
-            pstm = conexao.prepareStatement(sqlInstrucao);
+            Connection conexao = model.DAO.ConnectionFactory.getConnection();
+            PreparedStatement pstm = conexao.prepareStatement(sqlInstrucao);
             pstm.setInt(1, id);
-            rst = pstm.executeQuery();
+            ResultSet rst = pstm.executeQuery();
+            Hospede hospede = new Hospede();
 
             while (rst.next()) {
                 hospede.setId(rst.getInt("id"));
@@ -128,17 +124,16 @@ public class HospedeDAO implements InterfaceDAO<Hospede> {
                 hospede.setContato(rst.getString("contato"));
                 hospede.setStatus(rst.getString("status").charAt(0));
             }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
             ConnectionFactory.closeConnection(conexao, pstm, rst);
             return hospede;
+        } catch (SQLException ex) {
+            AppLogger.error("Erro ao carregar hóspede", ex);
+            throw new SQLException("Erro ao carregar hóspede");
         }
     }
 
     @Override
-    public List<Hospede> Retrieve(String atributo, String valor) {
-
+    public List<Hospede> Retrieve(String atributo, String valor) throws SQLException {
         String sqlInstrucao = "Select "
                 + " id,"
                 + " nome, "
@@ -163,15 +158,12 @@ public class HospedeDAO implements InterfaceDAO<Hospede> {
                 + " From hospede"
                 + " Where " + atributo + " like ?";
 
-        Connection conexao = model.DAO.ConnectionFactory.getConnection();
-        PreparedStatement pstm = null;
-        ResultSet rst = null;
-        List<Hospede> listaHospedes = new ArrayList<>();
-
         try {
-            pstm = conexao.prepareStatement(sqlInstrucao);
+            Connection conexao = model.DAO.ConnectionFactory.getConnection();
+            PreparedStatement pstm = conexao.prepareStatement(sqlInstrucao);
             pstm.setString(1, "%" + valor + "%");
-            rst = pstm.executeQuery();
+            ResultSet rst = pstm.executeQuery();
+            List<Hospede> listaHospedes = new ArrayList<>();
 
             while (rst.next()) {
                 Hospede hospede = new Hospede();
@@ -197,17 +189,16 @@ public class HospedeDAO implements InterfaceDAO<Hospede> {
                 hospede.setStatus(rst.getString("status").charAt(0));
                 listaHospedes.add(hospede);
             }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
             ConnectionFactory.closeConnection(conexao, pstm, rst);
             return listaHospedes;
+        } catch (SQLException ex) {
+            AppLogger.error("Erro ao buscar hóspedes", ex);
+            throw new SQLException("Erro ao buscar hóspedes");
         }
     }
 
     @Override
-    public void Update(Hospede objeto) {
-
+    public void Update(Hospede objeto) throws SQLException {
         String sqlInstrucao = "Update hospede "
                 + " Set"
                 + " nome = ?, "
@@ -231,45 +222,41 @@ public class HospedeDAO implements InterfaceDAO<Hospede> {
                 + " contato = ? "
                 + " Where id = ? ";
 
-        Connection conexao = model.DAO.ConnectionFactory.getConnection();
-        PreparedStatement pstm = null;
-        
-        try{
-        pstm = conexao.prepareStatement(sqlInstrucao);
-        pstm.setString(1, objeto.getNome());
-        pstm.setString(2, objeto.getFone1());
-        pstm.setString(3, objeto.getFone2());
-        pstm.setString(4, objeto.getEmail());
-        pstm.setString(5, objeto.getCep());
-        pstm.setString(6, objeto.getLogradouro());
-        pstm.setString(7, objeto.getBairro());
-        pstm.setString(8, objeto.getCidade());
-        pstm.setString(9, objeto.getComplemento());
-        pstm.setString(10, objeto.getDataCadastro());
-        pstm.setString(11, objeto.getCpf());
-        pstm.setString(12, objeto.getRg());
-        pstm.setString(13, objeto.getObs());
-        pstm.setString(14, String.valueOf(objeto.getStatus()));
-        pstm.setString(15, String.valueOf(objeto.getSexo()));
-        pstm.setString(15, objeto.getRazaoSocial());
-        pstm.setString(16, objeto.getCnpj());
-        pstm.setString(17, objeto.getInscricaoEstadual());
-        pstm.setString(18, objeto.getContato());
-        pstm.setInt(19, objeto.getId());
-        
-        pstm.execute();
-        } catch (SQLException ex){
-            ex.printStackTrace();
-        }finally{
+        try {
+            Connection conexao = model.DAO.ConnectionFactory.getConnection();
+            PreparedStatement pstm = conexao.prepareStatement(sqlInstrucao);
+
+            pstm.setString(1, objeto.getNome());
+            pstm.setString(2, objeto.getFone1());
+            pstm.setString(3, objeto.getFone2());
+            pstm.setString(4, objeto.getEmail());
+            pstm.setString(5, objeto.getCep());
+            pstm.setString(6, objeto.getLogradouro());
+            pstm.setString(7, objeto.getBairro());
+            pstm.setString(8, objeto.getCidade());
+            pstm.setString(9, objeto.getComplemento());
+            pstm.setString(10, objeto.getDataCadastro());
+            pstm.setString(11, objeto.getCpf());
+            pstm.setString(12, objeto.getRg());
+            pstm.setString(13, objeto.getObs());
+            pstm.setString(14, String.valueOf(objeto.getStatus()));
+            pstm.setString(15, String.valueOf(objeto.getSexo()));
+            pstm.setString(16, objeto.getRazaoSocial());
+            pstm.setString(17, objeto.getCnpj());
+            pstm.setString(18, objeto.getInscricaoEstadual());
+            pstm.setString(19, objeto.getContato());
+            pstm.setInt(20, objeto.getId());
+
+            pstm.execute();
             ConnectionFactory.closeConnection(conexao, pstm);
+        } catch (SQLException ex) {
+            AppLogger.error("Erro ao atualizar hóspede", ex);
+            throw new SQLException("Erro ao atualizar hóspede");
         }
     }
 
     @Override
-    public void Delete(Hospede objeto) {
-        
-        
-        
+    public void Delete(Hospede objeto) throws SQLException {
+        // Implemente aqui se necessário, seguindo o mesmo padrão.
     }
-
 }

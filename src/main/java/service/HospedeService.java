@@ -1,34 +1,41 @@
 package service;
 
+import java.sql.SQLException;
 import java.util.List;
+
 import model.DAO.HospedeDAO;
 import model.Hospede;
 
-public class HospedeService {
+public class HospedeService implements InterfaceService<Hospede> {
 
-    public static void Criar(Hospede objeto) {
-        HospedeDAO hospedeDAO = new HospedeDAO();
+    private final HospedeDAO hospedeDAO;
+
+    public HospedeService() {
+        this.hospedeDAO = new HospedeDAO();
+    }
+
+    @Override
+    public void Criar(Hospede objeto) throws SQLException {
         hospedeDAO.Create(objeto);
     }
 
-    public static Hospede Carregar(int id) {
-
-        HospedeDAO hospedeDAO = new HospedeDAO();
+    @Override
+    public Hospede Carregar(int id) throws SQLException {
         return hospedeDAO.Retrieve(id);
     }
 
-    public static List<Hospede> Carregar(String atributo, String valor) {
-        HospedeDAO hospedeDAO = new HospedeDAO();
+    @Override
+    public List<Hospede> Carregar(String atributo, String valor) throws SQLException {
         return hospedeDAO.Retrieve(atributo, valor);
     }
 
-    public static void Atualizar(Hospede objeto) {
-        HospedeDAO hospedeDAO = new HospedeDAO();
+    @Override
+    public void Atualizar(Hospede objeto) throws SQLException {
         hospedeDAO.Update(objeto);
     }
 
-    public static void Apagar(Hospede objeto) {
-        HospedeDAO hospedeDAO = new HospedeDAO();
+    @Override
+    public void Apagar(Hospede objeto) throws SQLException {
         hospedeDAO.Delete(objeto);
     }
 }

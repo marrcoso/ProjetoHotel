@@ -1,33 +1,41 @@
 package service;
 
+import java.sql.SQLException;
 import java.util.List;
+
 import model.DAO.MarcaDAO;
 import model.Marca;
 
-public class MarcaService {
+public class MarcaService implements InterfaceService<Marca> {
 
-    public static void Criar(Marca objeto) {
-        MarcaDAO marcaDAO = new MarcaDAO();
+    private final MarcaDAO marcaDAO;
+
+    public MarcaService() {
+        this.marcaDAO = new MarcaDAO();
+    }
+
+    @Override
+    public void Criar(Marca objeto) throws SQLException {
         marcaDAO.Create(objeto);
     }
 
-    public static Marca Carregar(int id) {
-        MarcaDAO marcaDAO = new MarcaDAO();
+    @Override
+    public Marca Carregar(int id) throws SQLException {
         return marcaDAO.Retrieve(id);
     }
 
-    public static List<Marca> Carregar(String atributo, String valor) {
-        MarcaDAO marcaDAO = new MarcaDAO();
+    @Override
+    public List<Marca> Carregar(String atributo, String valor) throws SQLException {
         return marcaDAO.Retrieve(atributo, valor);
     }
 
-    public static void Atualizar(Marca objeto) {
-        MarcaDAO marcaDAO = new MarcaDAO();
+    @Override
+    public void Atualizar(Marca objeto) throws SQLException {
         marcaDAO.Update(objeto);
     }
 
-    public static void Apagar(Marca objeto) {
-        MarcaDAO marcaDAO = new MarcaDAO();
+    @Override
+    public void Apagar(Marca objeto) throws SQLException {
         marcaDAO.Delete(objeto);
     }
 }

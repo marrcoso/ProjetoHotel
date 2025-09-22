@@ -1,33 +1,41 @@
 package service;
 
+import java.sql.SQLException;
 import java.util.List;
+
 import model.DAO.VeiculoDAO;
 import model.Veiculo;
 
-public class VeiculoService {
+public class VeiculoService implements InterfaceService<Veiculo> {
 
-    public static void Criar(Veiculo objeto) {
-        VeiculoDAO veiculoDAO = new VeiculoDAO();
+    private final VeiculoDAO veiculoDAO;
+
+    public VeiculoService() {
+        this.veiculoDAO = new VeiculoDAO();
+    }
+
+    @Override
+    public void Criar(Veiculo objeto) throws SQLException {
         veiculoDAO.Create(objeto);
     }
 
-    public static Veiculo Carregar(int id) {
-        VeiculoDAO veiculoDAO = new VeiculoDAO();
+    @Override
+    public Veiculo Carregar(int id) throws SQLException {
         return veiculoDAO.Retrieve(id);
     }
 
-    public static List<Veiculo> Carregar(String atributo, String valor) {
-        VeiculoDAO veiculoDAO = new VeiculoDAO();
+    @Override
+    public List<Veiculo> Carregar(String atributo, String valor) throws SQLException {
         return veiculoDAO.Retrieve(atributo, valor);
     }
 
-    public static void Atualizar(Veiculo objeto) {
-        VeiculoDAO veiculoDAO = new VeiculoDAO();
+    @Override
+    public void Atualizar(Veiculo objeto) throws SQLException {
         veiculoDAO.Update(objeto);
     }
 
-    public static void Apagar(Veiculo objeto) {
-        VeiculoDAO veiculoDAO = new VeiculoDAO();
+    @Override
+    public void Apagar(Veiculo objeto) throws SQLException {
         veiculoDAO.Delete(objeto);
     }
 }

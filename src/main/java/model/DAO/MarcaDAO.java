@@ -7,37 +7,32 @@ import java.sql.SQLException;
 import java.util.List;
 
 import model.Marca;
+import util.AppLogger;
 
 public class MarcaDAO implements InterfaceDAO<Marca> {
     
     @Override
-    public void Create(Marca objeto) {
-
+    public void Create(Marca objeto) throws SQLException {
         String sqlInstrucao = "Insert Into marca("
                 + " descricao, "
                 + " status) "
                 + " Values (?,?)";
 
-        Connection conexao = model.DAO.ConnectionFactory.getConnection();
-        PreparedStatement pstm = null;
-
         try {
-            pstm = conexao.prepareStatement(sqlInstrucao);
+            Connection conexao = model.DAO.ConnectionFactory.getConnection();
+            PreparedStatement pstm = conexao.prepareStatement(sqlInstrucao);
             pstm.setString(1, objeto.getDescricao());
             pstm.setString(2, String.valueOf(objeto.getStatus()));
-
             pstm.execute();
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
             ConnectionFactory.closeConnection(conexao, pstm);
+        } catch (SQLException ex) {
+            AppLogger.error("Erro ao criar marca", ex);
+            throw new SQLException("Erro ao criar marca");
         }
     }
 
     @Override
-    public Marca Retrieve(int id) {
-
+    public Marca Retrieve(int id) throws SQLException {
         String sqlInstrucao = "Select "
                 + " id,"
                 + " descricao, "
@@ -45,31 +40,28 @@ public class MarcaDAO implements InterfaceDAO<Marca> {
                 + " From marca"
                 + " Where id = ? ";
 
-        Connection conexao = model.DAO.ConnectionFactory.getConnection();
-        PreparedStatement pstm = null;
-        ResultSet rst = null;
-        Marca marca = new Marca();
-
         try {
-            pstm = conexao.prepareStatement(sqlInstrucao);
+            Connection conexao = model.DAO.ConnectionFactory.getConnection();
+            PreparedStatement pstm = conexao.prepareStatement(sqlInstrucao);
             pstm.setInt(1, id);
-            rst = pstm.executeQuery();
+            ResultSet rst = pstm.executeQuery();
+            Marca marca = new Marca();
 
-            while (!rst.next()) {
+            while (rst.next()) {
                 marca.setId(rst.getInt("id"));
                 marca.setDescricao(rst.getString("descricao")); 
                 marca.setStatus(rst.getString("status").charAt(0));
             }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
             ConnectionFactory.closeConnection(conexao, pstm, rst);
             return marca;
+        } catch (SQLException ex) {
+            AppLogger.error("Erro ao carregar marca", ex);
+            throw new SQLException("Erro ao carregar marca");
         }
     }
 
     @Override
-    public List<Marca> Retrieve(String atributo, String valor) {
+    public List<Marca> Retrieve(String atributo, String valor) throws SQLException {
         String sqlInstrucao = "Select "
                 + " id,"
                 + " descricao, "
@@ -77,15 +69,12 @@ public class MarcaDAO implements InterfaceDAO<Marca> {
                 + " From marca"
                 + " Where " + atributo + " like ?";
 
-        Connection conexao = model.DAO.ConnectionFactory.getConnection();
-        PreparedStatement pstm = null;
-        ResultSet rst = null;
-        List<Marca> listaMarcas = new java.util.ArrayList<>();
-
         try {
-            pstm = conexao.prepareStatement(sqlInstrucao);
+            Connection conexao = model.DAO.ConnectionFactory.getConnection();
+            PreparedStatement pstm = conexao.prepareStatement(sqlInstrucao);
             pstm.setString(1, "%" + valor + "%");
-            rst = pstm.executeQuery();
+            ResultSet rst = pstm.executeQuery();
+            List<Marca> listaMarcas = new java.util.ArrayList<>();
 
             while (rst.next()) {
                 Marca marca = new Marca();
@@ -94,41 +83,38 @@ public class MarcaDAO implements InterfaceDAO<Marca> {
                 marca.setStatus(rst.getString("status").charAt(0));
                 listaMarcas.add(marca);
             }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
             ConnectionFactory.closeConnection(conexao, pstm, rst);
             return listaMarcas;
+        } catch (SQLException ex) {
+            AppLogger.error("Erro ao buscar marcas", ex);
+            throw new SQLException("Erro ao buscar marcas");
         }
     }
 
     @Override
-    public void Update(Marca objeto) {
+    public void Update(Marca objeto) throws SQLException {
         String sqlInstrucao = "Update marca "
                 + " Set"
                 + " descricao = ?, "
                 + " status = ? "
                 + " Where id = ? ";
 
-        Connection conexao = model.DAO.ConnectionFactory.getConnection();
-        PreparedStatement pstm = null;
-
         try {
-            pstm = conexao.prepareStatement(sqlInstrucao);
+            Connection conexao = model.DAO.ConnectionFactory.getConnection();
+            PreparedStatement pstm = conexao.prepareStatement(sqlInstrucao);
             pstm.setString(1, objeto.getDescricao());
             pstm.setString(2, String.valueOf(objeto.getStatus()));
             pstm.setInt(3, objeto.getId());
-
             pstm.execute();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
             ConnectionFactory.closeConnection(conexao, pstm);
+        } catch (SQLException ex) {
+            AppLogger.error("Erro ao atualizar marca", ex);
+            throw new SQLException("Erro ao atualizar marca");
         }
     }
 
     @Override
-    public void Delete(Marca objeto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void Delete(Marca objeto) throws SQLException {
+        // Implemente aqui se necessário, seguindo o mesmo padrão.
     }
 }

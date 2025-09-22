@@ -1,66 +1,48 @@
 package model.DAO;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import io.github.cdimascio.dotenv.Dotenv;
 
 public class ConnectionFactory {
 
-    private static final String driver;
-    private static final String banco;
-    private static final String usuario;
-    private static final String senha;
+    private static final String BANCO;
+    private static final String USUARIO;
+    private static final String SENHA;
 
     static {
         Dotenv dotenv = Dotenv.configure()
             .directory("./")
             .load();
-        driver = dotenv.get("DB_DRIVER");
-        banco = dotenv.get("DB_URL");
-        usuario = dotenv.get("DB_USER");
-        senha = dotenv.get("DB_PASS");
+        BANCO = dotenv.get("DB_URL");
+        USUARIO = dotenv.get("DB_USER");
+        SENHA = dotenv.get("DB_PASS");
     }
 
-    public static Connection getConnection() {
+    public static Connection getConnection() throws SQLException {
 
-        try {
-            return DriverManager.getConnection(banco + "?verifyServerCertificate=false"
-                    + "&useSSL=false"
-                    + "&requireSSL=false"
-                    + "&USER=" + usuario + "&password=" + senha + "&serverTimezone=UTC");
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return null;
-        }
+        return DriverManager.getConnection(BANCO + "?verifyServerCertificate=false"
+            + "&useSSL=false"
+            + "&requireSSL=false"
+            + "&USER=" + USUARIO + "&password=" + SENHA + "&serverTimezone=UTC");
     }
 
-    public static void closeConnection(Connection conexao) {
-        try {
-            conexao.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
+    public static void closeConnection(Connection conexao) throws SQLException {
+        conexao.close();
     }
 
-    public static void closeConnection(Connection conexao, PreparedStatement pstm) {
-        try {
-            pstm.close();
-            conexao.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
+    public static void closeConnection(Connection conexao, PreparedStatement pstm) throws SQLException {
+        pstm.close();
+        conexao.close();
     }
 
-    public static void closeConnection(Connection conexao, PreparedStatement pstm, ResultSet rst) {
-        try {
-            pstm.close();
-            rst.close();
-            conexao.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
+    public static void closeConnection(Connection conexao, PreparedStatement pstm, ResultSet rst) throws SQLException {
+        pstm.close();
+        rst.close();
+        conexao.close();
     }
 }
