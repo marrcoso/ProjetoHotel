@@ -6,9 +6,7 @@
 package view;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 /**
  *
@@ -51,18 +49,7 @@ public class TelaCadastroMarca extends javax.swing.JDialog {
     public JPanel getjPanelDados() {
         return jPanelDados;
     }
-
-    public JTextField getjTextFieldId() {
-        return jTextFieldId;
-    }
-
-    public JTextField getjTextFieldDescricao() {
-        return jTextFieldDescricao;
-    }
-
-    public JComboBox<String> getjComboBoxStatus() {
-        return jComboBoxStatus;
-    }
+    
     
     
     

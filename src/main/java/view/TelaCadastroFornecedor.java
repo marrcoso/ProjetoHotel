@@ -6,10 +6,7 @@
 package view;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 /**
  *
@@ -48,162 +45,9 @@ public class TelaCadastroFornecedor extends javax.swing.JDialog {
     public JPanel getjPanelBotoes() {
         return jPanelBotoes;
     }
-
+    
     public JPanel getjPanelDados() {
         return jPanelDados;
-    }
-
-    public JComboBox<String> getjComboBoxStatus() {
-        return jComboBoxStatus;
-    }
-
-    public void setjComboBoxStatus(JComboBox<String> jComboBoxStatus) {
-        this.jComboBoxStatus = jComboBoxStatus;
-    }
-
-
-    public JComboBox<String> getjComboBoxSexo() {
-        return jComboBoxSexo;
-    }
-
-    public void setjComboBoxSexo(JComboBox<String> jComboBoxSexo) {
-        this.jComboBoxSexo = jComboBoxSexo;
-    }
-
-    public JFormattedTextField getjFormattedTextFieldCep() {
-        return jFormattedTextFieldCep;
-    }
-
-    public void setjFormattedTextFieldCep(JFormattedTextField jFormattedTextFieldCep) {
-        this.jFormattedTextFieldCep = jFormattedTextFieldCep;
-    }
-
-    public JFormattedTextField getjFormattedTextFieldCnpj() {
-        return jFormattedTextFieldCnpj;
-    }
-
-    public void setjFormattedTextFieldCnpj(JFormattedTextField jFormattedTextFieldCnpj) {
-        this.jFormattedTextFieldCnpj = jFormattedTextFieldCnpj;
-    }
-
-    public JFormattedTextField getjFormattedTextFieldCpf() {
-        return jFormattedTextFieldCpf;
-    }
-
-    public void setjFormattedTextFieldCpf(JFormattedTextField jFormattedTextFieldCpf) {
-        this.jFormattedTextFieldCpf = jFormattedTextFieldCpf;
-    }
-
-    public JFormattedTextField getjFormattedTextFieldFone1() {
-        return jFormattedTextFieldFone1;
-    }
-
-    public void setjFormattedTextFieldFone1(JFormattedTextField jFormattedTextFieldFone1) {
-        this.jFormattedTextFieldFone1 = jFormattedTextFieldFone1;
-    }
-
-    public JFormattedTextField getjFormattedTextFieldFone2() {
-        return jFormattedTextFieldFone2;
-    }
-
-    public void setjFormattedTextFieldFone2(JFormattedTextField jFormattedTextFieldFone2) {
-        this.jFormattedTextFieldFone2 = jFormattedTextFieldFone2;
-    }
-
-    public JTextField getjTextFieldBairro() {
-        return jTextFieldBairro;
-    }
-
-    public void setjTextFieldBairro(JTextField jTextFieldBairro) {
-        this.jTextFieldBairro = jTextFieldBairro;
-    }
-
-    public JTextField getjTextFieldCidade() {
-        return jTextFieldCidade;
-    }
-
-    public void setjTextFieldCidade(JTextField jTextFieldCidade) {
-        this.jTextFieldCidade = jTextFieldCidade;
-    }
-
-    public JTextField getjTextFieldComplemento() {
-        return jTextFieldComplemento;
-    }
-
-    public void setjTextFieldComplemento(JTextField jTextFieldComplemento) {
-        this.jTextFieldComplemento = jTextFieldComplemento;
-    }
-
-    public JTextField getjTextFieldContato() {
-        return jTextFieldContato;
-    }
-
-    public void setjTextFieldContato(JTextField jTextFieldContato) {
-        this.jTextFieldContato = jTextFieldContato;
-    }
-
-    public JTextField getjTextFieldEmail() {
-        return jTextFieldEmail;
-    }
-
-    public void setjTextFieldEmail(JTextField jTextFieldEmail) {
-        this.jTextFieldEmail = jTextFieldEmail;
-    }
-
-    public JTextField getjTextFieldId() {
-        return jTextFieldId;
-    }
-
-    public void setjTextFieldId(JTextField jTextFieldId) {
-        this.jTextFieldId = jTextFieldId;
-    }
-
-    public JTextField getjTextFieldInscricaoEstadual() {
-        return jTextFieldInscricaoEstadual;
-    }
-
-    public void setjTextFieldInscricaoEstadual(JTextField jTextFieldInscricaoEstadual) {
-        this.jTextFieldInscricaoEstadual = jTextFieldInscricaoEstadual;
-    }
-
-    public JTextField getjTextFieldLogradouro() {
-        return jTextFieldLogradouro;
-    }
-
-    public void setjTextFieldLogradouro(JTextField jTextFieldLogradouro) {
-        this.jTextFieldLogradouro = jTextFieldLogradouro;
-    }
-
-    public JTextField getjTextFieldNomeFantasia() {
-        return jTextFieldNomeFantasia;
-    }
-
-    public void setjTextFieldNomeFantasia(JTextField jTextFieldNomeFantasia) {
-        this.jTextFieldNomeFantasia = jTextFieldNomeFantasia;
-    }
-
-    public JTextField getjTextFieldObs() {
-        return jTextFieldObs;
-    }
-
-    public void setjTextFieldObs(JTextField jTextFieldObs) {
-        this.jTextFieldObs = jTextFieldObs;
-    }
-
-    public JTextField getjTextFieldRazaoSocial() {
-        return jTextFieldRazaoSocial;
-    }
-
-    public void setjTextFieldRazaoSocial(JTextField jTextFieldRazaoSocial) {
-        this.jTextFieldRazaoSocial = jTextFieldRazaoSocial;
-    }
-
-    public JTextField getjTextFieldRg() {
-        return jTextFieldRg;
-    }
-
-    public void setjTextFieldRg(JTextField jTextFieldRg) {
-        this.jTextFieldRg = jTextFieldRg;
     }
     
     

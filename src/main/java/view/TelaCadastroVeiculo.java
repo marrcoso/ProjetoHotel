@@ -6,9 +6,7 @@
 package view;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 /**
  *
@@ -51,26 +49,7 @@ public class TelaCadastroVeiculo extends javax.swing.JDialog {
     public JPanel getjPanelDados() {
         return jPanelDados;
     }
-
-    public JTextField getjTextFieldId() {
-        return jTextFieldId;
-    }
     
-    public JTextField getjTextFieldPlaca() {
-        return jTextFieldPlaca;
-    }
-
-    public JTextField getjTextFieldCor() {
-        return jTextFieldCor;
-    }
-
-    public JComboBox<String> getjComboBoxModelo() {
-        return jComboBoxModelo;
-    }
-
-    public JComboBox<String> getjComboBoxStatus() {
-        return jComboBoxStatus;
-    }
     
     
     
