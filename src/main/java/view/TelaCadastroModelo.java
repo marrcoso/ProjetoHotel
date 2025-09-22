@@ -6,7 +6,10 @@
 package view;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -48,6 +51,86 @@ public class TelaCadastroModelo extends javax.swing.JDialog {
     
     public JPanel getjPanelDados() {
         return jPanelDados;
+    }
+
+    public JComboBox<String> getjComboBoxMarca() {
+        return jComboBoxMarca;
+    }
+
+    public void setjComboBoxMarca(JComboBox<String> jComboBoxMarca) {
+        this.jComboBoxMarca = jComboBoxMarca;
+    }
+
+    public JComboBox<String> getjComboBoxStatus() {
+        return jComboBoxStatus;
+    }
+
+    public void setjComboBoxStatus(JComboBox<String> jComboBoxStatus) {
+        this.jComboBoxStatus = jComboBoxStatus;
+    }
+
+    public JLabel getjLabelDescricao() {
+        return jLabelDescricao;
+    }
+
+    public void setjLabelDescricao(JLabel jLabelDescricao) {
+        this.jLabelDescricao = jLabelDescricao;
+    }
+
+    public JLabel getjLabelId() {
+        return jLabelId;
+    }
+
+    public void setjLabelId(JLabel jLabelId) {
+        this.jLabelId = jLabelId;
+    }
+
+    public JLabel getjLabelMarca() {
+        return jLabelMarca;
+    }
+
+    public void setjLabelMarca(JLabel jLabelMarca) {
+        this.jLabelMarca = jLabelMarca;
+    }
+
+    public JLabel getjLabelStatus() {
+        return jLabelStatus;
+    }
+
+    public void setjLabelStatus(JLabel jLabelStatus) {
+        this.jLabelStatus = jLabelStatus;
+    }
+
+    public JLabel getjLabelTitulo() {
+        return jLabelTitulo;
+    }
+
+    public void setjLabelTitulo(JLabel jLabelTitulo) {
+        this.jLabelTitulo = jLabelTitulo;
+    }
+
+    public JPanel getjPanelTitulo() {
+        return jPanelTitulo;
+    }
+
+    public void setjPanelTitulo(JPanel jPanelTitulo) {
+        this.jPanelTitulo = jPanelTitulo;
+    }
+
+    public JTextField getjTextFieldDescricao() {
+        return jTextFieldDescricao;
+    }
+
+    public void setjTextFieldDescricao(JTextField jTextFieldDescricao) {
+        this.jTextFieldDescricao = jTextFieldDescricao;
+    }
+
+    public JTextField getjTextFieldId() {
+        return jTextFieldId;
+    }
+
+    public void setjTextFieldId(JTextField jTextFieldId) {
+        this.jTextFieldId = jTextFieldId;
     }
     
     

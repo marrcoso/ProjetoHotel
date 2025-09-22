@@ -6,7 +6,12 @@
 package view;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -48,6 +53,158 @@ public class TelaCadastroQuarto extends javax.swing.JDialog {
     
     public JPanel getjPanelDados() {
         return jPanelDados;
+    }
+
+    public JCheckBox getjCheckBoxFlagAnimais() {
+        return jCheckBoxFlagAnimais;
+    }
+
+    public void setjCheckBoxFlagAnimais(JCheckBox jCheckBoxFlagAnimais) {
+        this.jCheckBoxFlagAnimais = jCheckBoxFlagAnimais;
+    }
+
+    public JComboBox<String> getjComboBoxStatus() {
+        return jComboBoxStatus;
+    }
+
+    public void setjComboBoxStatus(JComboBox<String> jComboBoxStatus) {
+        this.jComboBoxStatus = jComboBoxStatus;
+    }
+
+    public JFormattedTextField getjFormattedTextFieldAndar() {
+        return jFormattedTextFieldAndar;
+    }
+
+    public void setjFormattedTextFieldAndar(JFormattedTextField jFormattedTextFieldAndar) {
+        this.jFormattedTextFieldAndar = jFormattedTextFieldAndar;
+    }
+
+    public JFormattedTextField getjFormattedTextFieldCapacidade() {
+        return jFormattedTextFieldCapacidade;
+    }
+
+    public void setjFormattedTextFieldCapacidade(JFormattedTextField jFormattedTextFieldCapacidade) {
+        this.jFormattedTextFieldCapacidade = jFormattedTextFieldCapacidade;
+    }
+
+    public JFormattedTextField getjFormattedTextFieldMetragem() {
+        return jFormattedTextFieldMetragem;
+    }
+
+    public void setjFormattedTextFieldMetragem(JFormattedTextField jFormattedTextFieldMetragem) {
+        this.jFormattedTextFieldMetragem = jFormattedTextFieldMetragem;
+    }
+
+    public JLabel getjLabelAndar() {
+        return jLabelAndar;
+    }
+
+    public void setjLabelAndar(JLabel jLabelAndar) {
+        this.jLabelAndar = jLabelAndar;
+    }
+
+    public JLabel getjLabelCapacidade() {
+        return jLabelCapacidade;
+    }
+
+    public void setjLabelCapacidade(JLabel jLabelCapacidade) {
+        this.jLabelCapacidade = jLabelCapacidade;
+    }
+
+    public JLabel getjLabelDescricao() {
+        return jLabelDescricao;
+    }
+
+    public void setjLabelDescricao(JLabel jLabelDescricao) {
+        this.jLabelDescricao = jLabelDescricao;
+    }
+
+    public JLabel getjLabelDescricaoIdentificacao() {
+        return jLabelDescricaoIdentificacao;
+    }
+
+    public void setjLabelDescricaoIdentificacao(JLabel jLabelDescricaoIdentificacao) {
+        this.jLabelDescricaoIdentificacao = jLabelDescricaoIdentificacao;
+    }
+
+    public JLabel getjLabelId() {
+        return jLabelId;
+    }
+
+    public void setjLabelId(JLabel jLabelId) {
+        this.jLabelId = jLabelId;
+    }
+
+    public JLabel getjLabelMetragem() {
+        return jLabelMetragem;
+    }
+
+    public void setjLabelMetragem(JLabel jLabelMetragem) {
+        this.jLabelMetragem = jLabelMetragem;
+    }
+
+    public JLabel getjLabelObservacao() {
+        return jLabelObservacao;
+    }
+
+    public void setjLabelObservacao(JLabel jLabelObservacao) {
+        this.jLabelObservacao = jLabelObservacao;
+    }
+
+    public JLabel getjLabelStatus() {
+        return jLabelStatus;
+    }
+
+    public void setjLabelStatus(JLabel jLabelStatus) {
+        this.jLabelStatus = jLabelStatus;
+    }
+
+    public JLabel getjLabelTitulo() {
+        return jLabelTitulo;
+    }
+
+    public void setjLabelTitulo(JLabel jLabelTitulo) {
+        this.jLabelTitulo = jLabelTitulo;
+    }
+
+    public JPanel getjPanelTitulo() {
+        return jPanelTitulo;
+    }
+
+    public void setjPanelTitulo(JPanel jPanelTitulo) {
+        this.jPanelTitulo = jPanelTitulo;
+    }
+
+    public JTextField getjTextFieldDescricao() {
+        return jTextFieldDescricao;
+    }
+
+    public void setjTextFieldDescricao(JTextField jTextFieldDescricao) {
+        this.jTextFieldDescricao = jTextFieldDescricao;
+    }
+
+    public JTextField getjTextFieldDescricaoidentificacao() {
+        return jTextFieldDescricaoidentificacao;
+    }
+
+    public void setjTextFieldDescricaoidentificacao(JTextField jTextFieldDescricaoidentificacao) {
+        this.jTextFieldDescricaoidentificacao = jTextFieldDescricaoidentificacao;
+    }
+
+    public JTextField getjTextFieldId() {
+        return jTextFieldId;
+    }
+
+    public void setjTextFieldId(JTextField jTextFieldId) {
+        this.jTextFieldId = jTextFieldId;
+    }
+
+    public JTextField getjTextFieldObservacao() {
+        return jTextFieldObservacao;
+    }
+
+    public void setjTextFieldObservacao(JTextField jTextFieldObservacao) {
+        this.jTextFieldObservacao = jTextFieldObservacao;
     }
     
     

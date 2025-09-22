@@ -6,7 +6,11 @@
 package view;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -48,6 +52,342 @@ public class TelaCadastroFornecedor extends javax.swing.JDialog {
     
     public JPanel getjPanelDados() {
         return jPanelDados;
+    }
+
+    public JComboBox<String> getjComboBoxSexo() {
+        return jComboBoxSexo;
+    }
+
+    public void setjComboBoxSexo(JComboBox<String> jComboBoxSexo) {
+        this.jComboBoxSexo = jComboBoxSexo;
+    }
+
+    public JComboBox<String> getjComboBoxStatus() {
+        return jComboBoxStatus;
+    }
+
+    public void setjComboBoxStatus(JComboBox<String> jComboBoxStatus) {
+        this.jComboBoxStatus = jComboBoxStatus;
+    }
+
+    public JFormattedTextField getjFormattedTextField5() {
+        return jFormattedTextField5;
+    }
+
+    public void setjFormattedTextField5(JFormattedTextField jFormattedTextField5) {
+        this.jFormattedTextField5 = jFormattedTextField5;
+    }
+
+    public JFormattedTextField getjFormattedTextFieldCep() {
+        return jFormattedTextFieldCep;
+    }
+
+    public void setjFormattedTextFieldCep(JFormattedTextField jFormattedTextFieldCep) {
+        this.jFormattedTextFieldCep = jFormattedTextFieldCep;
+    }
+
+    public JFormattedTextField getjFormattedTextFieldCnpj() {
+        return jFormattedTextFieldCnpj;
+    }
+
+    public void setjFormattedTextFieldCnpj(JFormattedTextField jFormattedTextFieldCnpj) {
+        this.jFormattedTextFieldCnpj = jFormattedTextFieldCnpj;
+    }
+
+    public JFormattedTextField getjFormattedTextFieldCpf() {
+        return jFormattedTextFieldCpf;
+    }
+
+    public void setjFormattedTextFieldCpf(JFormattedTextField jFormattedTextFieldCpf) {
+        this.jFormattedTextFieldCpf = jFormattedTextFieldCpf;
+    }
+
+    public JFormattedTextField getjFormattedTextFieldFone1() {
+        return jFormattedTextFieldFone1;
+    }
+
+    public void setjFormattedTextFieldFone1(JFormattedTextField jFormattedTextFieldFone1) {
+        this.jFormattedTextFieldFone1 = jFormattedTextFieldFone1;
+    }
+
+    public JFormattedTextField getjFormattedTextFieldFone2() {
+        return jFormattedTextFieldFone2;
+    }
+
+    public void setjFormattedTextFieldFone2(JFormattedTextField jFormattedTextFieldFone2) {
+        this.jFormattedTextFieldFone2 = jFormattedTextFieldFone2;
+    }
+
+    public JLabel getjLabelBairro() {
+        return jLabelBairro;
+    }
+
+    public void setjLabelBairro(JLabel jLabelBairro) {
+        this.jLabelBairro = jLabelBairro;
+    }
+
+    public JLabel getjLabelCadastro() {
+        return jLabelCadastro;
+    }
+
+    public void setjLabelCadastro(JLabel jLabelCadastro) {
+        this.jLabelCadastro = jLabelCadastro;
+    }
+
+    public JLabel getjLabelCep() {
+        return jLabelCep;
+    }
+
+    public void setjLabelCep(JLabel jLabelCep) {
+        this.jLabelCep = jLabelCep;
+    }
+
+    public JLabel getjLabelCidade() {
+        return jLabelCidade;
+    }
+
+    public void setjLabelCidade(JLabel jLabelCidade) {
+        this.jLabelCidade = jLabelCidade;
+    }
+
+    public JLabel getjLabelCnpj() {
+        return jLabelCnpj;
+    }
+
+    public void setjLabelCnpj(JLabel jLabelCnpj) {
+        this.jLabelCnpj = jLabelCnpj;
+    }
+
+    public JLabel getjLabelComplemento() {
+        return jLabelComplemento;
+    }
+
+    public void setjLabelComplemento(JLabel jLabelComplemento) {
+        this.jLabelComplemento = jLabelComplemento;
+    }
+
+    public JLabel getjLabelContato() {
+        return jLabelContato;
+    }
+
+    public void setjLabelContato(JLabel jLabelContato) {
+        this.jLabelContato = jLabelContato;
+    }
+
+    public JLabel getjLabelCpf() {
+        return jLabelCpf;
+    }
+
+    public void setjLabelCpf(JLabel jLabelCpf) {
+        this.jLabelCpf = jLabelCpf;
+    }
+
+    public JLabel getjLabelEmail() {
+        return jLabelEmail;
+    }
+
+    public void setjLabelEmail(JLabel jLabelEmail) {
+        this.jLabelEmail = jLabelEmail;
+    }
+
+    public JLabel getjLabelFone1() {
+        return jLabelFone1;
+    }
+
+    public void setjLabelFone1(JLabel jLabelFone1) {
+        this.jLabelFone1 = jLabelFone1;
+    }
+
+    public JLabel getjLabelFone2() {
+        return jLabelFone2;
+    }
+
+    public void setjLabelFone2(JLabel jLabelFone2) {
+        this.jLabelFone2 = jLabelFone2;
+    }
+
+    public JLabel getjLabelId() {
+        return jLabelId;
+    }
+
+    public void setjLabelId(JLabel jLabelId) {
+        this.jLabelId = jLabelId;
+    }
+
+    public JLabel getjLabelInscricaoEstadual() {
+        return jLabelInscricaoEstadual;
+    }
+
+    public void setjLabelInscricaoEstadual(JLabel jLabelInscricaoEstadual) {
+        this.jLabelInscricaoEstadual = jLabelInscricaoEstadual;
+    }
+
+    public JLabel getjLabelLogradouro() {
+        return jLabelLogradouro;
+    }
+
+    public void setjLabelLogradouro(JLabel jLabelLogradouro) {
+        this.jLabelLogradouro = jLabelLogradouro;
+    }
+
+    public JLabel getjLabelNomeFantasia() {
+        return jLabelNomeFantasia;
+    }
+
+    public void setjLabelNomeFantasia(JLabel jLabelNomeFantasia) {
+        this.jLabelNomeFantasia = jLabelNomeFantasia;
+    }
+
+    public JLabel getjLabelObs() {
+        return jLabelObs;
+    }
+
+    public void setjLabelObs(JLabel jLabelObs) {
+        this.jLabelObs = jLabelObs;
+    }
+
+    public JLabel getjLabelRazaoSocial() {
+        return jLabelRazaoSocial;
+    }
+
+    public void setjLabelRazaoSocial(JLabel jLabelRazaoSocial) {
+        this.jLabelRazaoSocial = jLabelRazaoSocial;
+    }
+
+    public JLabel getjLabelSexo() {
+        return jLabelSexo;
+    }
+
+    public void setjLabelSexo(JLabel jLabelSexo) {
+        this.jLabelSexo = jLabelSexo;
+    }
+
+    public JLabel getjLabelSexo1() {
+        return jLabelSexo1;
+    }
+
+    public void setjLabelSexo1(JLabel jLabelSexo1) {
+        this.jLabelSexo1 = jLabelSexo1;
+    }
+
+    public JLabel getjLabelTitulo() {
+        return jLabelTitulo;
+    }
+
+    public void setjLabelTitulo(JLabel jLabelTitulo) {
+        this.jLabelTitulo = jLabelTitulo;
+    }
+
+    public JLabel getjLabelrg() {
+        return jLabelrg;
+    }
+
+    public void setjLabelrg(JLabel jLabelrg) {
+        this.jLabelrg = jLabelrg;
+    }
+
+    public JPanel getjPanelTitulo() {
+        return jPanelTitulo;
+    }
+
+    public void setjPanelTitulo(JPanel jPanelTitulo) {
+        this.jPanelTitulo = jPanelTitulo;
+    }
+
+    public JTextField getjTextFieldBairro() {
+        return jTextFieldBairro;
+    }
+
+    public void setjTextFieldBairro(JTextField jTextFieldBairro) {
+        this.jTextFieldBairro = jTextFieldBairro;
+    }
+
+    public JTextField getjTextFieldCidade() {
+        return jTextFieldCidade;
+    }
+
+    public void setjTextFieldCidade(JTextField jTextFieldCidade) {
+        this.jTextFieldCidade = jTextFieldCidade;
+    }
+
+    public JTextField getjTextFieldComplemento() {
+        return jTextFieldComplemento;
+    }
+
+    public void setjTextFieldComplemento(JTextField jTextFieldComplemento) {
+        this.jTextFieldComplemento = jTextFieldComplemento;
+    }
+
+    public JTextField getjTextFieldContato() {
+        return jTextFieldContato;
+    }
+
+    public void setjTextFieldContato(JTextField jTextFieldContato) {
+        this.jTextFieldContato = jTextFieldContato;
+    }
+
+    public JTextField getjTextFieldEmail() {
+        return jTextFieldEmail;
+    }
+
+    public void setjTextFieldEmail(JTextField jTextFieldEmail) {
+        this.jTextFieldEmail = jTextFieldEmail;
+    }
+
+    public JTextField getjTextFieldId() {
+        return jTextFieldId;
+    }
+
+    public void setjTextFieldId(JTextField jTextFieldId) {
+        this.jTextFieldId = jTextFieldId;
+    }
+
+    public JTextField getjTextFieldInscricaoEstadual() {
+        return jTextFieldInscricaoEstadual;
+    }
+
+    public void setjTextFieldInscricaoEstadual(JTextField jTextFieldInscricaoEstadual) {
+        this.jTextFieldInscricaoEstadual = jTextFieldInscricaoEstadual;
+    }
+
+    public JTextField getjTextFieldLogradouro() {
+        return jTextFieldLogradouro;
+    }
+
+    public void setjTextFieldLogradouro(JTextField jTextFieldLogradouro) {
+        this.jTextFieldLogradouro = jTextFieldLogradouro;
+    }
+
+    public JTextField getjTextFieldNomeFantasia() {
+        return jTextFieldNomeFantasia;
+    }
+
+    public void setjTextFieldNomeFantasia(JTextField jTextFieldNomeFantasia) {
+        this.jTextFieldNomeFantasia = jTextFieldNomeFantasia;
+    }
+
+    public JTextField getjTextFieldObs() {
+        return jTextFieldObs;
+    }
+
+    public void setjTextFieldObs(JTextField jTextFieldObs) {
+        this.jTextFieldObs = jTextFieldObs;
+    }
+
+    public JTextField getjTextFieldRazaoSocial() {
+        return jTextFieldRazaoSocial;
+    }
+
+    public void setjTextFieldRazaoSocial(JTextField jTextFieldRazaoSocial) {
+        this.jTextFieldRazaoSocial = jTextFieldRazaoSocial;
+    }
+
+    public JTextField getjTextFieldRg() {
+        return jTextFieldRg;
+    }
+
+    public void setjTextFieldRg(JTextField jTextFieldRg) {
+        this.jTextFieldRg = jTextFieldRg;
     }
     
     

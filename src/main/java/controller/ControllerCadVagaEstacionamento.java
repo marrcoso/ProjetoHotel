@@ -1,55 +1,182 @@
-
 package controller;
-
-import view.TelaCadastroVagaEstacionamento;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import view.TelaBuscaVaga;
+import java.sql.SQLException;
 
-public class ControllerCadVagaEstacionamento implements ActionListener {
+import javax.swing.JOptionPane;
+
+import model.VagaEstacionamento;
+import service.InterfaceService;
+import service.VagaEstacionamentoService;
+import view.TelaBuscaVaga;
+import view.TelaCadastroVagaEstacionamento;
+
+public class ControllerCadVagaEstacionamento implements ActionListener, InterfaceControllerCad<VagaEstacionamento> {
 
     TelaCadastroVagaEstacionamento telaCadastroVagaEstacionamento;
+    InterfaceService<VagaEstacionamento> vagaService;
+    public static int codigo;
 
     public ControllerCadVagaEstacionamento(TelaCadastroVagaEstacionamento telaCadastroVagaEstacionamento) {
-
         this.telaCadastroVagaEstacionamento = telaCadastroVagaEstacionamento;
+        this.vagaService = new VagaEstacionamentoService();
+        utilities.Utilities.ativaDesativa(this.telaCadastroVagaEstacionamento.getjPanelBotoes(), true);
+        utilities.Utilities.limpaComponentes(this.telaCadastroVagaEstacionamento.getjPanelDados(), false);
 
+        initListeners();
+    }
+
+    private void initListeners() {
         this.telaCadastroVagaEstacionamento.getjButtonNovo().addActionListener(this);
         this.telaCadastroVagaEstacionamento.getjButtonCancelar().addActionListener(this);
         this.telaCadastroVagaEstacionamento.getjButtonGravar().addActionListener(this);
         this.telaCadastroVagaEstacionamento.getjButtonBuscar().addActionListener(this);
         this.telaCadastroVagaEstacionamento.getjButtonSair().addActionListener(this);
-
-        //Desenvolver as setagens de situação inicial dos componentes
-        /*this.telaCadastroVagaEstacionamento.getjButtonNovo().setEnabled(true);
-        this.telaCadastroVagaEstacionamento.getjButtonCancelar().setEnabled(false);
-        this.telaCadastroVagaEstacionamento.getjButtonGravar().setEnabled(false);
-        this.telaCadastroVagaEstacionamento.getjButtonBuscar().setEnabled(true);
-        this.telaCadastroVagaEstacionamento.getjButtonSair().setEnabled(true);*/
-        utilities.Utilities.ativaDesativa(this.telaCadastroVagaEstacionamento.getjPanelBotoes(), true);
-        utilities.Utilities.limpaComponentes(this.telaCadastroVagaEstacionamento.getjPanelDados(), false);
     }
 
     @Override
     public void actionPerformed(ActionEvent evento) {
-        if (evento.getSource() == this.telaCadastroVagaEstacionamento.getjButtonNovo()) {
-            utilities.Utilities.ativaDesativa(this.telaCadastroVagaEstacionamento.getjPanelBotoes(), false);
-        utilities.Utilities.limpaComponentes(this.telaCadastroVagaEstacionamento.getjPanelDados(), true);
-        } else if (evento.getSource() == this.telaCadastroVagaEstacionamento.getjButtonCancelar()) {
-            utilities.Utilities.ativaDesativa(this.telaCadastroVagaEstacionamento.getjPanelBotoes(), true);
-        utilities.Utilities.limpaComponentes(this.telaCadastroVagaEstacionamento.getjPanelDados(), false);
-        } else if (evento.getSource() == this.telaCadastroVagaEstacionamento.getjButtonGravar()) {
-            utilities.Utilities.ativaDesativa(this.telaCadastroVagaEstacionamento.getjPanelBotoes(), true);
-        utilities.Utilities.limpaComponentes(this.telaCadastroVagaEstacionamento.getjPanelDados(), false);
-        } else if (evento.getSource() == this.telaCadastroVagaEstacionamento.getjButtonBuscar()) {
-            
-            TelaBuscaVaga telaBuscaVaga = new TelaBuscaVaga(null, true);
-            ControllerBuscaVagaEstacionamento controllerBuscaVagaEstacionamento = new ControllerBuscaVagaEstacionamento(telaBuscaVaga);
-            telaBuscaVaga.setVisible(true);
-            
-        } else if (evento.getSource() == this.telaCadastroVagaEstacionamento.getjButtonSair()) {
-            this.telaCadastroVagaEstacionamento.dispose();
+        Object source = evento.getSource();
+        if (source == telaCadastroVagaEstacionamento.getjButtonNovo()) {
+            handleNovo();
+            return;
         }
+        if (source == telaCadastroVagaEstacionamento.getjButtonCancelar()) {
+            handleCancelar();
+            return;
+        }
+        if (source == telaCadastroVagaEstacionamento.getjButtonGravar()) {
+            handleGravar();
+            return;
+        }
+        if (source == telaCadastroVagaEstacionamento.getjButtonBuscar()) {
+            handleBuscar();
+            return;
+        }
+        if (source == telaCadastroVagaEstacionamento.getjButtonSair()) {
+            handleSair();
+        }
+    }
+
+    private void handleNovo() {
+        utilities.Utilities.ativaDesativa(this.telaCadastroVagaEstacionamento.getjPanelBotoes(), false);
+        utilities.Utilities.limpaComponentes(this.telaCadastroVagaEstacionamento.getjPanelDados(), true);
+        this.telaCadastroVagaEstacionamento.getjTextFieldId().setEnabled(false);
+        this.telaCadastroVagaEstacionamento.getjTextFieldDescricao().requestFocus();
+        this.telaCadastroVagaEstacionamento.getjComboBoxStatus().setSelectedItem("Ativo");
+        this.telaCadastroVagaEstacionamento.getjComboBoxStatus().setEnabled(false);
+    }
+
+    private void handleCancelar() {
+        utilities.Utilities.ativaDesativa(this.telaCadastroVagaEstacionamento.getjPanelBotoes(), true);
+        utilities.Utilities.limpaComponentes(this.telaCadastroVagaEstacionamento.getjPanelDados(), false);
+    }
+
+    private boolean isFormularioValido() {
+        if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroVagaEstacionamento.getjTextFieldDescricao().getText())) {
+            JOptionPane.showMessageDialog(null, "O campo Descrição é obrigatório.");
+            telaCadastroVagaEstacionamento.getjTextFieldDescricao().requestFocus();
+            return false;
+        }
+        if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroVagaEstacionamento.getjTextFieldObservacao().getText())) {
+            JOptionPane.showMessageDialog(null, "O campo Observação é obrigatório.");
+            telaCadastroVagaEstacionamento.getjTextFieldObservacao().requestFocus();
+            return false;
+        }
+        if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroVagaEstacionamento.getjFormattedTextFieldMetragem().getText())) {
+            JOptionPane.showMessageDialog(null, "O campo Metragem é obrigatório.");
+            telaCadastroVagaEstacionamento.getjFormattedTextFieldMetragem().requestFocus();
+            return false;
+        }
+        if (!utilities.ValidadorCampos.validarStatus(telaCadastroVagaEstacionamento.getjComboBoxStatus().getSelectedItem().toString())) {
+            JOptionPane.showMessageDialog(null, "Selecione um Status válido.");
+            telaCadastroVagaEstacionamento.getjComboBoxStatus().requestFocus();
+            return false;
+        }
+        return true;
+    }
+
+    private void handleGravar() {
+        if (!isFormularioValido()) {
+            return;
+        }
+        VagaEstacionamento vaga = construirDoFormulario();
+
+        boolean isNovoCadastro = telaCadastroVagaEstacionamento.getjTextFieldId().getText().trim().isEmpty();
+
+        if (isNovoCadastro) {
+            try {
+                vagaService.Criar(vaga);
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(telaCadastroVagaEstacionamento, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            utilities.Utilities.ativaDesativa(telaCadastroVagaEstacionamento.getjPanelBotoes(), true);
+            utilities.Utilities.limpaComponentes(telaCadastroVagaEstacionamento.getjPanelDados(), false);
+            return;
+        }
+
+        vaga.setId(Integer.parseInt(telaCadastroVagaEstacionamento.getjTextFieldId().getText()));
+        try {
+            vagaService.Atualizar(vaga);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(telaCadastroVagaEstacionamento, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        utilities.Utilities.ativaDesativa(telaCadastroVagaEstacionamento.getjPanelBotoes(), true);
+        utilities.Utilities.limpaComponentes(telaCadastroVagaEstacionamento.getjPanelDados(), false);
+    }
+
+    private VagaEstacionamento construirDoFormulario() {
+        VagaEstacionamento vaga = new VagaEstacionamento();
+        vaga.setDescricao(telaCadastroVagaEstacionamento.getjTextFieldDescricao().getText());
+        vaga.setObs(telaCadastroVagaEstacionamento.getjTextFieldObservacao().getText());
+        vaga.setMetragemVaga(Float.parseFloat(telaCadastroVagaEstacionamento.getjFormattedTextFieldMetragem().getText()));
+
+        Object statusSelecionado = telaCadastroVagaEstacionamento.getjComboBoxStatus().getSelectedItem();
+        vaga.setStatus(
+            statusSelecionado != null && statusSelecionado.equals("Ativo") ? 'A' : 'I'
+        );
+
+        return vaga;
+    }
+
+    private void handleBuscar() {
+        codigo = 0;
+        TelaBuscaVaga telaBuscaVaga = new TelaBuscaVaga(null, true);
+        @SuppressWarnings("unused")
+        ControllerBuscaVagaEstacionamento controllerBuscaVagaEstacionamento = new ControllerBuscaVagaEstacionamento(telaBuscaVaga);
+        telaBuscaVaga.setVisible(true);
+
+        if (codigo != 0) {
+            utilities.Utilities.ativaDesativa(telaCadastroVagaEstacionamento.getjPanelBotoes(), false);
+            utilities.Utilities.limpaComponentes(telaCadastroVagaEstacionamento.getjPanelDados(), true);
+
+            telaCadastroVagaEstacionamento.getjTextFieldId().setText(String.valueOf(codigo));
+            telaCadastroVagaEstacionamento.getjTextFieldId().setEnabled(false);
+
+            VagaEstacionamento vaga;
+            try {
+                vaga = new VagaEstacionamentoService().Carregar(codigo);
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(telaCadastroVagaEstacionamento, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            telaCadastroVagaEstacionamento.getjTextFieldDescricao().setText(vaga.getDescricao());
+            telaCadastroVagaEstacionamento.getjTextFieldObservacao().setText(vaga.getObs());
+            telaCadastroVagaEstacionamento.getjFormattedTextFieldMetragem().setText(String.valueOf(vaga.getMetragemVaga()));
+            telaCadastroVagaEstacionamento.getjComboBoxStatus().setSelectedItem(
+                vaga.getStatus() == 'A' ? "Ativo" : "Inativo"
+            );
+
+            telaCadastroVagaEstacionamento.getjTextFieldDescricao().requestFocus();
+        }
+    }
+
+    private void handleSair() {
+        this.telaCadastroVagaEstacionamento.dispose();
     }
 }

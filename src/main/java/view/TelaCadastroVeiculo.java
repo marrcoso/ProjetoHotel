@@ -6,7 +6,10 @@
 package view;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -48,6 +51,102 @@ public class TelaCadastroVeiculo extends javax.swing.JDialog {
     
     public JPanel getjPanelDados() {
         return jPanelDados;
+    }
+
+    public JComboBox<String> getjComboBoxModelo() {
+        return jComboBoxModelo;
+    }
+
+    public void setjComboBoxModelo(JComboBox<String> jComboBoxModelo) {
+        this.jComboBoxModelo = jComboBoxModelo;
+    }
+
+    public JComboBox<String> getjComboBoxStatus() {
+        return jComboBoxStatus;
+    }
+
+    public void setjComboBoxStatus(JComboBox<String> jComboBoxStatus) {
+        this.jComboBoxStatus = jComboBoxStatus;
+    }
+
+    public JLabel getjLabelCor() {
+        return jLabelCor;
+    }
+
+    public void setjLabelCor(JLabel jLabelCor) {
+        this.jLabelCor = jLabelCor;
+    }
+
+    public JLabel getjLabelId() {
+        return jLabelId;
+    }
+
+    public void setjLabelId(JLabel jLabelId) {
+        this.jLabelId = jLabelId;
+    }
+
+    public JLabel getjLabelModelo() {
+        return jLabelModelo;
+    }
+
+    public void setjLabelModelo(JLabel jLabelModelo) {
+        this.jLabelModelo = jLabelModelo;
+    }
+
+    public JLabel getjLabelPlaca() {
+        return jLabelPlaca;
+    }
+
+    public void setjLabelPlaca(JLabel jLabelPlaca) {
+        this.jLabelPlaca = jLabelPlaca;
+    }
+
+    public JLabel getjLabelStatus() {
+        return jLabelStatus;
+    }
+
+    public void setjLabelStatus(JLabel jLabelStatus) {
+        this.jLabelStatus = jLabelStatus;
+    }
+
+    public JLabel getjLabelTitulo() {
+        return jLabelTitulo;
+    }
+
+    public void setjLabelTitulo(JLabel jLabelTitulo) {
+        this.jLabelTitulo = jLabelTitulo;
+    }
+
+    public JPanel getjPanelTitulo() {
+        return jPanelTitulo;
+    }
+
+    public void setjPanelTitulo(JPanel jPanelTitulo) {
+        this.jPanelTitulo = jPanelTitulo;
+    }
+
+    public JTextField getjTextFieldCor() {
+        return jTextFieldCor;
+    }
+
+    public void setjTextFieldCor(JTextField jTextFieldCor) {
+        this.jTextFieldCor = jTextFieldCor;
+    }
+
+    public JTextField getjTextFieldId() {
+        return jTextFieldId;
+    }
+
+    public void setjTextFieldId(JTextField jTextFieldId) {
+        this.jTextFieldId = jTextFieldId;
+    }
+
+    public JTextField getjTextFieldPlaca() {
+        return jTextFieldPlaca;
+    }
+
+    public void setjTextFieldPlaca(JTextField jTextFieldPlaca) {
+        this.jTextFieldPlaca = jTextFieldPlaca;
     }
     
     
