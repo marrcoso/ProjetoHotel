@@ -15,7 +15,6 @@ public class ControllerBuscaFuncionario implements ActionListener {
     TelaBuscaFuncionario telaBuscaFuncionario;
 
     public ControllerBuscaFuncionario(TelaBuscaFuncionario telaBuscaFuncionario) {
-
         this.telaBuscaFuncionario = telaBuscaFuncionario;
         initListeners();
     }
@@ -44,7 +43,7 @@ public class ControllerBuscaFuncionario implements ActionListener {
 
     private void handleCarregar() {
         if (telaBuscaFuncionario.getjTableDados().getRowCount() == 0) {
-            JOptionPane.showMessageDialog(null, "Não Existem Dados Selecionados!");
+            JOptionPane.showMessageDialog(null, "Não Existem Dados Selecionados para Edição!");
         } else {
             ControllerCadFuncionario.codigo = (int) telaBuscaFuncionario.getjTableDados()
                 .getValueAt(telaBuscaFuncionario.getjTableDados().getSelectedRow(), 0);
