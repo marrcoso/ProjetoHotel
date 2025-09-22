@@ -2,60 +2,113 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.List;
+
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+import model.Quarto;
+import service.QuartoService;
 import view.TelaBuscaQuarto;
 
-public class ControllerBuscaQuarto implements ActionListener {
+public class ControllerBuscaQuarto implements ActionListener, InterfaceControllerBusca {
 
     TelaBuscaQuarto telaBuscaQuarto;
+    private final QuartoService quartoService;
 
     public ControllerBuscaQuarto(TelaBuscaQuarto telaBuscaQuarto) {
-
         this.telaBuscaQuarto = telaBuscaQuarto;
+        this.quartoService = new QuartoService();
+        initListeners();
+    }
 
+    private void initListeners() {
         this.telaBuscaQuarto.getjButtonCarregar().addActionListener(this);
         this.telaBuscaQuarto.getjButtonFiltar().addActionListener(this);
         this.telaBuscaQuarto.getjButtonSair().addActionListener(this);
-
     }
 
     @Override
     public void actionPerformed(ActionEvent evento) {
-
-        if (evento.getSource() == this.telaBuscaQuarto.getjButtonCarregar()) {
-            JOptionPane.showMessageDialog(null, "Botão Carregar Pressionado...");
-            if (this.telaBuscaQuarto.getjTableDados().getRowCount() == 0) {
-                JOptionPane.showMessageDialog(null, "Não Existem Dados Selecionados!");
-            } else {
-                JOptionPane.showMessageDialog(null, "Carregando Dados para Edição....");
-            }
-        } else if (evento.getSource() == this.telaBuscaQuarto.getjButtonFiltar()) {
-            JOptionPane.showMessageDialog(null, "Botão Filtrar Pressionado...");
-            if (this.telaBuscaQuarto.getjTFFiltro().getText().trim().equalsIgnoreCase("")) {
-                JOptionPane.showMessageDialog(null, "Sem Dados para a Seleção...");
-            } else {
-                JOptionPane.showMessageDialog(null, "Filtrando informações...");
-                if (this.telaBuscaQuarto.getjCBFiltro().getSelectedIndex() == 0) {
-                    JOptionPane.showMessageDialog(null, "Filtrando por ID");
-
-                } else if (this.telaBuscaQuarto.getjCBFiltro().getSelectedIndex() == 1) {
-                    JOptionPane.showMessageDialog(null, "Filtrando por Descrição");
-                } else if (this.telaBuscaQuarto.getjCBFiltro().getSelectedIndex() == 2) {
-                    JOptionPane.showMessageDialog(null, "Filtrando por Capacidade");
-                } else if (this.telaBuscaQuarto.getjCBFiltro().getSelectedIndex() == 3) {
-                    JOptionPane.showMessageDialog(null, "Filtrando por Metragem");
-                } else if (this.telaBuscaQuarto.getjCBFiltro().getSelectedIndex() == 4) {
-                    JOptionPane.showMessageDialog(null, "Filtrando por Identificação");
-                } else if (this.telaBuscaQuarto.getjCBFiltro().getSelectedIndex() == 5) {
-                    JOptionPane.showMessageDialog(null, "Filtrando por Andar");
-                } else if (this.telaBuscaQuarto.getjCBFiltro().getSelectedIndex() == 6) {
-                    JOptionPane.showMessageDialog(null, "Filtrando por Animais");
-                } else if (this.telaBuscaQuarto.getjCBFiltro().getSelectedIndex() == 7) {
-                    JOptionPane.showMessageDialog(null, "Filtrando por Observação");
-                }
-            }
-        } else if (evento.getSource() == this.telaBuscaQuarto.getjButtonSair()) {
-            this.telaBuscaQuarto.dispose();
+        Object source = evento.getSource();
+        if (source == telaBuscaQuarto.getjButtonCarregar()) {
+            handleCarregar();
+            return;
         }
+        if (source == telaBuscaQuarto.getjButtonFiltar()) {
+            handleFiltrar();
+            return;
+        }
+        if (source == telaBuscaQuarto.getjButtonSair()) {
+            handleSair();
+        }
+    }
+
+    private void handleCarregar() {
+        if (telaBuscaQuarto.getjTableDados().getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Não Existem Dados Selecionados para Edição!");
+        } else {
+            ControllerCadQuarto.codigo = (int) telaBuscaQuarto.getjTableDados()
+                .getValueAt(telaBuscaQuarto.getjTableDados().getSelectedRow(), 0);
+            telaBuscaQuarto.dispose();
+        }
+    }
+
+    private enum FiltroQuarto {
+        ID, DESCRICAO;
+
+        public static FiltroQuarto fromIndex(int index) {
+            switch (index) {
+                case 0: return ID;
+                case 1: return DESCRICAO;
+                default: throw new IllegalArgumentException("Filtro inválido");
+            }
+        }
+    }
+
+    private void handleFiltrar() {
+        if (telaBuscaQuarto.getjTFFiltro().getText().trim().equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(null, "Sem Dados para a Seleção...");
+            return;
+        }
+        DefaultTableModel tabela = (DefaultTableModel) telaBuscaQuarto.getjTableDados().getModel();
+        tabela.setRowCount(0);
+
+        int filtroIndex = telaBuscaQuarto.getjCBFiltro().getSelectedIndex();
+        String filtroTexto = telaBuscaQuarto.getjTFFiltro().getText();
+
+        FiltroQuarto filtro = FiltroQuarto.fromIndex(filtroIndex);
+
+        try {
+            switch (filtro) {
+                case ID:
+                    Quarto quarto = quartoService.Carregar(Integer.parseInt(filtroTexto));
+                    if (quarto != null) {
+                        tabela.addRow(new Object[]{
+                            quarto.getId(), quarto.getDescricao(), quarto.getCapacidadeHospedes(),
+                            quarto.getMetragem(), quarto.getIdentificacao(), quarto.getAndar(),
+                            quarto.isFlagAnimais(), quarto.getObs(), quarto.getStatus()
+                        });
+                    }
+                    break;
+                case DESCRICAO:
+                    List<Quarto> listaPorDescricao = quartoService.Carregar("descricao", filtroTexto);
+                    for (Quarto q : listaPorDescricao) {
+                        tabela.addRow(new Object[]{
+                            q.getId(), q.getDescricao(), q.getCapacidadeHospedes(),
+                            q.getMetragem(), q.getIdentificacao(), q.getAndar(),
+                            q.isFlagAnimais(), q.getObs(), q.getStatus()
+                        });
+                    }
+                    break;
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(telaBuscaQuarto, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void handleSair() {
+        this.telaBuscaQuarto.dispose();
     }
 }

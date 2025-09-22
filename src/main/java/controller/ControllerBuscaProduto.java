@@ -2,52 +2,105 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.List;
+
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+import model.Produto;
+import service.ProdutoService;
 import view.TelaBuscaProduto;
 
-public class ControllerBuscaProduto implements ActionListener {
+public class ControllerBuscaProduto implements ActionListener, InterfaceControllerBusca {
 
     TelaBuscaProduto telaBuscaProduto;
+    private final ProdutoService produtoService;
 
     public ControllerBuscaProduto(TelaBuscaProduto telaBuscaProduto) {
-
         this.telaBuscaProduto = telaBuscaProduto;
+        this.produtoService = new ProdutoService();
+        initListeners();
+    }
 
+    private void initListeners() {
         this.telaBuscaProduto.getjButtonCarregar().addActionListener(this);
         this.telaBuscaProduto.getjButtonFiltar().addActionListener(this);
         this.telaBuscaProduto.getjButtonSair().addActionListener(this);
-
     }
 
     @Override
     public void actionPerformed(ActionEvent evento) {
-
-        if (evento.getSource() == this.telaBuscaProduto.getjButtonCarregar()) {
-            JOptionPane.showMessageDialog(null, "Botão Carregar Pressionado...");
-            if (this.telaBuscaProduto.getjTableDados().getRowCount() == 0) {
-                JOptionPane.showMessageDialog(null, "Não Existem Dados Selecionados!");
-            } else {
-                JOptionPane.showMessageDialog(null, "Carregando Dados para Edição....");
-            }
-        } else if (evento.getSource() == this.telaBuscaProduto.getjButtonFiltar()) {
-            JOptionPane.showMessageDialog(null, "Botão Filtrar Pressionado...");
-            if (this.telaBuscaProduto.getjTFFiltro().getText().trim().equalsIgnoreCase("")) {
-                JOptionPane.showMessageDialog(null, "Sem Dados para a Seleção...");
-            } else {
-                JOptionPane.showMessageDialog(null, "Filtrando informações...");
-                if (this.telaBuscaProduto.getjCBFiltro().getSelectedIndex() == 0) {
-                    JOptionPane.showMessageDialog(null, "Filtrando por ID");
-
-                } else if (this.telaBuscaProduto.getjCBFiltro().getSelectedIndex() == 1) {
-                    JOptionPane.showMessageDialog(null, "Filtrando por Descrição");
-                } else if (this.telaBuscaProduto.getjCBFiltro().getSelectedIndex() == 2) {
-                    JOptionPane.showMessageDialog(null, "Filtrando por Observação");
-                } else if (this.telaBuscaProduto.getjCBFiltro().getSelectedIndex() == 3) {
-                    JOptionPane.showMessageDialog(null, "Filtrando por Valor");
-                }
-            }
-        } else if (evento.getSource() == this.telaBuscaProduto.getjButtonSair()) {
-            this.telaBuscaProduto.dispose();
+        Object source = evento.getSource();
+        if (source == telaBuscaProduto.getjButtonCarregar()) {
+            handleCarregar();
+            return;
         }
+        if (source == telaBuscaProduto.getjButtonFiltar()) {
+            handleFiltrar();
+            return;
+        }
+        if (source == telaBuscaProduto.getjButtonSair()) {
+            handleSair();
+        }
+    }
+
+    private void handleCarregar() {
+        if (telaBuscaProduto.getjTableDados().getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Não Existem Dados Selecionados para Edição!");
+        } else {
+            ControllerCadProduto.codigo = (int) telaBuscaProduto.getjTableDados()
+                .getValueAt(telaBuscaProduto.getjTableDados().getSelectedRow(), 0);
+            telaBuscaProduto.dispose();
+        }
+    }
+
+    private enum FiltroProduto {
+        ID, DESCRICAO;
+
+        public static FiltroProduto fromIndex(int index) {
+            switch (index) {
+                case 0: return ID;
+                case 1: return DESCRICAO;
+                default: throw new IllegalArgumentException("Filtro inválido");
+            }
+        }
+    }
+
+    private void handleFiltrar() {
+        if (telaBuscaProduto.getjTFFiltro().getText().trim().equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(null, "Sem Dados para a Seleção...");
+            return;
+        }
+        DefaultTableModel tabela = (DefaultTableModel) telaBuscaProduto.getjTableDados().getModel();
+        tabela.setRowCount(0);
+
+        int filtroIndex = telaBuscaProduto.getjCBFiltro().getSelectedIndex();
+        String filtroTexto = telaBuscaProduto.getjTFFiltro().getText();
+
+        FiltroProduto filtro = FiltroProduto.fromIndex(filtroIndex);
+
+        try {
+            switch (filtro) {
+                case ID:
+                    Produto produto = produtoService.Carregar(Integer.parseInt(filtroTexto));
+                    if (produto != null) {
+                        tabela.addRow(new Object[]{produto.getId(), produto.getDescricao(), produto.getObs(), produto.getValor(), produto.getStatus()});
+                    }
+                    break;
+                case DESCRICAO:
+                    List<Produto> listaPorDescricao = produtoService.Carregar("descricao", filtroTexto);
+                    for (Produto p : listaPorDescricao) {
+                        tabela.addRow(new Object[]{p.getId(), p.getDescricao(), p.getObs(), p.getValor(), p.getStatus()});
+                    }
+                    break;
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(telaBuscaProduto, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void handleSair() {
+        this.telaBuscaProduto.dispose();
     }
 }
