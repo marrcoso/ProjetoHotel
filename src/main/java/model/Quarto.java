@@ -1,13 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
-/**
- *
- * @author MarcusVinicius
- */
 public class Quarto {
     private int id;
     private String descricao;
@@ -123,8 +115,4 @@ public class Quarto {
         "\nobs                = " + obs + 
         "\nstatus             = " + status;
     }
-    
-    
-    
-    
 }
