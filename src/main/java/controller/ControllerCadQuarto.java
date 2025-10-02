@@ -94,16 +94,6 @@ public class ControllerCadQuarto implements ActionListener, InterfaceControllerC
             telaCadastroQuarto.getjFormattedTextFieldCapacidade().requestFocus();
             return false;
         }
-        if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroQuarto.getjTextFieldObservacao().getText())) {
-            JOptionPane.showMessageDialog(null, "O campo Observação é obrigatório.");
-            telaCadastroQuarto.getjTextFieldObservacao().requestFocus();
-            return false;
-        }
-        if (!utilities.ValidadorCampos.validarStatus(telaCadastroQuarto.getjComboBoxStatus().getSelectedItem().toString())) {
-            JOptionPane.showMessageDialog(null, "Selecione um Status válido.");
-            telaCadastroQuarto.getjComboBoxStatus().requestFocus();
-            return false;
-        }
         return true;
     }
 
@@ -147,6 +137,7 @@ public class ControllerCadQuarto implements ActionListener, InterfaceControllerC
         quarto.setCapacidadeHospedes(Integer.parseInt(telaCadastroQuarto.getjFormattedTextFieldCapacidade().getText()));
         quarto.setObs(telaCadastroQuarto.getjTextFieldObservacao().getText());
         quarto.setFlagAnimais(telaCadastroQuarto.getjCheckBoxFlagAnimais().isSelected());
+        quarto.setIdentificacao(telaCadastroQuarto.getjTextFieldDescricaoidentificacao().getText());
 
         Object statusSelecionado = telaCadastroQuarto.getjComboBoxStatus().getSelectedItem();
         quarto.setStatus(
@@ -183,6 +174,7 @@ public class ControllerCadQuarto implements ActionListener, InterfaceControllerC
             telaCadastroQuarto.getjFormattedTextFieldMetragem().setText(String.valueOf(quarto.getMetragem()));
             telaCadastroQuarto.getjFormattedTextFieldCapacidade().setText(String.valueOf(quarto.getCapacidadeHospedes()));
             telaCadastroQuarto.getjTextFieldObservacao().setText(quarto.getObs());
+            telaCadastroQuarto.getjTextFieldDescricaoidentificacao().setText(quarto.getIdentificacao());
             telaCadastroQuarto.getjCheckBoxFlagAnimais().setSelected(quarto.isFlagAnimais());
 
             telaCadastroQuarto.getjComboBoxStatus().setSelectedItem(

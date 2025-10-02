@@ -14,11 +14,11 @@ public class QuartoDAO implements InterfaceDAO<Quarto> {
     public void Create(Quarto objeto) throws SQLException {
         String sqlInstrucao = "Insert Into quarto("
                 + " descricao, "
-                + " capacidadehospedes, "
+                + " capacidade_hospedes, "
                 + " metragem, "
                 + " identificacao, "
                 + " andar, "
-                + " flaganimais, "
+                + " flag_animais, "
                 + " obs, "
                 + " status) "
                 + " Values (?,?,?,?,?,?,?,?)";
@@ -47,11 +47,11 @@ public class QuartoDAO implements InterfaceDAO<Quarto> {
         String sqlInstrucao = "Select "
                 + " id, "
                 + " descricao, "
-                + " capacidadehospedes, "
+                + " capacidade_hospedes, "
                 + " metragem, "
                 + " identificacao, "
                 + " andar, "
-                + " flaganimais, "
+                + " flag_animais, "
                 + " obs, "
                 + " status "
                 + " From quarto"
@@ -67,11 +67,11 @@ public class QuartoDAO implements InterfaceDAO<Quarto> {
             while (rst.next()) {
                 quarto.setId(rst.getInt("id"));
                 quarto.setDescricao(rst.getString("descricao"));
-                quarto.setCapacidadeHospedes(rst.getInt("capacidadehospedes"));
+                quarto.setCapacidadeHospedes(rst.getInt("capacidade_hospedes"));
                 quarto.setMetragem(rst.getFloat("metragem"));
                 quarto.setIdentificacao(rst.getString("identificacao"));
                 quarto.setAndar(rst.getInt("andar"));
-                quarto.setFlagAnimais(rst.getBoolean("flaganimais"));
+                quarto.setFlagAnimais(rst.getBoolean("flag_animais"));
                 quarto.setObs(rst.getString("obs"));
                 quarto.setStatus(rst.getString("status").charAt(0));
             }
@@ -88,11 +88,11 @@ public class QuartoDAO implements InterfaceDAO<Quarto> {
         String sqlInstrucao = "Select "
                 + " id, "
                 + " descricao, "
-                + " capacidadehospedes, "
+                + " capacidade_hospedes, "
                 + " metragem, "
                 + " identificacao, "
                 + " andar, "
-                + " flaganimais, "
+                + " flag_animais, "
                 + " obs, "
                 + " status "
                 + " From quarto"
@@ -109,11 +109,11 @@ public class QuartoDAO implements InterfaceDAO<Quarto> {
                 Quarto quarto = new Quarto();
                 quarto.setId(rst.getInt("id"));
                 quarto.setDescricao(rst.getString("descricao"));
-                quarto.setCapacidadeHospedes(rst.getInt("capacidadehospedes"));
+                quarto.setCapacidadeHospedes(rst.getInt("capacidade_hospedes"));
                 quarto.setMetragem(rst.getFloat("metragem"));
                 quarto.setIdentificacao(rst.getString("identificacao"));
                 quarto.setAndar(rst.getInt("andar"));
-                quarto.setFlagAnimais(rst.getBoolean("flaganimais"));
+                quarto.setFlagAnimais(rst.getBoolean("flag_animais"));
                 quarto.setObs(rst.getString("obs"));
                 quarto.setStatus(rst.getString("status").charAt(0));
                 listaQuartos.add(quarto);
@@ -131,11 +131,11 @@ public class QuartoDAO implements InterfaceDAO<Quarto> {
         String sqlInstrucao = "Update quarto "
                 + " Set"
                 + " descricao = ?, "
-                + " capacidadehospedes = ?, "
+                + " capacidade_hospedes = ?, "
                 + " metragem = ?, "
                 + " identificacao = ?, "
                 + " andar = ?, "
-                + " flaganimais = ?, "
+                + " flag_animais = ?, "
                 + " obs = ?, "
                 + " status = ? "
                 + " Where id = ? ";
