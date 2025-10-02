@@ -8,14 +8,13 @@ import javax.swing.JOptionPane;
 
 import model.Fornecedor;
 import service.FornecedorService;
-import service.InterfaceService;
 import view.TelaBuscaFornecedor;
 import view.TelaCadastroFornecedor;
 
 public class ControllerCadFornecedor implements ActionListener, InterfaceControllerCad<Fornecedor> {
 
-    TelaCadastroFornecedor telaCadastroFornecedor;
-    InterfaceService<Fornecedor> fornecedorService;
+    private final TelaCadastroFornecedor telaCadastroFornecedor;
+    private final FornecedorService fornecedorService;
     public static int codigo;
 
     public ControllerCadFornecedor(TelaCadastroFornecedor telaCadastroFornecedor) {

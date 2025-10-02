@@ -14,7 +14,7 @@ import view.TelaBuscaHospede;
 
 public class ControllerBuscaHospede implements ActionListener, InterfaceControllerBusca {
 
-    TelaBuscaHospede telaBuscaHospede;
+    private final TelaBuscaHospede telaBuscaHospede;
     private final HospedeService hospedeService;
 
     public ControllerBuscaHospede(TelaBuscaHospede telaBuscaHospede) {

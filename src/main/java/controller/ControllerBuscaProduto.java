@@ -14,7 +14,7 @@ import view.TelaBuscaProduto;
 
 public class ControllerBuscaProduto implements ActionListener, InterfaceControllerBusca {
 
-    TelaBuscaProduto telaBuscaProduto;
+    private final TelaBuscaProduto telaBuscaProduto;
     private final ProdutoService produtoService;
 
     public ControllerBuscaProduto(TelaBuscaProduto telaBuscaProduto) {

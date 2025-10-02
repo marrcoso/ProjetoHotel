@@ -7,15 +7,14 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 import model.Quarto;
-import service.InterfaceService;
 import service.QuartoService;
 import view.TelaBuscaQuarto;
 import view.TelaCadastroQuarto;
 
 public class ControllerCadQuarto implements ActionListener, InterfaceControllerCad<Quarto> {
 
-    TelaCadastroQuarto telaCadastroQuarto;
-    InterfaceService<Quarto> quartoService;
+    private final TelaCadastroQuarto telaCadastroQuarto;
+    private final QuartoService quartoService;
     public static int codigo;
 
     public ControllerCadQuarto(TelaCadastroQuarto telaCadastroQuarto) {

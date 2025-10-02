@@ -8,14 +8,13 @@ import javax.swing.JOptionPane;
 
 import model.Funcionario;
 import service.FuncionarioService;
-import service.InterfaceService;
 import view.TelaBuscaFuncionario;
 import view.TelaCadastroFuncionario;
 
 public class ControllerCadFuncionario implements ActionListener, InterfaceControllerCad<Funcionario> {
 
-    TelaCadastroFuncionario telaCadastroFuncionario;
-    InterfaceService<Funcionario> funcionarioService;
+    private final TelaCadastroFuncionario telaCadastroFuncionario;
+    private final FuncionarioService funcionarioService;
     public static int codigo;
 
     public ControllerCadFuncionario(TelaCadastroFuncionario telaCadastroFuncionario) {

@@ -14,7 +14,7 @@ import view.TelaBuscaVeiculo;
 
 public class ControllerBuscaVeiculo implements ActionListener, InterfaceControllerBusca {
 
-    TelaBuscaVeiculo telaBuscaVeiculo;
+    private final TelaBuscaVeiculo telaBuscaVeiculo;
     private final VeiculoService veiculoService;
 
     public ControllerBuscaVeiculo(TelaBuscaVeiculo telaBuscaVeiculo) {

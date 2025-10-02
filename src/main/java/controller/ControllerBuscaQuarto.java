@@ -14,7 +14,7 @@ import view.TelaBuscaQuarto;
 
 public class ControllerBuscaQuarto implements ActionListener, InterfaceControllerBusca {
 
-    TelaBuscaQuarto telaBuscaQuarto;
+    private final TelaBuscaQuarto telaBuscaQuarto;
     private final QuartoService quartoService;
 
     public ControllerBuscaQuarto(TelaBuscaQuarto telaBuscaQuarto) {

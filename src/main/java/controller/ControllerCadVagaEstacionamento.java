@@ -7,15 +7,14 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 import model.VagaEstacionamento;
-import service.InterfaceService;
 import service.VagaEstacionamentoService;
 import view.TelaBuscaVaga;
 import view.TelaCadastroVagaEstacionamento;
 
 public class ControllerCadVagaEstacionamento implements ActionListener, InterfaceControllerCad<VagaEstacionamento> {
 
-    TelaCadastroVagaEstacionamento telaCadastroVagaEstacionamento;
-    InterfaceService<VagaEstacionamento> vagaService;
+    private final TelaCadastroVagaEstacionamento telaCadastroVagaEstacionamento;
+    private final VagaEstacionamentoService vagaService;
     public static int codigo;
 
     public ControllerCadVagaEstacionamento(TelaCadastroVagaEstacionamento telaCadastroVagaEstacionamento) {

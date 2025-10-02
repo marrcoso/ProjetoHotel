@@ -14,7 +14,7 @@ import view.TelaBuscaVaga;
 
 public class ControllerBuscaVagaEstacionamento implements ActionListener, InterfaceControllerBusca {
 
-    TelaBuscaVaga telaBuscaVaga;
+    private final TelaBuscaVaga telaBuscaVaga;
     private final VagaEstacionamentoService vagaService;
 
     public ControllerBuscaVagaEstacionamento(TelaBuscaVaga telaBuscaVaga) {

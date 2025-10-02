@@ -14,7 +14,7 @@ import view.TelaBuscaFuncionario;
 
 public class ControllerBuscaFuncionario implements ActionListener, InterfaceControllerBusca {
 
-    TelaBuscaFuncionario telaBuscaFuncionario;
+    private final TelaBuscaFuncionario telaBuscaFuncionario;
     private final FuncionarioService funcionarioService;
 
     public ControllerBuscaFuncionario(TelaBuscaFuncionario telaBuscaFuncionario) {

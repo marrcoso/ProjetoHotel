@@ -14,7 +14,7 @@ import view.TelaBuscaMarca;
 
 public class ControllerBuscaMarca implements ActionListener, InterfaceControllerBusca {
 
-    TelaBuscaMarca telaBuscaMarca;
+    private final TelaBuscaMarca telaBuscaMarca;
     private final MarcaService marcaService;
 
     public ControllerBuscaMarca(TelaBuscaMarca telaBuscaMarca) {

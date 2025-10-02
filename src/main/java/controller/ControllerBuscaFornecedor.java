@@ -14,7 +14,7 @@ import view.TelaBuscaFornecedor;
 
 public class ControllerBuscaFornecedor implements ActionListener, InterfaceControllerBusca {
 
-    TelaBuscaFornecedor telaBuscaFornecedor;
+    private final TelaBuscaFornecedor telaBuscaFornecedor;
     private final FornecedorService fornecedorService;
 
     public ControllerBuscaFornecedor(TelaBuscaFornecedor telaBuscaFornecedor) {

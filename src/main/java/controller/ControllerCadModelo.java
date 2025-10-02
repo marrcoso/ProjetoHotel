@@ -7,15 +7,14 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 import model.Modelo;
-import service.InterfaceService;
 import service.ModeloService;
 import view.TelaBuscaModelo;
 import view.TelaCadastroModelo;
 
 public class ControllerCadModelo implements ActionListener, InterfaceControllerCad<Modelo> {
 
-    TelaCadastroModelo telaCadastroModelo;
-    InterfaceService<Modelo> modeloService;
+    private final TelaCadastroModelo telaCadastroModelo;
+    private final ModeloService modeloService;
     public static int codigo;
 
     public ControllerCadModelo(TelaCadastroModelo telaCadastroModelo) {

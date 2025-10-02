@@ -8,14 +8,13 @@ import javax.swing.JOptionPane;
 
 import model.Hospede;
 import service.HospedeService;
-import service.InterfaceService;
 import view.TelaBuscaHospede;
 import view.TelaCadastroHospede;
 
 public class ControllerCadHospede implements ActionListener, InterfaceControllerCad<Hospede> {
 
-    TelaCadastroHospede telaCadastroHospede;
-    InterfaceService<Hospede> hospedeService;
+    private final TelaCadastroHospede telaCadastroHospede;
+    private final HospedeService hospedeService;
     public static int codigo;
 
     public ControllerCadHospede(TelaCadastroHospede telaCadastroHospede) {
