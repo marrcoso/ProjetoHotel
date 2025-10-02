@@ -56,15 +56,28 @@ public class ControllerBuscaQuarto implements ActionListener, InterfaceControlle
     }
 
     private enum FiltroQuarto {
-        ID, DESCRICAO;
+        ID, DESCRICAO, CAPACIDADE_HOSPEDES, METRAGEM, IDENTIFICACAO, ANDAR, OBS;
 
         public static FiltroQuarto fromIndex(int index) {
             switch (index) {
                 case 0: return ID;
                 case 1: return DESCRICAO;
+                case 2: return CAPACIDADE_HOSPEDES;
+                case 3: return METRAGEM;
+                case 4: return IDENTIFICACAO;
+                case 5: return ANDAR;
+                case 6: return OBS;
                 default: throw new IllegalArgumentException("Filtro inválido");
             }
         }
+    }
+
+    private void adicionarLinhaTabela(DefaultTableModel tabela, Quarto quarto) {
+        tabela.addRow(new Object[]{
+            quarto.getId(), quarto.getDescricao(), quarto.getCapacidadeHospedes(),
+            quarto.getMetragem(), quarto.getIdentificacao(), quarto.getAndar(),
+            quarto.isFlagAnimais(), quarto.getObs(), quarto.getStatus()
+        });
     }
 
     private void handleFiltrar() {
@@ -82,26 +95,55 @@ public class ControllerBuscaQuarto implements ActionListener, InterfaceControlle
 
         try {
             switch (filtro) {
-                case ID:
+                case ID: {
                     Quarto quarto = quartoService.Carregar(Integer.parseInt(filtroTexto));
                     if (quarto != null) {
-                        tabela.addRow(new Object[]{
-                            quarto.getId(), quarto.getDescricao(), quarto.getCapacidadeHospedes(),
-                            quarto.getMetragem(), quarto.getIdentificacao(), quarto.getAndar(),
-                            quarto.isFlagAnimais(), quarto.getObs(), quarto.getStatus()
-                        });
+                        adicionarLinhaTabela(tabela, quarto);
                     }
                     break;
-                case DESCRICAO:
-                    List<Quarto> listaPorDescricao = quartoService.Carregar("descricao", filtroTexto);
-                    for (Quarto q : listaPorDescricao) {
-                        tabela.addRow(new Object[]{
-                            q.getId(), q.getDescricao(), q.getCapacidadeHospedes(),
-                            q.getMetragem(), q.getIdentificacao(), q.getAndar(),
-                            q.isFlagAnimais(), q.getObs(), q.getStatus()
-                        });
+                }
+                case DESCRICAO: {
+                    List<Quarto> lista = quartoService.Carregar("descricao", filtroTexto);
+                    for (Quarto quarto : lista) {
+                        adicionarLinhaTabela(tabela, quarto);
                     }
                     break;
+                }
+                case CAPACIDADE_HOSPEDES: {
+                    List<Quarto> lista = quartoService.Carregar("capacidade_hospedes", filtroTexto);
+                    for (Quarto quarto : lista) {
+                        adicionarLinhaTabela(tabela, quarto);
+                    }
+                    break;
+                }
+                case METRAGEM: {
+                    List<Quarto> lista = quartoService.Carregar("metragem", filtroTexto);
+                    for (Quarto quarto : lista) {
+                        adicionarLinhaTabela(tabela, quarto);
+                    }
+                    break;
+                }
+                case IDENTIFICACAO: {
+                    List<Quarto> lista = quartoService.Carregar("identificacao", filtroTexto);
+                    for (Quarto quarto : lista) {
+                        adicionarLinhaTabela(tabela, quarto);
+                    }
+                    break;
+                }
+                case ANDAR: {
+                    List<Quarto> lista = quartoService.Carregar("andar", filtroTexto);
+                    for (Quarto quarto : lista) {
+                        adicionarLinhaTabela(tabela, quarto);
+                    }
+                    break;
+                }
+                case OBS: {
+                    List<Quarto> lista = quartoService.Carregar("obs", filtroTexto);
+                    for (Quarto quarto : lista) {
+                        adicionarLinhaTabela(tabela, quarto);
+                    }
+                    break;
+                }
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(telaBuscaQuarto, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);

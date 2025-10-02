@@ -258,18 +258,16 @@
         <Component class="javax.swing.JComboBox" name="jCBFiltro">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="8">
+              <StringArray count="7">
                 <StringItem index="0" value="Id"/>
                 <StringItem index="1" value="Descri&#xe7;&#xe3;o"/>
                 <StringItem index="2" value="Capacidade"/>
                 <StringItem index="3" value="Metragem"/>
                 <StringItem index="4" value="Identifica&#xe7;&#xe3;o"/>
                 <StringItem index="5" value="Andar"/>
-                <StringItem index="6" value="Animais?"/>
-                <StringItem index="7" value="Observa&#xe7;&#xe3;o"/>
+                <StringItem index="6" value="Observa&#xe7;&#xe3;o"/>
               </StringArray>
             </Property>
-            <Property name="selectedIndex" type="int" value="-1"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCBFiltroActionPerformed"/>

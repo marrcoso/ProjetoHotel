@@ -140,8 +140,7 @@ public class TelaBuscaQuarto extends javax.swing.JDialog {
 
         jPanelFiltros.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jCBFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Id", "Descrição", "Capacidade", "Metragem", "Identificação", "Andar", "Animais?", "Observação" }));
-        jCBFiltro.setSelectedIndex(-1);
+        jCBFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Id", "Descrição", "Capacidade", "Metragem", "Identificação", "Andar", "Observação" }));
         jCBFiltro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCBFiltroActionPerformed(evt);
