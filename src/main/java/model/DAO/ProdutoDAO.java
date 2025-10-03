@@ -12,12 +12,12 @@ import util.AppLogger;
 public class ProdutoDAO implements InterfaceDAO<Produto> {
     @Override
     public void Create(Produto objeto) throws SQLException {
-        String sqlInstrucao = "Insert Into produto("
+        String sqlInstrucao = "Insert Into produto_copa("
                 + " descricao, "
                 + " valor, "
                 + " obs, "
-                + " status) "
-                + " Values (?,?,?,?)";
+                + " status "
+                + " ) Values (?,?,?,?)";
 
         try {
             Connection conexao = model.DAO.ConnectionFactory.getConnection();
@@ -42,7 +42,7 @@ public class ProdutoDAO implements InterfaceDAO<Produto> {
                 + " valor, "
                 + " obs, "
                 + " status "
-                + " From produto"
+                + " From produto_copa"
                 + " Where id = ? ";
 
         try {
@@ -75,7 +75,7 @@ public class ProdutoDAO implements InterfaceDAO<Produto> {
                 + " valor, "
                 + " obs, "
                 + " status "
-                + " From produto"
+                + " From produto_copa"
                 + " Where " + atributo + " like ?";
 
         try {
@@ -104,7 +104,7 @@ public class ProdutoDAO implements InterfaceDAO<Produto> {
 
     @Override
     public void Update(Produto objeto) throws SQLException {
-        String sqlInstrucao = "Update produto "
+        String sqlInstrucao = "Update produto_copa "
                 + " Set"
                 + " descricao = ?, "
                 + " valor = ?, "
