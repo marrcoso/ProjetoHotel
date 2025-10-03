@@ -11,6 +11,14 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class Utilities {
+
+    public static void ativaDesativaButton(JButton button, boolean ativa){
+        if("0".equals(button.getActionCommand())){
+            button.setEnabled(ativa);
+        } else {
+            button.setEnabled(!ativa);
+        }
+    }
     
     public static void ativaDesativa(JPanel painel, boolean ativa){
         
@@ -18,11 +26,7 @@ public class Utilities {
         for (Component componenteAtual : vetComponentes) {
             
             if(componenteAtual instanceof JButton){
-                if(((JButton) componenteAtual).getActionCommand() == "0"){
-                    componenteAtual.setEnabled(ativa);
-                } else {
-                    componenteAtual.setEnabled(!ativa);
-                }
+                ativaDesativaButton((JButton) componenteAtual, ativa);
             }
         }
     }
@@ -45,6 +49,8 @@ public class Utilities {
             } else if (componenteAtual instanceof JPasswordField) {
                 ((JPasswordField) componenteAtual).setText("");
                 componenteAtual.setEnabled(ativa);
+            } else if(componenteAtual instanceof JButton){
+                ativaDesativaButton((JButton) componenteAtual, !ativa);
             }
         }
     }
