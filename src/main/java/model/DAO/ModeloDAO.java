@@ -53,8 +53,8 @@ public class ModeloDAO implements InterfaceDAO<Modelo> {
             while (rst.next()) {
                 modelo.setId(rst.getInt("id"));
                 modelo.setDescricao(rst.getString("descricao")); 
-                // Aqui você pode buscar a marca pelo id se necessário
                 modelo.setStatus(rst.getString("status").charAt(0));
+                modelo.setMarca(new MarcaDAO().Retrieve(rst.getInt("marca_id")));
             }
             ConnectionFactory.closeConnection(conexao, pstm, rst);
             return modelo;
@@ -86,6 +86,7 @@ public class ModeloDAO implements InterfaceDAO<Modelo> {
                 modelo.setId(rst.getInt("id"));
                 modelo.setDescricao(rst.getString("descricao"));
                 modelo.setStatus(rst.getString("status").charAt(0));
+                modelo.setMarca(new MarcaDAO().Retrieve(rst.getInt("marca_id")));
                 listaModelos.add(modelo);
             }
             ConnectionFactory.closeConnection(conexao, pstm, rst);

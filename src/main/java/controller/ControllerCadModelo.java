@@ -6,8 +6,11 @@ import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
+import model.Marca;
 import model.Modelo;
+import service.MarcaService;
 import service.ModeloService;
+import view.TelaBuscaMarca;
 import view.TelaBuscaModelo;
 import view.TelaCadastroModelo;
 
@@ -16,6 +19,8 @@ public class ControllerCadModelo implements ActionListener, InterfaceControllerC
     private final TelaCadastroModelo telaCadastroModelo;
     private final ModeloService modeloService;
     public static int codigo;
+    public static int codigoMarca;
+    private Marca marcaRelacionada;
 
     public ControllerCadModelo(TelaCadastroModelo telaCadastroModelo) {
         this.telaCadastroModelo = telaCadastroModelo;
@@ -32,6 +37,7 @@ public class ControllerCadModelo implements ActionListener, InterfaceControllerC
         this.telaCadastroModelo.getjButtonGravar().addActionListener(this);
         this.telaCadastroModelo.getjButtonBuscar().addActionListener(this);
         this.telaCadastroModelo.getjButtonSair().addActionListener(this);
+        this.telaCadastroModelo.getjButtonRelacionarMarca().addActionListener(this);
     }
 
     @Override
@@ -56,6 +62,9 @@ public class ControllerCadModelo implements ActionListener, InterfaceControllerC
         if (source == telaCadastroModelo.getjButtonSair()) {
             handleSair();
         }
+        if (source == telaCadastroModelo.getjButtonRelacionarMarca()) {
+            handleRelacionarMarca();
+        }
     }
 
     private void handleNovo() {
@@ -70,6 +79,7 @@ public class ControllerCadModelo implements ActionListener, InterfaceControllerC
     private void handleCancelar() {
         utilities.Utilities.ativaDesativa(this.telaCadastroModelo.getjPanelBotoes(), true);
         utilities.Utilities.limpaComponentes(this.telaCadastroModelo.getjPanelDados(), false);
+        this.marcaRelacionada = null;
     }
 
     private boolean isFormularioValido() {
@@ -83,7 +93,11 @@ public class ControllerCadModelo implements ActionListener, InterfaceControllerC
             telaCadastroModelo.getjComboBoxStatus().requestFocus();
             return false;
         }
-        // TODO: Validar Marca
+        if (marcaRelacionada == null) {
+            JOptionPane.showMessageDialog(null, "É necessário relacionar uma marca ao produto.");
+            telaCadastroModelo.getjButtonRelacionarMarca().requestFocus();
+            return false;
+        }
         return true;
     }
 
@@ -126,9 +140,45 @@ public class ControllerCadModelo implements ActionListener, InterfaceControllerC
         modelo.setStatus(
             statusSelecionado != null && statusSelecionado.equals("Ativo") ? 'A' : 'I'
             );
-        // TODO: Setar Marca
+        
+        modelo.setMarca(marcaRelacionada);
 
         return modelo;
+    }
+
+    private void handleRelacionarMarca(){
+        codigoMarca = 0;
+        TelaBuscaMarca telaBuscaMarca = new TelaBuscaMarca(null, true);
+        @SuppressWarnings("unused")
+        ControllerBuscaMarca controllerBuscaMarca = new ControllerBuscaMarca(telaBuscaMarca, valor -> ControllerCadModelo.codigoMarca = valor);
+        telaBuscaMarca.setVisible(true);
+        if (codigoMarca != 0) {
+            utilities.Utilities.ativaDesativa(telaCadastroModelo.getjPanelBotoes(), false);
+            this.telaCadastroModelo.getjTextFieldId().setEnabled(false);
+            this.telaCadastroModelo.getjTextFieldDescricao().requestFocus();
+            this.telaCadastroModelo.getjComboBoxStatus().setSelectedItem("Ativo");
+            this.telaCadastroModelo.getjComboBoxStatus().setEnabled(false);
+
+            Marca marca;
+            try {
+                marca = new MarcaService().Carregar(codigoMarca);
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(telaCadastroModelo, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            this.marcaRelacionada = marca;
+
+            telaCadastroModelo.getjFormattedTextFieldMarca().setText(getMarcaFormat(marcaRelacionada));
+            telaCadastroModelo.getjFormattedTextFieldMarca().setEnabled(false);
+        }
+    }
+
+    private String getMarcaFormat(Marca marca) {
+        if (marca == null) {
+            return "";
+        }
+        return String.valueOf(marca.getId()) + " - " + marca.getDescricao();
     }
 
     private void handleBuscar() {
@@ -159,8 +209,9 @@ public class ControllerCadModelo implements ActionListener, InterfaceControllerC
                 modelo.getStatus() == 'A' ? "Ativo" : "Inativo"
             );
 
-            // TODO: Obter Marca
-
+            this.marcaRelacionada = modelo.getMarca();
+            telaCadastroModelo.getjFormattedTextFieldMarca().setText(getMarcaFormat(marcaRelacionada));
+            telaCadastroModelo.getjFormattedTextFieldMarca().setEnabled(false);
             telaCadastroModelo.getjTextFieldDescricao().requestFocus();
         }
     }

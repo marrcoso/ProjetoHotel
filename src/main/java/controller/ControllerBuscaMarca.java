@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.function.Consumer;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -16,10 +17,12 @@ public class ControllerBuscaMarca implements ActionListener, InterfaceController
 
     private final TelaBuscaMarca telaBuscaMarca;
     private final MarcaService marcaService;
+    private final Consumer<Integer> atualizaCodigo;
 
-    public ControllerBuscaMarca(TelaBuscaMarca telaBuscaMarca) {
+    public ControllerBuscaMarca(TelaBuscaMarca telaBuscaMarca, Consumer<Integer> atualizaCodigo) {
         this.telaBuscaMarca = telaBuscaMarca;
         this.marcaService = new MarcaService();
+        this.atualizaCodigo = atualizaCodigo;
         initListeners();
     }
 
@@ -49,8 +52,9 @@ public class ControllerBuscaMarca implements ActionListener, InterfaceController
         if (telaBuscaMarca.getjTableDados().getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Não Existem Dados Selecionados para Edição!");
         } else {
-            ControllerCadMarca.codigo = (int) telaBuscaMarca.getjTableDados()
+            int codigo = (int) telaBuscaMarca.getjTableDados()
                 .getValueAt(telaBuscaMarca.getjTableDados().getSelectedRow(), 0);
+            atualizaCodigo.accept(codigo);
             telaBuscaMarca.dispose();
         }
     }

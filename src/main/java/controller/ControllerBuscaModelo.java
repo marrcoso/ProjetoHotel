@@ -85,7 +85,7 @@ public class ControllerBuscaModelo implements ActionListener, InterfaceControlle
                 case ID:
                     Modelo modelo = modeloService.Carregar(Integer.parseInt(filtroTexto));
                     if (modelo != null) {
-                        tabela.addRow(new Object[]{modelo.getId(), modelo.getDescricao(), modelo.getMarca(), modelo.getStatus()});
+                        tabela.addRow(new Object[]{modelo.getId(), modelo.getDescricao(), modelo.getMarca().getId(), modelo.getStatus()});
                     }
                     break;
                 case DESCRICAO:

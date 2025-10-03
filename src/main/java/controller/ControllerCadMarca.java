@@ -134,7 +134,7 @@ public class ControllerCadMarca implements ActionListener, InterfaceControllerCa
         codigo = 0;
         TelaBuscaMarca telaBuscaMarca = new TelaBuscaMarca(null, true);
         @SuppressWarnings("unused")
-        ControllerBuscaMarca controllerBuscaMarca = new ControllerBuscaMarca(telaBuscaMarca);
+        ControllerBuscaMarca controllerBuscaMarca = new ControllerBuscaMarca(telaBuscaMarca, marcaId -> ControllerCadMarca.codigo = marcaId);
         telaBuscaMarca.setVisible(true);
 
         if (codigo != 0) {
