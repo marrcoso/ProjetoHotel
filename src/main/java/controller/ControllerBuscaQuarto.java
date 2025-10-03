@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.function.Consumer;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -16,10 +17,13 @@ public class ControllerBuscaQuarto implements ActionListener, InterfaceControlle
 
     private final TelaBuscaQuarto telaBuscaQuarto;
     private final QuartoService quartoService;
+    private final Consumer<Integer> atualizaCodigo;
+    
 
-    public ControllerBuscaQuarto(TelaBuscaQuarto telaBuscaQuarto) {
+    public ControllerBuscaQuarto(TelaBuscaQuarto telaBuscaQuarto, Consumer<Integer> atualizaCodigo) {
         this.telaBuscaQuarto = telaBuscaQuarto;
         this.quartoService = new QuartoService();
+        this.atualizaCodigo = atualizaCodigo;
         initListeners();
     }
 
@@ -49,8 +53,9 @@ public class ControllerBuscaQuarto implements ActionListener, InterfaceControlle
         if (telaBuscaQuarto.getjTableDados().getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Não Existem Dados Selecionados para Edição!");
         } else {
-            ControllerCadQuarto.codigo = (int) telaBuscaQuarto.getjTableDados()
+            int codigo = (int) telaBuscaQuarto.getjTableDados()
                 .getValueAt(telaBuscaQuarto.getjTableDados().getSelectedRow(), 0);
+            atualizaCodigo.accept(codigo);
             telaBuscaQuarto.dispose();
         }
     }

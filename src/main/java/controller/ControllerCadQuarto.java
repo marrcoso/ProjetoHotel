@@ -150,7 +150,7 @@ public class ControllerCadQuarto implements ActionListener, InterfaceControllerC
         codigo = 0;
         TelaBuscaQuarto telaBuscaQuarto = new TelaBuscaQuarto(null, true);
         @SuppressWarnings("unused")
-        ControllerBuscaQuarto controllerBuscaQuarto = new ControllerBuscaQuarto(telaBuscaQuarto);
+        ControllerBuscaQuarto controllerBuscaQuarto = new ControllerBuscaQuarto(telaBuscaQuarto, valor -> ControllerCadQuarto.codigo = valor);
         telaBuscaQuarto.setVisible(true);
 
         if (codigo != 0) {

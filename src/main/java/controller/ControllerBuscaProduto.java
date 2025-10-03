@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.function.Consumer;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -16,10 +17,12 @@ public class ControllerBuscaProduto implements ActionListener, InterfaceControll
 
     private final TelaBuscaProduto telaBuscaProduto;
     private final ProdutoService produtoService;
+    private final Consumer<Integer> atualizaCodigo;
 
-    public ControllerBuscaProduto(TelaBuscaProduto telaBuscaProduto) {
+    public ControllerBuscaProduto(TelaBuscaProduto telaBuscaProduto, Consumer<Integer> atualizaCodigo) {
         this.telaBuscaProduto = telaBuscaProduto;
         this.produtoService = new ProdutoService();
+        this.atualizaCodigo = atualizaCodigo;
         initListeners();
     }
 
@@ -49,8 +52,9 @@ public class ControllerBuscaProduto implements ActionListener, InterfaceControll
         if (telaBuscaProduto.getjTableDados().getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Não Existem Dados Selecionados para Edição!");
         } else {
-            ControllerCadProduto.codigo = (int) telaBuscaProduto.getjTableDados()
+            int codigo = (int) telaBuscaProduto.getjTableDados()
                 .getValueAt(telaBuscaProduto.getjTableDados().getSelectedRow(), 0);
+            atualizaCodigo.accept(codigo);
             telaBuscaProduto.dispose();
         }
     }

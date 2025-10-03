@@ -136,7 +136,7 @@ public class ControllerCadProduto implements ActionListener, InterfaceController
         codigo = 0;
         TelaBuscaProduto telaBuscaProduto = new TelaBuscaProduto(null, true);
         @SuppressWarnings("unused")
-        ControllerBuscaProduto controllerBuscaProduto = new ControllerBuscaProduto(telaBuscaProduto);
+        ControllerBuscaProduto controllerBuscaProduto = new ControllerBuscaProduto(telaBuscaProduto, valor -> ControllerCadProduto.codigo = valor);
         telaBuscaProduto.setVisible(true);
 
         if (codigo != 0) {
