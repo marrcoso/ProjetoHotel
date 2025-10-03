@@ -78,19 +78,9 @@ public class ControllerCadProduto implements ActionListener, InterfaceController
             telaCadastroProduto.getjTextFieldDescricao().requestFocus();
             return false;
         }
-        if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroProduto.getjTextFieldObservacao().getText())) {
-            JOptionPane.showMessageDialog(null, "O campo Observação é obrigatório.");
-            telaCadastroProduto.getjTextFieldObservacao().requestFocus();
-            return false;
-        }
         if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroProduto.getjFormattedTextFieldValor().getText())) {
             JOptionPane.showMessageDialog(null, "O campo Valor é obrigatório.");
             telaCadastroProduto.getjFormattedTextFieldValor().requestFocus();
-            return false;
-        }
-        if (!utilities.ValidadorCampos.validarStatus(telaCadastroProduto.getjComboBoxStatus().getSelectedItem().toString())) {
-            JOptionPane.showMessageDialog(null, "Selecione um Status válido.");
-            telaCadastroProduto.getjComboBoxStatus().requestFocus();
             return false;
         }
         return true;
