@@ -34,11 +34,15 @@ public class Utilities {
     public static void limpaComponentes(JPanel painel, boolean ativa) {
         Component[] vetComponentes = painel.getComponents();
         for (Component componenteAtual : vetComponentes) {
-            if (componenteAtual instanceof JTextField) {
+            System.out.println(componenteAtual.getClass());
+            if (componenteAtual instanceof JFormattedTextField) {
+                JFormattedTextField formattedTextField = (JFormattedTextField) componenteAtual;
+                boolean alwaysDisabled = (boolean) formattedTextField.getClientProperty("alwaysDisabled");
+                formattedTextField.setText("");
+                System.out.println("alwaysDisabled: " + alwaysDisabled);
+                formattedTextField.setEnabled(alwaysDisabled ? false : ativa);
+            } else if (componenteAtual instanceof JTextField) {
                 ((JTextField) componenteAtual).setText("");
-                componenteAtual.setEnabled(ativa);
-            } else if (componenteAtual instanceof JFormattedTextField) {
-                ((JFormattedTextField) componenteAtual).setText("");
                 componenteAtual.setEnabled(ativa);
             } else if (componenteAtual instanceof JComboBox) {
                 ((JComboBox) componenteAtual).setSelectedIndex(-1);

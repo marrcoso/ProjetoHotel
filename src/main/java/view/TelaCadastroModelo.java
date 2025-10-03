@@ -222,7 +222,7 @@ public class TelaCadastroModelo extends javax.swing.JDialog {
 
         jFormattedTextFieldMarca.setEditable(false);
         jFormattedTextFieldMarca.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.##"))));
-        jFormattedTextFieldMarca.setActionCommand("");
+        jFormattedTextFieldMarca.putClientProperty("alwaysDisabled", true);
         jFormattedTextFieldMarca.setEnabled(false);
         jFormattedTextFieldMarca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
