@@ -13,7 +13,7 @@ import model.Quarto;
 import service.QuartoService;
 import view.TelaBuscaQuarto;
 
-public class ControllerBuscaQuarto implements ActionListener, InterfaceControllerBusca {
+public final class ControllerBuscaQuarto implements ActionListener, InterfaceControllerBusca<Quarto> {
 
     private final TelaBuscaQuarto telaBuscaQuarto;
     private final QuartoService quartoService;
@@ -27,7 +27,8 @@ public class ControllerBuscaQuarto implements ActionListener, InterfaceControlle
         initListeners();
     }
 
-    private void initListeners() {
+    @Override
+    public void initListeners() {
         this.telaBuscaQuarto.getjButtonCarregar().addActionListener(this);
         this.telaBuscaQuarto.getjButtonFiltar().addActionListener(this);
         this.telaBuscaQuarto.getjButtonSair().addActionListener(this);
@@ -49,7 +50,8 @@ public class ControllerBuscaQuarto implements ActionListener, InterfaceControlle
         }
     }
 
-    private void handleCarregar() {
+    @Override
+    public void handleCarregar() {
         if (telaBuscaQuarto.getjTableDados().getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Não Existem Dados Selecionados para Edição!");
         } else {
@@ -77,7 +79,8 @@ public class ControllerBuscaQuarto implements ActionListener, InterfaceControlle
         }
     }
 
-    private void adicionarLinhaTabela(DefaultTableModel tabela, Quarto quarto) {
+    @Override
+    public void adicionarLinhaTabela(DefaultTableModel tabela, Quarto quarto) {
         tabela.addRow(new Object[]{
             quarto.getId(), quarto.getDescricao(), quarto.getCapacidadeHospedes(),
             quarto.getMetragem(), quarto.getIdentificacao(), quarto.getAndar(),
@@ -85,7 +88,8 @@ public class ControllerBuscaQuarto implements ActionListener, InterfaceControlle
         });
     }
 
-    private void handleFiltrar() {
+    @Override
+    public void handleFiltrar() {
         if (telaBuscaQuarto.getjTFFiltro().getText().trim().equalsIgnoreCase("")) {
             JOptionPane.showMessageDialog(null, "Sem Dados para a Seleção...");
             return;
@@ -155,7 +159,8 @@ public class ControllerBuscaQuarto implements ActionListener, InterfaceControlle
         }
     }
 
-    private void handleSair() {
+    @Override
+    public void handleSair() {
         this.telaBuscaQuarto.dispose();
     }
 }

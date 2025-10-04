@@ -14,12 +14,12 @@ import view.TelaBuscaMarca;
 import view.TelaBuscaModelo;
 import view.TelaCadastroModelo;
 
-public class ControllerCadModelo implements ActionListener, InterfaceControllerCad<Modelo> {
+public final class ControllerCadModelo implements ActionListener, InterfaceControllerCad<Modelo> {
 
     private final TelaCadastroModelo telaCadastroModelo;
     private final ModeloService modeloService;
-    public static int codigo;
-    public static int codigoMarca;
+    private int codigoModelo;
+    private int codigoMarca;
     private Marca marcaRelacionada;
 
     public ControllerCadModelo(TelaCadastroModelo telaCadastroModelo) {
@@ -31,7 +31,8 @@ public class ControllerCadModelo implements ActionListener, InterfaceControllerC
         initListeners();
     }
 
-    private void initListeners() {
+    @Override
+    public void initListeners() {
         this.telaCadastroModelo.getjButtonNovo().addActionListener(this);
         this.telaCadastroModelo.getjButtonCancelar().addActionListener(this);
         this.telaCadastroModelo.getjButtonGravar().addActionListener(this);
@@ -67,7 +68,8 @@ public class ControllerCadModelo implements ActionListener, InterfaceControllerC
         }
     }
 
-    private void handleNovo() {
+    @Override
+    public void handleNovo() {
         utilities.Utilities.ativaDesativa(this.telaCadastroModelo.getjPanelBotoes(), false);
         utilities.Utilities.limpaComponentes(this.telaCadastroModelo.getjPanelDados(), true);
         this.telaCadastroModelo.getjTextFieldId().setEnabled(false);
@@ -76,13 +78,15 @@ public class ControllerCadModelo implements ActionListener, InterfaceControllerC
         this.telaCadastroModelo.getjComboBoxStatus().setEnabled(false);
     }
 
-    private void handleCancelar() {
+    @Override
+    public void handleCancelar() {
         utilities.Utilities.ativaDesativa(this.telaCadastroModelo.getjPanelBotoes(), true);
         utilities.Utilities.limpaComponentes(this.telaCadastroModelo.getjPanelDados(), false);
         this.marcaRelacionada = null;
     }
 
-    private boolean isFormularioValido() {
+    @Override
+    public boolean isFormularioValido() {
         if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroModelo.getjTextFieldDescricao().getText())) {
             JOptionPane.showMessageDialog(null, "O campo Descrição é obrigatório.");
             telaCadastroModelo.getjTextFieldDescricao().requestFocus();
@@ -101,7 +105,8 @@ public class ControllerCadModelo implements ActionListener, InterfaceControllerC
         return true;
     }
 
-    private void handleGravar() {
+    @Override
+    public void handleGravar() {
         if (!isFormularioValido()) {
             return;
         }
@@ -133,7 +138,8 @@ public class ControllerCadModelo implements ActionListener, InterfaceControllerC
         utilities.Utilities.limpaComponentes(telaCadastroModelo.getjPanelDados(), false);
     }
 
-    private Modelo construirDoFormulario() {
+    @Override
+    public Modelo construirDoFormulario() {
         Modelo modelo = new Modelo();
         modelo.setDescricao(telaCadastroModelo.getjTextFieldDescricao().getText());
         Object statusSelecionado = telaCadastroModelo.getjComboBoxStatus().getSelectedItem();
@@ -150,8 +156,9 @@ public class ControllerCadModelo implements ActionListener, InterfaceControllerC
         codigoMarca = 0;
         TelaBuscaMarca telaBuscaMarca = new TelaBuscaMarca(null, true);
         @SuppressWarnings("unused")
-        ControllerBuscaMarca controllerBuscaMarca = new ControllerBuscaMarca(telaBuscaMarca, valor -> ControllerCadModelo.codigoMarca = valor);
+        ControllerBuscaMarca controllerBuscaMarca = new ControllerBuscaMarca(telaBuscaMarca, valor -> this.codigoMarca = valor);
         telaBuscaMarca.setVisible(true);
+
         if (codigoMarca != 0) {
             utilities.Utilities.ativaDesativa(telaCadastroModelo.getjPanelBotoes(), false);
             this.telaCadastroModelo.getjTextFieldId().setEnabled(false);
@@ -170,7 +177,6 @@ public class ControllerCadModelo implements ActionListener, InterfaceControllerC
             this.marcaRelacionada = marca;
 
             telaCadastroModelo.getjFormattedTextFieldMarca().setText(getMarcaFormat(marcaRelacionada));
-            telaCadastroModelo.getjFormattedTextFieldMarca().setEnabled(false);
         }
     }
 
@@ -178,26 +184,27 @@ public class ControllerCadModelo implements ActionListener, InterfaceControllerC
         if (marca == null) {
             return "";
         }
-        return String.valueOf(marca.getId()) + " - " + marca.getDescricao();
+        return String.format("%d - %s", marca.getId(), marca.getDescricao());
     }
 
-    private void handleBuscar() {
-        codigo = 0;
+    @Override
+    public void handleBuscar() {
+        codigoModelo = 0;
         TelaBuscaModelo telaBuscaModelo = new TelaBuscaModelo(null, true);
         @SuppressWarnings("unused")
-        ControllerBuscaModelo controllerBuscaModelo = new ControllerBuscaModelo(telaBuscaModelo);
+        ControllerBuscaModelo controllerBuscaModelo = new ControllerBuscaModelo(telaBuscaModelo, valor -> this.codigoModelo = valor);
         telaBuscaModelo.setVisible(true);
 
-        if (codigo != 0) {
+        if (codigoModelo != 0) {
             utilities.Utilities.ativaDesativa(telaCadastroModelo.getjPanelBotoes(), false);
             utilities.Utilities.limpaComponentes(telaCadastroModelo.getjPanelDados(), true);
 
-            telaCadastroModelo.getjTextFieldId().setText(String.valueOf(codigo));
+            telaCadastroModelo.getjTextFieldId().setText(String.valueOf(codigoModelo));
             telaCadastroModelo.getjTextFieldId().setEnabled(false);
 
             Modelo modelo;
             try {
-                modelo = new ModeloService().Carregar(codigo);
+                modelo = new ModeloService().Carregar(codigoModelo);
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(telaCadastroModelo, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
@@ -211,12 +218,13 @@ public class ControllerCadModelo implements ActionListener, InterfaceControllerC
 
             this.marcaRelacionada = modelo.getMarca();
             telaCadastroModelo.getjFormattedTextFieldMarca().setText(getMarcaFormat(marcaRelacionada));
-            telaCadastroModelo.getjFormattedTextFieldMarca().setEnabled(false);
             telaCadastroModelo.getjTextFieldDescricao().requestFocus();
         }
     }
 
-    private void handleSair() {
+    
+    @Override
+    public void handleSair() {
         this.telaCadastroModelo.dispose();
     }
 }

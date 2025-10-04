@@ -11,11 +11,11 @@ import service.FuncionarioService;
 import view.TelaBuscaFuncionario;
 import view.TelaCadastroFuncionario;
 
-public class ControllerCadFuncionario implements ActionListener, InterfaceControllerCad<Funcionario> {
+public final class ControllerCadFuncionario implements ActionListener, InterfaceControllerCad<Funcionario> {
 
     private final TelaCadastroFuncionario telaCadastroFuncionario;
     private final FuncionarioService funcionarioService;
-    public static int codigo;
+    private int codigo;
 
     public ControllerCadFuncionario(TelaCadastroFuncionario telaCadastroFuncionario) {
         this.telaCadastroFuncionario = telaCadastroFuncionario;
@@ -26,7 +26,8 @@ public class ControllerCadFuncionario implements ActionListener, InterfaceContro
         initListeners();
     }
 
-    private void initListeners() {
+    @Override
+    public void initListeners() {
         this.telaCadastroFuncionario.getjButtonNovo().addActionListener(this);
         this.telaCadastroFuncionario.getjButtonCancelar().addActionListener(this);
         this.telaCadastroFuncionario.getjButtonGravar().addActionListener(this);
@@ -58,7 +59,8 @@ public class ControllerCadFuncionario implements ActionListener, InterfaceContro
         }
     }
 
-    private void handleNovo() {
+    @Override
+    public void handleNovo() {
         utilities.Utilities.ativaDesativa(telaCadastroFuncionario.getjPanelBotoes(), false);
         utilities.Utilities.limpaComponentes(telaCadastroFuncionario.getjPanelDados(), true);
         telaCadastroFuncionario.getjTextFieldUsuario().requestFocus();
@@ -69,12 +71,14 @@ public class ControllerCadFuncionario implements ActionListener, InterfaceContro
         telaCadastroFuncionario.getjComboBoxStatus().setEnabled(false);
     }
 
-    private void handleCancelar() {
+    @Override
+    public void handleCancelar() {
         utilities.Utilities.ativaDesativa(telaCadastroFuncionario.getjPanelBotoes(), true);
         utilities.Utilities.limpaComponentes(telaCadastroFuncionario.getjPanelDados(), false);
     }
 
-    private boolean isFormularioValido() {
+    @Override
+    public boolean isFormularioValido() {
         if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroFuncionario.getjTextFieldNome().getText())) {
             JOptionPane.showMessageDialog(null, "O Atributo Nome é Obrigatório.");
             telaCadastroFuncionario.getjTextFieldNome().requestFocus();
@@ -150,7 +154,8 @@ public class ControllerCadFuncionario implements ActionListener, InterfaceContro
         return true;
     }
 
-    private void handleGravar() {
+    @Override
+    public void handleGravar() {
         if (!isFormularioValido()) {
             return;
         }
@@ -182,7 +187,8 @@ public class ControllerCadFuncionario implements ActionListener, InterfaceContro
         utilities.Utilities.limpaComponentes(telaCadastroFuncionario.getjPanelDados(), false);
     }
 
-    private Funcionario construirDoFormulario() {
+    @Override
+    public Funcionario construirDoFormulario() {
         Funcionario funcionario = new Funcionario();
         funcionario.setNome(telaCadastroFuncionario.getjTextFieldNome().getText());
         funcionario.setCpf(utilities.Utilities.apenasNumeros(telaCadastroFuncionario.getjFormattedTextFieldCpf().getText()));
@@ -213,11 +219,12 @@ public class ControllerCadFuncionario implements ActionListener, InterfaceContro
         return funcionario;
     }
 
-    private void handleBuscar() {
+    @Override
+    public void handleBuscar() {
         codigo = 0;
         TelaBuscaFuncionario telaBuscaFuncionario = new TelaBuscaFuncionario(null, true);
         @SuppressWarnings("unused")
-        ControllerBuscaFuncionario controllerBuscaFuncionario = new ControllerBuscaFuncionario(telaBuscaFuncionario);
+        ControllerBuscaFuncionario controllerBuscaFuncionario = new ControllerBuscaFuncionario(telaBuscaFuncionario, valor -> this.codigo = valor);
         telaBuscaFuncionario.setVisible(true);
 
         if (codigo != 0) {
@@ -262,7 +269,8 @@ public class ControllerCadFuncionario implements ActionListener, InterfaceContro
         }
     }
 
-    private void handleSair() {
+    @Override
+    public void handleSair() {
         telaCadastroFuncionario.dispose();
     }
 }

@@ -6,16 +6,19 @@ import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
+import model.Modelo;
 import model.Veiculo;
 import service.VeiculoService;
 import view.TelaBuscaVeiculo;
 import view.TelaCadastroVeiculo;
 
-public class ControllerCadVeiculo implements ActionListener, InterfaceControllerCad<Veiculo> {
+public final class ControllerCadVeiculo implements ActionListener, InterfaceControllerCad<Veiculo> {
 
     private final TelaCadastroVeiculo telaCadastroVeiculo;
     private final VeiculoService veiculoService;
-    public static int codigo;
+    private int codigoVeiculo;
+    private int codigoModelo;
+    private Modelo modeloRelacionado;
 
     public ControllerCadVeiculo(TelaCadastroVeiculo telaCadastroVeiculo) {
         this.telaCadastroVeiculo = telaCadastroVeiculo;
@@ -26,12 +29,14 @@ public class ControllerCadVeiculo implements ActionListener, InterfaceController
         initListeners();
     }
 
-    private void initListeners() {
+    @Override
+    public void initListeners() {
         this.telaCadastroVeiculo.getjButtonNovo().addActionListener(this);
         this.telaCadastroVeiculo.getjButtonCancelar().addActionListener(this);
         this.telaCadastroVeiculo.getjButtonGravar().addActionListener(this);
         this.telaCadastroVeiculo.getjButtonBuscar().addActionListener(this);
         this.telaCadastroVeiculo.getjButtonSair().addActionListener(this);
+        this.telaCadastroVeiculo.getjButtonRelacionarModelo().addActionListener(this);
     }
 
     @Override
@@ -56,9 +61,13 @@ public class ControllerCadVeiculo implements ActionListener, InterfaceController
         if (source == telaCadastroVeiculo.getjButtonSair()) {
             handleSair();
         }
+        if (source == telaCadastroVeiculo.getjButtonRelacionarModelo()) {
+            handleRelacionarModelo();
+        }
     }
 
-    private void handleNovo() {
+    @Override
+    public void handleNovo() {
         utilities.Utilities.ativaDesativa(this.telaCadastroVeiculo.getjPanelBotoes(), false);
         utilities.Utilities.limpaComponentes(this.telaCadastroVeiculo.getjPanelDados(), true);
         this.telaCadastroVeiculo.getjTextFieldId().setEnabled(false);
@@ -67,12 +76,15 @@ public class ControllerCadVeiculo implements ActionListener, InterfaceController
         this.telaCadastroVeiculo.getjComboBoxStatus().setEnabled(false);
     }
 
-    private void handleCancelar() {
+    @Override
+    public void handleCancelar() {
         utilities.Utilities.ativaDesativa(this.telaCadastroVeiculo.getjPanelBotoes(), true);
         utilities.Utilities.limpaComponentes(this.telaCadastroVeiculo.getjPanelDados(), false);
+        this.modeloRelacionado = null;
     }
 
-    private boolean isFormularioValido() {
+    @Override
+    public boolean isFormularioValido() {
         if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroVeiculo.getjTextFieldPlaca().getText())) {
             JOptionPane.showMessageDialog(null, "O campo Placa é obrigatório.");
             telaCadastroVeiculo.getjTextFieldPlaca().requestFocus();
@@ -83,17 +95,16 @@ public class ControllerCadVeiculo implements ActionListener, InterfaceController
             telaCadastroVeiculo.getjTextFieldCor().requestFocus();
             return false;
         }
-        
-        if (!utilities.ValidadorCampos.validarStatus(telaCadastroVeiculo.getjComboBoxStatus().getSelectedItem().toString())) {
-            JOptionPane.showMessageDialog(null, "Selecione um Status válido.");
-            telaCadastroVeiculo.getjComboBoxStatus().requestFocus();
+        if (modeloRelacionado == null) {
+            JOptionPane.showMessageDialog(null, "Selecione um Modelo para o Veículo.");
+            telaCadastroVeiculo.getjButtonRelacionarModelo().requestFocus();
             return false;
         }
-        // TODO: Validar modelo
         return true;
     }
 
-    private void handleGravar() {
+    @Override
+    public void handleGravar() {
         if (!isFormularioValido()) {
             return;
         }
@@ -125,7 +136,8 @@ public class ControllerCadVeiculo implements ActionListener, InterfaceController
         utilities.Utilities.limpaComponentes(telaCadastroVeiculo.getjPanelDados(), false);
     }
 
-    private Veiculo construirDoFormulario() {
+    @Override
+    public Veiculo construirDoFormulario() {
         Veiculo veiculo = new Veiculo();
         veiculo.setPlaca(telaCadastroVeiculo.getjTextFieldPlaca().getText());
         veiculo.setCor(telaCadastroVeiculo.getjTextFieldCor().getText());
@@ -135,28 +147,62 @@ public class ControllerCadVeiculo implements ActionListener, InterfaceController
             statusSelecionado != null && statusSelecionado.equals("Ativo") ? 'A' : 'I'
         );
 
-        //TODO: Setar modelo
+        veiculo.setModelo(modeloRelacionado);
 
         return veiculo;
     }
 
-    private void handleBuscar() {
-        codigo = 0;
+    public void handleRelacionarModelo() {
+        codigoModelo = 0;
         TelaBuscaVeiculo telaBuscaVeiculo = new TelaBuscaVeiculo(null, true);
         @SuppressWarnings("unused")
-        ControllerBuscaVeiculo controllerBuscaVeiculo = new ControllerBuscaVeiculo(telaBuscaVeiculo);
+        ControllerBuscaVeiculo controllerBuscaVeiculo = new ControllerBuscaVeiculo(telaBuscaVeiculo, codigo -> this.codigoModelo = codigo);
         telaBuscaVeiculo.setVisible(true);
 
-        if (codigo != 0) {
+        if (codigoModelo != 0) {
+            utilities.Utilities.ativaDesativa(telaCadastroVeiculo.getjPanelBotoes(), false);
+            this.telaCadastroVeiculo.getjTextFieldId().setEnabled(false);
+            this.telaCadastroVeiculo.getjTextFieldPlaca().requestFocus();
+            this.telaCadastroVeiculo.getjComboBoxStatus().setSelectedItem("Ativo");
+            this.telaCadastroVeiculo.getjComboBoxStatus().setEnabled(false);
+
+            Modelo modelo;
+            try {
+                modelo = new service.ModeloService().Carregar(codigoModelo);
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(telaCadastroVeiculo, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            this.modeloRelacionado = modelo;
+            telaCadastroVeiculo.getjFormattedTextFieldModelo().setText(getModeloFormat(modeloRelacionado));
+        }
+    }
+
+    private String getModeloFormat(Modelo modelo) {
+        if (modelo == null) {
+            return "";
+        }
+        return String.format("%d - %s", modelo.getId(), modelo.getDescricao());
+    }
+
+    @Override
+    public void handleBuscar() {
+        codigoVeiculo = 0;
+        TelaBuscaVeiculo telaBuscaVeiculo = new TelaBuscaVeiculo(null, true);
+        @SuppressWarnings("unused")
+        ControllerBuscaVeiculo controllerBuscaVeiculo = new ControllerBuscaVeiculo(telaBuscaVeiculo, codigo -> this.codigoVeiculo = codigo);
+        telaBuscaVeiculo.setVisible(true);
+
+        if (codigoVeiculo != 0) {
             utilities.Utilities.ativaDesativa(telaCadastroVeiculo.getjPanelBotoes(), false);
             utilities.Utilities.limpaComponentes(telaCadastroVeiculo.getjPanelDados(), true);
-
-            telaCadastroVeiculo.getjTextFieldId().setText(String.valueOf(codigo));
+            telaCadastroVeiculo.getjTextFieldId().setText(String.valueOf(codigoVeiculo));
             telaCadastroVeiculo.getjTextFieldId().setEnabled(false);
 
             Veiculo veiculo;
             try {
-                veiculo = new VeiculoService().Carregar(codigo);
+                veiculo = new VeiculoService().Carregar(codigoVeiculo);
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(telaCadastroVeiculo, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
@@ -168,13 +214,14 @@ public class ControllerCadVeiculo implements ActionListener, InterfaceController
                 veiculo.getStatus() == 'A' ? "Ativo" : "Inativo"
             );
 
-            //TODO: Obter Modelo
-
+            this.modeloRelacionado = veiculo.getModelo();
+            telaCadastroVeiculo.getjFormattedTextFieldModelo().setText(getModeloFormat(modeloRelacionado));
             telaCadastroVeiculo.getjTextFieldPlaca().requestFocus();
         }
     }
 
-    private void handleSair() {
+    @Override
+    public void handleSair() {
         telaCadastroVeiculo.dispose();
     }
 }

@@ -11,11 +11,11 @@ import service.FornecedorService;
 import view.TelaBuscaFornecedor;
 import view.TelaCadastroFornecedor;
 
-public class ControllerCadFornecedor implements ActionListener, InterfaceControllerCad<Fornecedor> {
+public final class ControllerCadFornecedor implements ActionListener, InterfaceControllerCad<Fornecedor> {
 
     private final TelaCadastroFornecedor telaCadastroFornecedor;
     private final FornecedorService fornecedorService;
-    public static int codigo;
+    private int codigo;
 
     public ControllerCadFornecedor(TelaCadastroFornecedor telaCadastroFornecedor) {
         this.telaCadastroFornecedor = telaCadastroFornecedor;
@@ -26,7 +26,8 @@ public class ControllerCadFornecedor implements ActionListener, InterfaceControl
         initListeners();
     }
 
-    private void initListeners() {
+    @Override
+    public void initListeners() {
         this.telaCadastroFornecedor.getjButtonNovo().addActionListener(this);
         this.telaCadastroFornecedor.getjButtonCancelar().addActionListener(this);
         this.telaCadastroFornecedor.getjButtonGravar().addActionListener(this);
@@ -58,7 +59,8 @@ public class ControllerCadFornecedor implements ActionListener, InterfaceControl
         }
     }
 
-    private void handleNovo() {
+    @Override
+    public void handleNovo() {
         utilities.Utilities.ativaDesativa(this.telaCadastroFornecedor.getjPanelBotoes(), false);
         utilities.Utilities.limpaComponentes(this.telaCadastroFornecedor.getjPanelDados(), true);
         this.telaCadastroFornecedor.getjTextFieldId().setEnabled(false);
@@ -67,12 +69,14 @@ public class ControllerCadFornecedor implements ActionListener, InterfaceControl
         this.telaCadastroFornecedor.getjComboBoxStatus().setEnabled(false);
     }
 
-    private void handleCancelar() {
+    @Override
+    public void handleCancelar() {
         utilities.Utilities.ativaDesativa(this.telaCadastroFornecedor.getjPanelBotoes(), true);
         utilities.Utilities.limpaComponentes(this.telaCadastroFornecedor.getjPanelDados(), false);
     }
 
-    private boolean isFormularioValido() {
+    @Override
+    public boolean isFormularioValido() {
         if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroFornecedor.getjTextFieldNomeFantasia().getText())) {
             JOptionPane.showMessageDialog(null, "O campo Nome é obrigatório.");
             telaCadastroFornecedor.getjTextFieldNomeFantasia().requestFocus();
@@ -122,7 +126,8 @@ public class ControllerCadFornecedor implements ActionListener, InterfaceControl
         return true;
     }
 
-    private void handleGravar() {
+    @Override
+    public void handleGravar() {
         if (!isFormularioValido()) {
             return;
         }
@@ -154,7 +159,8 @@ public class ControllerCadFornecedor implements ActionListener, InterfaceControl
         utilities.Utilities.limpaComponentes(telaCadastroFornecedor.getjPanelDados(), false);
     }
 
-    private Fornecedor construirDoFormulario() {
+    @Override
+    public Fornecedor construirDoFormulario() {
         Fornecedor fornecedor = new Fornecedor();
         fornecedor.setNome(telaCadastroFornecedor.getjTextFieldNomeFantasia().getText());
         fornecedor.setRazaoSocial(telaCadastroFornecedor.getjTextFieldRazaoSocial().getText());
@@ -178,11 +184,12 @@ public class ControllerCadFornecedor implements ActionListener, InterfaceControl
         return fornecedor;
     }
 
-    private void handleBuscar() {
+    @Override
+    public void handleBuscar() {
         codigo = 0;
         TelaBuscaFornecedor telaBuscaFornecedor = new TelaBuscaFornecedor(null, true);
         @SuppressWarnings("unused")
-        ControllerBuscaFornecedor controllerBuscaFornecedor = new ControllerBuscaFornecedor(telaBuscaFornecedor);
+        ControllerBuscaFornecedor controllerBuscaFornecedor = new ControllerBuscaFornecedor(telaBuscaFornecedor, valor -> this.codigo = valor);
         telaBuscaFornecedor.setVisible(true);
 
         if (codigo != 0) {
@@ -222,7 +229,8 @@ public class ControllerCadFornecedor implements ActionListener, InterfaceControl
         }
     }
 
-    private void handleSair() {
+    @Override
+    public void handleSair() {
         telaCadastroFornecedor.dispose();
     }
 }

@@ -11,11 +11,11 @@ import service.MarcaService;
 import view.TelaBuscaMarca;
 import view.TelaCadastroMarca;
 
-public class ControllerCadMarca implements ActionListener, InterfaceControllerCad<Marca> {
+public final class ControllerCadMarca implements ActionListener, InterfaceControllerCad<Marca> {
 
     private final TelaCadastroMarca telaCadastroMarca;
     private final MarcaService marcaService;
-    public static int codigo;
+    private int codigo;
 
     public ControllerCadMarca(TelaCadastroMarca telaCadastroMarca) {
         this.telaCadastroMarca = telaCadastroMarca;
@@ -26,7 +26,8 @@ public class ControllerCadMarca implements ActionListener, InterfaceControllerCa
         initListeners();
     }
 
-    private void initListeners() {
+    @Override
+    public void initListeners() {
         this.telaCadastroMarca.getjButtonNovo().addActionListener(this);
         this.telaCadastroMarca.getjButtonCancelar().addActionListener(this);
         this.telaCadastroMarca.getjButtonGravar().addActionListener(this);
@@ -58,7 +59,8 @@ public class ControllerCadMarca implements ActionListener, InterfaceControllerCa
         }
     }
 
-    private void handleNovo() {
+    @Override
+    public void handleNovo() {
         utilities.Utilities.ativaDesativa(this.telaCadastroMarca.getjPanelBotoes(), false);
         utilities.Utilities.limpaComponentes(this.telaCadastroMarca.getjPanelDados(), true);
         this.telaCadastroMarca.getjTextFieldId().setEnabled(false);
@@ -67,12 +69,14 @@ public class ControllerCadMarca implements ActionListener, InterfaceControllerCa
         this.telaCadastroMarca.getjComboBoxStatus().setEnabled(false);
     }
 
-    private void handleCancelar() {
+    @Override
+    public void handleCancelar() {
         utilities.Utilities.ativaDesativa(this.telaCadastroMarca.getjPanelBotoes(), true);
         utilities.Utilities.limpaComponentes(this.telaCadastroMarca.getjPanelDados(), false);
     }
 
-    private boolean isFormularioValido() {
+    @Override
+    public boolean isFormularioValido() {
         if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroMarca.getjTextFieldDescricao().getText())) {
             JOptionPane.showMessageDialog(null, "O campo Descrição é obrigatório.");
             telaCadastroMarca.getjTextFieldDescricao().requestFocus();
@@ -86,7 +90,8 @@ public class ControllerCadMarca implements ActionListener, InterfaceControllerCa
         return true;
     }
 
-    private void handleGravar() {
+    @Override
+    public void handleGravar() {
         if (!isFormularioValido()) {
             return;
         }
@@ -118,7 +123,8 @@ public class ControllerCadMarca implements ActionListener, InterfaceControllerCa
         utilities.Utilities.limpaComponentes(telaCadastroMarca.getjPanelDados(), false);
     }
 
-    private Marca construirDoFormulario() {
+    @Override
+    public Marca construirDoFormulario() {
         Marca marca = new Marca();
         marca.setDescricao(telaCadastroMarca.getjTextFieldDescricao().getText());
 
@@ -130,11 +136,12 @@ public class ControllerCadMarca implements ActionListener, InterfaceControllerCa
         return marca;
     }
 
-    private void handleBuscar() {
+    @Override
+    public void handleBuscar() {
         codigo = 0;
         TelaBuscaMarca telaBuscaMarca = new TelaBuscaMarca(null, true);
         @SuppressWarnings("unused")
-        ControllerBuscaMarca controllerBuscaMarca = new ControllerBuscaMarca(telaBuscaMarca, marcaId -> ControllerCadMarca.codigo = marcaId);
+        ControllerBuscaMarca controllerBuscaMarca = new ControllerBuscaMarca(telaBuscaMarca, marcaId -> this.codigo = marcaId);
         telaBuscaMarca.setVisible(true);
 
         if (codigo != 0) {
@@ -161,7 +168,8 @@ public class ControllerCadMarca implements ActionListener, InterfaceControllerCa
         }
     }
 
-    private void handleSair() {
+    @Override
+    public void handleSair() {
         telaCadastroMarca.dispose();
     }
 }

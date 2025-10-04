@@ -11,11 +11,11 @@ import service.VagaEstacionamentoService;
 import view.TelaBuscaVaga;
 import view.TelaCadastroVagaEstacionamento;
 
-public class ControllerCadVagaEstacionamento implements ActionListener, InterfaceControllerCad<VagaEstacionamento> {
+public final class ControllerCadVagaEstacionamento implements ActionListener, InterfaceControllerCad<VagaEstacionamento> {
 
     private final TelaCadastroVagaEstacionamento telaCadastroVagaEstacionamento;
     private final VagaEstacionamentoService vagaService;
-    public static int codigo;
+    private int codigo;
 
     public ControllerCadVagaEstacionamento(TelaCadastroVagaEstacionamento telaCadastroVagaEstacionamento) {
         this.telaCadastroVagaEstacionamento = telaCadastroVagaEstacionamento;
@@ -26,7 +26,8 @@ public class ControllerCadVagaEstacionamento implements ActionListener, Interfac
         initListeners();
     }
 
-    private void initListeners() {
+    @Override
+    public void initListeners() {
         this.telaCadastroVagaEstacionamento.getjButtonNovo().addActionListener(this);
         this.telaCadastroVagaEstacionamento.getjButtonCancelar().addActionListener(this);
         this.telaCadastroVagaEstacionamento.getjButtonGravar().addActionListener(this);
@@ -58,7 +59,8 @@ public class ControllerCadVagaEstacionamento implements ActionListener, Interfac
         }
     }
 
-    private void handleNovo() {
+    @Override
+    public void handleNovo() {
         utilities.Utilities.ativaDesativa(this.telaCadastroVagaEstacionamento.getjPanelBotoes(), false);
         utilities.Utilities.limpaComponentes(this.telaCadastroVagaEstacionamento.getjPanelDados(), true);
         this.telaCadastroVagaEstacionamento.getjTextFieldId().setEnabled(false);
@@ -67,12 +69,14 @@ public class ControllerCadVagaEstacionamento implements ActionListener, Interfac
         this.telaCadastroVagaEstacionamento.getjComboBoxStatus().setEnabled(false);
     }
 
-    private void handleCancelar() {
+    @Override
+    public void handleCancelar() {
         utilities.Utilities.ativaDesativa(this.telaCadastroVagaEstacionamento.getjPanelBotoes(), true);
         utilities.Utilities.limpaComponentes(this.telaCadastroVagaEstacionamento.getjPanelDados(), false);
     }
 
-    private boolean isFormularioValido() {
+    @Override
+    public boolean isFormularioValido() {
         if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroVagaEstacionamento.getjTextFieldDescricao().getText())) {
             JOptionPane.showMessageDialog(null, "O campo Descrição é obrigatório.");
             telaCadastroVagaEstacionamento.getjTextFieldDescricao().requestFocus();
@@ -96,7 +100,8 @@ public class ControllerCadVagaEstacionamento implements ActionListener, Interfac
         return true;
     }
 
-    private void handleGravar() {
+    @Override
+    public void handleGravar() {
         if (!isFormularioValido()) {
             return;
         }
@@ -128,7 +133,8 @@ public class ControllerCadVagaEstacionamento implements ActionListener, Interfac
         utilities.Utilities.limpaComponentes(telaCadastroVagaEstacionamento.getjPanelDados(), false);
     }
 
-    private VagaEstacionamento construirDoFormulario() {
+    @Override
+    public VagaEstacionamento construirDoFormulario() {
         VagaEstacionamento vaga = new VagaEstacionamento();
         vaga.setDescricao(telaCadastroVagaEstacionamento.getjTextFieldDescricao().getText());
         vaga.setObs(telaCadastroVagaEstacionamento.getjTextFieldObservacao().getText());
@@ -142,11 +148,12 @@ public class ControllerCadVagaEstacionamento implements ActionListener, Interfac
         return vaga;
     }
 
-    private void handleBuscar() {
+    @Override
+    public void handleBuscar() {
         codigo = 0;
         TelaBuscaVaga telaBuscaVaga = new TelaBuscaVaga(null, true);
         @SuppressWarnings("unused")
-        ControllerBuscaVagaEstacionamento controllerBuscaVagaEstacionamento = new ControllerBuscaVagaEstacionamento(telaBuscaVaga);
+        ControllerBuscaVagaEstacionamento controllerBuscaVagaEstacionamento = new ControllerBuscaVagaEstacionamento(telaBuscaVaga, valor -> this.codigo = valor);
         telaBuscaVaga.setVisible(true);
 
         if (codigo != 0) {
@@ -175,7 +182,8 @@ public class ControllerCadVagaEstacionamento implements ActionListener, Interfac
         }
     }
 
-    private void handleSair() {
+    @Override
+    public void handleSair() {
         this.telaCadastroVagaEstacionamento.dispose();
     }
 }

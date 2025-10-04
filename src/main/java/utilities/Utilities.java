@@ -31,15 +31,15 @@ public class Utilities {
         }
     }
     
+    @SuppressWarnings("rawtypes")
     public static void limpaComponentes(JPanel painel, boolean ativa) {
         Component[] vetComponentes = painel.getComponents();
         for (Component componenteAtual : vetComponentes) {
-            System.out.println(componenteAtual.getClass());
             if (componenteAtual instanceof JFormattedTextField) {
                 JFormattedTextField formattedTextField = (JFormattedTextField) componenteAtual;
-                boolean alwaysDisabled = (boolean) formattedTextField.getClientProperty("alwaysDisabled");
+                Object alwaysDisabledObj = formattedTextField.getClientProperty("alwaysDisabled");
+                boolean alwaysDisabled = alwaysDisabledObj instanceof Boolean ? (Boolean) alwaysDisabledObj : false;
                 formattedTextField.setText("");
-                System.out.println("alwaysDisabled: " + alwaysDisabled);
                 formattedTextField.setEnabled(alwaysDisabled ? false : ativa);
             } else if (componenteAtual instanceof JTextField) {
                 ((JTextField) componenteAtual).setText("");

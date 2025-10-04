@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.function.Consumer;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -12,18 +13,21 @@ import model.Fornecedor;
 import service.FornecedorService;
 import view.TelaBuscaFornecedor;
 
-public class ControllerBuscaFornecedor implements ActionListener, InterfaceControllerBusca {
+public final class ControllerBuscaFornecedor implements ActionListener, InterfaceControllerBusca<Fornecedor> {
 
     private final TelaBuscaFornecedor telaBuscaFornecedor;
     private final FornecedorService fornecedorService;
+    private final Consumer<Integer> atualizaCodigo;
 
-    public ControllerBuscaFornecedor(TelaBuscaFornecedor telaBuscaFornecedor) {
+    public ControllerBuscaFornecedor(TelaBuscaFornecedor telaBuscaFornecedor, Consumer<Integer> atualizaCodigo) {
         this.telaBuscaFornecedor = telaBuscaFornecedor;
         this.fornecedorService = new FornecedorService();
+        this.atualizaCodigo = atualizaCodigo;
         initListeners();
     }
 
-    private void initListeners() {
+    @Override
+    public void initListeners() {
         this.telaBuscaFornecedor.getjButtonCarregar().addActionListener(this);
         this.telaBuscaFornecedor.getjButtonFiltar().addActionListener(this);
         this.telaBuscaFornecedor.getjButtonSair().addActionListener(this);
@@ -45,12 +49,14 @@ public class ControllerBuscaFornecedor implements ActionListener, InterfaceContr
         }
     }
 
-    private void handleCarregar() {
+    @Override
+    public void handleCarregar() {
         if (telaBuscaFornecedor.getjTableDados().getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Não Existem Dados Selecionados para Edição!");
         } else {
-            ControllerCadFornecedor.codigo = (int) telaBuscaFornecedor.getjTableDados()
+            int codigo = (int) telaBuscaFornecedor.getjTableDados()
                 .getValueAt(telaBuscaFornecedor.getjTableDados().getSelectedRow(), 0);
+            atualizaCodigo.accept(codigo);
             telaBuscaFornecedor.dispose();
         }
     }
@@ -68,7 +74,18 @@ public class ControllerBuscaFornecedor implements ActionListener, InterfaceContr
         }
     }
 
-    private void handleFiltrar() {
+    @Override
+    public void adicionarLinhaTabela(DefaultTableModel tabela, Fornecedor fornecedor) {
+        tabela.addRow(new Object[]{
+            fornecedor.getId(),
+            fornecedor.getNome(),
+            fornecedor.getCpf(),
+            fornecedor.getStatus()
+        });
+    }
+
+    @Override
+    public void handleFiltrar() {
         if (telaBuscaFornecedor.getjTFFiltro().getText().trim().equalsIgnoreCase("")) {
             JOptionPane.showMessageDialog(null, "Sem Dados para a Seleção...");
             return;
@@ -83,31 +100,35 @@ public class ControllerBuscaFornecedor implements ActionListener, InterfaceContr
 
         try {
             switch (filtro) {
-                case ID:
+                case ID: {
                     Fornecedor fornecedor = fornecedorService.Carregar(Integer.parseInt(filtroTexto));
                     if (fornecedor != null) {
-                        tabela.addRow(new Object[]{fornecedor.getId(), fornecedor.getNome(), fornecedor.getCpf(), fornecedor.getStatus()});
+                        adicionarLinhaTabela(tabela, fornecedor);
                     }
                     break;
-                case NOME:
+                }
+                case NOME: {
                     List<Fornecedor> listaPorNome = fornecedorService.Carregar("nome", filtroTexto);
                     for (Fornecedor f : listaPorNome) {
-                        tabela.addRow(new Object[]{f.getId(), f.getNome(), f.getCpf(), f.getStatus()});
+                        adicionarLinhaTabela(tabela, f);
                     }
                     break;
-                case CPF:
+                }
+                case CPF: {
                     List<Fornecedor> listaPorCpf = fornecedorService.Carregar("cpf", filtroTexto);
                     for (Fornecedor f : listaPorCpf) {
-                        tabela.addRow(new Object[]{f.getId(), f.getNome(), f.getCpf(), f.getStatus()});
+                        adicionarLinhaTabela(tabela, f);
                     }
                     break;
+                }
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(telaBuscaFornecedor, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    private void handleSair() {
+    @Override
+    public void handleSair() {
         this.telaBuscaFornecedor.dispose();
     }
 }

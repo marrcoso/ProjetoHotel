@@ -13,7 +13,7 @@ import model.Produto;
 import service.ProdutoService;
 import view.TelaBuscaProduto;
 
-public class ControllerBuscaProduto implements ActionListener, InterfaceControllerBusca {
+public final class ControllerBuscaProduto implements ActionListener, InterfaceControllerBusca<Produto> {
 
     private final TelaBuscaProduto telaBuscaProduto;
     private final ProdutoService produtoService;
@@ -26,7 +26,8 @@ public class ControllerBuscaProduto implements ActionListener, InterfaceControll
         initListeners();
     }
 
-    private void initListeners() {
+    @Override
+    public void initListeners() {
         this.telaBuscaProduto.getjButtonCarregar().addActionListener(this);
         this.telaBuscaProduto.getjButtonFiltar().addActionListener(this);
         this.telaBuscaProduto.getjButtonSair().addActionListener(this);
@@ -48,7 +49,8 @@ public class ControllerBuscaProduto implements ActionListener, InterfaceControll
         }
     }
 
-    private void handleCarregar() {
+    @Override
+    public void handleCarregar() {
         if (telaBuscaProduto.getjTableDados().getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Não Existem Dados Selecionados para Edição!");
         } else {
@@ -71,7 +73,19 @@ public class ControllerBuscaProduto implements ActionListener, InterfaceControll
         }
     }
 
-    private void handleFiltrar() {
+    @Override
+    public void adicionarLinhaTabela(DefaultTableModel tabela, Produto produto) {
+        tabela.addRow(new Object[]{
+            produto.getId(),
+            produto.getDescricao(),
+            produto.getObs(),
+            produto.getValor(),
+            produto.getStatus()
+        });
+    }
+
+    @Override
+    public void handleFiltrar() {
         if (telaBuscaProduto.getjTFFiltro().getText().trim().equalsIgnoreCase("")) {
             JOptionPane.showMessageDialog(null, "Sem Dados para a Seleção...");
             return;
@@ -86,25 +100,28 @@ public class ControllerBuscaProduto implements ActionListener, InterfaceControll
 
         try {
             switch (filtro) {
-                case ID:
+                case ID: {
                     Produto produto = produtoService.Carregar(Integer.parseInt(filtroTexto));
                     if (produto != null) {
-                        tabela.addRow(new Object[]{produto.getId(), produto.getDescricao(), produto.getObs(), produto.getValor(), produto.getStatus()});
+                        adicionarLinhaTabela(tabela, produto);
                     }
                     break;
-                case DESCRICAO:
+                }
+                case DESCRICAO: {
                     List<Produto> listaPorDescricao = produtoService.Carregar("descricao", filtroTexto);
                     for (Produto p : listaPorDescricao) {
-                        tabela.addRow(new Object[]{p.getId(), p.getDescricao(), p.getObs(), p.getValor(), p.getStatus()});
+                        adicionarLinhaTabela(tabela, p);
                     }
                     break;
+                }
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(telaBuscaProduto, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    private void handleSair() {
+    @Override
+    public void handleSair() {
         this.telaBuscaProduto.dispose();
     }
 }

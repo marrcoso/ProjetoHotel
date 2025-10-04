@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.function.Consumer;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -12,18 +13,21 @@ import model.Veiculo;
 import service.VeiculoService;
 import view.TelaBuscaVeiculo;
 
-public class ControllerBuscaVeiculo implements ActionListener, InterfaceControllerBusca {
+public final class ControllerBuscaVeiculo implements ActionListener, InterfaceControllerBusca<Veiculo> {
 
     private final TelaBuscaVeiculo telaBuscaVeiculo;
     private final VeiculoService veiculoService;
+    private final Consumer<Integer> atualizaCodigo;
 
-    public ControllerBuscaVeiculo(TelaBuscaVeiculo telaBuscaVeiculo) {
+    public ControllerBuscaVeiculo(TelaBuscaVeiculo telaBuscaVeiculo, Consumer<Integer> atualizaCodigo) {
         this.telaBuscaVeiculo = telaBuscaVeiculo;
         this.veiculoService = new VeiculoService();
+        this.atualizaCodigo = atualizaCodigo;
         initListeners();
     }
 
-    private void initListeners() {
+    @Override
+    public void initListeners() {
         this.telaBuscaVeiculo.getjButtonCarregar().addActionListener(this);
         this.telaBuscaVeiculo.getjButtonFiltar().addActionListener(this);
         this.telaBuscaVeiculo.getjButtonSair().addActionListener(this);
@@ -45,29 +49,44 @@ public class ControllerBuscaVeiculo implements ActionListener, InterfaceControll
         }
     }
 
-    private void handleCarregar() {
+    @Override
+    public void handleCarregar() {
         if (telaBuscaVeiculo.getjTableDados().getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Não Existem Dados Selecionados para Edição!");
         } else {
-            ControllerCadVeiculo.codigo = (int) telaBuscaVeiculo.getjTableDados()
+            int codigo = (int) telaBuscaVeiculo.getjTableDados()
                 .getValueAt(telaBuscaVeiculo.getjTableDados().getSelectedRow(), 0);
+            atualizaCodigo.accept(codigo);
             telaBuscaVeiculo.dispose();
         }
     }
 
     private enum FiltroVeiculo {
-        ID, PLACA;
+        ID, PLACA, COR;
 
         public static FiltroVeiculo fromIndex(int index) {
             switch (index) {
                 case 0: return ID;
                 case 1: return PLACA;
+                case 2: return COR;
                 default: throw new IllegalArgumentException("Filtro inválido");
             }
         }
     }
 
-    private void handleFiltrar() {
+    @Override
+    public void adicionarLinhaTabela(DefaultTableModel tabela, Veiculo veiculo) {
+        tabela.addRow(new Object[]{
+            veiculo.getId(),
+            veiculo.getPlaca(),
+            veiculo.getCor(),
+            veiculo.getModelo(),
+            veiculo.getStatus()
+        });
+    }
+
+    @Override
+    public void handleFiltrar() {
         if (telaBuscaVeiculo.getjTFFiltro().getText().trim().equalsIgnoreCase("")) {
             JOptionPane.showMessageDialog(null, "Sem Dados para a Seleção...");
             return;
@@ -82,25 +101,35 @@ public class ControllerBuscaVeiculo implements ActionListener, InterfaceControll
 
         try {
             switch (filtro) {
-                case ID:
+                case ID: {
                     Veiculo veiculo = veiculoService.Carregar(Integer.parseInt(filtroTexto));
                     if (veiculo != null) {
-                        tabela.addRow(new Object[]{veiculo.getId(), veiculo.getPlaca(), veiculo.getCor(), veiculo.getModelo(), veiculo.getStatus()});
+                        adicionarLinhaTabela(tabela, veiculo);
                     }
                     break;
-                case PLACA:
+                }
+                case PLACA: {
                     List<Veiculo> listaPorPlaca = veiculoService.Carregar("placa", filtroTexto);
                     for (Veiculo v : listaPorPlaca) {
-                        tabela.addRow(new Object[]{v.getId(), v.getPlaca(), v.getCor(), v.getModelo(), v.getStatus()});
+                        adicionarLinhaTabela(tabela, v);
                     }
                     break;
+                }
+                case COR: {
+                    List<Veiculo> listaPorCor = veiculoService.Carregar("cor", filtroTexto);
+                    for (Veiculo v : listaPorCor) {
+                        adicionarLinhaTabela(tabela, v);
+                    }
+                    break;
+                }
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(telaBuscaVeiculo, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    private void handleSair() {
+    @Override
+    public void handleSair() {
         telaBuscaVeiculo.dispose();
     }
 }

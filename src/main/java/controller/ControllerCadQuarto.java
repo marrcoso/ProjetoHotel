@@ -11,11 +11,11 @@ import service.QuartoService;
 import view.TelaBuscaQuarto;
 import view.TelaCadastroQuarto;
 
-public class ControllerCadQuarto implements ActionListener, InterfaceControllerCad<Quarto> {
+public final class ControllerCadQuarto implements ActionListener, InterfaceControllerCad<Quarto> {
 
     private final TelaCadastroQuarto telaCadastroQuarto;
     private final QuartoService quartoService;
-    public static int codigo;
+    private int codigo;
 
     public ControllerCadQuarto(TelaCadastroQuarto telaCadastroQuarto) {
         this.telaCadastroQuarto = telaCadastroQuarto;
@@ -26,7 +26,8 @@ public class ControllerCadQuarto implements ActionListener, InterfaceControllerC
         initListeners();
     }
 
-    private void initListeners() {
+    @Override
+    public void initListeners() {
         this.telaCadastroQuarto.getjButtonNovo().addActionListener(this);
         this.telaCadastroQuarto.getjButtonCancelar().addActionListener(this);
         this.telaCadastroQuarto.getjButtonGravar().addActionListener(this);
@@ -58,7 +59,8 @@ public class ControllerCadQuarto implements ActionListener, InterfaceControllerC
         }
     }
 
-    private void handleNovo() {
+    @Override
+    public void handleNovo() {
         utilities.Utilities.ativaDesativa(this.telaCadastroQuarto.getjPanelBotoes(), false);
         utilities.Utilities.limpaComponentes(this.telaCadastroQuarto.getjPanelDados(), true);
         this.telaCadastroQuarto.getjTextFieldId().setEnabled(false);
@@ -67,12 +69,14 @@ public class ControllerCadQuarto implements ActionListener, InterfaceControllerC
         this.telaCadastroQuarto.getjComboBoxStatus().setEnabled(false);
     }
 
-    private void handleCancelar() {
+    @Override
+    public void handleCancelar() {
         utilities.Utilities.ativaDesativa(this.telaCadastroQuarto.getjPanelBotoes(), true);
         utilities.Utilities.limpaComponentes(this.telaCadastroQuarto.getjPanelDados(), false);
     }
 
-    private boolean isFormularioValido() {
+    @Override
+    public boolean isFormularioValido() {
         if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroQuarto.getjTextFieldDescricao().getText())) {
             JOptionPane.showMessageDialog(null, "O campo Descrição é obrigatório.");
             telaCadastroQuarto.getjTextFieldDescricao().requestFocus();
@@ -96,7 +100,8 @@ public class ControllerCadQuarto implements ActionListener, InterfaceControllerC
         return true;
     }
 
-    private void handleGravar() {
+    @Override
+    public void handleGravar() {
         if (!isFormularioValido()) {
             return;
         }
@@ -128,7 +133,8 @@ public class ControllerCadQuarto implements ActionListener, InterfaceControllerC
         utilities.Utilities.limpaComponentes(telaCadastroQuarto.getjPanelDados(), false);
     }
 
-    private Quarto construirDoFormulario() {
+    @Override
+    public Quarto construirDoFormulario() {
         Quarto quarto = new Quarto();
         quarto.setDescricao(telaCadastroQuarto.getjTextFieldDescricao().getText());
         quarto.setAndar(Integer.parseInt(telaCadastroQuarto.getjFormattedTextFieldAndar().getText()));
@@ -146,11 +152,12 @@ public class ControllerCadQuarto implements ActionListener, InterfaceControllerC
         return quarto;
     }
 
-    private void handleBuscar() {
+    @Override
+    public void handleBuscar() {
         codigo = 0;
         TelaBuscaQuarto telaBuscaQuarto = new TelaBuscaQuarto(null, true);
         @SuppressWarnings("unused")
-        ControllerBuscaQuarto controllerBuscaQuarto = new ControllerBuscaQuarto(telaBuscaQuarto, valor -> ControllerCadQuarto.codigo = valor);
+        ControllerBuscaQuarto controllerBuscaQuarto = new ControllerBuscaQuarto(telaBuscaQuarto, valor -> this.codigo = valor);
         telaBuscaQuarto.setVisible(true);
 
         if (codigo != 0) {
@@ -184,7 +191,8 @@ public class ControllerCadQuarto implements ActionListener, InterfaceControllerC
         }
     }
 
-    private void handleSair() {
+    @Override
+    public void handleSair() {
         telaCadastroQuarto.dispose();
     }
 }

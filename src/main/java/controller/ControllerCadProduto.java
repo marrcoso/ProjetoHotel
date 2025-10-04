@@ -11,11 +11,11 @@ import service.ProdutoService;
 import view.TelaBuscaProduto;
 import view.TelaCadastroProduto;
 
-public class ControllerCadProduto implements ActionListener, InterfaceControllerCad<Produto> {
+public final class ControllerCadProduto implements ActionListener, InterfaceControllerCad<Produto> {
 
     private final TelaCadastroProduto telaCadastroProduto;
     private final ProdutoService produtoService;
-    public static int codigo;
+    private int codigo;
 
     public ControllerCadProduto(TelaCadastroProduto telaCadastroProduto) {
         this.telaCadastroProduto = telaCadastroProduto;
@@ -26,7 +26,8 @@ public class ControllerCadProduto implements ActionListener, InterfaceController
         initListeners();
     }
 
-    private void initListeners() {
+    @Override
+    public void initListeners() {
         this.telaCadastroProduto.getjButtonNovo().addActionListener(this);
         this.telaCadastroProduto.getjButtonCancelar().addActionListener(this);
         this.telaCadastroProduto.getjButtonGravar().addActionListener(this);
@@ -58,7 +59,8 @@ public class ControllerCadProduto implements ActionListener, InterfaceController
         }
     }
 
-    private void handleNovo() {
+    @Override
+    public void handleNovo() {
         utilities.Utilities.ativaDesativa(this.telaCadastroProduto.getjPanelBotoes(), false);
         utilities.Utilities.limpaComponentes(this.telaCadastroProduto.getjPanelDados(), true);
         this.telaCadastroProduto.getjTextFieldId().setEnabled(false);
@@ -67,12 +69,14 @@ public class ControllerCadProduto implements ActionListener, InterfaceController
         this.telaCadastroProduto.getjComboBoxStatus().setEnabled(false);
     }
 
-    private void handleCancelar() {
+    @Override
+    public void handleCancelar() {
         utilities.Utilities.ativaDesativa(this.telaCadastroProduto.getjPanelBotoes(), true);
         utilities.Utilities.limpaComponentes(this.telaCadastroProduto.getjPanelDados(), false);
     }
 
-    private boolean isFormularioValido() {
+    @Override
+    public boolean isFormularioValido() {
         if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroProduto.getjTextFieldDescricao().getText())) {
             JOptionPane.showMessageDialog(null, "O campo Descrição é obrigatório.");
             telaCadastroProduto.getjTextFieldDescricao().requestFocus();
@@ -86,7 +90,8 @@ public class ControllerCadProduto implements ActionListener, InterfaceController
         return true;
     }
 
-    private void handleGravar() {
+    @Override
+    public void handleGravar() {
         if (!isFormularioValido()) {
             return;
         }
@@ -118,7 +123,8 @@ public class ControllerCadProduto implements ActionListener, InterfaceController
         utilities.Utilities.limpaComponentes(telaCadastroProduto.getjPanelDados(), false);
     }
 
-    private Produto construirDoFormulario() {
+    @Override
+    public Produto construirDoFormulario() {
         Produto produto = new Produto();
         produto.setDescricao(telaCadastroProduto.getjTextFieldDescricao().getText());
         produto.setObs(telaCadastroProduto.getjTextFieldObservacao().getText());
@@ -132,11 +138,12 @@ public class ControllerCadProduto implements ActionListener, InterfaceController
         return produto;
     }
 
-    private void handleBuscar() {
+    @Override
+    public void handleBuscar() {
         codigo = 0;
         TelaBuscaProduto telaBuscaProduto = new TelaBuscaProduto(null, true);
         @SuppressWarnings("unused")
-        ControllerBuscaProduto controllerBuscaProduto = new ControllerBuscaProduto(telaBuscaProduto, valor -> ControllerCadProduto.codigo = valor);
+        ControllerBuscaProduto controllerBuscaProduto = new ControllerBuscaProduto(telaBuscaProduto, valor -> this.codigo = valor);
         telaBuscaProduto.setVisible(true);
 
         if (codigo != 0) {
@@ -165,7 +172,8 @@ public class ControllerCadProduto implements ActionListener, InterfaceController
         }
     }
 
-    private void handleSair() {
+    @Override
+    public void handleSair() {
         telaCadastroProduto.dispose();
     }
 }

@@ -66,6 +66,10 @@ public class Veiculo {
         return modelo;
     }
 
+    public void setModelo(Modelo modelo) {
+        this.modelo = modelo;
+    }
+
     @Override
     public String toString() {
         return 

@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.function.Consumer;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -12,18 +13,21 @@ import model.VagaEstacionamento;
 import service.VagaEstacionamentoService;
 import view.TelaBuscaVaga;
 
-public class ControllerBuscaVagaEstacionamento implements ActionListener, InterfaceControllerBusca {
+public final class ControllerBuscaVagaEstacionamento implements ActionListener, InterfaceControllerBusca<VagaEstacionamento> {
 
     private final TelaBuscaVaga telaBuscaVaga;
     private final VagaEstacionamentoService vagaService;
+    private final Consumer<Integer> atualizaCodigo;
 
-    public ControllerBuscaVagaEstacionamento(TelaBuscaVaga telaBuscaVaga) {
+    public ControllerBuscaVagaEstacionamento(TelaBuscaVaga telaBuscaVaga, Consumer<Integer> atualizaCodigo) {
         this.telaBuscaVaga = telaBuscaVaga;
         this.vagaService = new VagaEstacionamentoService();
+        this.atualizaCodigo = atualizaCodigo;
         initListeners();
     }
 
-    private void initListeners() {
+    @Override
+    public void initListeners() {
         this.telaBuscaVaga.getjButtonCarregar().addActionListener(this);
         this.telaBuscaVaga.getjButtonFiltar().addActionListener(this);
         this.telaBuscaVaga.getjButtonSair().addActionListener(this);
@@ -45,12 +49,14 @@ public class ControllerBuscaVagaEstacionamento implements ActionListener, Interf
         }
     }
 
-    private void handleCarregar() {
+    @Override
+    public void handleCarregar() {
         if (telaBuscaVaga.getjTableDados().getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Não Existem Dados Selecionados para Edição!");
         } else {
-            ControllerCadVagaEstacionamento.codigo = (int) telaBuscaVaga.getjTableDados()
+            int codigo = (int) telaBuscaVaga.getjTableDados()
                 .getValueAt(telaBuscaVaga.getjTableDados().getSelectedRow(), 0);
+            atualizaCodigo.accept(codigo);
             telaBuscaVaga.dispose();
         }
     }
@@ -67,7 +73,19 @@ public class ControllerBuscaVagaEstacionamento implements ActionListener, Interf
         }
     }
 
-    private void handleFiltrar() {
+    @Override
+    public void adicionarLinhaTabela(DefaultTableModel tabela, VagaEstacionamento vaga) {
+        tabela.addRow(new Object[]{
+            vaga.getId(),
+            vaga.getDescricao(),
+            vaga.getObs(),
+            vaga.getMetragemVaga(),
+            vaga.getStatus()
+        });
+    }
+
+    @Override
+    public void handleFiltrar() {
         if (telaBuscaVaga.getjTFFiltro().getText().trim().equalsIgnoreCase("")) {
             JOptionPane.showMessageDialog(null, "Sem Dados para a Seleção...");
             return;
@@ -82,25 +100,28 @@ public class ControllerBuscaVagaEstacionamento implements ActionListener, Interf
 
         try {
             switch (filtro) {
-                case ID:
+                case ID: {
                     VagaEstacionamento vaga = vagaService.Carregar(Integer.parseInt(filtroTexto));
                     if (vaga != null) {
-                        tabela.addRow(new Object[]{vaga.getId(), vaga.getDescricao(), vaga.getObs(), vaga.getMetragemVaga(), vaga.getStatus()});
+                        adicionarLinhaTabela(tabela, vaga);
                     }
                     break;
-                case DESCRICAO:
+                }
+                case DESCRICAO: {
                     List<VagaEstacionamento> listaPorDescricao = vagaService.Carregar("descricao", filtroTexto);
                     for (VagaEstacionamento v : listaPorDescricao) {
-                        tabela.addRow(new Object[]{v.getId(), v.getDescricao(), v.getObs(), v.getMetragemVaga(), v.getStatus()});
+                        adicionarLinhaTabela(tabela, v);
                     }
                     break;
+                }
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(telaBuscaVaga, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    private void handleSair() {
-        telaBuscaVaga.dispose();
+    @Override
+    public void handleSair() {
+        this.telaBuscaVaga.dispose();
     }
 }

@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.function.Consumer;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -12,18 +13,21 @@ import model.Funcionario;
 import service.FuncionarioService;
 import view.TelaBuscaFuncionario;
 
-public class ControllerBuscaFuncionario implements ActionListener, InterfaceControllerBusca {
+public final class ControllerBuscaFuncionario implements ActionListener, InterfaceControllerBusca<Funcionario> {
 
     private final TelaBuscaFuncionario telaBuscaFuncionario;
     private final FuncionarioService funcionarioService;
+    private final Consumer<Integer> atualizaCodigo;
 
-    public ControllerBuscaFuncionario(TelaBuscaFuncionario telaBuscaFuncionario) {
+    public ControllerBuscaFuncionario(TelaBuscaFuncionario telaBuscaFuncionario, Consumer<Integer> atualizaCodigo) {
         this.telaBuscaFuncionario = telaBuscaFuncionario;
         this.funcionarioService = new FuncionarioService();
+        this.atualizaCodigo = atualizaCodigo;
         initListeners();
     }
 
-    private void initListeners() {
+    @Override
+    public void initListeners() {
         this.telaBuscaFuncionario.getjButtonCarregar().addActionListener(this);
         this.telaBuscaFuncionario.getjButtonFiltar().addActionListener(this);
         this.telaBuscaFuncionario.getjButtonSair().addActionListener(this);
@@ -45,12 +49,14 @@ public class ControllerBuscaFuncionario implements ActionListener, InterfaceCont
         }
     }
 
-    private void handleCarregar() {
+    @Override
+    public void handleCarregar() {
         if (telaBuscaFuncionario.getjTableDados().getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Não Existem Dados Selecionados!");
         } else {
-            ControllerCadFuncionario.codigo = (int) telaBuscaFuncionario.getjTableDados()
+            int codigo = (int) telaBuscaFuncionario.getjTableDados()
                 .getValueAt(telaBuscaFuncionario.getjTableDados().getSelectedRow(), 0);
+            atualizaCodigo.accept(codigo);
             telaBuscaFuncionario.dispose();
         }
     }
@@ -68,7 +74,18 @@ public class ControllerBuscaFuncionario implements ActionListener, InterfaceCont
         }
     }
 
-    private void handleFiltrar() {
+    @Override
+    public void adicionarLinhaTabela(DefaultTableModel tabela, Funcionario funcionario) {
+        tabela.addRow(new Object[]{
+            funcionario.getId(),
+            funcionario.getNome(),
+            funcionario.getCpf(),
+            funcionario.getStatus()
+        });
+    }
+
+    @Override
+    public void handleFiltrar() {
         if (telaBuscaFuncionario.getjTFFiltro().getText().trim().equalsIgnoreCase("")) {
             JOptionPane.showMessageDialog(null, "Sem Dados para a Seleção...");
             return;
@@ -83,31 +100,35 @@ public class ControllerBuscaFuncionario implements ActionListener, InterfaceCont
 
         try {
             switch (filtro) {
-                case ID:
+                case ID: {
                     Funcionario funcionario = funcionarioService.Carregar(Integer.parseInt(filtroTexto));
                     if (funcionario != null) {
-                        tabela.addRow(new Object[]{funcionario.getId(), funcionario.getNome(), funcionario.getCpf(), funcionario.getStatus()});
+                        adicionarLinhaTabela(tabela, funcionario);
                     }
                     break;
-                case NOME:
+                }
+                case NOME: {
                     List<Funcionario> listaPorNome = funcionarioService.Carregar("nome", filtroTexto);
                     for (Funcionario f : listaPorNome) {
-                        tabela.addRow(new Object[]{f.getId(), f.getNome(), f.getCpf(), f.getStatus()});
+                        adicionarLinhaTabela(tabela, f);
                     }
                     break;
-                case CPF:
+                }
+                case CPF: {
                     List<Funcionario> listaPorCpf = funcionarioService.Carregar("cpf", filtroTexto);
                     for (Funcionario f : listaPorCpf) {
-                        tabela.addRow(new Object[]{f.getId(), f.getNome(), f.getCpf(), f.getStatus()});
+                        adicionarLinhaTabela(tabela, f);
                     }
                     break;
+                }
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(telaBuscaFuncionario, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    private void handleSair() {
+    @Override
+    public void handleSair() {
         telaBuscaFuncionario.dispose();
     }
 }

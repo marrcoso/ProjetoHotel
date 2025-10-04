@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.function.Consumer;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -12,18 +13,21 @@ import model.Modelo;
 import service.ModeloService;
 import view.TelaBuscaModelo;
 
-public class ControllerBuscaModelo implements ActionListener, InterfaceControllerBusca {
+public final class ControllerBuscaModelo implements ActionListener, InterfaceControllerBusca<Modelo> {
 
     private final TelaBuscaModelo telaBuscaModelo;
     private final ModeloService modeloService;
+    private final Consumer<Integer> atualizaCodigo;
 
-    public ControllerBuscaModelo(TelaBuscaModelo telaBuscaModelo) {
+    public ControllerBuscaModelo(TelaBuscaModelo telaBuscaModelo, Consumer<Integer> atualizaCodigo) {
         this.telaBuscaModelo = telaBuscaModelo;
         this.modeloService = new ModeloService();
+        this.atualizaCodigo = atualizaCodigo;
         initListeners();
     }
 
-    private void initListeners() {
+    @Override
+    public void initListeners() {
         this.telaBuscaModelo.getjButtonCarregar().addActionListener(this);
         this.telaBuscaModelo.getjButtonFiltar().addActionListener(this);
         this.telaBuscaModelo.getjButtonSair().addActionListener(this);
@@ -45,12 +49,14 @@ public class ControllerBuscaModelo implements ActionListener, InterfaceControlle
         }
     }
 
-    private void handleCarregar() {
+    @Override
+    public void handleCarregar() {
         if (telaBuscaModelo.getjTableDados().getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Não Existem Dados Selecionados para Edição!");
         } else {
-            ControllerCadModelo.codigo = (int) telaBuscaModelo.getjTableDados()
+            int codigo = (int) telaBuscaModelo.getjTableDados()
                 .getValueAt(telaBuscaModelo.getjTableDados().getSelectedRow(), 0);
+            atualizaCodigo.accept(codigo);
             telaBuscaModelo.dispose();
         }
     }
@@ -67,7 +73,18 @@ public class ControllerBuscaModelo implements ActionListener, InterfaceControlle
         }
     }
 
-    private void handleFiltrar() {
+    @Override
+    public void adicionarLinhaTabela(DefaultTableModel tabela, Modelo modelo) {
+        tabela.addRow(new Object[]{
+            modelo.getId(),
+            modelo.getDescricao(),
+            modelo.getMarca().getId(),
+            modelo.getStatus()
+        });
+    }
+
+    @Override
+    public void handleFiltrar() {
         if (telaBuscaModelo.getjTFFiltro().getText().trim().equalsIgnoreCase("")) {
             JOptionPane.showMessageDialog(null, "Sem Dados para a Seleção...");
             return;
@@ -82,25 +99,29 @@ public class ControllerBuscaModelo implements ActionListener, InterfaceControlle
 
         try {
             switch (filtro) {
-                case ID:
+                case ID: {
                     Modelo modelo = modeloService.Carregar(Integer.parseInt(filtroTexto));
                     if (modelo != null) {
-                        tabela.addRow(new Object[]{modelo.getId(), modelo.getDescricao(), modelo.getMarca().getId(), modelo.getStatus()});
+                        adicionarLinhaTabela(tabela, modelo);
                     }
                     break;
-                case DESCRICAO:
+                }
+                case DESCRICAO: {
                     List<Modelo> listaPorDescricao = modeloService.Carregar("descricao", filtroTexto);
-                    for (Modelo m : listaPorDescricao) {
-                        tabela.addRow(new Object[]{m.getId(), m.getDescricao(), m.getMarca(), m.getStatus()});
+                    for (Modelo modelo : listaPorDescricao) {
+                        adicionarLinhaTabela(tabela, modelo);
                     }
                     break;
+                }
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(telaBuscaModelo, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    private void handleSair() {
+    @Override
+    public void handleSair() {
         this.telaBuscaModelo.dispose();
     }
+
 }

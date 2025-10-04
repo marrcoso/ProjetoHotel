@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.function.Consumer;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -12,18 +13,21 @@ import model.Servico;
 import service.ServicoService;
 import view.TelaBuscaServico;
 
-public class ControllerBuscaServico implements ActionListener, InterfaceControllerBusca {
+public final class ControllerBuscaServico implements ActionListener, InterfaceControllerBusca<Servico> {
 
     private final TelaBuscaServico telaBuscaServico;
     private final ServicoService servicoService;
+    private final Consumer<Integer> atualizaCodigo;
 
-    public ControllerBuscaServico(TelaBuscaServico telaBuscaServico) {
+    public ControllerBuscaServico(TelaBuscaServico telaBuscaServico, Consumer<Integer> atualizaCodigo) {
         this.telaBuscaServico = telaBuscaServico;
         this.servicoService = new ServicoService();
+        this.atualizaCodigo = atualizaCodigo;
         initListeners();
     }
 
-    private void initListeners() {
+    @Override
+    public void initListeners() {
         this.telaBuscaServico.getjButtonCarregar().addActionListener(this);
         this.telaBuscaServico.getjButtonFiltar().addActionListener(this);
         this.telaBuscaServico.getjButtonSair().addActionListener(this);
@@ -45,12 +49,14 @@ public class ControllerBuscaServico implements ActionListener, InterfaceControll
         }
     }
 
-    private void handleCarregar() {
+    @Override
+    public void handleCarregar() {
         if (telaBuscaServico.getjTableDados().getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Não Existem Dados Selecionados para Edição!");
         } else {
-            ControllerCadServico.codigo = (int) telaBuscaServico.getjTableDados()
+            int codigo = (int) telaBuscaServico.getjTableDados()
                 .getValueAt(telaBuscaServico.getjTableDados().getSelectedRow(), 0);
+            atualizaCodigo.accept(codigo);
             telaBuscaServico.dispose();
         }
     }
@@ -67,7 +73,18 @@ public class ControllerBuscaServico implements ActionListener, InterfaceControll
         }
     }
 
-    private void handleFiltrar() {
+    @Override
+    public void adicionarLinhaTabela(DefaultTableModel tabela, Servico servico) {
+        tabela.addRow(new Object[]{
+            servico.getId(),
+            servico.getDescricao(),
+            servico.getObs(),
+            servico.getStatus()
+        });
+    }
+
+    @Override
+    public void handleFiltrar() {
         if (telaBuscaServico.getjTFFiltro().getText().trim().equalsIgnoreCase("")) {
             JOptionPane.showMessageDialog(null, "Sem Dados para a Seleção...");
             return;
@@ -82,25 +99,28 @@ public class ControllerBuscaServico implements ActionListener, InterfaceControll
 
         try {
             switch (filtro) {
-                case ID:
+                case ID: {
                     Servico servico = servicoService.Carregar(Integer.parseInt(filtroTexto));
                     if (servico != null) {
-                        tabela.addRow(new Object[]{servico.getId(), servico.getDescricao(), servico.getObs(), servico.getStatus()});
+                        adicionarLinhaTabela(tabela, servico);
                     }
                     break;
-                case DESCRICAO:
+                }
+                case DESCRICAO: {
                     List<Servico> listaPorDescricao = servicoService.Carregar("descricao", filtroTexto);
                     for (Servico s : listaPorDescricao) {
-                        tabela.addRow(new Object[]{s.getId(), s.getDescricao(), s.getObs(), s.getStatus()});
+                        adicionarLinhaTabela(tabela, s);
                     }
                     break;
+                }
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(telaBuscaServico, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    private void handleSair() {
+    @Override
+    public void handleSair() {
         this.telaBuscaServico.dispose();
     }
 }

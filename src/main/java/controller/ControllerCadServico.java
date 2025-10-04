@@ -11,11 +11,11 @@ import service.ServicoService;
 import view.TelaBuscaServico;
 import view.TelaCadastroServico;
 
-public class ControllerCadServico implements ActionListener, InterfaceControllerCad<Servico> {
+public final class ControllerCadServico implements ActionListener, InterfaceControllerCad<Servico> {
 
     private final TelaCadastroServico telaCadastroServico;
     private final ServicoService servicoService;
-    public static int codigo;
+    private int codigo;
 
     public ControllerCadServico(TelaCadastroServico telaCadastroServico) {
         this.telaCadastroServico = telaCadastroServico;
@@ -26,7 +26,8 @@ public class ControllerCadServico implements ActionListener, InterfaceController
         initListeners();
     }
 
-    private void initListeners() {
+    @Override
+    public void initListeners() {
         this.telaCadastroServico.getjButtonNovo().addActionListener(this);
         this.telaCadastroServico.getjButtonCancelar().addActionListener(this);
         this.telaCadastroServico.getjButtonGravar().addActionListener(this);
@@ -58,7 +59,8 @@ public class ControllerCadServico implements ActionListener, InterfaceController
         }
     }
 
-    private void handleNovo() {
+    @Override
+    public void handleNovo() {
         utilities.Utilities.ativaDesativa(this.telaCadastroServico.getjPanelBotoes(), false);
         utilities.Utilities.limpaComponentes(this.telaCadastroServico.getjPanelDados(), true);
         this.telaCadastroServico.getjTextFieldId().setEnabled(false);
@@ -67,12 +69,14 @@ public class ControllerCadServico implements ActionListener, InterfaceController
         this.telaCadastroServico.getjComboBoxStatus().setEnabled(false);
     }
 
-    private void handleCancelar() {
+    @Override
+    public void handleCancelar() {
         utilities.Utilities.ativaDesativa(this.telaCadastroServico.getjPanelBotoes(), true);
         utilities.Utilities.limpaComponentes(this.telaCadastroServico.getjPanelDados(), false);
     }
 
-    private boolean isFormularioValido() {
+    @Override
+    public boolean isFormularioValido() {
         if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroServico.getjTextFieldDescricao().getText())) {
             JOptionPane.showMessageDialog(null, "O campo Descrição é obrigatório.");
             telaCadastroServico.getjTextFieldDescricao().requestFocus();
@@ -91,7 +95,8 @@ public class ControllerCadServico implements ActionListener, InterfaceController
         return true;
     }
 
-    private void handleGravar() {
+    @Override
+    public void handleGravar() {
         if (!isFormularioValido()) {
             return;
         }
@@ -123,7 +128,8 @@ public class ControllerCadServico implements ActionListener, InterfaceController
         utilities.Utilities.limpaComponentes(telaCadastroServico.getjPanelDados(), false);
     }
 
-    private Servico construirDoFormulario() {
+    @Override
+    public Servico construirDoFormulario() {
         Servico servico = new Servico();
         servico.setDescricao(telaCadastroServico.getjTextFieldDescricao().getText());
         servico.setObs(telaCadastroServico.getjTextFieldObservacao().getText());
@@ -136,11 +142,12 @@ public class ControllerCadServico implements ActionListener, InterfaceController
         return servico;
     }
 
-    private void handleBuscar() {
+    @Override
+    public void handleBuscar() {
         codigo = 0;
         TelaBuscaServico telaBuscaServico = new TelaBuscaServico(null, true);
         @SuppressWarnings("unused")
-        ControllerBuscaServico controllerBuscaServico = new ControllerBuscaServico(telaBuscaServico);
+        ControllerBuscaServico controllerBuscaServico = new ControllerBuscaServico(telaBuscaServico, valor -> this.codigo = valor);
         telaBuscaServico.setVisible(true);
 
         if (codigo != 0) {
@@ -168,7 +175,8 @@ public class ControllerCadServico implements ActionListener, InterfaceController
         }
     }
 
-    private void handleSair() {
+    @Override
+    public void handleSair() {
         this.telaCadastroServico.dispose();
     }
 }

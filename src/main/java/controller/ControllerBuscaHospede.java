@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.function.Consumer;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -12,18 +13,21 @@ import model.Hospede;
 import service.HospedeService;
 import view.TelaBuscaHospede;
 
-public class ControllerBuscaHospede implements ActionListener, InterfaceControllerBusca {
+public final class ControllerBuscaHospede implements ActionListener, InterfaceControllerBusca<Hospede> {
 
     private final TelaBuscaHospede telaBuscaHospede;
     private final HospedeService hospedeService;
+    private final Consumer<Integer> atualizaCodigo;
 
-    public ControllerBuscaHospede(TelaBuscaHospede telaBuscaHospede) {
+    public ControllerBuscaHospede(TelaBuscaHospede telaBuscaHospede, Consumer<Integer> atualizaCodigo) {
         this.telaBuscaHospede = telaBuscaHospede;
         this.hospedeService = new HospedeService();
+        this.atualizaCodigo = atualizaCodigo;
         initListeners();
     }
 
-    private void initListeners() {
+    @Override
+    public void initListeners() {
         this.telaBuscaHospede.getjButtonCarregar().addActionListener(this);
         this.telaBuscaHospede.getjButtonFiltar().addActionListener(this);
         this.telaBuscaHospede.getjButtonSair().addActionListener(this);
@@ -45,12 +49,14 @@ public class ControllerBuscaHospede implements ActionListener, InterfaceControll
         }
     }
 
-    private void handleCarregar() {
+    @Override
+    public void handleCarregar() {
         if (telaBuscaHospede.getjTableDados().getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Não Existem Dados Selecionados para Edição!");
         } else {
-            ControllerCadHospede.codigo = (int) telaBuscaHospede.getjTableDados()
+            int codigo = (int) telaBuscaHospede.getjTableDados()
                 .getValueAt(telaBuscaHospede.getjTableDados().getSelectedRow(), 0);
+            atualizaCodigo.accept(codigo);
             telaBuscaHospede.dispose();
         }
     }
@@ -68,7 +74,18 @@ public class ControllerBuscaHospede implements ActionListener, InterfaceControll
         }
     }
 
-    private void handleFiltrar() {
+    @Override
+    public void adicionarLinhaTabela(DefaultTableModel tabela, Hospede hospede) {
+        tabela.addRow(new Object[]{
+            hospede.getId(),
+            hospede.getNome(),
+            hospede.getCpf(),
+            hospede.getStatus()
+        });
+    }
+
+    @Override
+    public void handleFiltrar() {
         if (telaBuscaHospede.getjTFFiltro().getText().trim().equalsIgnoreCase("")) {
             JOptionPane.showMessageDialog(null, "Sem Dados para a Seleção...");
             return;
@@ -83,31 +100,35 @@ public class ControllerBuscaHospede implements ActionListener, InterfaceControll
 
         try {
             switch (filtro) {
-                case ID:
+                case ID: {
                     Hospede hospede = hospedeService.Carregar(Integer.parseInt(filtroTexto));
                     if (hospede != null) {
-                        tabela.addRow(new Object[]{hospede.getId(), hospede.getNome(), hospede.getCpf(), hospede.getStatus()});
+                        adicionarLinhaTabela(tabela, hospede);
                     }
                     break;
-                case NOME:
+                }
+                case NOME: {
                     List<Hospede> listaPorNome = hospedeService.Carregar("nome", filtroTexto);
                     for (Hospede h : listaPorNome) {
-                        tabela.addRow(new Object[]{h.getId(), h.getNome(), h.getCpf(), h.getStatus()});
+                        adicionarLinhaTabela(tabela, h);
                     }
                     break;
-                case CPF:
+                }
+                case CPF: {
                     List<Hospede> listaPorCpf = hospedeService.Carregar("cpf", filtroTexto);
                     for (Hospede h : listaPorCpf) {
-                        tabela.addRow(new Object[]{h.getId(), h.getNome(), h.getCpf(), h.getStatus()});
+                        adicionarLinhaTabela(tabela, h);
                     }
                     break;
+                }
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(telaBuscaHospede, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    private void handleSair() {
+    @Override
+    public void handleSair() {
         telaBuscaHospede.dispose();
     }
 }

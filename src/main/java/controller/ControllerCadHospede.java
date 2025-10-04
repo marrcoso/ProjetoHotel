@@ -11,11 +11,11 @@ import service.HospedeService;
 import view.TelaBuscaHospede;
 import view.TelaCadastroHospede;
 
-public class ControllerCadHospede implements ActionListener, InterfaceControllerCad<Hospede> {
+public final class ControllerCadHospede implements ActionListener, InterfaceControllerCad<Hospede> {
 
     private final TelaCadastroHospede telaCadastroHospede;
     private final HospedeService hospedeService;
-    public static int codigo;
+    private int codigo;
 
     public ControllerCadHospede(TelaCadastroHospede telaCadastroHospede) {
         this.telaCadastroHospede = telaCadastroHospede;
@@ -26,7 +26,8 @@ public class ControllerCadHospede implements ActionListener, InterfaceController
         initListeners();
     }
 
-    private void initListeners() {
+    @Override
+    public void initListeners() {
         this.telaCadastroHospede.getjButtonNovo().addActionListener(this);
         this.telaCadastroHospede.getjButtonCancelar().addActionListener(this);
         this.telaCadastroHospede.getjButtonGravar().addActionListener(this);
@@ -58,7 +59,8 @@ public class ControllerCadHospede implements ActionListener, InterfaceController
         }
     }
 
-    private void handleNovo() {
+    @Override
+    public void handleNovo() {
         utilities.Utilities.ativaDesativa(this.telaCadastroHospede.getjPanelBotoes(), false);
         utilities.Utilities.limpaComponentes(this.telaCadastroHospede.getjPanelDados(), true);
         this.telaCadastroHospede.getjTextFieldId().setEnabled(false);
@@ -70,12 +72,14 @@ public class ControllerCadHospede implements ActionListener, InterfaceController
         telaCadastroHospede.getjComboBoxStatus().setEnabled(false);
     }
 
-    private void handleCancelar() {
+    @Override
+    public void handleCancelar() {
         utilities.Utilities.ativaDesativa(this.telaCadastroHospede.getjPanelBotoes(), true);
         utilities.Utilities.limpaComponentes(this.telaCadastroHospede.getjPanelDados(), false);
     }
 
-    private boolean isFormularioValido() {
+    @Override
+    public boolean isFormularioValido() {
         if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroHospede.getjTextFieldNomeFantasia().getText())) {
             JOptionPane.showMessageDialog(null, "O campo Nome Fantasia é obrigatório.");
             telaCadastroHospede.getjTextFieldNomeFantasia().requestFocus();
@@ -142,7 +146,8 @@ public class ControllerCadHospede implements ActionListener, InterfaceController
         return true;
     }
 
-    private void handleGravar() {
+    @Override
+    public void handleGravar() {
         if (!isFormularioValido()) {
             return;
         }
@@ -174,7 +179,8 @@ public class ControllerCadHospede implements ActionListener, InterfaceController
         utilities.Utilities.limpaComponentes(telaCadastroHospede.getjPanelDados(), false);
     }
 
-    private Hospede construirDoFormulario() {
+    @Override
+    public Hospede construirDoFormulario() {
         Hospede hospede = new Hospede();
         hospede.setNome(telaCadastroHospede.getjTextFieldNomeFantasia().getText());
         hospede.setRazaoSocial(telaCadastroHospede.getjTextFieldRazaoSocial().getText());
@@ -206,11 +212,12 @@ public class ControllerCadHospede implements ActionListener, InterfaceController
         return hospede;
     }
 
-    private void handleBuscar() {
+    @Override
+    public void handleBuscar() {
         codigo = 0;
         TelaBuscaHospede telaBuscaHospede = new TelaBuscaHospede(null, true);
         @SuppressWarnings("unused")
-        ControllerBuscaHospede controllerBuscaHospede = new ControllerBuscaHospede(telaBuscaHospede);
+        ControllerBuscaHospede controllerBuscaHospede = new ControllerBuscaHospede(telaBuscaHospede, valor -> this.codigo = valor);
         telaBuscaHospede.setVisible(true);
 
         if (codigo != 0) {
@@ -246,7 +253,6 @@ public class ControllerCadHospede implements ActionListener, InterfaceController
             telaCadastroHospede.getjTextFieldComplemento().setText(hospede.getComplemento());
             telaCadastroHospede.getjTextFieldContato().setText(hospede.getContato());
             telaCadastroHospede.getjTextFieldObs().setText(hospede.getObs());
-            telaCadastroHospede.getjFormattedTextFieldDataCadastro().setText(hospede.getDataCadastro());
 
             telaCadastroHospede.getjComboBoxSexo().setSelectedItem(
                 hospede.getSexo() == 'M' ? "Masculino" : "Feminino"
@@ -260,7 +266,8 @@ public class ControllerCadHospede implements ActionListener, InterfaceController
         }
     }
 
-    private void handleSair() {
+    @Override
+    public void handleSair() {
         telaCadastroHospede.dispose();
     }
 }
