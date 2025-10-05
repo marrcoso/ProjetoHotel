@@ -5,6 +5,7 @@ public class Fornecedor extends Pessoa{
     private String cnpj;
     private String inscricaoEstadual;
     private String contato;
+    public static final String TIPO = "Fornecedor";
 
     public Fornecedor() {
     }

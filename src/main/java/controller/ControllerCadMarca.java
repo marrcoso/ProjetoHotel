@@ -22,7 +22,6 @@ public final class ControllerCadMarca implements ActionListener, InterfaceContro
         this.marcaService = new MarcaService();
         utilities.Utilities.ativaDesativa(this.telaCadastroMarca.getjPanelBotoes(), true);
         utilities.Utilities.limpaComponentes(this.telaCadastroMarca.getjPanelDados(), false);
-
         initListeners();
     }
 

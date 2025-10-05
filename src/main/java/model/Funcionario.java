@@ -3,6 +3,7 @@ public class Funcionario extends Pessoa{
    
     private String usuario;
     private String senha;
+    public static final String TIPO = "Funcionário";
 
     public Funcionario() {
   

@@ -4,6 +4,7 @@ public class Hospede extends Pessoa{
     private String cnpj;
     private String inscricaoEstadual;
     private String contato;
+    public static final String TIPO = "Hóspede";
 
     public Hospede() {
     }

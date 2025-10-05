@@ -5,6 +5,7 @@ import java.awt.Component;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -32,31 +33,41 @@ public class Utilities {
             }
         }
     }
+
+    private static boolean isAlwaysDisabled(JComponent component) {
+        Object alwaysDisabledObj = component.getClientProperty(Utilities.ALWAYS_DISABLED);
+        return alwaysDisabledObj instanceof Boolean ? (Boolean) alwaysDisabledObj : false;
+    }
     
     @SuppressWarnings("rawtypes")
     public static void limpaComponentes(JPanel painel, boolean ativa) {
         Component[] vetComponentes = painel.getComponents();
         for (Component componenteAtual : vetComponentes) {
+            if (!(componenteAtual instanceof JComponent)) {
+                continue;
+            }
             if (componenteAtual instanceof JFormattedTextField) {
                 JFormattedTextField formattedTextField = (JFormattedTextField) componenteAtual;
-                Object alwaysDisabledObj = formattedTextField.getClientProperty(Utilities.ALWAYS_DISABLED);
-                boolean alwaysDisabled = alwaysDisabledObj instanceof Boolean ? (Boolean) alwaysDisabledObj : false;
                 formattedTextField.setText("");
-                formattedTextField.setEnabled(alwaysDisabled ? false : ativa);
             } else if (componenteAtual instanceof JTextField) {
                 ((JTextField) componenteAtual).setText("");
-                componenteAtual.setEnabled(ativa);
             } else if (componenteAtual instanceof JComboBox) {
-                ((JComboBox) componenteAtual).setSelectedIndex(-1);
-                componenteAtual.setEnabled(ativa);
+                JComboBox comboBox = (JComboBox) componenteAtual;
+                comboBox.setSelectedIndex(-1);
             } else if (componenteAtual instanceof JCheckBox) {
                 ((JCheckBox) componenteAtual).setSelected(false);
-                componenteAtual.setEnabled(ativa);
             } else if (componenteAtual instanceof JPasswordField) {
                 ((JPasswordField) componenteAtual).setText("");
                 componenteAtual.setEnabled(ativa);
             } else if(componenteAtual instanceof JButton){
                 ativaDesativaButton((JButton) componenteAtual, !ativa);
+            }
+            
+            boolean alwaysDisabled = isAlwaysDisabled((JComponent) componenteAtual);
+            if (componenteAtual instanceof JPanel) {
+                limpaComponentes((JPanel) componenteAtual, alwaysDisabled ? false : ativa);
+            } else {
+                componenteAtual.setEnabled(alwaysDisabled ? false : ativa);
             }
         }
     }

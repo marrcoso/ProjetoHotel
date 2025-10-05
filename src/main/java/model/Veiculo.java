@@ -14,16 +14,18 @@ public class Veiculo {
     private String cor;
     private char status;
     private Modelo modelo;
+    private Pessoa proprietario;
 
     public Veiculo() {
     }
 
-    public Veiculo(int id, String placa, String cor, char status, Modelo modelo) {
+    public Veiculo(int id, String placa, String cor, char status, Modelo modelo, Pessoa proprietario) {
         this.id = id;
         this.placa = placa;
         this.cor = cor;
         this.status = status;
         this.modelo = modelo;
+        this.proprietario = proprietario;
     }
 
     public int getId() {
@@ -68,6 +70,14 @@ public class Veiculo {
 
     public void setModelo(Modelo modelo) {
         this.modelo = modelo;
+    }
+
+    public Pessoa getProprietario() {
+        return proprietario;
+    }
+
+    public void setProprietario(Pessoa proprietario) {
+        this.proprietario = proprietario;
     }
 
     @Override

@@ -163,8 +163,6 @@ public final class ControllerCadModelo implements ActionListener, InterfaceContr
             utilities.Utilities.ativaDesativa(telaCadastroModelo.getjPanelBotoes(), false);
             this.telaCadastroModelo.getjTextFieldId().setEnabled(false);
             this.telaCadastroModelo.getjTextFieldDescricao().requestFocus();
-            this.telaCadastroModelo.getjComboBoxStatus().setSelectedItem("Ativo");
-            this.telaCadastroModelo.getjComboBoxStatus().setEnabled(false);
 
             Marca marca;
             try {
