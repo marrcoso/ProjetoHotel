@@ -511,6 +511,11 @@ public class TelaCadastroFornecedor extends javax.swing.JDialog {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        jFormattedTextFieldCnpj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFormattedTextFieldCnpjActionPerformed(evt);
+            }
+        });
 
         jLabelFone1.setText("Fone1");
 
@@ -519,14 +524,14 @@ public class TelaCadastroFornecedor extends javax.swing.JDialog {
         jLabelEmail.setText("Email");
 
         try {
-            jFormattedTextFieldFone1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(0##) #####-####")));
+            jFormattedTextFieldFone1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) #####-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
 
         jDataCadastro.setEditable(false);
-        jDataCadastro.setEnabled(false);
         jDataCadastro.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jDataCadastro.setText("08/07/2025");
         jDataCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jDataCadastroActionPerformed(evt);
@@ -833,6 +838,10 @@ public class TelaCadastroFornecedor extends javax.swing.JDialog {
     private void jDataCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDataCadastroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jDataCadastroActionPerformed
+
+    private void jFormattedTextFieldCnpjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldCnpjActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFormattedTextFieldCnpjActionPerformed
 
     /**
      * @param args the command line arguments

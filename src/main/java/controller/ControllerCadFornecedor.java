@@ -3,8 +3,6 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import javax.swing.JOptionPane;
 
@@ -82,13 +80,23 @@ public final class ControllerCadFornecedor implements ActionListener, InterfaceC
     @Override
     public boolean isFormularioValido() {
         if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroFornecedor.getjTextFieldNomeFantasia().getText())) {
-            JOptionPane.showMessageDialog(null, "O campo Nome é obrigatório.");
+            JOptionPane.showMessageDialog(null, "O campo Nome Fantasia é obrigatório.");
             telaCadastroFornecedor.getjTextFieldNomeFantasia().requestFocus();
             return false;
         }
-        if (!utilities.ValidadorCampos.validarCampoEmail(telaCadastroFornecedor.getjTextFieldEmail().getText())) {
-            JOptionPane.showMessageDialog(null, "O campo Email é inválido.");
-            telaCadastroFornecedor.getjTextFieldEmail().requestFocus();
+        if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroFornecedor.getjTextFieldRazaoSocial().getText())) {
+            JOptionPane.showMessageDialog(null, "O campo Razão Social é obrigatório.");
+            telaCadastroFornecedor.getjTextFieldRazaoSocial().requestFocus();
+            return false;
+        }
+        if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroFornecedor.getjTextFieldInscricaoEstadual().getText())) {
+            JOptionPane.showMessageDialog(null, "O campo Inscrição Estadual é obrigatório.");
+            telaCadastroFornecedor.getjTextFieldInscricaoEstadual().requestFocus();
+            return false;
+        }
+        if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroFornecedor.getjFormattedTextFieldCnpj().getText())) {
+            JOptionPane.showMessageDialog(null, "O campo CNPJ é obrigatório.");
+            telaCadastroFornecedor.getjFormattedTextFieldCnpj().requestFocus();
             return false;
         }
         if (!utilities.ValidadorCampos.validarFone(telaCadastroFornecedor.getjFormattedTextFieldFone1().getText())) {
@@ -102,19 +110,24 @@ public final class ControllerCadFornecedor implements ActionListener, InterfaceC
             telaCadastroFornecedor.getjFormattedTextFieldFone2().requestFocus();
             return false;
         }
+        if (!utilities.ValidadorCampos.validarCampoEmail(telaCadastroFornecedor.getjTextFieldEmail().getText())) {
+            JOptionPane.showMessageDialog(null, "O campo Email é inválido.");
+            telaCadastroFornecedor.getjTextFieldEmail().requestFocus();
+            return false;
+        }
         if (!utilities.ValidadorCampos.validarCep(telaCadastroFornecedor.getjFormattedTextFieldCep().getText())) {
             JOptionPane.showMessageDialog(null, "O campo CEP é obrigatório.");
             telaCadastroFornecedor.getjFormattedTextFieldCep().requestFocus();
             return false;
         }
-        if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroFornecedor.getjTextFieldBairro().getText())) {
-            JOptionPane.showMessageDialog(null, "O campo Bairro é obrigatório.");
-            telaCadastroFornecedor.getjTextFieldBairro().requestFocus();
-            return false;
-        }
         if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroFornecedor.getjTextFieldCidade().getText())) {
             JOptionPane.showMessageDialog(null, "O campo Cidade é obrigatório.");
             telaCadastroFornecedor.getjTextFieldCidade().requestFocus();
+            return false;
+        }
+        if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroFornecedor.getjTextFieldBairro().getText())) {
+            JOptionPane.showMessageDialog(null, "O campo Bairro é obrigatório.");
+            telaCadastroFornecedor.getjTextFieldBairro().requestFocus();
             return false;
         }
         if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroFornecedor.getjTextFieldLogradouro().getText())) {
@@ -125,6 +138,11 @@ public final class ControllerCadFornecedor implements ActionListener, InterfaceC
         if (!utilities.ValidadorCampos.validarStatus(telaCadastroFornecedor.getjComboBoxStatus().getSelectedItem().toString())) {
             JOptionPane.showMessageDialog(null, "Selecione um Status válido.");
             telaCadastroFornecedor.getjComboBoxStatus().requestFocus();
+            return false;
+        }
+        if (!utilities.ValidadorCampos.validarSexo(telaCadastroFornecedor.getjComboBoxSexo().getSelectedItem().toString())) {
+            JOptionPane.showMessageDialog(null, "Selecione um Sexo válido.");
+            telaCadastroFornecedor.getjComboBoxSexo().requestFocus();
             return false;
         }
         return true;

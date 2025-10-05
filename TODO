@@ -7,9 +7,9 @@ Serviço:
     ☐ Consertar DAO para retrieve
     ☐ Testar formulário
 Fornecedor:
-    ☐ Implementar data de cadastro automatica
-    ☐ consertar ordem da validação de form
-    ☐ Testar formulário
+    ✔ Implementar data de cadastro automatica
+    ✔ consertar ordem da validação de form
+    ✔ Testar formulário
 Hospedes:
     ☐ Consertar input de cnpj
     ☐ Permitir limpar um campo de input formatado depois de preenchido (CNPJ)
