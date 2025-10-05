@@ -5,6 +5,9 @@
  */
 package view;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
@@ -70,12 +73,12 @@ public class TelaCadastroFornecedor extends javax.swing.JDialog {
         this.jComboBoxStatus = jComboBoxStatus;
     }
 
-    public JFormattedTextField getjFormattedTextField5() {
-        return jFormattedTextField5;
+    public JFormattedTextField getjDataCadastro() {
+        return jDataCadastro;
     }
 
-    public void setjFormattedTextField5(JFormattedTextField jFormattedTextField5) {
-        this.jFormattedTextField5 = jFormattedTextField5;
+    public void setjDataCadastro(JFormattedTextField jDataCadastro) {
+        this.jDataCadastro = jDataCadastro;
     }
 
     public JFormattedTextField getjFormattedTextFieldCep() {
@@ -429,7 +432,7 @@ public class TelaCadastroFornecedor extends javax.swing.JDialog {
         jLabelEmail = new javax.swing.JLabel();
         jTextFieldEmail = new javax.swing.JTextField();
         jFormattedTextFieldFone1 = new javax.swing.JFormattedTextField();
-        jFormattedTextField5 = new javax.swing.JFormattedTextField();
+        jDataCadastro = new javax.swing.JFormattedTextField();
         jLabelCadastro = new javax.swing.JLabel();
         jLabelCep = new javax.swing.JLabel();
         jFormattedTextFieldCep = new javax.swing.JFormattedTextField();
@@ -521,9 +524,14 @@ public class TelaCadastroFornecedor extends javax.swing.JDialog {
             ex.printStackTrace();
         }
 
-        jFormattedTextField5.setEditable(false);
-        jFormattedTextField5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jFormattedTextField5.setText("08/07/2025");
+        jDataCadastro.setEditable(false);
+        jDataCadastro.setEnabled(false);
+        jDataCadastro.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jDataCadastro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jDataCadastroActionPerformed(evt);
+            }
+        });
 
         jLabelCadastro.setText("Data de Cadastro");
 
@@ -652,7 +660,7 @@ public class TelaCadastroFornecedor extends javax.swing.JDialog {
                                         .addComponent(jLabelCnpj))
                                     .addGap(156, 156, 156)))
                             .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jFormattedTextField5, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jDataCadastro, javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jLabelCadastro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addGap(20, 20, 20))
         );
@@ -671,7 +679,7 @@ public class TelaCadastroFornecedor extends javax.swing.JDialog {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelDadosLayout.createSequentialGroup()
                                 .addComponent(jLabelCadastro)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jFormattedTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jDataCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelDadosLayout.createSequentialGroup()
                                 .addComponent(jLabelSexo1)
                                 .addGap(28, 28, 28))
@@ -822,6 +830,10 @@ public class TelaCadastroFornecedor extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonGravarActionPerformed
 
+    private void jDataCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDataCadastroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jDataCadastroActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -872,7 +884,7 @@ public class TelaCadastroFornecedor extends javax.swing.JDialog {
     private javax.swing.JButton jButtonSair;
     private javax.swing.JComboBox<String> jComboBoxSexo;
     private javax.swing.JComboBox<String> jComboBoxStatus;
-    private javax.swing.JFormattedTextField jFormattedTextField5;
+    private javax.swing.JFormattedTextField jDataCadastro;
     private javax.swing.JFormattedTextField jFormattedTextFieldCep;
     private javax.swing.JFormattedTextField jFormattedTextFieldCnpj;
     private javax.swing.JFormattedTextField jFormattedTextFieldCpf;

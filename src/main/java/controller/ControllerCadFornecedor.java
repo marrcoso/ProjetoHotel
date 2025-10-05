@@ -3,6 +3,8 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import javax.swing.JOptionPane;
 
@@ -64,9 +66,11 @@ public final class ControllerCadFornecedor implements ActionListener, InterfaceC
         utilities.Utilities.ativaDesativa(this.telaCadastroFornecedor.getjPanelBotoes(), false);
         utilities.Utilities.limpaComponentes(this.telaCadastroFornecedor.getjPanelDados(), true);
         this.telaCadastroFornecedor.getjTextFieldId().setEnabled(false);
+        this.telaCadastroFornecedor.getjDataCadastro().setEnabled(false);
         this.telaCadastroFornecedor.getjTextFieldNomeFantasia().requestFocus();
         this.telaCadastroFornecedor.getjComboBoxStatus().setSelectedItem("Ativo");
         this.telaCadastroFornecedor.getjComboBoxStatus().setEnabled(false);
+        this.telaCadastroFornecedor.getjDataCadastro().setText(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
     }
 
     @Override

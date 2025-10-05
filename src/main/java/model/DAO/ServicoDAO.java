@@ -39,7 +39,7 @@ public class ServicoDAO implements InterfaceDAO<Servico> {
                 + " descricao, "
                 + " obs, "
                 + " status "
-                + " From veiculo"
+                + " From servico"
                 + " Where id = ? ";
 
         try {
@@ -71,7 +71,7 @@ public class ServicoDAO implements InterfaceDAO<Servico> {
                 + " descricao, "
                 + " obs, "
                 + " status "
-                + " From veiculo"
+                + " From servico"
                 + " Where " + atributo + " like ?";
 
         try {
@@ -99,8 +99,8 @@ public class ServicoDAO implements InterfaceDAO<Servico> {
 
     @Override
     public void Update(Servico objeto) throws SQLException {
-        String sqlInstrucao = "Update veiculo "
-                + " Set"
+        String sqlInstrucao = "Update servico "
+                + " Set "
                 + " descricao = ?, "
                 + " obs = ?, "
                 + " status = ? "

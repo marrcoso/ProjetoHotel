@@ -224,7 +224,7 @@
                                   </Group>
                               </Group>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jFormattedTextField5" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="jDataCadastro" alignment="1" max="32767" attributes="0"/>
                                   <Component id="jLabelCadastro" alignment="1" max="32767" attributes="0"/>
                               </Group>
                           </Group>
@@ -250,7 +250,7 @@
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="jLabelCadastro" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jFormattedTextField5" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jDataCadastro" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="jLabelSexo1" min="-2" max="-2" attributes="0"/>
@@ -458,12 +458,15 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField5">
+        <Component class="javax.swing.JFormattedTextField" name="jDataCadastro">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="08/07/2025"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jDataCadastroActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelCadastro">
           <Properties>
