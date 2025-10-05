@@ -2,6 +2,7 @@ Produto:
     ☐ Input de valor formatado/mascara
     ☐ Consertar filtro de valor ou remover
     ☐ Consertar filtro de observação ou remover
+    ☐ Testar formulário
 Serviço:
     ☐ Consertar DAO para retrieve
     ☐ Testar formulário
@@ -12,9 +13,11 @@ Fornecedor:
 Hospedes:
     ☐ Consertar input de cnpj
     ☐ Permitir limpar um campo de input formatado depois de preenchido (CNPJ)
-    ☐ Implementar dados de cadastro automática
+    ☐ Implementar data de cadastro automática
+    ☐ Testar formulário
 Quarto:
     ☐ consertar ordem da validação de form
+    ☐ Testar formulário
 Vaga Estacionamento:
     ☐ Consertar DAO para retrieve
     ☐ Testar formulário
