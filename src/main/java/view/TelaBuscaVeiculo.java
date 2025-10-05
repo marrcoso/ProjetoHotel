@@ -110,17 +110,18 @@ public class TelaBuscaVeiculo extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Id", "Placa", "Cor", "Modelo", "Status"
+                "Id", "Placa", "Cor", "Modelo", "Proprietario", "Status"
             }
         ));
         jTableDados.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jTableDados);
         if (jTableDados.getColumnModel().getColumnCount() > 0) {
             jTableDados.getColumnModel().getColumn(0).setMaxWidth(40);
-            jTableDados.getColumnModel().getColumn(1).setMaxWidth(210);
-            jTableDados.getColumnModel().getColumn(2).setMaxWidth(170);
+            jTableDados.getColumnModel().getColumn(1).setMaxWidth(150);
+            jTableDados.getColumnModel().getColumn(2).setMaxWidth(150);
             jTableDados.getColumnModel().getColumn(3).setMaxWidth(80);
-            jTableDados.getColumnModel().getColumn(4).setMaxWidth(80);
+            jTableDados.getColumnModel().getColumn(4).setMaxWidth(150);
+            jTableDados.getColumnModel().getColumn(5).setMaxWidth(80);
         }
 
         javax.swing.GroupLayout jPanelDadosLayout = new javax.swing.GroupLayout(jPanelDados);
@@ -136,8 +137,7 @@ public class TelaBuscaVeiculo extends javax.swing.JDialog {
 
         jPanelFiltros.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jCBFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Id", "Placa", "Cor", "Modelo" }));
-        jCBFiltro.setSelectedIndex(-1);
+        jCBFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Id", "Placa", "Cor", "Modelo", "Hospede", "Funcionario", "Fornecedor" }));
         jCBFiltro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCBFiltroActionPerformed(evt);

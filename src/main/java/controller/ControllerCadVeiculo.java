@@ -118,6 +118,11 @@ public final class ControllerCadVeiculo implements ActionListener, InterfaceCont
 
     @Override
     public boolean isFormularioValido() {
+        if (proprietarioRelacionado == null) {
+            JOptionPane.showMessageDialog(null, "Selecione um Proprietário para o Veículo.");
+            telaCadastroVeiculo.getjButtonRelacionarProprietario().requestFocus();
+            return false;
+        }
         if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroVeiculo.getjTextFieldPlaca().getText())) {
             JOptionPane.showMessageDialog(null, "O campo Placa é obrigatório.");
             telaCadastroVeiculo.getjTextFieldPlaca().requestFocus();
@@ -131,11 +136,6 @@ public final class ControllerCadVeiculo implements ActionListener, InterfaceCont
         if (modeloRelacionado == null) {
             JOptionPane.showMessageDialog(null, "Selecione um Modelo para o Veículo.");
             telaCadastroVeiculo.getjButtonRelacionarModelo().requestFocus();
-            return false;
-        }
-        if (proprietarioRelacionado == null) {
-            JOptionPane.showMessageDialog(null, "Selecione um Proprietário para o Veículo.");
-            telaCadastroVeiculo.getjButtonRelacionarProprietario().requestFocus();
             return false;
         }
         return true;
@@ -196,8 +196,6 @@ public final class ControllerCadVeiculo implements ActionListener, InterfaceCont
         if (selectedItem == null || selectedItem.equals(tipoProprietarioSelecionado)) {
             return;
         }
-        codigoProprietario = 0;
-        proprietarioRelacionado = null;
         telaCadastroVeiculo.getjFormattedTextFieldProprietario().setText("");
         tipoProprietarioSelecionado = selectedItem;
         telaCadastroVeiculo.getjLabelProprietario().setText(selectedItem);
@@ -377,7 +375,6 @@ public final class ControllerCadVeiculo implements ActionListener, InterfaceCont
             this.modeloRelacionado = veiculo.getModelo();
             telaCadastroVeiculo.getjFormattedTextFieldModelo().setText(getModeloFormat(modeloRelacionado));
             this.proprietarioRelacionado = veiculo.getProprietario();
-            telaCadastroVeiculo.getjFormattedTextFieldProprietario().setText(getProprietarioFormat(proprietarioRelacionado));
             
             if (proprietarioRelacionado instanceof Hospede) {
                 telaCadastroVeiculo.getjComboBoxTipoProprietario().setSelectedItem(Hospede.TIPO);
@@ -386,7 +383,8 @@ public final class ControllerCadVeiculo implements ActionListener, InterfaceCont
             } else if (proprietarioRelacionado instanceof Fornecedor) {
                 telaCadastroVeiculo.getjComboBoxTipoProprietario().setSelectedItem(Fornecedor.TIPO);
             }
-
+            
+            telaCadastroVeiculo.getjFormattedTextFieldProprietario().setText(getProprietarioFormat(proprietarioRelacionado));
             telaCadastroVeiculo.getjTextFieldPlaca().requestFocus();
         }
     }

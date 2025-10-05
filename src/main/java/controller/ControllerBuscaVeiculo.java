@@ -62,13 +62,17 @@ public final class ControllerBuscaVeiculo implements ActionListener, InterfaceCo
     }
 
     private enum FiltroVeiculo {
-        ID, PLACA, COR;
+        ID, PLACA, COR, MODELO, HOSPEDE, FUNCIONARIO, FORNECEDOR;
 
         public static FiltroVeiculo fromIndex(int index) {
             switch (index) {
                 case 0: return ID;
                 case 1: return PLACA;
                 case 2: return COR;
+                case 3: return MODELO;
+                case 4: return HOSPEDE;
+                case 5: return FUNCIONARIO;
+                case 6: return FORNECEDOR;
                 default: throw new IllegalArgumentException("Filtro inválido");
             }
         }
@@ -80,9 +84,17 @@ public final class ControllerBuscaVeiculo implements ActionListener, InterfaceCo
             veiculo.getId(),
             veiculo.getPlaca(),
             veiculo.getCor(),
-            veiculo.getModelo(),
+            veiculo.getModelo().getId(),
+            veiculo.getProprietario().getId() + " - " + veiculo.getProprietario().getNome(),
             veiculo.getStatus()
         });
+    }
+
+    private void carregarPorAtributo(String atributo, String valor, DefaultTableModel tabela) throws SQLException {
+        List<Veiculo> listaVeiculos = veiculoService.Carregar(atributo, valor);
+        for (Veiculo v : listaVeiculos) {
+            adicionarLinhaTabela(tabela, v);
+        }
     }
 
     @Override
@@ -109,17 +121,27 @@ public final class ControllerBuscaVeiculo implements ActionListener, InterfaceCo
                     break;
                 }
                 case PLACA: {
-                    List<Veiculo> listaPorPlaca = veiculoService.Carregar("placa", filtroTexto);
-                    for (Veiculo v : listaPorPlaca) {
-                        adicionarLinhaTabela(tabela, v);
-                    }
+                    carregarPorAtributo("placa", filtroTexto, tabela);
                     break;
                 }
                 case COR: {
-                    List<Veiculo> listaPorCor = veiculoService.Carregar("cor", filtroTexto);
-                    for (Veiculo v : listaPorCor) {
-                        adicionarLinhaTabela(tabela, v);
-                    }
+                    carregarPorAtributo("cor", filtroTexto, tabela);
+                    break;
+                }
+                case MODELO: {
+                    carregarPorAtributo("modelo_id", filtroTexto, tabela);
+                    break;
+                }
+                case HOSPEDE: {
+                    carregarPorAtributo("hospede_id", filtroTexto, tabela);
+                    break;
+                }
+                case FUNCIONARIO: {
+                    carregarPorAtributo("funcionario_id", filtroTexto, tabela);
+                    break;
+                }
+                case FORNECEDOR: {
+                    carregarPorAtributo("fornecedor_id", filtroTexto, tabela);
                     break;
                 }
             }
