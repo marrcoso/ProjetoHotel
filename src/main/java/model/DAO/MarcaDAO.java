@@ -45,9 +45,10 @@ public class MarcaDAO implements InterfaceDAO<Marca> {
             PreparedStatement pstm = conexao.prepareStatement(sqlInstrucao);
             pstm.setInt(1, id);
             ResultSet rst = pstm.executeQuery();
-            Marca marca = new Marca();
+            Marca marca = null;
 
             while (rst.next()) {
+                marca = new Marca();
                 marca.setId(rst.getInt("id"));
                 marca.setDescricao(rst.getString("descricao")); 
                 marca.setStatus(rst.getString("status").charAt(0));

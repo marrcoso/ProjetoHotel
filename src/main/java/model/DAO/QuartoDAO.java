@@ -62,9 +62,10 @@ public class QuartoDAO implements InterfaceDAO<Quarto> {
             PreparedStatement pstm = conexao.prepareStatement(sqlInstrucao);
             pstm.setInt(1, id);
             ResultSet rst = pstm.executeQuery();
-            Quarto quarto = new Quarto();
+            Quarto quarto = null;
 
             while (rst.next()) {
+                quarto = new Quarto();
                 quarto.setId(rst.getInt("id"));
                 quarto.setDescricao(rst.getString("descricao"));
                 quarto.setCapacidadeHospedes(rst.getInt("capacidade_hospedes"));

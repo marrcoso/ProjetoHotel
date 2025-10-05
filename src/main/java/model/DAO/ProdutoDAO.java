@@ -50,9 +50,10 @@ public class ProdutoDAO implements InterfaceDAO<Produto> {
             PreparedStatement pstm = conexao.prepareStatement(sqlInstrucao);
             pstm.setInt(1, id);
             ResultSet rst = pstm.executeQuery();
-            Produto produto = new Produto();
+            Produto produto = null;
 
             while (rst.next()) {
+                produto = new Produto();
                 produto.setId(rst.getInt("id"));
                 produto.setDescricao(rst.getString("descricao"));
                 produto.setValor(rst.getFloat("valor"));

@@ -93,10 +93,11 @@ public class FuncionarioDAO implements InterfaceDAO<Funcionario> {
             PreparedStatement pstm = conexao.prepareStatement(sqlInstrucao);
             pstm.setInt(1, id);
             ResultSet rst = pstm.executeQuery();
-            Funcionario funcionario = new Funcionario();
+            Funcionario funcionario = null;
 
 
             while (rst.next()) {
+                funcionario = new Funcionario();
                 funcionario.setId(rst.getInt("id"));
                 funcionario.setNome(rst.getString(2));
                 funcionario.setFone1(rst.getString("fone"));     

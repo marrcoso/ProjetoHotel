@@ -99,9 +99,10 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor> {
             PreparedStatement pstm = conexao.prepareStatement(sqlInstrucao);
             pstm.setInt(1, id);
             ResultSet rst = pstm.executeQuery();
-            Fornecedor fornecedor = new Fornecedor();
+            Fornecedor fornecedor = null;
 
             while (rst.next()) {
+                fornecedor = new Fornecedor();
                 fornecedor.setId(rst.getInt("id"));
                 fornecedor.setNome(rst.getString(2));
                 fornecedor.setFone1(rst.getString("fone"));     

@@ -50,9 +50,10 @@ public class VagaEstacionamentoDAO implements InterfaceDAO<VagaEstacionamento> {
             PreparedStatement pstm = conexao.prepareStatement(sqlInstrucao);
             pstm.setInt(1, id);
             ResultSet rst = pstm.executeQuery();
-            VagaEstacionamento vagaEstacionamento = new VagaEstacionamento();
+            VagaEstacionamento vagaEstacionamento = null;
 
             while (rst.next()) {
+                vagaEstacionamento = new VagaEstacionamento();
                 vagaEstacionamento.setId(rst.getInt("id"));
                 vagaEstacionamento.setDescricao(rst.getString("descricao"));
                 vagaEstacionamento.setObs(rst.getString("obs"));

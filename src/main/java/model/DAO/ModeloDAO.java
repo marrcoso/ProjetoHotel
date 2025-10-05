@@ -51,9 +51,7 @@ public class ModeloDAO implements InterfaceDAO<Modelo> {
             Modelo modelo = null;
 
             while (rst.next()) {
-                if (modelo == null) {
-                    modelo = new Modelo();
-                }
+                modelo = new Modelo();
                 modelo.setId(rst.getInt("id"));
                 modelo.setDescricao(rst.getString("descricao")); 
                 modelo.setStatus(rst.getString("status").charAt(0));

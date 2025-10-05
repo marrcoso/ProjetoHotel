@@ -54,9 +54,7 @@ public class VeiculoDAO implements InterfaceDAO<Veiculo> {
             Veiculo veiculo = null;
             
             while (rst.next()) {
-                if (veiculo == null) {
-                    veiculo = new Veiculo();
-                }
+                veiculo = new Veiculo();
                 veiculo.setId(rst.getInt("id"));
                 veiculo.setPlaca(rst.getString("placa"));
                 veiculo.setModelo(new ModeloDAO().Retrieve(rst.getInt("modelo_id")));

@@ -100,9 +100,10 @@ public class HospedeDAO implements InterfaceDAO<Hospede> {
             PreparedStatement pstm = conexao.prepareStatement(sqlInstrucao);
             pstm.setInt(1, id);
             ResultSet rst = pstm.executeQuery();
-            Hospede hospede = new Hospede();
+            Hospede hospede = null;
 
             while (rst.next()) {
+                hospede = new Hospede();
                 hospede.setId(rst.getInt("id"));
                 hospede.setNome(rst.getString(2));
                 hospede.setFone1(rst.getString("fone"));
