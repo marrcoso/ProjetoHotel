@@ -12,6 +12,8 @@ import javax.swing.JTextField;
 
 public class Utilities {
 
+    public static final String ALWAYS_DISABLED = "alwaysDisabled";
+
     public static void ativaDesativaButton(JButton button, boolean ativa){
         if("0".equals(button.getActionCommand())){
             button.setEnabled(ativa);
@@ -37,7 +39,7 @@ public class Utilities {
         for (Component componenteAtual : vetComponentes) {
             if (componenteAtual instanceof JFormattedTextField) {
                 JFormattedTextField formattedTextField = (JFormattedTextField) componenteAtual;
-                Object alwaysDisabledObj = formattedTextField.getClientProperty("alwaysDisabled");
+                Object alwaysDisabledObj = formattedTextField.getClientProperty(Utilities.ALWAYS_DISABLED);
                 boolean alwaysDisabled = alwaysDisabledObj instanceof Boolean ? (Boolean) alwaysDisabledObj : false;
                 formattedTextField.setText("");
                 formattedTextField.setEnabled(alwaysDisabled ? false : ativa);

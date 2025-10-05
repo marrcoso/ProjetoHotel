@@ -51,12 +51,15 @@ public class VeiculoDAO implements InterfaceDAO<Veiculo> {
             PreparedStatement pstm = conexao.prepareStatement(sqlInstrucao);
             pstm.setInt(1, id);
             ResultSet rst = pstm.executeQuery();
-            Veiculo veiculo = new Veiculo();
-
+            Veiculo veiculo = null;
+            
             while (rst.next()) {
+                if (veiculo == null) {
+                    veiculo = new Veiculo();
+                }
                 veiculo.setId(rst.getInt("id"));
                 veiculo.setPlaca(rst.getString("placa"));
-                // Aqui você pode buscar o modelo pelo id se necessário
+                veiculo.setModelo(new ModeloDAO().Retrieve(rst.getInt("modelo_id")));
                 veiculo.setCor(rst.getString("cor"));
                 veiculo.setStatus(rst.getString("status").charAt(0));
             }

@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import model.Modelo;
 import model.Veiculo;
 import service.VeiculoService;
+import view.TelaBuscaModelo;
 import view.TelaBuscaVeiculo;
 import view.TelaCadastroVeiculo;
 
@@ -25,7 +26,7 @@ public final class ControllerCadVeiculo implements ActionListener, InterfaceCont
         this.veiculoService = new VeiculoService();
         utilities.Utilities.ativaDesativa(this.telaCadastroVeiculo.getjPanelBotoes(), true);
         utilities.Utilities.limpaComponentes(this.telaCadastroVeiculo.getjPanelDados(), false);
-
+        this.telaCadastroVeiculo.getjFormattedTextFieldModelo().putClientProperty(utilities.Utilities.ALWAYS_DISABLED, true);
         initListeners();
     }
 
@@ -154,10 +155,10 @@ public final class ControllerCadVeiculo implements ActionListener, InterfaceCont
 
     public void handleRelacionarModelo() {
         codigoModelo = 0;
-        TelaBuscaVeiculo telaBuscaVeiculo = new TelaBuscaVeiculo(null, true);
+        TelaBuscaModelo telaBuscaModelo = new TelaBuscaModelo(null, true);
         @SuppressWarnings("unused")
-        ControllerBuscaVeiculo controllerBuscaVeiculo = new ControllerBuscaVeiculo(telaBuscaVeiculo, codigo -> this.codigoModelo = codigo);
-        telaBuscaVeiculo.setVisible(true);
+        ControllerBuscaModelo controllerBuscaModelo = new ControllerBuscaModelo(telaBuscaModelo, codigo -> this.codigoModelo = codigo);
+        telaBuscaModelo.setVisible(true);
 
         if (codigoModelo != 0) {
             utilities.Utilities.ativaDesativa(telaCadastroVeiculo.getjPanelBotoes(), false);

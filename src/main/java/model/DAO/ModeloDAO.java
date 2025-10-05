@@ -48,9 +48,12 @@ public class ModeloDAO implements InterfaceDAO<Modelo> {
             PreparedStatement pstm = conexao.prepareStatement(sqlInstrucao);
             pstm.setInt(1, id);
             ResultSet rst = pstm.executeQuery();
-            Modelo modelo = new Modelo();
+            Modelo modelo = null;
 
             while (rst.next()) {
+                if (modelo == null) {
+                    modelo = new Modelo();
+                }
                 modelo.setId(rst.getInt("id"));
                 modelo.setDescricao(rst.getString("descricao")); 
                 modelo.setStatus(rst.getString("status").charAt(0));

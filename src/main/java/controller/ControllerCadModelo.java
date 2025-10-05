@@ -27,7 +27,7 @@ public final class ControllerCadModelo implements ActionListener, InterfaceContr
         this.modeloService = new ModeloService();
         utilities.Utilities.ativaDesativa(this.telaCadastroModelo.getjPanelBotoes(), true);
         utilities.Utilities.limpaComponentes(this.telaCadastroModelo.getjPanelDados(), false);
-
+        this.telaCadastroModelo.getjFormattedTextFieldMarca().putClientProperty(utilities.Utilities.ALWAYS_DISABLED, true);
         initListeners();
     }
 

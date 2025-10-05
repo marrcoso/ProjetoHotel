@@ -101,9 +101,11 @@ public final class ControllerBuscaModelo implements ActionListener, InterfaceCon
             switch (filtro) {
                 case ID: {
                     Modelo modelo = modeloService.Carregar(Integer.parseInt(filtroTexto));
-                    if (modelo != null) {
-                        adicionarLinhaTabela(tabela, modelo);
+                    if (modelo == null) {
+                        JOptionPane.showMessageDialog(telaBuscaModelo, "Nenhum modelo encontrado com o ID informado.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                        return;
                     }
+                    adicionarLinhaTabela(tabela, modelo);
                     break;
                 }
                 case DESCRICAO: {
