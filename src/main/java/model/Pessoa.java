@@ -1,7 +1,5 @@
 package model;
 
-import java.time.LocalDate;
-
 public class Pessoa {
 
     private int id;
@@ -35,7 +33,7 @@ public class Pessoa {
         this.bairro = bairro;
         this.cidade = cidade;
         this.complemento = complemento;
-        this.dataCadastro = LocalDate.now().toString();
+        this.dataCadastro = dataCadastro;
         this.cpf = cpf;
         this.rg = rg;
         this.obs = obs;

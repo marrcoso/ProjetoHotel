@@ -70,7 +70,7 @@ public final class ControllerCadFornecedor implements ActionListener, InterfaceC
         this.telaCadastroFornecedor.getjTextFieldNomeFantasia().requestFocus();
         this.telaCadastroFornecedor.getjComboBoxStatus().setSelectedItem("Ativo");
         this.telaCadastroFornecedor.getjComboBoxStatus().setEnabled(false);
-        this.telaCadastroFornecedor.getjDataCadastro().setText(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        this.telaCadastroFornecedor.getjDataCadastro().setText(utilities.Utilities.getDataHoje());
     }
 
     @Override
