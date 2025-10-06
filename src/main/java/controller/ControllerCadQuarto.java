@@ -87,13 +87,13 @@ public final class ControllerCadQuarto implements ActionListener, InterfaceContr
             telaCadastroQuarto.getjFormattedTextFieldCapacidade().requestFocus();
             return false;
         }
-        if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroQuarto.getjFormattedTextFieldMetragem().getText())) {
-            JOptionPane.showMessageDialog(null, "O campo Metragem é obrigatório.");
+        if (!utilities.ValidadorCampos.validarCampoNumero(telaCadastroQuarto.getjFormattedTextFieldMetragem().getText())) {
+            JOptionPane.showMessageDialog(null, "O campo Metragem é inválido.");
             telaCadastroQuarto.getjFormattedTextFieldMetragem().requestFocus();
             return false;
         }
-        if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroQuarto.getjFormattedTextFieldAndar().getText())) {
-            JOptionPane.showMessageDialog(null, "O campo Andar é obrigatório.");
+        if (!utilities.ValidadorCampos.validarCampoNumero(telaCadastroQuarto.getjFormattedTextFieldAndar().getText())) {
+            JOptionPane.showMessageDialog(null, "O campo Andar é inválido.");
             telaCadastroQuarto.getjFormattedTextFieldAndar().requestFocus();
             return false;
         }
