@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 
 import model.VagaEstacionamento;
 import service.VagaEstacionamentoService;
+import utilities.Utilities;
 import view.TelaBuscaVaga;
 import view.TelaCadastroVagaEstacionamento;
 
@@ -20,8 +21,10 @@ public final class ControllerCadVagaEstacionamento implements ActionListener, In
     public ControllerCadVagaEstacionamento(TelaCadastroVagaEstacionamento telaCadastroVagaEstacionamento) {
         this.telaCadastroVagaEstacionamento = telaCadastroVagaEstacionamento;
         this.vagaService = new VagaEstacionamentoService();
-        utilities.Utilities.ativaDesativa(this.telaCadastroVagaEstacionamento.getjPanelBotoes(), true);
-        utilities.Utilities.limpaComponentes(this.telaCadastroVagaEstacionamento.getjPanelDados(), false);
+        Utilities.setAlwaysDisabled(this.telaCadastroVagaEstacionamento.getjTextFieldId(), true);
+        Utilities.setAlwaysDisabled(this.telaCadastroVagaEstacionamento.getjComboBoxStatus(), true);
+        Utilities.ativaDesativa(this.telaCadastroVagaEstacionamento.getjPanelBotoes(), true);
+        Utilities.limpaComponentes(this.telaCadastroVagaEstacionamento.getjPanelDados(), false);
 
         initListeners();
     }
@@ -61,18 +64,16 @@ public final class ControllerCadVagaEstacionamento implements ActionListener, In
 
     @Override
     public void handleNovo() {
-        utilities.Utilities.ativaDesativa(this.telaCadastroVagaEstacionamento.getjPanelBotoes(), false);
-        utilities.Utilities.limpaComponentes(this.telaCadastroVagaEstacionamento.getjPanelDados(), true);
-        this.telaCadastroVagaEstacionamento.getjTextFieldId().setEnabled(false);
+        Utilities.ativaDesativa(this.telaCadastroVagaEstacionamento.getjPanelBotoes(), false);
+        Utilities.limpaComponentes(this.telaCadastroVagaEstacionamento.getjPanelDados(), true);
         this.telaCadastroVagaEstacionamento.getjFormattedTextFieldMetragem().requestFocus();
         this.telaCadastroVagaEstacionamento.getjComboBoxStatus().setSelectedItem("Ativo");
-        this.telaCadastroVagaEstacionamento.getjComboBoxStatus().setEnabled(false);
     }
 
     @Override
     public void handleCancelar() {
-        utilities.Utilities.ativaDesativa(this.telaCadastroVagaEstacionamento.getjPanelBotoes(), true);
-        utilities.Utilities.limpaComponentes(this.telaCadastroVagaEstacionamento.getjPanelDados(), false);
+        Utilities.ativaDesativa(this.telaCadastroVagaEstacionamento.getjPanelBotoes(), true);
+        Utilities.limpaComponentes(this.telaCadastroVagaEstacionamento.getjPanelDados(), false);
     }
 
     @Override
@@ -111,8 +112,8 @@ public final class ControllerCadVagaEstacionamento implements ActionListener, In
                 JOptionPane.showMessageDialog(telaCadastroVagaEstacionamento, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            utilities.Utilities.ativaDesativa(telaCadastroVagaEstacionamento.getjPanelBotoes(), true);
-            utilities.Utilities.limpaComponentes(telaCadastroVagaEstacionamento.getjPanelDados(), false);
+            Utilities.ativaDesativa(telaCadastroVagaEstacionamento.getjPanelBotoes(), true);
+            Utilities.limpaComponentes(telaCadastroVagaEstacionamento.getjPanelDados(), false);
             return;
         }
 
@@ -124,8 +125,8 @@ public final class ControllerCadVagaEstacionamento implements ActionListener, In
             return;
         }
 
-        utilities.Utilities.ativaDesativa(telaCadastroVagaEstacionamento.getjPanelBotoes(), true);
-        utilities.Utilities.limpaComponentes(telaCadastroVagaEstacionamento.getjPanelDados(), false);
+        Utilities.ativaDesativa(telaCadastroVagaEstacionamento.getjPanelBotoes(), true);
+        Utilities.limpaComponentes(telaCadastroVagaEstacionamento.getjPanelDados(), false);
     }
 
     @Override
@@ -152,11 +153,10 @@ public final class ControllerCadVagaEstacionamento implements ActionListener, In
         telaBuscaVaga.setVisible(true);
 
         if (codigo != 0) {
-            utilities.Utilities.ativaDesativa(telaCadastroVagaEstacionamento.getjPanelBotoes(), false);
-            utilities.Utilities.limpaComponentes(telaCadastroVagaEstacionamento.getjPanelDados(), true);
+            Utilities.ativaDesativa(telaCadastroVagaEstacionamento.getjPanelBotoes(), false);
+            Utilities.limpaComponentes(telaCadastroVagaEstacionamento.getjPanelDados(), true);
 
             telaCadastroVagaEstacionamento.getjTextFieldId().setText(String.valueOf(codigo));
-            telaCadastroVagaEstacionamento.getjTextFieldId().setEnabled(false);
 
             VagaEstacionamento vaga;
             try {

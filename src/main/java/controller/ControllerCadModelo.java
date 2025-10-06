@@ -10,6 +10,7 @@ import model.Marca;
 import model.Modelo;
 import service.MarcaService;
 import service.ModeloService;
+import utilities.Utilities;
 import view.TelaBuscaMarca;
 import view.TelaBuscaModelo;
 import view.TelaCadastroModelo;
@@ -25,9 +26,11 @@ public final class ControllerCadModelo implements ActionListener, InterfaceContr
     public ControllerCadModelo(TelaCadastroModelo telaCadastroModelo) {
         this.telaCadastroModelo = telaCadastroModelo;
         this.modeloService = new ModeloService();
-        utilities.Utilities.ativaDesativa(this.telaCadastroModelo.getjPanelBotoes(), true);
-        utilities.Utilities.limpaComponentes(this.telaCadastroModelo.getjPanelDados(), false);
-        this.telaCadastroModelo.getjFormattedTextFieldMarca().putClientProperty(utilities.Utilities.ALWAYS_DISABLED, true);
+        Utilities.setAlwaysDisabled(this.telaCadastroModelo.getjTextFieldId(), true);
+        Utilities.setAlwaysDisabled(this.telaCadastroModelo.getjComboBoxStatus(), true);
+        Utilities.ativaDesativa(this.telaCadastroModelo.getjPanelBotoes(), true);
+        Utilities.limpaComponentes(this.telaCadastroModelo.getjPanelDados(), false);
+        this.telaCadastroModelo.getjFormattedTextFieldMarca().putClientProperty(Utilities.ALWAYS_DISABLED, true);
         initListeners();
     }
 
@@ -70,18 +73,16 @@ public final class ControllerCadModelo implements ActionListener, InterfaceContr
 
     @Override
     public void handleNovo() {
-        utilities.Utilities.ativaDesativa(this.telaCadastroModelo.getjPanelBotoes(), false);
-        utilities.Utilities.limpaComponentes(this.telaCadastroModelo.getjPanelDados(), true);
-        this.telaCadastroModelo.getjTextFieldId().setEnabled(false);
+        Utilities.ativaDesativa(this.telaCadastroModelo.getjPanelBotoes(), false);
+        Utilities.limpaComponentes(this.telaCadastroModelo.getjPanelDados(), true);
         this.telaCadastroModelo.getjTextFieldDescricao().requestFocus();
         this.telaCadastroModelo.getjComboBoxStatus().setSelectedItem("Ativo");
-        this.telaCadastroModelo.getjComboBoxStatus().setEnabled(false);
     }
 
     @Override
     public void handleCancelar() {
-        utilities.Utilities.ativaDesativa(this.telaCadastroModelo.getjPanelBotoes(), true);
-        utilities.Utilities.limpaComponentes(this.telaCadastroModelo.getjPanelDados(), false);
+        Utilities.ativaDesativa(this.telaCadastroModelo.getjPanelBotoes(), true);
+        Utilities.limpaComponentes(this.telaCadastroModelo.getjPanelDados(), false);
         this.marcaRelacionada = null;
     }
 
@@ -121,8 +122,8 @@ public final class ControllerCadModelo implements ActionListener, InterfaceContr
                 JOptionPane.showMessageDialog(telaCadastroModelo, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            utilities.Utilities.ativaDesativa(telaCadastroModelo.getjPanelBotoes(), true);
-            utilities.Utilities.limpaComponentes(telaCadastroModelo.getjPanelDados(), false);
+            Utilities.ativaDesativa(telaCadastroModelo.getjPanelBotoes(), true);
+            Utilities.limpaComponentes(telaCadastroModelo.getjPanelDados(), false);
             return;
         }
 
@@ -134,8 +135,8 @@ public final class ControllerCadModelo implements ActionListener, InterfaceContr
             return;
         }
 
-        utilities.Utilities.ativaDesativa(telaCadastroModelo.getjPanelBotoes(), true);
-        utilities.Utilities.limpaComponentes(telaCadastroModelo.getjPanelDados(), false);
+        Utilities.ativaDesativa(telaCadastroModelo.getjPanelBotoes(), true);
+        Utilities.limpaComponentes(telaCadastroModelo.getjPanelDados(), false);
     }
 
     @Override
@@ -160,8 +161,7 @@ public final class ControllerCadModelo implements ActionListener, InterfaceContr
         telaBuscaMarca.setVisible(true);
 
         if (codigoMarca != 0) {
-            utilities.Utilities.ativaDesativa(telaCadastroModelo.getjPanelBotoes(), false);
-            this.telaCadastroModelo.getjTextFieldId().setEnabled(false);
+            Utilities.ativaDesativa(telaCadastroModelo.getjPanelBotoes(), false);
             this.telaCadastroModelo.getjTextFieldDescricao().requestFocus();
 
             Marca marca;
@@ -194,11 +194,10 @@ public final class ControllerCadModelo implements ActionListener, InterfaceContr
         telaBuscaModelo.setVisible(true);
 
         if (codigoModelo != 0) {
-            utilities.Utilities.ativaDesativa(telaCadastroModelo.getjPanelBotoes(), false);
-            utilities.Utilities.limpaComponentes(telaCadastroModelo.getjPanelDados(), true);
+            Utilities.ativaDesativa(telaCadastroModelo.getjPanelBotoes(), false);
+            Utilities.limpaComponentes(telaCadastroModelo.getjPanelDados(), true);
 
             telaCadastroModelo.getjTextFieldId().setText(String.valueOf(codigoModelo));
-            telaCadastroModelo.getjTextFieldId().setEnabled(false);
 
             Modelo modelo;
             try {

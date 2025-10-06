@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 
 import model.Servico;
 import service.ServicoService;
+import utilities.Utilities;
 import view.TelaBuscaServico;
 import view.TelaCadastroServico;
 
@@ -20,8 +21,10 @@ public final class ControllerCadServico implements ActionListener, InterfaceCont
     public ControllerCadServico(TelaCadastroServico telaCadastroServico) {
         this.telaCadastroServico = telaCadastroServico;
         this.servicoService = new ServicoService();
-        utilities.Utilities.ativaDesativa(this.telaCadastroServico.getjPanelBotoes(), true);
-        utilities.Utilities.limpaComponentes(this.telaCadastroServico.getjPanelDados(), false);
+        Utilities.setAlwaysDisabled(this.telaCadastroServico.getjTextFieldId(), true);
+        Utilities.setAlwaysDisabled(this.telaCadastroServico.getjComboBoxStatus(), true);
+        Utilities.ativaDesativa(this.telaCadastroServico.getjPanelBotoes(), true);
+        Utilities.limpaComponentes(this.telaCadastroServico.getjPanelDados(), false);
 
         initListeners();
     }
@@ -61,18 +64,16 @@ public final class ControllerCadServico implements ActionListener, InterfaceCont
 
     @Override
     public void handleNovo() {
-        utilities.Utilities.ativaDesativa(this.telaCadastroServico.getjPanelBotoes(), false);
-        utilities.Utilities.limpaComponentes(this.telaCadastroServico.getjPanelDados(), true);
-        this.telaCadastroServico.getjTextFieldId().setEnabled(false);
+        Utilities.ativaDesativa(this.telaCadastroServico.getjPanelBotoes(), false);
+        Utilities.limpaComponentes(this.telaCadastroServico.getjPanelDados(), true);
         this.telaCadastroServico.getjTextFieldDescricao().requestFocus();
         this.telaCadastroServico.getjComboBoxStatus().setSelectedItem("Ativo");
-        this.telaCadastroServico.getjComboBoxStatus().setEnabled(false);
     }
 
     @Override
     public void handleCancelar() {
-        utilities.Utilities.ativaDesativa(this.telaCadastroServico.getjPanelBotoes(), true);
-        utilities.Utilities.limpaComponentes(this.telaCadastroServico.getjPanelDados(), false);
+        Utilities.ativaDesativa(this.telaCadastroServico.getjPanelBotoes(), true);
+        Utilities.limpaComponentes(this.telaCadastroServico.getjPanelDados(), false);
     }
 
     @Override
@@ -106,8 +107,8 @@ public final class ControllerCadServico implements ActionListener, InterfaceCont
                 JOptionPane.showMessageDialog(telaCadastroServico, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            utilities.Utilities.ativaDesativa(telaCadastroServico.getjPanelBotoes(), true);
-            utilities.Utilities.limpaComponentes(telaCadastroServico.getjPanelDados(), false);
+            Utilities.ativaDesativa(telaCadastroServico.getjPanelBotoes(), true);
+            Utilities.limpaComponentes(telaCadastroServico.getjPanelDados(), false);
             return;
         }
 
@@ -119,8 +120,8 @@ public final class ControllerCadServico implements ActionListener, InterfaceCont
             return;
         }
 
-        utilities.Utilities.ativaDesativa(telaCadastroServico.getjPanelBotoes(), true);
-        utilities.Utilities.limpaComponentes(telaCadastroServico.getjPanelDados(), false);
+        Utilities.ativaDesativa(telaCadastroServico.getjPanelBotoes(), true);
+        Utilities.limpaComponentes(telaCadastroServico.getjPanelDados(), false);
     }
 
     @Override
@@ -146,11 +147,10 @@ public final class ControllerCadServico implements ActionListener, InterfaceCont
         telaBuscaServico.setVisible(true);
 
         if (codigo != 0) {
-            utilities.Utilities.ativaDesativa(telaCadastroServico.getjPanelBotoes(), false);
-            utilities.Utilities.limpaComponentes(telaCadastroServico.getjPanelDados(), true);
+            Utilities.ativaDesativa(telaCadastroServico.getjPanelBotoes(), false);
+            Utilities.limpaComponentes(telaCadastroServico.getjPanelDados(), true);
 
             telaCadastroServico.getjTextFieldId().setText(String.valueOf(codigo));
-            telaCadastroServico.getjTextFieldId().setEnabled(false);
 
             Servico servico;
             try {

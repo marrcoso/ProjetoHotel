@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 
 import model.Fornecedor;
 import service.FornecedorService;
+import utilities.Utilities;
 import view.TelaBuscaFornecedor;
 import view.TelaCadastroFornecedor;
 
@@ -20,13 +21,15 @@ public final class ControllerCadFornecedor implements ActionListener, InterfaceC
     public ControllerCadFornecedor(TelaCadastroFornecedor telaCadastroFornecedor) {
         this.telaCadastroFornecedor = telaCadastroFornecedor;
         this.fornecedorService = new FornecedorService();
-        utilities.Utilities.ativaDesativa(this.telaCadastroFornecedor.getjPanelBotoes(), true);
-        utilities.Utilities.limpaComponentes(this.telaCadastroFornecedor.getjPanelDados(), false);
-        utilities.Utilities.permiteLimparFormattedField(this.telaCadastroFornecedor.getjFormattedTextFieldCpf());
-        utilities.Utilities.permiteLimparFormattedField(this.telaCadastroFornecedor.getjFormattedTextFieldCep());
-        utilities.Utilities.permiteLimparFormattedField(this.telaCadastroFornecedor.getjFormattedTextFieldCnpj());
-        utilities.Utilities.permiteLimparFormattedField(this.telaCadastroFornecedor.getjFormattedTextFieldFone1());
-        utilities.Utilities.permiteLimparFormattedField(this.telaCadastroFornecedor.getjFormattedTextFieldFone2());
+        Utilities.setAlwaysDisabled(this.telaCadastroFornecedor.getjTextFieldId(), true);
+        Utilities.setAlwaysDisabled(this.telaCadastroFornecedor.getjComboBoxStatus(), true);
+        Utilities.ativaDesativa(this.telaCadastroFornecedor.getjPanelBotoes(), true);
+        Utilities.limpaComponentes(this.telaCadastroFornecedor.getjPanelDados(), false);
+        Utilities.permiteLimparFormattedField(this.telaCadastroFornecedor.getjFormattedTextFieldCpf());
+        Utilities.permiteLimparFormattedField(this.telaCadastroFornecedor.getjFormattedTextFieldCep());
+        Utilities.permiteLimparFormattedField(this.telaCadastroFornecedor.getjFormattedTextFieldCnpj());
+        Utilities.permiteLimparFormattedField(this.telaCadastroFornecedor.getjFormattedTextFieldFone1());
+        Utilities.permiteLimparFormattedField(this.telaCadastroFornecedor.getjFormattedTextFieldFone2());
         initListeners();
     }
 
@@ -65,20 +68,20 @@ public final class ControllerCadFornecedor implements ActionListener, InterfaceC
 
     @Override
     public void handleNovo() {
-        utilities.Utilities.ativaDesativa(this.telaCadastroFornecedor.getjPanelBotoes(), false);
-        utilities.Utilities.limpaComponentes(this.telaCadastroFornecedor.getjPanelDados(), true);
+        Utilities.ativaDesativa(this.telaCadastroFornecedor.getjPanelBotoes(), false);
+        Utilities.limpaComponentes(this.telaCadastroFornecedor.getjPanelDados(), true);
         this.telaCadastroFornecedor.getjTextFieldId().setEnabled(false);
         this.telaCadastroFornecedor.getjFormattedTextFieldDataCadastro().setEnabled(false);
         this.telaCadastroFornecedor.getjTextFieldNomeFantasia().requestFocus();
         this.telaCadastroFornecedor.getjComboBoxStatus().setSelectedItem("Ativo");
         this.telaCadastroFornecedor.getjComboBoxStatus().setEnabled(false);
-        this.telaCadastroFornecedor.getjFormattedTextFieldDataCadastro().setText(utilities.Utilities.getDataHoje());
+        this.telaCadastroFornecedor.getjFormattedTextFieldDataCadastro().setText(Utilities.getDataHoje());
     }
 
     @Override
     public void handleCancelar() {
-        utilities.Utilities.ativaDesativa(this.telaCadastroFornecedor.getjPanelBotoes(), true);
-        utilities.Utilities.limpaComponentes(this.telaCadastroFornecedor.getjPanelDados(), false);
+        Utilities.ativaDesativa(this.telaCadastroFornecedor.getjPanelBotoes(), true);
+        Utilities.limpaComponentes(this.telaCadastroFornecedor.getjPanelDados(), false);
     }
 
     @Override
@@ -93,8 +96,8 @@ public final class ControllerCadFornecedor implements ActionListener, InterfaceC
             telaCadastroFornecedor.getjComboBoxSexo().requestFocus();
             return false;
         }
-        boolean cpfPreenchido = utilities.Utilities.apenasNumeros(telaCadastroFornecedor.getjFormattedTextFieldCpf().getText()).length() > 0;
-        boolean cnpjPreenchido = utilities.Utilities.apenasNumeros(telaCadastroFornecedor.getjFormattedTextFieldCnpj().getText()).length() > 0;
+        boolean cpfPreenchido = Utilities.apenasNumeros(telaCadastroFornecedor.getjFormattedTextFieldCpf().getText()).length() > 0;
+        boolean cnpjPreenchido = Utilities.apenasNumeros(telaCadastroFornecedor.getjFormattedTextFieldCnpj().getText()).length() > 0;
         if (!cpfPreenchido && !cnpjPreenchido) {
             JOptionPane.showMessageDialog(null, "Preencha ao menos um dos campos: CPF ou CNPJ.");
             telaCadastroFornecedor.getjFormattedTextFieldCpf().requestFocus();
@@ -115,7 +118,7 @@ public final class ControllerCadFornecedor implements ActionListener, InterfaceC
             telaCadastroFornecedor.getjFormattedTextFieldFone1().requestFocus();
             return false;
         }
-        boolean fone2Preenchido = utilities.Utilities.apenasNumeros(telaCadastroFornecedor.getjFormattedTextFieldFone2().getText()).length() > 0;
+        boolean fone2Preenchido = Utilities.apenasNumeros(telaCadastroFornecedor.getjFormattedTextFieldFone2().getText()).length() > 0;
         if (fone2Preenchido && !utilities.ValidadorCampos.validarFone(telaCadastroFornecedor.getjFormattedTextFieldFone2().getText())) {
             JOptionPane.showMessageDialog(null, "O campo Fone2 é inválido.");
             telaCadastroFornecedor.getjFormattedTextFieldFone2().requestFocus();
@@ -170,8 +173,8 @@ public final class ControllerCadFornecedor implements ActionListener, InterfaceC
                 JOptionPane.showMessageDialog(telaCadastroFornecedor, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            utilities.Utilities.ativaDesativa(telaCadastroFornecedor.getjPanelBotoes(), true);
-            utilities.Utilities.limpaComponentes(telaCadastroFornecedor.getjPanelDados(), false);
+            Utilities.ativaDesativa(telaCadastroFornecedor.getjPanelBotoes(), true);
+            Utilities.limpaComponentes(telaCadastroFornecedor.getjPanelDados(), false);
             return;
         }
 
@@ -183,8 +186,8 @@ public final class ControllerCadFornecedor implements ActionListener, InterfaceC
             return;
         }
 
-        utilities.Utilities.ativaDesativa(telaCadastroFornecedor.getjPanelBotoes(), true);
-        utilities.Utilities.limpaComponentes(telaCadastroFornecedor.getjPanelDados(), false);
+        Utilities.ativaDesativa(telaCadastroFornecedor.getjPanelBotoes(), true);
+        Utilities.limpaComponentes(telaCadastroFornecedor.getjPanelDados(), false);
     }
 
     @Override
@@ -193,20 +196,20 @@ public final class ControllerCadFornecedor implements ActionListener, InterfaceC
         fornecedor.setNome(telaCadastroFornecedor.getjTextFieldNomeFantasia().getText());
         fornecedor.setRazaoSocial(telaCadastroFornecedor.getjTextFieldRazaoSocial().getText());
         fornecedor.setRg(telaCadastroFornecedor.getjTextFieldRg().getText());
-        fornecedor.setCpf(utilities.Utilities.apenasNumeros(telaCadastroFornecedor.getjFormattedTextFieldCpf().getText()));
+        fornecedor.setCpf(Utilities.apenasNumeros(telaCadastroFornecedor.getjFormattedTextFieldCpf().getText()));
         fornecedor.setInscricaoEstadual(telaCadastroFornecedor.getjTextFieldInscricaoEstadual().getText());
-        fornecedor.setCnpj(utilities.Utilities.apenasNumeros(telaCadastroFornecedor.getjFormattedTextFieldCnpj().getText()));
-        fornecedor.setFone1(utilities.Utilities.apenasNumeros(telaCadastroFornecedor.getjFormattedTextFieldFone1().getText()));
-        fornecedor.setFone2(utilities.Utilities.apenasNumeros(telaCadastroFornecedor.getjFormattedTextFieldFone2().getText()));
+        fornecedor.setCnpj(Utilities.apenasNumeros(telaCadastroFornecedor.getjFormattedTextFieldCnpj().getText()));
+        fornecedor.setFone1(Utilities.apenasNumeros(telaCadastroFornecedor.getjFormattedTextFieldFone1().getText()));
+        fornecedor.setFone2(Utilities.apenasNumeros(telaCadastroFornecedor.getjFormattedTextFieldFone2().getText()));
         fornecedor.setEmail(telaCadastroFornecedor.getjTextFieldEmail().getText());
-        fornecedor.setCep(utilities.Utilities.apenasNumeros(telaCadastroFornecedor.getjFormattedTextFieldCep().getText()));
+        fornecedor.setCep(Utilities.apenasNumeros(telaCadastroFornecedor.getjFormattedTextFieldCep().getText()));
         fornecedor.setCidade(telaCadastroFornecedor.getjTextFieldCidade().getText());
         fornecedor.setBairro(telaCadastroFornecedor.getjTextFieldBairro().getText());
         fornecedor.setLogradouro(telaCadastroFornecedor.getjTextFieldLogradouro().getText());
         fornecedor.setComplemento(telaCadastroFornecedor.getjTextFieldComplemento().getText());
         fornecedor.setObs(telaCadastroFornecedor.getjTextFieldObs().getText());
         fornecedor.setContato(telaCadastroFornecedor.getjTextFieldContato().getText());
-        fornecedor.setDataCadastro(utilities.Utilities.formatarDataToSqlData(telaCadastroFornecedor.getjFormattedTextFieldDataCadastro().getText()));
+        fornecedor.setDataCadastro(Utilities.formatarDataToSqlData(telaCadastroFornecedor.getjFormattedTextFieldDataCadastro().getText()));
 
         Object sexoSelecionado = telaCadastroFornecedor.getjComboBoxSexo().getSelectedItem();
         fornecedor.setSexo(
@@ -230,8 +233,8 @@ public final class ControllerCadFornecedor implements ActionListener, InterfaceC
         telaBuscaFornecedor.setVisible(true);
 
         if (codigo != 0) {
-            utilities.Utilities.ativaDesativa(telaCadastroFornecedor.getjPanelBotoes(), false);
-            utilities.Utilities.limpaComponentes(telaCadastroFornecedor.getjPanelDados(), true);
+            Utilities.ativaDesativa(telaCadastroFornecedor.getjPanelBotoes(), false);
+            Utilities.limpaComponentes(telaCadastroFornecedor.getjPanelDados(), true);
 
             telaCadastroFornecedor.getjTextFieldId().setText(String.valueOf(codigo));
             telaCadastroFornecedor.getjTextFieldId().setEnabled(false);
@@ -243,19 +246,19 @@ public final class ControllerCadFornecedor implements ActionListener, InterfaceC
                 JOptionPane.showMessageDialog(telaCadastroFornecedor, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            telaCadastroFornecedor.getjFormattedTextFieldDataCadastro().setText(utilities.Utilities.formatarDataFromSqlData(fornecedor.getDataCadastro()));
+            telaCadastroFornecedor.getjFormattedTextFieldDataCadastro().setText(Utilities.formatarDataFromSqlData(fornecedor.getDataCadastro()));
             telaCadastroFornecedor.getjFormattedTextFieldDataCadastro().setEnabled(false);
 
             telaCadastroFornecedor.getjTextFieldNomeFantasia().setText(fornecedor.getNome());
             telaCadastroFornecedor.getjTextFieldRazaoSocial().setText(fornecedor.getRazaoSocial());
-            telaCadastroFornecedor.getjFormattedTextFieldCpf().setText(utilities.Utilities.formatarCpf(fornecedor.getCpf()));
-            telaCadastroFornecedor.getjFormattedTextFieldCnpj().setText(utilities.Utilities.formatarCnpj(fornecedor.getCnpj()));
+            telaCadastroFornecedor.getjFormattedTextFieldCpf().setText(Utilities.formatarCpf(fornecedor.getCpf()));
+            telaCadastroFornecedor.getjFormattedTextFieldCnpj().setText(Utilities.formatarCnpj(fornecedor.getCnpj()));
             telaCadastroFornecedor.getjTextFieldRg().setText(fornecedor.getRg());
             telaCadastroFornecedor.getjTextFieldInscricaoEstadual().setText(fornecedor.getInscricaoEstadual());
-            telaCadastroFornecedor.getjFormattedTextFieldFone1().setText(utilities.Utilities.formatarFone(fornecedor.getFone1()));
-            telaCadastroFornecedor.getjFormattedTextFieldFone2().setText(utilities.Utilities.formatarFone(fornecedor.getFone2()));
+            telaCadastroFornecedor.getjFormattedTextFieldFone1().setText(Utilities.formatarFone(fornecedor.getFone1()));
+            telaCadastroFornecedor.getjFormattedTextFieldFone2().setText(Utilities.formatarFone(fornecedor.getFone2()));
             telaCadastroFornecedor.getjTextFieldEmail().setText(fornecedor.getEmail());
-            telaCadastroFornecedor.getjFormattedTextFieldCep().setText(utilities.Utilities.formatarCep(fornecedor.getCep()));
+            telaCadastroFornecedor.getjFormattedTextFieldCep().setText(Utilities.formatarCep(fornecedor.getCep()));
             telaCadastroFornecedor.getjTextFieldBairro().setText(fornecedor.getBairro());
             telaCadastroFornecedor.getjTextFieldCidade().setText(fornecedor.getCidade());
             telaCadastroFornecedor.getjTextFieldLogradouro().setText(fornecedor.getLogradouro());

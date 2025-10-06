@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 
 import model.Produto;
 import service.ProdutoService;
+import utilities.Utilities;
 import view.TelaBuscaProduto;
 import view.TelaCadastroProduto;
 
@@ -20,9 +21,11 @@ public final class ControllerCadProduto implements ActionListener, InterfaceCont
     public ControllerCadProduto(TelaCadastroProduto telaCadastroProduto) {
         this.telaCadastroProduto = telaCadastroProduto;
         this.produtoService = new ProdutoService();
-        utilities.Utilities.ativaDesativa(this.telaCadastroProduto.getjPanelBotoes(), true);
-        utilities.Utilities.limpaComponentes(this.telaCadastroProduto.getjPanelDados(), false);
-        utilities.Utilities.permiteLimparFormattedField(this.telaCadastroProduto.getjFormattedTextFieldValor());
+        Utilities.setAlwaysDisabled(this.telaCadastroProduto.getjTextFieldId(), true);
+        Utilities.setAlwaysDisabled(this.telaCadastroProduto.getjComboBoxStatus(), true);
+        Utilities.ativaDesativa(this.telaCadastroProduto.getjPanelBotoes(), true);
+        Utilities.limpaComponentes(this.telaCadastroProduto.getjPanelDados(), false);
+        Utilities.permiteLimparFormattedField(this.telaCadastroProduto.getjFormattedTextFieldValor());
         initListeners();
     }
 
@@ -61,18 +64,16 @@ public final class ControllerCadProduto implements ActionListener, InterfaceCont
 
     @Override
     public void handleNovo() {
-        utilities.Utilities.ativaDesativa(this.telaCadastroProduto.getjPanelBotoes(), false);
-        utilities.Utilities.limpaComponentes(this.telaCadastroProduto.getjPanelDados(), true);
-        this.telaCadastroProduto.getjTextFieldId().setEnabled(false);
+        Utilities.ativaDesativa(this.telaCadastroProduto.getjPanelBotoes(), false);
+        Utilities.limpaComponentes(this.telaCadastroProduto.getjPanelDados(), true);
         this.telaCadastroProduto.getjTextFieldDescricao().requestFocus();
         this.telaCadastroProduto.getjComboBoxStatus().setSelectedItem("Ativo");
-        this.telaCadastroProduto.getjComboBoxStatus().setEnabled(false);
     }
 
     @Override
     public void handleCancelar() {
-        utilities.Utilities.ativaDesativa(this.telaCadastroProduto.getjPanelBotoes(), true);
-        utilities.Utilities.limpaComponentes(this.telaCadastroProduto.getjPanelDados(), false);
+        Utilities.ativaDesativa(this.telaCadastroProduto.getjPanelBotoes(), true);
+        Utilities.limpaComponentes(this.telaCadastroProduto.getjPanelDados(), false);
     }
 
     @Override
@@ -106,8 +107,8 @@ public final class ControllerCadProduto implements ActionListener, InterfaceCont
                 JOptionPane.showMessageDialog(telaCadastroProduto, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            utilities.Utilities.ativaDesativa(telaCadastroProduto.getjPanelBotoes(), true);
-            utilities.Utilities.limpaComponentes(telaCadastroProduto.getjPanelDados(), false);
+            Utilities.ativaDesativa(telaCadastroProduto.getjPanelBotoes(), true);
+            Utilities.limpaComponentes(telaCadastroProduto.getjPanelDados(), false);
             return;
         }
 
@@ -119,8 +120,8 @@ public final class ControllerCadProduto implements ActionListener, InterfaceCont
             return;
         }
 
-        utilities.Utilities.ativaDesativa(telaCadastroProduto.getjPanelBotoes(), true);
-        utilities.Utilities.limpaComponentes(telaCadastroProduto.getjPanelDados(), false);
+        Utilities.ativaDesativa(telaCadastroProduto.getjPanelBotoes(), true);
+        Utilities.limpaComponentes(telaCadastroProduto.getjPanelDados(), false);
     }
 
     @Override
@@ -147,11 +148,10 @@ public final class ControllerCadProduto implements ActionListener, InterfaceCont
         telaBuscaProduto.setVisible(true);
 
         if (codigo != 0) {
-            utilities.Utilities.ativaDesativa(telaCadastroProduto.getjPanelBotoes(), false);
-            utilities.Utilities.limpaComponentes(telaCadastroProduto.getjPanelDados(), true);
+            Utilities.ativaDesativa(telaCadastroProduto.getjPanelBotoes(), false);
+            Utilities.limpaComponentes(telaCadastroProduto.getjPanelDados(), true);
 
             telaCadastroProduto.getjTextFieldId().setText(String.valueOf(codigo));
-            telaCadastroProduto.getjTextFieldId().setEnabled(false);
 
             Produto produto;
             try {

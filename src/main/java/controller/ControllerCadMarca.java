@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 
 import model.Marca;
 import service.MarcaService;
+import utilities.Utilities;
 import view.TelaBuscaMarca;
 import view.TelaCadastroMarca;
 
@@ -20,8 +21,10 @@ public final class ControllerCadMarca implements ActionListener, InterfaceContro
     public ControllerCadMarca(TelaCadastroMarca telaCadastroMarca) {
         this.telaCadastroMarca = telaCadastroMarca;
         this.marcaService = new MarcaService();
-        utilities.Utilities.ativaDesativa(this.telaCadastroMarca.getjPanelBotoes(), true);
-        utilities.Utilities.limpaComponentes(this.telaCadastroMarca.getjPanelDados(), false);
+        Utilities.setAlwaysDisabled(this.telaCadastroMarca.getjTextFieldId(), true);
+        Utilities.setAlwaysDisabled(this.telaCadastroMarca.getjComboBoxStatus(), true);
+        Utilities.ativaDesativa(this.telaCadastroMarca.getjPanelBotoes(), true);
+        Utilities.limpaComponentes(this.telaCadastroMarca.getjPanelDados(), false);
         initListeners();
     }
 
@@ -60,8 +63,8 @@ public final class ControllerCadMarca implements ActionListener, InterfaceContro
 
     @Override
     public void handleNovo() {
-        utilities.Utilities.ativaDesativa(this.telaCadastroMarca.getjPanelBotoes(), false);
-        utilities.Utilities.limpaComponentes(this.telaCadastroMarca.getjPanelDados(), true);
+        Utilities.ativaDesativa(this.telaCadastroMarca.getjPanelBotoes(), false);
+        Utilities.limpaComponentes(this.telaCadastroMarca.getjPanelDados(), true);
         this.telaCadastroMarca.getjTextFieldId().setEnabled(false);
         this.telaCadastroMarca.getjTextFieldDescricao().requestFocus();
         this.telaCadastroMarca.getjComboBoxStatus().setSelectedItem("Ativo");
@@ -70,8 +73,8 @@ public final class ControllerCadMarca implements ActionListener, InterfaceContro
 
     @Override
     public void handleCancelar() {
-        utilities.Utilities.ativaDesativa(this.telaCadastroMarca.getjPanelBotoes(), true);
-        utilities.Utilities.limpaComponentes(this.telaCadastroMarca.getjPanelDados(), false);
+        Utilities.ativaDesativa(this.telaCadastroMarca.getjPanelBotoes(), true);
+        Utilities.limpaComponentes(this.telaCadastroMarca.getjPanelDados(), false);
     }
 
     @Override
@@ -105,8 +108,8 @@ public final class ControllerCadMarca implements ActionListener, InterfaceContro
                 JOptionPane.showMessageDialog(telaCadastroMarca, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            utilities.Utilities.ativaDesativa(telaCadastroMarca.getjPanelBotoes(), true);
-            utilities.Utilities.limpaComponentes(telaCadastroMarca.getjPanelDados(), false);
+            Utilities.ativaDesativa(telaCadastroMarca.getjPanelBotoes(), true);
+            Utilities.limpaComponentes(telaCadastroMarca.getjPanelDados(), false);
             return;
         }
 
@@ -118,8 +121,8 @@ public final class ControllerCadMarca implements ActionListener, InterfaceContro
             return;
         }
 
-        utilities.Utilities.ativaDesativa(telaCadastroMarca.getjPanelBotoes(), true);
-        utilities.Utilities.limpaComponentes(telaCadastroMarca.getjPanelDados(), false);
+        Utilities.ativaDesativa(telaCadastroMarca.getjPanelBotoes(), true);
+        Utilities.limpaComponentes(telaCadastroMarca.getjPanelDados(), false);
     }
 
     @Override
@@ -144,8 +147,8 @@ public final class ControllerCadMarca implements ActionListener, InterfaceContro
         telaBuscaMarca.setVisible(true);
 
         if (codigo != 0) {
-            utilities.Utilities.ativaDesativa(telaCadastroMarca.getjPanelBotoes(), false);
-            utilities.Utilities.limpaComponentes(telaCadastroMarca.getjPanelDados(), true);
+            Utilities.ativaDesativa(telaCadastroMarca.getjPanelBotoes(), false);
+            Utilities.limpaComponentes(telaCadastroMarca.getjPanelDados(), true);
 
             telaCadastroMarca.getjTextFieldId().setText(String.valueOf(codigo));
             telaCadastroMarca.getjTextFieldId().setEnabled(false);

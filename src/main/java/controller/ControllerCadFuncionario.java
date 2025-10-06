@@ -5,10 +5,10 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
-import utilities.Utilities;
 
 import model.Funcionario;
 import service.FuncionarioService;
+import utilities.Utilities;
 import view.TelaBuscaFuncionario;
 import view.TelaCadastroFuncionario;
 

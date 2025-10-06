@@ -15,6 +15,7 @@ import model.Veiculo;
 import service.FuncionarioService;
 import service.HospedeService;
 import service.VeiculoService;
+import utilities.Utilities;
 import view.TelaBuscaFuncionario;
 import view.TelaBuscaHospede;
 import view.TelaBuscaModelo;
@@ -35,11 +36,13 @@ public final class ControllerCadVeiculo implements ActionListener, InterfaceCont
     public ControllerCadVeiculo(TelaCadastroVeiculo telaCadastroVeiculo) {
         this.telaCadastroVeiculo = telaCadastroVeiculo;
         this.veiculoService = new VeiculoService();
-        utilities.Utilities.setAlwaysDisabled(this.telaCadastroVeiculo.getjFormattedTextFieldModelo(), true);
-        utilities.Utilities.setAlwaysDisabled(this.telaCadastroVeiculo.getjFormattedTextFieldProprietario(), true);
+        Utilities.setAlwaysDisabled(this.telaCadastroVeiculo.getjTextFieldId(), true);
+        Utilities.setAlwaysDisabled(this.telaCadastroVeiculo.getjComboBoxStatus(), true);
+        Utilities.setAlwaysDisabled(this.telaCadastroVeiculo.getjFormattedTextFieldModelo(), true);
+        Utilities.setAlwaysDisabled(this.telaCadastroVeiculo.getjFormattedTextFieldProprietario(), true);
         this.preencherTiposProprietario();
-        utilities.Utilities.ativaDesativa(this.telaCadastroVeiculo.getjPanelBotoes(), true);
-        utilities.Utilities.limpaComponentes(this.telaCadastroVeiculo.getjPanelDados(), false);
+        Utilities.ativaDesativa(this.telaCadastroVeiculo.getjPanelBotoes(), true);
+        Utilities.limpaComponentes(this.telaCadastroVeiculo.getjPanelDados(), false);
         initListeners();
     }
 
@@ -100,18 +103,16 @@ public final class ControllerCadVeiculo implements ActionListener, InterfaceCont
 
     @Override
     public void handleNovo() {
-        utilities.Utilities.ativaDesativa(this.telaCadastroVeiculo.getjPanelBotoes(), false);
-        utilities.Utilities.limpaComponentes(this.telaCadastroVeiculo.getjPanelDados(), true);
-        this.telaCadastroVeiculo.getjTextFieldId().setEnabled(false);
+        Utilities.ativaDesativa(this.telaCadastroVeiculo.getjPanelBotoes(), false);
+        Utilities.limpaComponentes(this.telaCadastroVeiculo.getjPanelDados(), true);
         this.telaCadastroVeiculo.getjTextFieldPlaca().requestFocus();
         this.telaCadastroVeiculo.getjComboBoxStatus().setSelectedItem("Ativo");
-        this.telaCadastroVeiculo.getjComboBoxStatus().setEnabled(false);
     }
 
     @Override
     public void handleCancelar() {
-        utilities.Utilities.ativaDesativa(this.telaCadastroVeiculo.getjPanelBotoes(), true);
-        utilities.Utilities.limpaComponentes(this.telaCadastroVeiculo.getjPanelDados(), false);
+        Utilities.ativaDesativa(this.telaCadastroVeiculo.getjPanelBotoes(), true);
+        Utilities.limpaComponentes(this.telaCadastroVeiculo.getjPanelDados(), false);
         this.modeloRelacionado = null;
         this.proprietarioRelacionado = null;
     }
@@ -157,8 +158,8 @@ public final class ControllerCadVeiculo implements ActionListener, InterfaceCont
                 JOptionPane.showMessageDialog(telaCadastroVeiculo, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            utilities.Utilities.ativaDesativa(telaCadastroVeiculo.getjPanelBotoes(), true);
-            utilities.Utilities.limpaComponentes(telaCadastroVeiculo.getjPanelDados(), false);
+            Utilities.ativaDesativa(telaCadastroVeiculo.getjPanelBotoes(), true);
+            Utilities.limpaComponentes(telaCadastroVeiculo.getjPanelDados(), false);
             return;
         }
 
@@ -170,8 +171,8 @@ public final class ControllerCadVeiculo implements ActionListener, InterfaceCont
             return;
         }
 
-        utilities.Utilities.ativaDesativa(telaCadastroVeiculo.getjPanelBotoes(), true);
-        utilities.Utilities.limpaComponentes(telaCadastroVeiculo.getjPanelDados(), false);
+        Utilities.ativaDesativa(telaCadastroVeiculo.getjPanelBotoes(), true);
+        Utilities.limpaComponentes(telaCadastroVeiculo.getjPanelDados(), false);
     }
 
     @Override
@@ -234,11 +235,9 @@ public final class ControllerCadVeiculo implements ActionListener, InterfaceCont
         telaBuscaProprietario.setVisible(true);
 
         if (codigoProprietario != 0) {
-            utilities.Utilities.ativaDesativa(telaCadastroVeiculo.getjPanelBotoes(), false);
-            this.telaCadastroVeiculo.getjTextFieldId().setEnabled(false);
+            Utilities.ativaDesativa(telaCadastroVeiculo.getjPanelBotoes(), false);
             this.telaCadastroVeiculo.getjTextFieldPlaca().requestFocus();
             this.telaCadastroVeiculo.getjComboBoxStatus().setSelectedItem("Ativo");
-            this.telaCadastroVeiculo.getjComboBoxStatus().setEnabled(false);
 
             Pessoa proprietario;
             try {
@@ -261,11 +260,9 @@ public final class ControllerCadVeiculo implements ActionListener, InterfaceCont
         telaBuscaProprietario.setVisible(true);
 
         if (codigoProprietario != 0) {
-            utilities.Utilities.ativaDesativa(telaCadastroVeiculo.getjPanelBotoes(), false);
-            this.telaCadastroVeiculo.getjTextFieldId().setEnabled(false);
+            Utilities.ativaDesativa(telaCadastroVeiculo.getjPanelBotoes(), false);
             this.telaCadastroVeiculo.getjTextFieldPlaca().requestFocus();
             this.telaCadastroVeiculo.getjComboBoxStatus().setSelectedItem("Ativo");
-            this.telaCadastroVeiculo.getjComboBoxStatus().setEnabled(false);
 
             Pessoa proprietario;
             try {
@@ -288,8 +285,7 @@ public final class ControllerCadVeiculo implements ActionListener, InterfaceCont
         telaBuscaProprietario.setVisible(true);
 
         if (codigoProprietario != 0) {
-            utilities.Utilities.ativaDesativa(telaCadastroVeiculo.getjPanelBotoes(), false);
-            this.telaCadastroVeiculo.getjTextFieldId().setEnabled(false);
+            Utilities.ativaDesativa(telaCadastroVeiculo.getjPanelBotoes(), false);
             this.telaCadastroVeiculo.getjTextFieldPlaca().requestFocus();
 
             Pessoa proprietario;
@@ -320,8 +316,7 @@ public final class ControllerCadVeiculo implements ActionListener, InterfaceCont
         telaBuscaModelo.setVisible(true);
 
         if (codigoModelo != 0) {
-            utilities.Utilities.ativaDesativa(telaCadastroVeiculo.getjPanelBotoes(), false);
-            this.telaCadastroVeiculo.getjTextFieldId().setEnabled(false);
+            Utilities.ativaDesativa(telaCadastroVeiculo.getjPanelBotoes(), false);
             this.telaCadastroVeiculo.getjTextFieldPlaca().requestFocus();
 
             Modelo modelo;
@@ -353,10 +348,9 @@ public final class ControllerCadVeiculo implements ActionListener, InterfaceCont
         telaBuscaVeiculo.setVisible(true);
 
         if (codigoVeiculo != 0) {
-            utilities.Utilities.ativaDesativa(telaCadastroVeiculo.getjPanelBotoes(), false);
-            utilities.Utilities.limpaComponentes(telaCadastroVeiculo.getjPanelDados(), true);
+            Utilities.ativaDesativa(telaCadastroVeiculo.getjPanelBotoes(), false);
+            Utilities.limpaComponentes(telaCadastroVeiculo.getjPanelDados(), true);
             telaCadastroVeiculo.getjTextFieldId().setText(String.valueOf(codigoVeiculo));
-            telaCadastroVeiculo.getjTextFieldId().setEnabled(false);
 
             Veiculo veiculo;
             try {

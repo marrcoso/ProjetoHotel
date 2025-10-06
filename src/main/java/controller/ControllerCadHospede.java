@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 
 import model.Hospede;
 import service.HospedeService;
+import utilities.Utilities;
 import view.TelaBuscaHospede;
 import view.TelaCadastroHospede;
 
@@ -20,13 +21,15 @@ public final class ControllerCadHospede implements ActionListener, InterfaceCont
     public ControllerCadHospede(TelaCadastroHospede telaCadastroHospede) {
         this.telaCadastroHospede = telaCadastroHospede;
         this.hospedeService = new HospedeService();
-        utilities.Utilities.ativaDesativa(this.telaCadastroHospede.getjPanelBotoes(), true);
-        utilities.Utilities.limpaComponentes(this.telaCadastroHospede.getjPanelDados(), false);
-        utilities.Utilities.permiteLimparFormattedField(this.telaCadastroHospede.getjFormattedTextFieldCpf());
-        utilities.Utilities.permiteLimparFormattedField(this.telaCadastroHospede.getjFormattedTextFieldCnpj());
-        utilities.Utilities.permiteLimparFormattedField(this.telaCadastroHospede.getjFormattedTextFieldFone1());
-        utilities.Utilities.permiteLimparFormattedField(this.telaCadastroHospede.getjFormattedTextFieldFone2());
-        utilities.Utilities.permiteLimparFormattedField(this.telaCadastroHospede.getjFormattedTextFieldCep());
+        Utilities.setAlwaysDisabled(this.telaCadastroHospede.getjTextFieldId(), true);
+        Utilities.setAlwaysDisabled(this.telaCadastroHospede.getjComboBoxStatus(), true);
+        Utilities.ativaDesativa(this.telaCadastroHospede.getjPanelBotoes(), true);
+        Utilities.limpaComponentes(this.telaCadastroHospede.getjPanelDados(), false);
+        Utilities.permiteLimparFormattedField(this.telaCadastroHospede.getjFormattedTextFieldCpf());
+        Utilities.permiteLimparFormattedField(this.telaCadastroHospede.getjFormattedTextFieldCnpj());
+        Utilities.permiteLimparFormattedField(this.telaCadastroHospede.getjFormattedTextFieldFone1());
+        Utilities.permiteLimparFormattedField(this.telaCadastroHospede.getjFormattedTextFieldFone2());
+        Utilities.permiteLimparFormattedField(this.telaCadastroHospede.getjFormattedTextFieldCep());
         initListeners();
     }
 
@@ -65,12 +68,12 @@ public final class ControllerCadHospede implements ActionListener, InterfaceCont
 
     @Override
     public void handleNovo() {
-        utilities.Utilities.ativaDesativa(this.telaCadastroHospede.getjPanelBotoes(), false);
-        utilities.Utilities.limpaComponentes(this.telaCadastroHospede.getjPanelDados(), true);
+        Utilities.ativaDesativa(this.telaCadastroHospede.getjPanelBotoes(), false);
+        Utilities.limpaComponentes(this.telaCadastroHospede.getjPanelDados(), true);
         this.telaCadastroHospede.getjTextFieldId().setEnabled(false);
         this.telaCadastroHospede.getjTextFieldNomeFantasia().requestFocus();
         telaCadastroHospede.getjTextFieldId().setEnabled(false);
-        telaCadastroHospede.getjFormattedTextFieldDataCadastro().setText(utilities.Utilities.getDataHoje());
+        telaCadastroHospede.getjFormattedTextFieldDataCadastro().setText(Utilities.getDataHoje());
         telaCadastroHospede.getjFormattedTextFieldDataCadastro().setEnabled(false);
         telaCadastroHospede.getjComboBoxStatus().setSelectedItem("Ativo");
         telaCadastroHospede.getjComboBoxStatus().setEnabled(false);
@@ -78,8 +81,8 @@ public final class ControllerCadHospede implements ActionListener, InterfaceCont
 
     @Override
     public void handleCancelar() {
-        utilities.Utilities.ativaDesativa(this.telaCadastroHospede.getjPanelBotoes(), true);
-        utilities.Utilities.limpaComponentes(this.telaCadastroHospede.getjPanelDados(), false);
+        Utilities.ativaDesativa(this.telaCadastroHospede.getjPanelBotoes(), true);
+        Utilities.limpaComponentes(this.telaCadastroHospede.getjPanelDados(), false);
     }
 
     @Override
@@ -94,8 +97,8 @@ public final class ControllerCadHospede implements ActionListener, InterfaceCont
             telaCadastroHospede.getjComboBoxSexo().requestFocus();
             return false;
         }
-        boolean cpfPreenchido = utilities.Utilities.apenasNumeros(telaCadastroHospede.getjFormattedTextFieldCpf().getText()).length() > 0;
-        boolean cnpjPreenchido = utilities.Utilities.apenasNumeros(telaCadastroHospede.getjFormattedTextFieldCnpj().getText()).length() > 0;
+        boolean cpfPreenchido = Utilities.apenasNumeros(telaCadastroHospede.getjFormattedTextFieldCpf().getText()).length() > 0;
+        boolean cnpjPreenchido = Utilities.apenasNumeros(telaCadastroHospede.getjFormattedTextFieldCnpj().getText()).length() > 0;
         if (!cpfPreenchido && !cnpjPreenchido) {
             JOptionPane.showMessageDialog(null, "Preencha ao menos um dos campos: CPF ou CNPJ.");
             telaCadastroHospede.getjFormattedTextFieldCpf().requestFocus();
@@ -116,7 +119,7 @@ public final class ControllerCadHospede implements ActionListener, InterfaceCont
             telaCadastroHospede.getjFormattedTextFieldFone1().requestFocus();
             return false;
         }
-        boolean fone2Preenchido = utilities.Utilities.apenasNumeros(telaCadastroHospede.getjFormattedTextFieldFone2().getText()).length() > 0;
+        boolean fone2Preenchido = Utilities.apenasNumeros(telaCadastroHospede.getjFormattedTextFieldFone2().getText()).length() > 0;
         if (fone2Preenchido && !utilities.ValidadorCampos.validarFone(telaCadastroHospede.getjFormattedTextFieldFone2().getText())) {
             JOptionPane.showMessageDialog(null, "O campo Fone2 é inválido.");
             telaCadastroHospede.getjFormattedTextFieldFone2().requestFocus();
@@ -172,8 +175,8 @@ public final class ControllerCadHospede implements ActionListener, InterfaceCont
                 JOptionPane.showMessageDialog(telaCadastroHospede, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            utilities.Utilities.ativaDesativa(telaCadastroHospede.getjPanelBotoes(), true);
-            utilities.Utilities.limpaComponentes(telaCadastroHospede.getjPanelDados(), false);
+            Utilities.ativaDesativa(telaCadastroHospede.getjPanelBotoes(), true);
+            Utilities.limpaComponentes(telaCadastroHospede.getjPanelDados(), false);
             return;
         }
 
@@ -185,8 +188,8 @@ public final class ControllerCadHospede implements ActionListener, InterfaceCont
             return;
         }
 
-        utilities.Utilities.ativaDesativa(telaCadastroHospede.getjPanelBotoes(), true);
-        utilities.Utilities.limpaComponentes(telaCadastroHospede.getjPanelDados(), false);
+        Utilities.ativaDesativa(telaCadastroHospede.getjPanelBotoes(), true);
+        Utilities.limpaComponentes(telaCadastroHospede.getjPanelDados(), false);
     }
 
     @Override
@@ -194,21 +197,21 @@ public final class ControllerCadHospede implements ActionListener, InterfaceCont
         Hospede hospede = new Hospede();
         hospede.setNome(telaCadastroHospede.getjTextFieldNomeFantasia().getText());
         hospede.setRazaoSocial(telaCadastroHospede.getjTextFieldRazaoSocial().getText());
-        hospede.setCpf(utilities.Utilities.apenasNumeros(telaCadastroHospede.getjFormattedTextFieldCpf().getText()));
-        hospede.setCnpj(utilities.Utilities.apenasNumeros(telaCadastroHospede.getjFormattedTextFieldCnpj().getText()));
+        hospede.setCpf(Utilities.apenasNumeros(telaCadastroHospede.getjFormattedTextFieldCpf().getText()));
+        hospede.setCnpj(Utilities.apenasNumeros(telaCadastroHospede.getjFormattedTextFieldCnpj().getText()));
         hospede.setRg(telaCadastroHospede.getjTextFieldRg().getText());
         hospede.setInscricaoEstadual(telaCadastroHospede.getjTextFieldInscricaoEstadual().getText());
-        hospede.setFone1(utilities.Utilities.apenasNumeros(telaCadastroHospede.getjFormattedTextFieldFone1().getText()));
-        hospede.setFone2(utilities.Utilities.apenasNumeros(telaCadastroHospede.getjFormattedTextFieldFone2().getText()));
+        hospede.setFone1(Utilities.apenasNumeros(telaCadastroHospede.getjFormattedTextFieldFone1().getText()));
+        hospede.setFone2(Utilities.apenasNumeros(telaCadastroHospede.getjFormattedTextFieldFone2().getText()));
         hospede.setEmail(telaCadastroHospede.getjTextFieldEmail().getText());
-        hospede.setCep(utilities.Utilities.apenasNumeros(telaCadastroHospede.getjFormattedTextFieldCep().getText()));
+        hospede.setCep(Utilities.apenasNumeros(telaCadastroHospede.getjFormattedTextFieldCep().getText()));
         hospede.setBairro(telaCadastroHospede.getjTextFieldBairro().getText());
         hospede.setCidade(telaCadastroHospede.getjTextFieldCidade().getText());
         hospede.setLogradouro(telaCadastroHospede.getjTextFieldLogradouro().getText());
         hospede.setComplemento(telaCadastroHospede.getjTextFieldComplemento().getText());
         hospede.setContato(telaCadastroHospede.getjTextFieldContato().getText());
         hospede.setObs(telaCadastroHospede.getjTextFieldObs().getText());
-        hospede.setDataCadastro(utilities.Utilities.formatarDataToSqlData(telaCadastroHospede.getjFormattedTextFieldDataCadastro().getText()));
+        hospede.setDataCadastro(Utilities.formatarDataToSqlData(telaCadastroHospede.getjFormattedTextFieldDataCadastro().getText()));
 
         Object sexoSelecionado = telaCadastroHospede.getjComboBoxSexo().getSelectedItem();
         hospede.setSexo(
@@ -232,8 +235,8 @@ public final class ControllerCadHospede implements ActionListener, InterfaceCont
         telaBuscaHospede.setVisible(true);
 
         if (codigo != 0) {
-            utilities.Utilities.ativaDesativa(telaCadastroHospede.getjPanelBotoes(), false);
-            utilities.Utilities.limpaComponentes(telaCadastroHospede.getjPanelDados(), true);
+            Utilities.ativaDesativa(telaCadastroHospede.getjPanelBotoes(), false);
+            Utilities.limpaComponentes(telaCadastroHospede.getjPanelDados(), true);
 
             telaCadastroHospede.getjTextFieldId().setText(String.valueOf(codigo));
             telaCadastroHospede.getjTextFieldId().setEnabled(false);
@@ -246,18 +249,18 @@ public final class ControllerCadHospede implements ActionListener, InterfaceCont
                 return;
             }
 
-            telaCadastroHospede.getjFormattedTextFieldDataCadastro().setText(utilities.Utilities.formatarDataFromSqlData(hospede.getDataCadastro()));
+            telaCadastroHospede.getjFormattedTextFieldDataCadastro().setText(Utilities.formatarDataFromSqlData(hospede.getDataCadastro()));
             telaCadastroHospede.getjFormattedTextFieldDataCadastro().setEnabled(false);
             telaCadastroHospede.getjTextFieldNomeFantasia().setText(hospede.getNome());
             telaCadastroHospede.getjTextFieldRazaoSocial().setText(hospede.getRazaoSocial());
-            telaCadastroHospede.getjFormattedTextFieldCpf().setText(utilities.Utilities.formatarCpf(hospede.getCpf()));
-            telaCadastroHospede.getjFormattedTextFieldCnpj().setText(utilities.Utilities.formatarCnpj(hospede.getCnpj()));
+            telaCadastroHospede.getjFormattedTextFieldCpf().setText(Utilities.formatarCpf(hospede.getCpf()));
+            telaCadastroHospede.getjFormattedTextFieldCnpj().setText(Utilities.formatarCnpj(hospede.getCnpj()));
             telaCadastroHospede.getjTextFieldRg().setText(hospede.getRg());
             telaCadastroHospede.getjTextFieldInscricaoEstadual().setText(hospede.getInscricaoEstadual());
-            telaCadastroHospede.getjFormattedTextFieldFone1().setText(utilities.Utilities.formatarFone(hospede.getFone1()));
-            telaCadastroHospede.getjFormattedTextFieldFone2().setText(utilities.Utilities.formatarFone(hospede.getFone2()));
+            telaCadastroHospede.getjFormattedTextFieldFone1().setText(Utilities.formatarFone(hospede.getFone1()));
+            telaCadastroHospede.getjFormattedTextFieldFone2().setText(Utilities.formatarFone(hospede.getFone2()));
             telaCadastroHospede.getjTextFieldEmail().setText(hospede.getEmail());
-            telaCadastroHospede.getjFormattedTextFieldCep().setText(utilities.Utilities.formatarCep(hospede.getCep()));
+            telaCadastroHospede.getjFormattedTextFieldCep().setText(Utilities.formatarCep(hospede.getCep()));
             telaCadastroHospede.getjTextFieldBairro().setText(hospede.getBairro());
             telaCadastroHospede.getjTextFieldCidade().setText(hospede.getCidade());
             telaCadastroHospede.getjTextFieldLogradouro().setText(hospede.getLogradouro());

@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 
 import model.Quarto;
 import service.QuartoService;
+import utilities.Utilities;
 import view.TelaBuscaQuarto;
 import view.TelaCadastroQuarto;
 
@@ -20,8 +21,10 @@ public final class ControllerCadQuarto implements ActionListener, InterfaceContr
     public ControllerCadQuarto(TelaCadastroQuarto telaCadastroQuarto) {
         this.telaCadastroQuarto = telaCadastroQuarto;
         this.quartoService = new QuartoService();
-        utilities.Utilities.ativaDesativa(this.telaCadastroQuarto.getjPanelBotoes(), true);
-        utilities.Utilities.limpaComponentes(this.telaCadastroQuarto.getjPanelDados(), false);
+        Utilities.setAlwaysDisabled(this.telaCadastroQuarto.getjTextFieldId(), true);
+        Utilities.setAlwaysDisabled(this.telaCadastroQuarto.getjComboBoxStatus(), true);
+        Utilities.ativaDesativa(this.telaCadastroQuarto.getjPanelBotoes(), true);
+        Utilities.limpaComponentes(this.telaCadastroQuarto.getjPanelDados(), false);
 
         initListeners();
     }
@@ -61,18 +64,16 @@ public final class ControllerCadQuarto implements ActionListener, InterfaceContr
 
     @Override
     public void handleNovo() {
-        utilities.Utilities.ativaDesativa(this.telaCadastroQuarto.getjPanelBotoes(), false);
-        utilities.Utilities.limpaComponentes(this.telaCadastroQuarto.getjPanelDados(), true);
-        this.telaCadastroQuarto.getjTextFieldId().setEnabled(false);
+        Utilities.ativaDesativa(this.telaCadastroQuarto.getjPanelBotoes(), false);
+        Utilities.limpaComponentes(this.telaCadastroQuarto.getjPanelDados(), true);
         this.telaCadastroQuarto.getjTextFieldDescricao().requestFocus();
         this.telaCadastroQuarto.getjComboBoxStatus().setSelectedItem("Ativo");
-        this.telaCadastroQuarto.getjComboBoxStatus().setEnabled(false);
     }
 
     @Override
     public void handleCancelar() {
-        utilities.Utilities.ativaDesativa(this.telaCadastroQuarto.getjPanelBotoes(), true);
-        utilities.Utilities.limpaComponentes(this.telaCadastroQuarto.getjPanelDados(), false);
+        Utilities.ativaDesativa(this.telaCadastroQuarto.getjPanelBotoes(), true);
+        Utilities.limpaComponentes(this.telaCadastroQuarto.getjPanelDados(), false);
     }
 
     @Override
@@ -117,8 +118,8 @@ public final class ControllerCadQuarto implements ActionListener, InterfaceContr
                 JOptionPane.showMessageDialog(telaCadastroQuarto, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            utilities.Utilities.ativaDesativa(telaCadastroQuarto.getjPanelBotoes(), true);
-            utilities.Utilities.limpaComponentes(telaCadastroQuarto.getjPanelDados(), false);
+            Utilities.ativaDesativa(telaCadastroQuarto.getjPanelBotoes(), true);
+            Utilities.limpaComponentes(telaCadastroQuarto.getjPanelDados(), false);
             return;
         }
 
@@ -130,8 +131,8 @@ public final class ControllerCadQuarto implements ActionListener, InterfaceContr
             return;
         }
 
-        utilities.Utilities.ativaDesativa(telaCadastroQuarto.getjPanelBotoes(), true);
-        utilities.Utilities.limpaComponentes(telaCadastroQuarto.getjPanelDados(), false);
+        Utilities.ativaDesativa(telaCadastroQuarto.getjPanelBotoes(), true);
+        Utilities.limpaComponentes(telaCadastroQuarto.getjPanelDados(), false);
     }
 
     @Override
@@ -162,11 +163,10 @@ public final class ControllerCadQuarto implements ActionListener, InterfaceContr
         telaBuscaQuarto.setVisible(true);
 
         if (codigo != 0) {
-            utilities.Utilities.ativaDesativa(telaCadastroQuarto.getjPanelBotoes(), false);
-            utilities.Utilities.limpaComponentes(telaCadastroQuarto.getjPanelDados(), true);
+            Utilities.ativaDesativa(telaCadastroQuarto.getjPanelBotoes(), false);
+            Utilities.limpaComponentes(telaCadastroQuarto.getjPanelDados(), true);
 
             telaCadastroQuarto.getjTextFieldId().setText(String.valueOf(codigo));
-            telaCadastroQuarto.getjTextFieldId().setEnabled(false);
 
             Quarto quarto;
             try {
