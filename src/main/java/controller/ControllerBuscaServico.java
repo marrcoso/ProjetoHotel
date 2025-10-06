@@ -62,12 +62,13 @@ public final class ControllerBuscaServico implements ActionListener, InterfaceCo
     }
 
     private enum FiltroServico {
-        ID, DESCRICAO;
+        ID, DESCRICAO, OBSERVACAO;
 
         public static FiltroServico fromIndex(int index) {
             switch (index) {
                 case 0: return ID;
                 case 1: return DESCRICAO;
+                case 2: return OBSERVACAO;
                 default: throw new IllegalArgumentException("Filtro inválido");
             }
         }
@@ -118,6 +119,9 @@ public final class ControllerBuscaServico implements ActionListener, InterfaceCo
                     carregarPorAtributo("descricao", filtroTexto, tabela);
                     break;
                 }
+                case OBSERVACAO:
+                    carregarPorAtributo("obs", filtroTexto, tabela);
+                    break;
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(telaBuscaServico, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);

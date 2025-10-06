@@ -12,7 +12,7 @@ import util.AppLogger;
 public class ServicoDAO implements InterfaceDAO<Servico> {
     @Override
     public void Create(Servico objeto) throws SQLException {
-        String sqlInstrucao = "Insert Into veiculo("
+        String sqlInstrucao = "Insert Into servico("
                 + " descricao, "
                 + " obs, "
                 + " status) "

@@ -22,7 +22,7 @@ public final class ControllerCadProduto implements ActionListener, InterfaceCont
         this.produtoService = new ProdutoService();
         utilities.Utilities.ativaDesativa(this.telaCadastroProduto.getjPanelBotoes(), true);
         utilities.Utilities.limpaComponentes(this.telaCadastroProduto.getjPanelDados(), false);
-
+        utilities.Utilities.permiteLimparFormattedField(this.telaCadastroProduto.getjFormattedTextFieldValor());
         initListeners();
     }
 

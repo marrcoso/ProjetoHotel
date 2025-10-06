@@ -77,19 +77,14 @@ public final class ControllerCadServico implements ActionListener, InterfaceCont
 
     @Override
     public boolean isFormularioValido() {
-        if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroServico.getjTextFieldDescricao().getText())) {
-            JOptionPane.showMessageDialog(null, "O campo Descrição é obrigatório.");
-            telaCadastroServico.getjTextFieldDescricao().requestFocus();
-            return false;
-        }
-        if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroServico.getjTextFieldObservacao().getText())) {
-            JOptionPane.showMessageDialog(null, "O campo Observação é obrigatório.");
-            telaCadastroServico.getjTextFieldObservacao().requestFocus();
-            return false;
-        }
         if (!utilities.ValidadorCampos.validarStatus(telaCadastroServico.getjComboBoxStatus().getSelectedItem().toString())) {
             JOptionPane.showMessageDialog(null, "Selecione um Status válido.");
             telaCadastroServico.getjComboBoxStatus().requestFocus();
+            return false;
+        }
+        if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroServico.getjTextFieldDescricao().getText())) {
+            JOptionPane.showMessageDialog(null, "O campo Descrição é obrigatório.");
+            telaCadastroServico.getjTextFieldDescricao().requestFocus();
             return false;
         }
         return true;

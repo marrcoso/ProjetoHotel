@@ -1,11 +1,11 @@
 Produto:
-    ☐ Input de valor formatado/mascara
+    ✔ Input de valor formatado/mascara @done(25-10-06 16:54)
     ✔ Consertar filtro de valor ou remover @done(25-10-06 17:05)
     ✔ Consertar filtro de observação ou remover @done(25-10-06 17:05)
-    ☐ Testar formulário
+    ✔ Testar formulário @done(25-10-06 17:09)
 Serviço:
-    ☐ Consertar DAO para retrieve
-    ☐ Testar formulário
+    ✔ Consertar DAO para retrieve @done(25-10-06 17:14)
+    ✔ Testar formulário @done(25-10-06 17:14)
 Fornecedor:
     ✔ Implementar data de cadastro automatica
     ✔ consertar ordem da validação de form
@@ -24,3 +24,10 @@ Vaga Estacionamento:
 Veículo:
     ✔ Adicionar sistema de relacionamento para vincular veículo as pessoas @done(25-10-05 16:01)
     ✔ Testar formulário @done(25-10-05 16:18)
+
+Todas as telas:
+    ☐ Verificar troca de campo de status
+
+Opcionais:
+    ☐ Alterar para data de cadastro ser gerada por trigger no banco e não ter em create e update
+    ☐ Ocultar automaticamente campos não definidos no create (id, data cadastro) (talvez status se for mudar para não ser atualizado por tela de cadastro)
