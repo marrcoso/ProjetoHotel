@@ -82,7 +82,7 @@ public final class ControllerCadProduto implements ActionListener, InterfaceCont
             telaCadastroProduto.getjTextFieldDescricao().requestFocus();
             return false;
         }
-        if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroProduto.getjFormattedTextFieldValor().getText())) {
+        if (!utilities.ValidadorCampos.validarCampoNumero(telaCadastroProduto.getjFormattedTextFieldValor().getText())) {
             JOptionPane.showMessageDialog(null, "O campo Valor é obrigatório.");
             telaCadastroProduto.getjFormattedTextFieldValor().requestFocus();
             return false;
