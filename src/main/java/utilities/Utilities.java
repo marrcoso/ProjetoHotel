@@ -45,7 +45,11 @@ public class Utilities {
         });
     }
 
-    private static boolean isAlwaysDisabled(JComponent component) {
+    public static void setAlwaysDisabled(JComponent component, boolean alwaysDisabled) {
+        component.putClientProperty(Utilities.ALWAYS_DISABLED, alwaysDisabled);
+    }
+
+    public static boolean isAlwaysDisabled(JComponent component) {
         Object alwaysDisabledObj = component.getClientProperty(Utilities.ALWAYS_DISABLED);
         return alwaysDisabledObj instanceof Boolean ? (Boolean) alwaysDisabledObj : false;
     }

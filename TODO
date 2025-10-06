@@ -38,7 +38,7 @@ Marca:
 
 Todas as telas:
     ☐ Verificar campo de status para permitir ser trocavel (update banco no cadastro) ou apenas por função na busca
-    ☐ Validar campos que são numericos com validarCampoNumero()
+    ✔ Validar campos que são numericos com validarCampoNumero() @done(25-10-06 20:10)
 
 Opcionais:
     ☐ Alterar para data de cadastro ser gerada por trigger no banco e não ter em create e update

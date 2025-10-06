@@ -35,8 +35,8 @@ public final class ControllerCadVeiculo implements ActionListener, InterfaceCont
     public ControllerCadVeiculo(TelaCadastroVeiculo telaCadastroVeiculo) {
         this.telaCadastroVeiculo = telaCadastroVeiculo;
         this.veiculoService = new VeiculoService();
-        this.telaCadastroVeiculo.getjFormattedTextFieldModelo().putClientProperty(utilities.Utilities.ALWAYS_DISABLED, true);
-        this.telaCadastroVeiculo.getjFormattedTextFieldProprietario().putClientProperty(utilities.Utilities.ALWAYS_DISABLED, true);
+        utilities.Utilities.setAlwaysDisabled(this.telaCadastroVeiculo.getjFormattedTextFieldModelo(), true);
+        utilities.Utilities.setAlwaysDisabled(this.telaCadastroVeiculo.getjFormattedTextFieldProprietario(), true);
         this.preencherTiposProprietario();
         utilities.Utilities.ativaDesativa(this.telaCadastroVeiculo.getjPanelBotoes(), true);
         utilities.Utilities.limpaComponentes(this.telaCadastroVeiculo.getjPanelDados(), false);
