@@ -82,9 +82,9 @@ public final class ControllerCadQuarto implements ActionListener, InterfaceContr
             telaCadastroQuarto.getjTextFieldDescricao().requestFocus();
             return false;
         }
-        if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroQuarto.getjFormattedTextFieldAndar().getText())) {
-            JOptionPane.showMessageDialog(null, "O campo Andar é obrigatório.");
-            telaCadastroQuarto.getjFormattedTextFieldAndar().requestFocus();
+        if (!utilities.ValidadorCampos.validarCampoNumero(telaCadastroQuarto.getjFormattedTextFieldCapacidade().getText())) {
+            JOptionPane.showMessageDialog(null, "O campo Capacidade de Hóspedes é inválido.");
+            telaCadastroQuarto.getjFormattedTextFieldCapacidade().requestFocus();
             return false;
         }
         if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroQuarto.getjFormattedTextFieldMetragem().getText())) {
@@ -92,11 +92,12 @@ public final class ControllerCadQuarto implements ActionListener, InterfaceContr
             telaCadastroQuarto.getjFormattedTextFieldMetragem().requestFocus();
             return false;
         }
-        if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroQuarto.getjFormattedTextFieldCapacidade().getText())) {
-            JOptionPane.showMessageDialog(null, "O campo Capacidade de Hóspedes é obrigatório.");
-            telaCadastroQuarto.getjFormattedTextFieldCapacidade().requestFocus();
+        if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroQuarto.getjFormattedTextFieldAndar().getText())) {
+            JOptionPane.showMessageDialog(null, "O campo Andar é obrigatório.");
+            telaCadastroQuarto.getjFormattedTextFieldAndar().requestFocus();
             return false;
         }
+        
         return true;
     }
 
