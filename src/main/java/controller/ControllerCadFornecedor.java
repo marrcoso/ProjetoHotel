@@ -84,18 +84,20 @@ public final class ControllerCadFornecedor implements ActionListener, InterfaceC
             telaCadastroFornecedor.getjTextFieldNomeFantasia().requestFocus();
             return false;
         }
-        if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroFornecedor.getjTextFieldRazaoSocial().getText())) {
-            JOptionPane.showMessageDialog(null, "O campo Razão Social é obrigatório.");
-            telaCadastroFornecedor.getjTextFieldRazaoSocial().requestFocus();
+        boolean cpfPreenchido = utilities.Utilities.apenasNumeros(telaCadastroFornecedor.getjFormattedTextFieldCpf().getText()).length() > 0;
+        boolean cnpjPreenchido = utilities.Utilities.apenasNumeros(telaCadastroFornecedor.getjFormattedTextFieldCnpj().getText()).length() > 0;
+        if (!cpfPreenchido && !cnpjPreenchido) {
+            JOptionPane.showMessageDialog(null, "Preencha ao menos um dos campos: CPF ou CNPJ.");
+            telaCadastroFornecedor.getjFormattedTextFieldCpf().requestFocus();
             return false;
         }
-        if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroFornecedor.getjTextFieldInscricaoEstadual().getText())) {
-            JOptionPane.showMessageDialog(null, "O campo Inscrição Estadual é obrigatório.");
-            telaCadastroFornecedor.getjTextFieldInscricaoEstadual().requestFocus();
+        if (cpfPreenchido && !utilities.ValidadorCampos.validarCpf(telaCadastroFornecedor.getjFormattedTextFieldCpf().getText())) {
+            JOptionPane.showMessageDialog(null, "O campo CPF é inválido.");
+            telaCadastroFornecedor.getjFormattedTextFieldCpf().requestFocus();
             return false;
         }
-        if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroFornecedor.getjFormattedTextFieldCnpj().getText())) {
-            JOptionPane.showMessageDialog(null, "O campo CNPJ é obrigatório.");
+        if (cnpjPreenchido && !utilities.ValidadorCampos.validarCnpj(telaCadastroFornecedor.getjFormattedTextFieldCnpj().getText())) {
+            JOptionPane.showMessageDialog(null, "O campo CNPJ é inválido.");
             telaCadastroFornecedor.getjFormattedTextFieldCnpj().requestFocus();
             return false;
         }

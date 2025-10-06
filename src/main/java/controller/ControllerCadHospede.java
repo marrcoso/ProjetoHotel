@@ -123,19 +123,25 @@ public final class ControllerCadHospede implements ActionListener, InterfaceCont
             telaCadastroHospede.getjFormattedTextFieldCep().requestFocus();
             return false;
         }
-        if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroHospede.getjTextFieldBairro().getText())) {
-            JOptionPane.showMessageDialog(null, "O campo Bairro é obrigatório.");
-            telaCadastroHospede.getjTextFieldBairro().requestFocus();
-            return false;
-        }
         if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroHospede.getjTextFieldCidade().getText())) {
             JOptionPane.showMessageDialog(null, "O campo Cidade é obrigatório.");
             telaCadastroHospede.getjTextFieldCidade().requestFocus();
             return false;
         }
+        if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroHospede.getjTextFieldBairro().getText())) {
+            JOptionPane.showMessageDialog(null, "O campo Bairro é obrigatório.");
+            telaCadastroHospede.getjTextFieldBairro().requestFocus();
+            return false;
+        }
         if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroHospede.getjTextFieldLogradouro().getText())) {
             JOptionPane.showMessageDialog(null, "O campo Logradouro é obrigatório.");
             telaCadastroHospede.getjTextFieldLogradouro().requestFocus();
+            return false;
+        }
+
+        if (!utilities.ValidadorCampos.validarStatus(telaCadastroHospede.getjComboBoxStatus().getSelectedItem().toString())) {
+            JOptionPane.showMessageDialog(null, "Selecione um Status válido.");
+            telaCadastroHospede.getjComboBoxStatus().requestFocus();
             return false;
         }
         if (!utilities.ValidadorCampos.validarSexo(telaCadastroHospede.getjComboBoxSexo().getSelectedItem().toString())) {
