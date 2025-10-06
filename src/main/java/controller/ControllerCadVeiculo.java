@@ -123,15 +123,10 @@ public final class ControllerCadVeiculo implements ActionListener, InterfaceCont
             telaCadastroVeiculo.getjButtonRelacionarProprietario().requestFocus();
             return false;
         }
-        if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroVeiculo.getjTextFieldPlaca().getText())) {
-            JOptionPane.showMessageDialog(null, "O campo Placa é obrigatório.");
+        if (!utilities.ValidadorCampos.validarPlaca(telaCadastroVeiculo.getjTextFieldPlaca().getText())) {
+            JOptionPane.showMessageDialog(null, "O campo Placa é inválido (7 caracteres).");
             telaCadastroVeiculo.getjTextFieldPlaca().requestFocus();
             return false;
-        }
-        if (telaCadastroVeiculo.getjTextFieldPlaca().getText().length() > 7) {
-            JOptionPane.showMessageDialog(null, "O campo Placa aceita no máximo 7 caracteres.");
-            telaCadastroVeiculo.getjTextFieldPlaca().requestFocus();
-            return false;   
         }
         if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroVeiculo.getjTextFieldCor().getText())) {
             JOptionPane.showMessageDialog(null, "O campo Cor é obrigatório.");

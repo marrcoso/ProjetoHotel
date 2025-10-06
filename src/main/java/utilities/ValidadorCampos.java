@@ -49,4 +49,8 @@ public class ValidadorCampos {
         String apenasNumeros = Utilities.apenasNumeros(cep);
         return apenasNumeros.length() == 8;
     }
+
+    public static boolean validarPlaca(String placa) {
+        return validarCampoTexto(placa) && placa.length() == 7;
+    }
 }
