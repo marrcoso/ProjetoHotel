@@ -1,7 +1,7 @@
 Produto:
     ☐ Input de valor formatado/mascara
-    ☐ Consertar filtro de valor ou remover
-    ☐ Consertar filtro de observação ou remover
+    ✔ Consertar filtro de valor ou remover @done(25-10-06 17:05)
+    ✔ Consertar filtro de observação ou remover @done(25-10-06 17:05)
     ☐ Testar formulário
 Serviço:
     ☐ Consertar DAO para retrieve

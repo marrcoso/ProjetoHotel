@@ -84,6 +84,14 @@ public final class ControllerBuscaServico implements ActionListener, InterfaceCo
     }
 
     @Override
+    public void carregarPorAtributo(String atributo, String valor, DefaultTableModel tabela) throws SQLException {
+        List<Servico> listaServicos = servicoService.Carregar(atributo, valor);
+        for (Servico s : listaServicos) {
+            adicionarLinhaTabela(tabela, s);
+        }
+    }
+
+    @Override
     public void handleFiltrar() {
         if (telaBuscaServico.getjTFFiltro().getText().trim().equalsIgnoreCase("")) {
             JOptionPane.showMessageDialog(null, "Sem Dados para a Seleção...");
@@ -107,10 +115,7 @@ public final class ControllerBuscaServico implements ActionListener, InterfaceCo
                     break;
                 }
                 case DESCRICAO: {
-                    List<Servico> listaPorDescricao = servicoService.Carregar("descricao", filtroTexto);
-                    for (Servico s : listaPorDescricao) {
-                        adicionarLinhaTabela(tabela, s);
-                    }
+                    carregarPorAtributo("descricao", filtroTexto, tabela);
                     break;
                 }
             }

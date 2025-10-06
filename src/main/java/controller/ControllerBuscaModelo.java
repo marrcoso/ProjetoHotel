@@ -84,6 +84,14 @@ public final class ControllerBuscaModelo implements ActionListener, InterfaceCon
     }
 
     @Override
+    public void carregarPorAtributo(String atributo, String valor, DefaultTableModel tabela) throws SQLException {
+        List<Modelo> listaModelos = modeloService.Carregar(atributo, valor);
+        for (Modelo m : listaModelos) {
+            adicionarLinhaTabela(tabela, m);
+        }
+    }
+
+    @Override
     public void handleFiltrar() {
         if (telaBuscaModelo.getjTFFiltro().getText().trim().equalsIgnoreCase("")) {
             JOptionPane.showMessageDialog(null, "Sem Dados para a Seleção...");
@@ -109,10 +117,7 @@ public final class ControllerBuscaModelo implements ActionListener, InterfaceCon
                     break;
                 }
                 case DESCRICAO: {
-                    List<Modelo> listaPorDescricao = modeloService.Carregar("descricao", filtroTexto);
-                    for (Modelo modelo : listaPorDescricao) {
-                        adicionarLinhaTabela(tabela, modelo);
-                    }
+                    carregarPorAtributo("descricao", filtroTexto, tabela);
                     break;
                 }
             }

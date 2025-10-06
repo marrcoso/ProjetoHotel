@@ -85,6 +85,14 @@ public final class ControllerBuscaVagaEstacionamento implements ActionListener, 
     }
 
     @Override
+    public void carregarPorAtributo(String atributo, String valor, DefaultTableModel tabela) throws SQLException {
+        List<VagaEstacionamento> listaVagas = vagaService.Carregar(atributo, valor);
+        for (VagaEstacionamento v : listaVagas) {
+            adicionarLinhaTabela(tabela, v);
+        }
+    }
+
+    @Override
     public void handleFiltrar() {
         if (telaBuscaVaga.getjTFFiltro().getText().trim().equalsIgnoreCase("")) {
             JOptionPane.showMessageDialog(null, "Sem Dados para a Seleção...");
@@ -108,10 +116,7 @@ public final class ControllerBuscaVagaEstacionamento implements ActionListener, 
                     break;
                 }
                 case DESCRICAO: {
-                    List<VagaEstacionamento> listaPorDescricao = vagaService.Carregar("descricao", filtroTexto);
-                    for (VagaEstacionamento v : listaPorDescricao) {
-                        adicionarLinhaTabela(tabela, v);
-                    }
+                    carregarPorAtributo("descricao", filtroTexto, tabela);
                     break;
                 }
             }

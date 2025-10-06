@@ -85,6 +85,14 @@ public final class ControllerBuscaHospede implements ActionListener, InterfaceCo
     }
 
     @Override
+    public void carregarPorAtributo(String atributo, String valor, DefaultTableModel tabela) throws SQLException {
+        List<Hospede> listaHospedes = hospedeService.Carregar(atributo, valor);
+        for (Hospede h : listaHospedes) {
+            adicionarLinhaTabela(tabela, h);
+        }
+    }
+
+    @Override
     public void handleFiltrar() {
         if (telaBuscaHospede.getjTFFiltro().getText().trim().equalsIgnoreCase("")) {
             JOptionPane.showMessageDialog(null, "Sem Dados para a Seleção...");
@@ -108,17 +116,11 @@ public final class ControllerBuscaHospede implements ActionListener, InterfaceCo
                     break;
                 }
                 case NOME: {
-                    List<Hospede> listaPorNome = hospedeService.Carregar("nome", filtroTexto);
-                    for (Hospede h : listaPorNome) {
-                        adicionarLinhaTabela(tabela, h);
-                    }
+                    carregarPorAtributo("nome", filtroTexto, tabela);
                     break;
                 }
                 case CPF: {
-                    List<Hospede> listaPorCpf = hospedeService.Carregar("cpf", filtroTexto);
-                    for (Hospede h : listaPorCpf) {
-                        adicionarLinhaTabela(tabela, h);
-                    }
+                    carregarPorAtributo("cpf", filtroTexto, tabela);
                     break;
                 }
             }

@@ -85,6 +85,14 @@ public final class ControllerBuscaFornecedor implements ActionListener, Interfac
     }
 
     @Override
+    public void carregarPorAtributo(String atributo, String valor, DefaultTableModel tabela) throws SQLException {
+        List<Fornecedor> listaFornecedores = fornecedorService.Carregar(atributo, valor);
+        for (Fornecedor f : listaFornecedores) {
+            adicionarLinhaTabela(tabela, f);
+        }
+    }
+
+    @Override
     public void handleFiltrar() {
         if (telaBuscaFornecedor.getjTFFiltro().getText().trim().equalsIgnoreCase("")) {
             JOptionPane.showMessageDialog(null, "Sem Dados para a Seleção...");
@@ -108,17 +116,11 @@ public final class ControllerBuscaFornecedor implements ActionListener, Interfac
                     break;
                 }
                 case NOME: {
-                    List<Fornecedor> listaPorNome = fornecedorService.Carregar("nome", filtroTexto);
-                    for (Fornecedor f : listaPorNome) {
-                        adicionarLinhaTabela(tabela, f);
-                    }
+                    carregarPorAtributo("nome", filtroTexto, tabela);
                     break;
                 }
                 case CPF: {
-                    List<Fornecedor> listaPorCpf = fornecedorService.Carregar("cpf", filtroTexto);
-                    for (Fornecedor f : listaPorCpf) {
-                        adicionarLinhaTabela(tabela, f);
-                    }
+                    carregarPorAtributo("cpf", filtroTexto, tabela);
                     break;
                 }
             }

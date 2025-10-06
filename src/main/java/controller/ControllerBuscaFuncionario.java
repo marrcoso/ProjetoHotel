@@ -85,6 +85,14 @@ public final class ControllerBuscaFuncionario implements ActionListener, Interfa
     }
 
     @Override
+    public void carregarPorAtributo(String atributo, String valor, DefaultTableModel tabela) throws SQLException {
+        List<Funcionario> listaFuncionarios = funcionarioService.Carregar(atributo, valor);
+        for (Funcionario f : listaFuncionarios) {
+            adicionarLinhaTabela(tabela, f);
+        }
+    }
+
+    @Override
     public void handleFiltrar() {
         if (telaBuscaFuncionario.getjTFFiltro().getText().trim().equalsIgnoreCase("")) {
             JOptionPane.showMessageDialog(null, "Sem Dados para a Seleção...");
@@ -108,17 +116,11 @@ public final class ControllerBuscaFuncionario implements ActionListener, Interfa
                     break;
                 }
                 case NOME: {
-                    List<Funcionario> listaPorNome = funcionarioService.Carregar("nome", filtroTexto);
-                    for (Funcionario f : listaPorNome) {
-                        adicionarLinhaTabela(tabela, f);
-                    }
+                    carregarPorAtributo("nome", filtroTexto, tabela);
                     break;
                 }
                 case CPF: {
-                    List<Funcionario> listaPorCpf = funcionarioService.Carregar("cpf", filtroTexto);
-                    for (Funcionario f : listaPorCpf) {
-                        adicionarLinhaTabela(tabela, f);
-                    }
+                    carregarPorAtributo("cpf", filtroTexto, tabela);
                     break;
                 }
             }

@@ -90,7 +90,8 @@ public final class ControllerBuscaVeiculo implements ActionListener, InterfaceCo
         });
     }
 
-    private void carregarPorAtributo(String atributo, String valor, DefaultTableModel tabela) throws SQLException {
+    @Override
+    public void carregarPorAtributo(String atributo, String valor, DefaultTableModel tabela) throws SQLException {
         List<Veiculo> listaVeiculos = veiculoService.Carregar(atributo, valor);
         for (Veiculo v : listaVeiculos) {
             adicionarLinhaTabela(tabela, v);

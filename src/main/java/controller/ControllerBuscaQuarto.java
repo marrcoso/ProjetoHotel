@@ -89,6 +89,14 @@ public final class ControllerBuscaQuarto implements ActionListener, InterfaceCon
     }
 
     @Override
+    public void carregarPorAtributo(String atributo, String valor, DefaultTableModel tabela) throws SQLException {
+        List<Quarto> listaQuartos = quartoService.Carregar(atributo, valor);
+        for (Quarto q : listaQuartos) {
+            adicionarLinhaTabela(tabela, q);
+        }
+    }
+
+    @Override
     public void handleFiltrar() {
         if (telaBuscaQuarto.getjTFFiltro().getText().trim().equalsIgnoreCase("")) {
             JOptionPane.showMessageDialog(null, "Sem Dados para a Seleção...");
@@ -112,45 +120,27 @@ public final class ControllerBuscaQuarto implements ActionListener, InterfaceCon
                     break;
                 }
                 case DESCRICAO: {
-                    List<Quarto> lista = quartoService.Carregar("descricao", filtroTexto);
-                    for (Quarto quarto : lista) {
-                        adicionarLinhaTabela(tabela, quarto);
-                    }
+                    carregarPorAtributo("descricao", filtroTexto, tabela);
                     break;
                 }
                 case CAPACIDADE_HOSPEDES: {
-                    List<Quarto> lista = quartoService.Carregar("capacidade_hospedes", filtroTexto);
-                    for (Quarto quarto : lista) {
-                        adicionarLinhaTabela(tabela, quarto);
-                    }
+                    carregarPorAtributo("capacidade_hospedes", filtroTexto, tabela);
                     break;
                 }
                 case METRAGEM: {
-                    List<Quarto> lista = quartoService.Carregar("metragem", filtroTexto);
-                    for (Quarto quarto : lista) {
-                        adicionarLinhaTabela(tabela, quarto);
-                    }
+                    carregarPorAtributo("metragem", filtroTexto, tabela);
                     break;
                 }
                 case IDENTIFICACAO: {
-                    List<Quarto> lista = quartoService.Carregar("identificacao", filtroTexto);
-                    for (Quarto quarto : lista) {
-                        adicionarLinhaTabela(tabela, quarto);
-                    }
+                    carregarPorAtributo("identificacao", filtroTexto, tabela);
                     break;
                 }
                 case ANDAR: {
-                    List<Quarto> lista = quartoService.Carregar("andar", filtroTexto);
-                    for (Quarto quarto : lista) {
-                        adicionarLinhaTabela(tabela, quarto);
-                    }
+                    carregarPorAtributo("andar", filtroTexto, tabela);
                     break;
                 }
                 case OBS: {
-                    List<Quarto> lista = quartoService.Carregar("obs", filtroTexto);
-                    for (Quarto quarto : lista) {
-                        adicionarLinhaTabela(tabela, quarto);
-                    }
+                    carregarPorAtributo("obs", filtroTexto, tabela);
                     break;
                 }
             }

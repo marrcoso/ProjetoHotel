@@ -62,12 +62,14 @@ public final class ControllerBuscaProduto implements ActionListener, InterfaceCo
     }
 
     private enum FiltroProduto {
-        ID, DESCRICAO;
+        ID, DESCRICAO, OBSERVACAO, VALOR;
 
         public static FiltroProduto fromIndex(int index) {
             switch (index) {
                 case 0: return ID;
                 case 1: return DESCRICAO;
+                case 2: return OBSERVACAO;
+                case 3: return VALOR;
                 default: throw new IllegalArgumentException("Filtro inválido");
             }
         }
@@ -82,6 +84,14 @@ public final class ControllerBuscaProduto implements ActionListener, InterfaceCo
             produto.getValor(),
             produto.getStatus()
         });
+    }
+
+    @Override
+    public void carregarPorAtributo(String atributo, String valor, DefaultTableModel tabela) throws SQLException {
+        List<Produto> listaProdutos = produtoService.Carregar(atributo, valor);
+        for (Produto p : listaProdutos) {
+            adicionarLinhaTabela(tabela, p);
+        }
     }
 
     @Override
@@ -108,10 +118,15 @@ public final class ControllerBuscaProduto implements ActionListener, InterfaceCo
                     break;
                 }
                 case DESCRICAO: {
-                    List<Produto> listaPorDescricao = produtoService.Carregar("descricao", filtroTexto);
-                    for (Produto p : listaPorDescricao) {
-                        adicionarLinhaTabela(tabela, p);
-                    }
+                    carregarPorAtributo("descricao", filtroTexto, tabela);
+                    break;
+                }
+                case OBSERVACAO: {
+                    carregarPorAtributo("obs", filtroTexto, tabela);
+                    break;
+                }
+                case VALOR: {
+                    carregarPorAtributo("valor", filtroTexto, tabela);
                     break;
                 }
             }
@@ -124,4 +139,5 @@ public final class ControllerBuscaProduto implements ActionListener, InterfaceCo
     public void handleSair() {
         this.telaBuscaProduto.dispose();
     }
+
 }
