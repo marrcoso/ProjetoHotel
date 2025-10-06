@@ -6,6 +6,9 @@ Produto:
 Serviço:
     ✔ Consertar DAO para retrieve @done(25-10-06 17:14)
     ✔ Testar formulário @done(25-10-06 17:14)
+Funcionario:
+    ✔ Adicionar mais filtros @done(25-10-06 17:29)
+    ✔ Testar formulário @done(25-10-06 17:17)
 Fornecedor:
     ✔ Implementar data de cadastro automatica
     ✔ consertar ordem da validação de form
@@ -26,7 +29,7 @@ Veículo:
     ✔ Testar formulário @done(25-10-05 16:18)
 
 Todas as telas:
-    ☐ Verificar troca de campo de status
+    ☐ Verificar campo de status para permitir ser trocavel (update banco no cadastro) ou apenas por função na busca
 
 Opcionais:
     ☐ Alterar para data de cadastro ser gerada por trigger no banco e não ter em create e update

@@ -62,13 +62,21 @@ public final class ControllerBuscaFuncionario implements ActionListener, Interfa
     }
 
     private enum FiltroFuncionario {
-        ID, NOME, CPF;
+        ID, USUARIO, NOME, CPF, OBSERVACAO, TELEFONE, EMAIL, CEP, CIDADE, BAIRRO, LOGRADOURO;
 
         public static FiltroFuncionario fromIndex(int index) {
             switch (index) {
                 case 0: return ID;
-                case 1: return NOME;
-                case 2: return CPF;
+                case 1: return USUARIO;
+                case 2: return NOME;
+                case 3: return CPF;
+                case 4: return OBSERVACAO;
+                case 5: return TELEFONE;
+                case 6: return EMAIL;
+                case 7: return CEP;
+                case 8: return CIDADE;
+                case 9: return BAIRRO;
+                case 10: return LOGRADOURO;
                 default: throw new IllegalArgumentException("Filtro inválido");
             }
         }
@@ -80,7 +88,12 @@ public final class ControllerBuscaFuncionario implements ActionListener, Interfa
             funcionario.getId(),
             funcionario.getNome(),
             funcionario.getCpf(),
-            funcionario.getStatus()
+            funcionario.getStatus(),
+            funcionario.getUsuario(),
+            funcionario.getObs(),
+            funcionario.getFone1(),
+            funcionario.getEmail(),
+            funcionario.getCidade(),
         });
     }
 
@@ -115,12 +128,44 @@ public final class ControllerBuscaFuncionario implements ActionListener, Interfa
                     }
                     break;
                 }
+                case USUARIO: {
+                    carregarPorAtributo("usuario", filtroTexto, tabela);
+                    break;
+                }
                 case NOME: {
                     carregarPorAtributo("nome", filtroTexto, tabela);
                     break;
                 }
                 case CPF: {
                     carregarPorAtributo("cpf", filtroTexto, tabela);
+                    break;
+                }
+                case OBSERVACAO: {
+                    carregarPorAtributo("obs", filtroTexto, tabela);
+                    break;
+                }
+                case TELEFONE: {
+                    carregarPorAtributo("fone", filtroTexto, tabela);
+                    break;
+                }
+                case EMAIL: {
+                    carregarPorAtributo("email", filtroTexto, tabela);
+                    break;
+                }
+                case CEP: {
+                    carregarPorAtributo("cep", filtroTexto, tabela);
+                    break;
+                }
+                case CIDADE: {
+                    carregarPorAtributo("cidade", filtroTexto, tabela);
+                    break;
+                }
+                case BAIRRO: {
+                    carregarPorAtributo("bairro", filtroTexto, tabela);
+                    break;
+                }
+                case LOGRADOURO: {
+                    carregarPorAtributo("logradouro", filtroTexto, tabela);
                     break;
                 }
             }
