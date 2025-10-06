@@ -205,6 +205,7 @@ public final class ControllerCadFornecedor implements ActionListener, InterfaceC
         fornecedor.setLogradouro(telaCadastroFornecedor.getjTextFieldLogradouro().getText());
         fornecedor.setComplemento(telaCadastroFornecedor.getjTextFieldComplemento().getText());
         fornecedor.setObs(telaCadastroFornecedor.getjTextFieldObs().getText());
+        fornecedor.setContato(telaCadastroFornecedor.getjTextFieldContato().getText());
         fornecedor.setDataCadastro(utilities.Utilities.formatarDataToSqlData(telaCadastroFornecedor.getjFormattedTextFieldDataCadastro().getText()));
 
         Object sexoSelecionado = telaCadastroFornecedor.getjComboBoxSexo().getSelectedItem();
@@ -242,10 +243,14 @@ public final class ControllerCadFornecedor implements ActionListener, InterfaceC
                 JOptionPane.showMessageDialog(telaCadastroFornecedor, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
+            telaCadastroFornecedor.getjFormattedTextFieldDataCadastro().setText(utilities.Utilities.formatarDataFromSqlData(fornecedor.getDataCadastro()));
+            telaCadastroFornecedor.getjFormattedTextFieldDataCadastro().setEnabled(false);
 
             telaCadastroFornecedor.getjTextFieldNomeFantasia().setText(fornecedor.getNome());
             telaCadastroFornecedor.getjTextFieldRazaoSocial().setText(fornecedor.getRazaoSocial());
-            telaCadastroFornecedor.getjFormattedTextFieldCnpj().setText(fornecedor.getCnpj());
+            telaCadastroFornecedor.getjFormattedTextFieldCpf().setText(utilities.Utilities.formatarCpf(fornecedor.getCpf()));
+            telaCadastroFornecedor.getjFormattedTextFieldCnpj().setText(utilities.Utilities.formatarCnpj(fornecedor.getCnpj()));
+            telaCadastroFornecedor.getjTextFieldRg().setText(fornecedor.getRg());
             telaCadastroFornecedor.getjTextFieldInscricaoEstadual().setText(fornecedor.getInscricaoEstadual());
             telaCadastroFornecedor.getjFormattedTextFieldFone1().setText(utilities.Utilities.formatarFone(fornecedor.getFone1()));
             telaCadastroFornecedor.getjFormattedTextFieldFone2().setText(utilities.Utilities.formatarFone(fornecedor.getFone2()));
@@ -256,9 +261,14 @@ public final class ControllerCadFornecedor implements ActionListener, InterfaceC
             telaCadastroFornecedor.getjTextFieldLogradouro().setText(fornecedor.getLogradouro());
             telaCadastroFornecedor.getjTextFieldComplemento().setText(fornecedor.getComplemento());
             telaCadastroFornecedor.getjTextFieldObs().setText(fornecedor.getObs());
+            telaCadastroFornecedor.getjTextFieldContato().setText(fornecedor.getContato());
 
             telaCadastroFornecedor.getjComboBoxStatus().setSelectedItem(
                 fornecedor.getStatus() == 'A' ? "Ativo" : "Inativo"
+            );
+
+            telaCadastroFornecedor.getjComboBoxSexo().setSelectedItem(
+                fornecedor.getSexo() == 'M' ? "Masculino" : "Feminino"
             );
 
             telaCadastroFornecedor.getjTextFieldNomeFantasia().requestFocus();

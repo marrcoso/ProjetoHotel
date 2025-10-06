@@ -12,7 +12,9 @@ Funcionario:
 Fornecedor:
     ✔ Implementar data de cadastro automatica
     ✔ consertar ordem da validação de form
-    ✔ Testar formulário
+    ✔ Consertar form (data de cadastro, sexo, cpf) @done(25-10-06 17:48)
+    ✔ Adicionar mais filtros @done(25-10-06 17:48)
+    ✔ Testar formulário @done(25-10-06 17:48)
 Hospedes:
     ✔ Consertar input de cnpj @done(25-10-05 21:59)
     ✔ Permitir limpar um campo de input formatado depois de preenchido (CNPJ) @done(25-10-05 22:10)

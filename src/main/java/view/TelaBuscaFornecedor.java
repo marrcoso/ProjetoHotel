@@ -169,16 +169,23 @@ public class TelaBuscaFornecedor extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Id", "Nome", "CPF", "Status"
+                "Id", "Nome", "CPF", "Status", "Razao Social", "CNPJ", "Fone", "Email", "Cidade", "Obs"
             }
         ));
         jTableDados.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jTableDados);
         if (jTableDados.getColumnModel().getColumnCount() > 0) {
             jTableDados.getColumnModel().getColumn(0).setMaxWidth(40);
+            jTableDados.getColumnModel().getColumn(1).setMinWidth(200);
             jTableDados.getColumnModel().getColumn(1).setMaxWidth(270);
             jTableDados.getColumnModel().getColumn(2).setMaxWidth(130);
             jTableDados.getColumnModel().getColumn(3).setMaxWidth(60);
+            jTableDados.getColumnModel().getColumn(4).setMaxWidth(150);
+            jTableDados.getColumnModel().getColumn(5).setMaxWidth(150);
+            jTableDados.getColumnModel().getColumn(6).setMaxWidth(150);
+            jTableDados.getColumnModel().getColumn(7).setMaxWidth(150);
+            jTableDados.getColumnModel().getColumn(8).setMaxWidth(150);
+            jTableDados.getColumnModel().getColumn(9).setMaxWidth(150);
         }
 
         javax.swing.GroupLayout jPanelDadosLayout = new javax.swing.GroupLayout(jPanelDados);
@@ -194,8 +201,7 @@ public class TelaBuscaFornecedor extends javax.swing.JDialog {
 
         jPanelFiltros.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jCBFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Id", "Nome", "CPF" }));
-        jCBFiltro.setSelectedIndex(-1);
+        jCBFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Id", "Nome", "CPF", "Razão Social", "CNPJ", "Observação", "Telefone", "Email", "Cep", "Cidade", "Bairro", "Logradouro" }));
         jCBFiltro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCBFiltroActionPerformed(evt);
@@ -239,7 +245,7 @@ public class TelaBuscaFornecedor extends javax.swing.JDialog {
                             .addGroup(jPanelFiltrosLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTFFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(10, 372, Short.MAX_VALUE)
                 .addGroup(jPanelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButtonFiltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
