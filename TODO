@@ -29,7 +29,12 @@ Vaga Estacionamento:
     ✔ Testar formulário @done(25-10-06 19:53)
 Veículo:
     ✔ Adicionar sistema de relacionamento para vincular veículo as pessoas @done(25-10-05 16:01)
+    ✔ Melhora validação @done(25-10-06 20:02)
     ✔ Testar formulário @done(25-10-05 16:18)
+Modelo:
+    ✔ Testar formulário @done(25-10-06 19:55)
+Marca:
+    ✔ Testar formulário @done(25-10-06 19:55)
 
 Todas as telas:
     ☐ Verificar campo de status para permitir ser trocavel (update banco no cadastro) ou apenas por função na busca
