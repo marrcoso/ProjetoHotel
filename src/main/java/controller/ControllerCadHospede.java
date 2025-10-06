@@ -22,7 +22,11 @@ public final class ControllerCadHospede implements ActionListener, InterfaceCont
         this.hospedeService = new HospedeService();
         utilities.Utilities.ativaDesativa(this.telaCadastroHospede.getjPanelBotoes(), true);
         utilities.Utilities.limpaComponentes(this.telaCadastroHospede.getjPanelDados(), false);
-
+        utilities.Utilities.permiteLimparFormattedField(this.telaCadastroHospede.getjFormattedTextFieldCpf());
+        utilities.Utilities.permiteLimparFormattedField(this.telaCadastroHospede.getjFormattedTextFieldCnpj());
+        utilities.Utilities.permiteLimparFormattedField(this.telaCadastroHospede.getjFormattedTextFieldFone1());
+        utilities.Utilities.permiteLimparFormattedField(this.telaCadastroHospede.getjFormattedTextFieldFone2());
+        utilities.Utilities.permiteLimparFormattedField(this.telaCadastroHospede.getjFormattedTextFieldCep());
         initListeners();
     }
 

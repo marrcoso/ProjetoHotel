@@ -11,10 +11,10 @@ Fornecedor:
     ✔ consertar ordem da validação de form
     ✔ Testar formulário
 Hospedes:
-    ☐ Consertar input de cnpj
-    ☐ Permitir limpar um campo de input formatado depois de preenchido (CNPJ)
-    ☐ Implementar data de cadastro automática
-    ☐ Testar formulário
+    ✔ Consertar input de cnpj @done(25-10-05 21:59)
+    ✔ Permitir limpar um campo de input formatado depois de preenchido (CNPJ) @done(25-10-05 22:10)
+    ✔ Implementar data de cadastro automática @done(25-10-05 21:59)
+    ✔ Testar formulário @done(25-10-05 22:10)
 Quarto:
     ☐ consertar ordem da validação de form
     ☐ Testar formulário

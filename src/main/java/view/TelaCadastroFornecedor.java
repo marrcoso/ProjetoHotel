@@ -73,7 +73,7 @@ public class TelaCadastroFornecedor extends javax.swing.JDialog {
         this.jComboBoxStatus = jComboBoxStatus;
     }
 
-    public JFormattedTextField getjDataCadastro() {
+    public JFormattedTextField getjFormattedTextFieldDataCadastro() {
         return jDataCadastro;
     }
 
@@ -507,7 +507,7 @@ public class TelaCadastroFornecedor extends javax.swing.JDialog {
         jLabelCnpj.setText("CNPJ");
 
         try {
-            jFormattedTextFieldCnpj.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###/####-##")));
+            jFormattedTextFieldCnpj.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###/####-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -520,6 +520,12 @@ public class TelaCadastroFornecedor extends javax.swing.JDialog {
         jLabelFone1.setText("Fone1");
 
         jLabelFone2.setText("Fone 2");
+
+        try {
+            jFormattedTextFieldFone2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) #####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         jLabelEmail.setText("Email");
 
@@ -558,8 +564,7 @@ public class TelaCadastroFornecedor extends javax.swing.JDialog {
 
         jLabelSexo.setText("Sexo");
 
-        jComboBoxSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBoxSexo.setSelectedIndex(-1);
+        jComboBoxSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Feminino" }));
 
         jLabelContato.setText("Contato");
 

@@ -22,7 +22,10 @@ public final class ControllerCadFuncionario implements ActionListener, Interface
         this.funcionarioService = new FuncionarioService();
         utilities.Utilities.ativaDesativa(this.telaCadastroFuncionario.getjPanelBotoes(), true);
         utilities.Utilities.limpaComponentes(this.telaCadastroFuncionario.getjPanelDados(), false);
-
+        utilities.Utilities.permiteLimparFormattedField(this.telaCadastroFuncionario.getjFormattedTextFieldCep());
+        utilities.Utilities.permiteLimparFormattedField(this.telaCadastroFuncionario.getjFormattedTextFieldCpf());
+        utilities.Utilities.permiteLimparFormattedField(this.telaCadastroFuncionario.getjFormattedTextFieldFone1());
+        utilities.Utilities.permiteLimparFormattedField(this.telaCadastroFuncionario.getjFormattedTextFieldFone2());
         initListeners();
     }
 

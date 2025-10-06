@@ -34,6 +34,17 @@ public class Utilities {
         }
     }
 
+    public static void permiteLimparFormattedField(JFormattedTextField formattedTextField){
+        formattedTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (formattedTextField.getText().trim().replaceAll("[^a-zA-Z0-9]", "").isEmpty()) {
+                    formattedTextField.setValue(null);
+                }
+            }
+        });
+    }
+
     private static boolean isAlwaysDisabled(JComponent component) {
         Object alwaysDisabledObj = component.getClientProperty(Utilities.ALWAYS_DISABLED);
         return alwaysDisabledObj instanceof Boolean ? (Boolean) alwaysDisabledObj : false;

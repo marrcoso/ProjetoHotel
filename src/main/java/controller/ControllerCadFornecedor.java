@@ -22,7 +22,11 @@ public final class ControllerCadFornecedor implements ActionListener, InterfaceC
         this.fornecedorService = new FornecedorService();
         utilities.Utilities.ativaDesativa(this.telaCadastroFornecedor.getjPanelBotoes(), true);
         utilities.Utilities.limpaComponentes(this.telaCadastroFornecedor.getjPanelDados(), false);
-
+        utilities.Utilities.permiteLimparFormattedField(this.telaCadastroFornecedor.getjFormattedTextFieldCpf());
+        utilities.Utilities.permiteLimparFormattedField(this.telaCadastroFornecedor.getjFormattedTextFieldCep());
+        utilities.Utilities.permiteLimparFormattedField(this.telaCadastroFornecedor.getjFormattedTextFieldCnpj());
+        utilities.Utilities.permiteLimparFormattedField(this.telaCadastroFornecedor.getjFormattedTextFieldFone1());
+        utilities.Utilities.permiteLimparFormattedField(this.telaCadastroFornecedor.getjFormattedTextFieldFone2());
         initListeners();
     }
 
@@ -64,11 +68,11 @@ public final class ControllerCadFornecedor implements ActionListener, InterfaceC
         utilities.Utilities.ativaDesativa(this.telaCadastroFornecedor.getjPanelBotoes(), false);
         utilities.Utilities.limpaComponentes(this.telaCadastroFornecedor.getjPanelDados(), true);
         this.telaCadastroFornecedor.getjTextFieldId().setEnabled(false);
-        this.telaCadastroFornecedor.getjDataCadastro().setEnabled(false);
+        this.telaCadastroFornecedor.getjFormattedTextFieldDataCadastro().setEnabled(false);
         this.telaCadastroFornecedor.getjTextFieldNomeFantasia().requestFocus();
         this.telaCadastroFornecedor.getjComboBoxStatus().setSelectedItem("Ativo");
         this.telaCadastroFornecedor.getjComboBoxStatus().setEnabled(false);
-        this.telaCadastroFornecedor.getjDataCadastro().setText(utilities.Utilities.getDataHoje());
+        this.telaCadastroFornecedor.getjFormattedTextFieldDataCadastro().setText(utilities.Utilities.getDataHoje());
     }
 
     @Override
@@ -82,6 +86,11 @@ public final class ControllerCadFornecedor implements ActionListener, InterfaceC
         if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroFornecedor.getjTextFieldNomeFantasia().getText())) {
             JOptionPane.showMessageDialog(null, "O campo Nome Fantasia é obrigatório.");
             telaCadastroFornecedor.getjTextFieldNomeFantasia().requestFocus();
+            return false;
+        }
+        if (!utilities.ValidadorCampos.validarSexo(telaCadastroFornecedor.getjComboBoxSexo().getSelectedItem())) {
+            JOptionPane.showMessageDialog(null, "Selecione um Sexo válido.");
+            telaCadastroFornecedor.getjComboBoxSexo().requestFocus();
             return false;
         }
         boolean cpfPreenchido = utilities.Utilities.apenasNumeros(telaCadastroFornecedor.getjFormattedTextFieldCpf().getText()).length() > 0;
@@ -137,14 +146,9 @@ public final class ControllerCadFornecedor implements ActionListener, InterfaceC
             telaCadastroFornecedor.getjTextFieldLogradouro().requestFocus();
             return false;
         }
-        if (!utilities.ValidadorCampos.validarStatus(telaCadastroFornecedor.getjComboBoxStatus().getSelectedItem().toString())) {
+        if (!utilities.ValidadorCampos.validarStatus(telaCadastroFornecedor.getjComboBoxStatus().getSelectedItem())) {
             JOptionPane.showMessageDialog(null, "Selecione um Status válido.");
             telaCadastroFornecedor.getjComboBoxStatus().requestFocus();
-            return false;
-        }
-        if (!utilities.ValidadorCampos.validarSexo(telaCadastroFornecedor.getjComboBoxSexo().getSelectedItem().toString())) {
-            JOptionPane.showMessageDialog(null, "Selecione um Sexo válido.");
-            telaCadastroFornecedor.getjComboBoxSexo().requestFocus();
             return false;
         }
         return true;
@@ -188,17 +192,25 @@ public final class ControllerCadFornecedor implements ActionListener, InterfaceC
         Fornecedor fornecedor = new Fornecedor();
         fornecedor.setNome(telaCadastroFornecedor.getjTextFieldNomeFantasia().getText());
         fornecedor.setRazaoSocial(telaCadastroFornecedor.getjTextFieldRazaoSocial().getText());
-        fornecedor.setCnpj(utilities.Utilities.apenasNumeros(telaCadastroFornecedor.getjFormattedTextFieldCnpj().getText()));
+        fornecedor.setRg(telaCadastroFornecedor.getjTextFieldRg().getText());
+        fornecedor.setCpf(utilities.Utilities.apenasNumeros(telaCadastroFornecedor.getjFormattedTextFieldCpf().getText()));
         fornecedor.setInscricaoEstadual(telaCadastroFornecedor.getjTextFieldInscricaoEstadual().getText());
+        fornecedor.setCnpj(utilities.Utilities.apenasNumeros(telaCadastroFornecedor.getjFormattedTextFieldCnpj().getText()));
         fornecedor.setFone1(utilities.Utilities.apenasNumeros(telaCadastroFornecedor.getjFormattedTextFieldFone1().getText()));
         fornecedor.setFone2(utilities.Utilities.apenasNumeros(telaCadastroFornecedor.getjFormattedTextFieldFone2().getText()));
         fornecedor.setEmail(telaCadastroFornecedor.getjTextFieldEmail().getText());
         fornecedor.setCep(utilities.Utilities.apenasNumeros(telaCadastroFornecedor.getjFormattedTextFieldCep().getText()));
-        fornecedor.setBairro(telaCadastroFornecedor.getjTextFieldBairro().getText());
         fornecedor.setCidade(telaCadastroFornecedor.getjTextFieldCidade().getText());
+        fornecedor.setBairro(telaCadastroFornecedor.getjTextFieldBairro().getText());
         fornecedor.setLogradouro(telaCadastroFornecedor.getjTextFieldLogradouro().getText());
         fornecedor.setComplemento(telaCadastroFornecedor.getjTextFieldComplemento().getText());
         fornecedor.setObs(telaCadastroFornecedor.getjTextFieldObs().getText());
+        fornecedor.setDataCadastro(utilities.Utilities.formatarDataToSqlData(telaCadastroFornecedor.getjFormattedTextFieldDataCadastro().getText()));
+
+        Object sexoSelecionado = telaCadastroFornecedor.getjComboBoxSexo().getSelectedItem();
+        fornecedor.setSexo(
+            sexoSelecionado != null && sexoSelecionado.equals("Masculino") ? 'M' : 'F'
+        );
 
         Object statusSelecionado = telaCadastroFornecedor.getjComboBoxStatus().getSelectedItem();
         fornecedor.setStatus(
