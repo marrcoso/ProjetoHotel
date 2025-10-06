@@ -139,4 +139,12 @@ public class Utilities {
         }
         return data;
     }
+
+    public static String formatarDataToSqlData(String data) {
+        if (data != null && data.matches("\\d{2}/\\d{2}/\\d{4}")) {
+            String[] partes = data.split("/");
+            return String.format("%s-%s-%s", partes[2], partes[1], partes[0]);
+        }
+        return data;
+    }
 }

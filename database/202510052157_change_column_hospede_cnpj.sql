@@ -1,0 +1,2 @@
+ALTER TABLE hospede
+    MODIFY cnpj CHAR(14) NULL

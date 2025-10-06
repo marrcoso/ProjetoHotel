@@ -22,12 +22,12 @@ public class ValidadorCampos {
         return senha != null && senha.length >= 6;
     }
 
-    public static boolean validarStatus(String status) {
-        return status != null && (status.equals("Ativo") || status.equals("Inativo"));
+    public static boolean validarStatus(Object status) {
+        return status != null && (status.toString().equals("Ativo") || status.toString().equals("Inativo"));
     }
 
-    public static boolean validarSexo(String sexo) {
-        return sexo != null && (sexo.equals("Masculino") || sexo.equals("Feminino"));
+    public static boolean validarSexo(Object sexo) {
+        return sexo != null && (sexo.toString().equals("Masculino") || sexo.toString().equals("Feminino"));
     }
 
     public static boolean validarCpf(String cpf) {

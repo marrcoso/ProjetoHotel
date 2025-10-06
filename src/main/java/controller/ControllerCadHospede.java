@@ -85,6 +85,11 @@ public final class ControllerCadHospede implements ActionListener, InterfaceCont
             telaCadastroHospede.getjTextFieldNomeFantasia().requestFocus();
             return false;
         }
+        if (!utilities.ValidadorCampos.validarSexo(telaCadastroHospede.getjComboBoxSexo().getSelectedItem())) {
+            JOptionPane.showMessageDialog(null, "Selecione um Sexo válido.");
+            telaCadastroHospede.getjComboBoxSexo().requestFocus();
+            return false;
+        }
         boolean cpfPreenchido = utilities.Utilities.apenasNumeros(telaCadastroHospede.getjFormattedTextFieldCpf().getText()).length() > 0;
         boolean cnpjPreenchido = utilities.Utilities.apenasNumeros(telaCadastroHospede.getjFormattedTextFieldCnpj().getText()).length() > 0;
         if (!cpfPreenchido && !cnpjPreenchido) {
@@ -139,14 +144,9 @@ public final class ControllerCadHospede implements ActionListener, InterfaceCont
             return false;
         }
 
-        if (!utilities.ValidadorCampos.validarStatus(telaCadastroHospede.getjComboBoxStatus().getSelectedItem().toString())) {
+        if (!utilities.ValidadorCampos.validarStatus(telaCadastroHospede.getjComboBoxStatus().getSelectedItem())) {
             JOptionPane.showMessageDialog(null, "Selecione um Status válido.");
             telaCadastroHospede.getjComboBoxStatus().requestFocus();
-            return false;
-        }
-        if (!utilities.ValidadorCampos.validarSexo(telaCadastroHospede.getjComboBoxSexo().getSelectedItem().toString())) {
-            JOptionPane.showMessageDialog(null, "Selecione um Sexo válido.");
-            telaCadastroHospede.getjComboBoxSexo().requestFocus();
             return false;
         }
         return true;
@@ -204,6 +204,7 @@ public final class ControllerCadHospede implements ActionListener, InterfaceCont
         hospede.setComplemento(telaCadastroHospede.getjTextFieldComplemento().getText());
         hospede.setContato(telaCadastroHospede.getjTextFieldContato().getText());
         hospede.setObs(telaCadastroHospede.getjTextFieldObs().getText());
+        hospede.setDataCadastro(utilities.Utilities.formatarDataToSqlData(telaCadastroHospede.getjFormattedTextFieldDataCadastro().getText()));
 
         Object sexoSelecionado = telaCadastroHospede.getjComboBoxSexo().getSelectedItem();
         hospede.setSexo(

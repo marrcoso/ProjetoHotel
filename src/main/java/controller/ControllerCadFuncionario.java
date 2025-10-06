@@ -70,40 +70,15 @@ public final class ControllerCadFuncionario implements ActionListener, Interface
         telaCadastroFuncionario.getjComboBoxStatus().setSelectedItem("Ativo");
         telaCadastroFuncionario.getjComboBoxStatus().setEnabled(false);
     }
-
+    
     @Override
     public void handleCancelar() {
         utilities.Utilities.ativaDesativa(telaCadastroFuncionario.getjPanelBotoes(), true);
         utilities.Utilities.limpaComponentes(telaCadastroFuncionario.getjPanelDados(), false);
     }
-
+    
     @Override
     public boolean isFormularioValido() {
-        if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroFuncionario.getjTextFieldNome().getText())) {
-            JOptionPane.showMessageDialog(null, "O Atributo Nome é Obrigatório.");
-            telaCadastroFuncionario.getjTextFieldNome().requestFocus();
-            return false;
-        }
-        if (!utilities.ValidadorCampos.validarCpf(telaCadastroFuncionario.getjFormattedTextFieldCpf().getText())) {
-            JOptionPane.showMessageDialog(null, "O Atributo CPF é Inválido.");
-            telaCadastroFuncionario.getjFormattedTextFieldCpf().requestFocus();
-            return false;
-        }
-        if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroFuncionario.getjTextFieldRg().getText())) {
-            JOptionPane.showMessageDialog(null, "O Atributo RG é Obrigatório.");
-            telaCadastroFuncionario.getjTextFieldRg().requestFocus();
-            return false;
-        }
-        if (!utilities.ValidadorCampos.validarSexo(telaCadastroFuncionario.getjComboBoxSexo().getSelectedItem().toString())) {
-            JOptionPane.showMessageDialog(null, "O atributo Sexo é Inválido.");
-            telaCadastroFuncionario.getjComboBoxSexo().requestFocus();
-            return false;
-        }
-        if (!utilities.ValidadorCampos.validarStatus(telaCadastroFuncionario.getjComboBoxStatus().getSelectedItem().toString())) {
-            JOptionPane.showMessageDialog(null, "O atributo Status é Inválido.");
-            telaCadastroFuncionario.getjComboBoxStatus().requestFocus();
-            return false;
-        }
         if (!utilities.ValidadorCampos.validarCampoUsuario(telaCadastroFuncionario.getjTextFieldUsuario().getText())) {
             JOptionPane.showMessageDialog(null, "O atributo Usuário é Inválido.\n(De 5 a 20 caracteres. Apenas letras, números, '.' e '_' são permitidos)");
             telaCadastroFuncionario.getjTextFieldUsuario().requestFocus();
@@ -112,6 +87,26 @@ public final class ControllerCadFuncionario implements ActionListener, Interface
         if (!utilities.ValidadorCampos.validarSenha(telaCadastroFuncionario.getjPasswordFieldSenha().getPassword())) {
             JOptionPane.showMessageDialog(null, "A Senha é obrigatória.");
             telaCadastroFuncionario.getjPasswordFieldSenha().requestFocus();
+            return false;
+        }
+        if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroFuncionario.getjTextFieldNome().getText())) {
+            JOptionPane.showMessageDialog(null, "O Atributo Nome é Obrigatório.");
+            telaCadastroFuncionario.getjTextFieldNome().requestFocus();
+            return false;
+        }
+        if (!utilities.ValidadorCampos.validarSexo(telaCadastroFuncionario.getjComboBoxSexo().getSelectedItem())) {
+            JOptionPane.showMessageDialog(null, "O atributo Sexo é Inválido.");
+            telaCadastroFuncionario.getjComboBoxSexo().requestFocus();
+            return false;
+        }
+        if (!utilities.ValidadorCampos.validarCpf(telaCadastroFuncionario.getjFormattedTextFieldCpf().getText())) {
+            JOptionPane.showMessageDialog(null, "O Atributo CPF é Inválido.");
+            telaCadastroFuncionario.getjFormattedTextFieldCpf().requestFocus();
+            return false;
+        }
+        if (!utilities.ValidadorCampos.validarStatus(telaCadastroFuncionario.getjComboBoxStatus().getSelectedItem())) {
+            JOptionPane.showMessageDialog(null, "O atributo Status é Inválido.");
+            telaCadastroFuncionario.getjComboBoxStatus().requestFocus();
             return false;
         }
         if (!utilities.ValidadorCampos.validarFone(telaCadastroFuncionario.getjFormattedTextFieldFone1().getText())) {
@@ -135,14 +130,14 @@ public final class ControllerCadFuncionario implements ActionListener, Interface
             telaCadastroFuncionario.getjFormattedTextFieldCep().requestFocus();
             return false;
         }
-        if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroFuncionario.getjTextFieldBairro().getText())) {
-            JOptionPane.showMessageDialog(null, "O Bairro é obrigatório.");
-            telaCadastroFuncionario.getjTextFieldBairro().requestFocus();
-            return false;
-        }
         if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroFuncionario.getjTextFieldCidade().getText())) {
             JOptionPane.showMessageDialog(null, "A Cidade é obrigatória.");
             telaCadastroFuncionario.getjTextFieldCidade().requestFocus();
+            return false;
+        }
+        if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroFuncionario.getjTextFieldBairro().getText())) {
+            JOptionPane.showMessageDialog(null, "O Bairro é obrigatório.");
+            telaCadastroFuncionario.getjTextFieldBairro().requestFocus();
             return false;
         }
         if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroFuncionario.getjTextFieldLogradouro().getText())) {
@@ -215,6 +210,7 @@ public final class ControllerCadFuncionario implements ActionListener, Interface
         funcionario.setCidade(telaCadastroFuncionario.getjTextFieldCidade().getText());
         funcionario.setLogradouro(telaCadastroFuncionario.getjTextFieldLogradouro().getText());
         funcionario.setComplemento(telaCadastroFuncionario.getjTextFieldComplemento().getText());
+        funcionario.setDataCadastro(utilities.Utilities.formatarDataToSqlData(telaCadastroFuncionario.getjFormattedTextFieldDataCadastro().getText()));
 
         return funcionario;
     }

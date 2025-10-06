@@ -351,7 +351,7 @@ public class TelaCadastroFuncionario extends javax.swing.JDialog {
 
         jComboBoxStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ativo", "Inativo" }));
 
-        jLabelNome.setText("Descrição");
+        jLabelNome.setText("Nome");
 
         jTextFieldNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
