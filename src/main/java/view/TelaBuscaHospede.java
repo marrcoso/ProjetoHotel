@@ -66,6 +66,7 @@ public class TelaBuscaHospede extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Projeto de Gestão Hoteleira");
         setAlwaysOnTop(true);
+        setPreferredSize(new java.awt.Dimension(901, 362));
         setResizable(false);
 
         jPaneltitulo.setBackground(new java.awt.Color(153, 255, 102));
@@ -90,23 +91,28 @@ public class TelaBuscaHospede extends javax.swing.JDialog {
 
         jPanelDados.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jTableDados.setAutoCreateRowSorter(true);
         jTableDados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Id", "Nome", "CPF", "Status"
+                "Id", "Nome", "CPF", "Status", "Razão Social", "CNPJ", "Fone", "Email", "Cidade", "Obs"
             }
         ));
-        jTableDados.setDefaultEditor(Object.class, null);
         jTableDados.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jTableDados);
         if (jTableDados.getColumnModel().getColumnCount() > 0) {
             jTableDados.getColumnModel().getColumn(0).setMaxWidth(40);
+            jTableDados.getColumnModel().getColumn(1).setMinWidth(200);
             jTableDados.getColumnModel().getColumn(1).setMaxWidth(270);
-            jTableDados.getColumnModel().getColumn(2).setMaxWidth(130);
+            jTableDados.getColumnModel().getColumn(2).setMaxWidth(150);
             jTableDados.getColumnModel().getColumn(3).setMaxWidth(60);
+            jTableDados.getColumnModel().getColumn(4).setMaxWidth(150);
+            jTableDados.getColumnModel().getColumn(5).setMaxWidth(100);
+            jTableDados.getColumnModel().getColumn(6).setMaxWidth(150);
+            jTableDados.getColumnModel().getColumn(7).setMaxWidth(150);
+            jTableDados.getColumnModel().getColumn(8).setMaxWidth(150);
+            jTableDados.getColumnModel().getColumn(9).setMaxWidth(150);
         }
 
         javax.swing.GroupLayout jPanelDadosLayout = new javax.swing.GroupLayout(jPanelDados);
@@ -122,8 +128,7 @@ public class TelaBuscaHospede extends javax.swing.JDialog {
 
         jPanelFiltros.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jCBFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Id", "Nome", "CPF" }));
-        jCBFiltro.setSelectedIndex(-1);
+        jCBFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Id", "Nome", "CPF", "Razão Social", "CNPJ", "Observação", "Telefone", "Email", "Cep", "Cidade", "Bairro", "Logradouro" }));
 
         jLabelFiltrar.setText("Filtrar Por");
 
@@ -131,12 +136,22 @@ public class TelaBuscaHospede extends javax.swing.JDialog {
 
         jButtonCarregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Load.png"))); // NOI18N
         jButtonCarregar.setText("Carregar");
+        jButtonCarregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCarregarActionPerformed(evt);
+            }
+        });
 
         jButtonSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Exit.png"))); // NOI18N
         jButtonSair.setText("Fechar");
 
         jButtonFiltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Find.png"))); // NOI18N
         jButtonFiltar.setText("Filtrar");
+        jButtonFiltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonFiltarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelFiltrosLayout = new javax.swing.GroupLayout(jPanelFiltros);
         jPanelFiltros.setLayout(jPanelFiltrosLayout);
@@ -145,7 +160,10 @@ public class TelaBuscaHospede extends javax.swing.JDialog {
             .addGroup(jPanelFiltrosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonCarregar)
+                    .addGroup(jPanelFiltrosLayout.createSequentialGroup()
+                        .addComponent(jButtonCarregar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonSair))
                     .addGroup(jPanelFiltrosLayout.createSequentialGroup()
                         .addGroup(jPanelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jCBFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -153,14 +171,13 @@ public class TelaBuscaHospede extends javax.swing.JDialog {
                         .addGroup(jPanelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelFiltrosLayout.createSequentialGroup()
                                 .addGap(8, 8, 8)
-                                .addComponent(jLabelValor))
+                                .addComponent(jLabelValor)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanelFiltrosLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTFFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonFiltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jTFFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jButtonFiltar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanelFiltrosLayout.setVerticalGroup(
@@ -208,6 +225,10 @@ public class TelaBuscaHospede extends javax.swing.JDialog {
     private void jButtonCarregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCarregarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonCarregarActionPerformed
+
+    private void jButtonFiltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFiltarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonFiltarActionPerformed
 
      /**
      * @param args the command line arguments

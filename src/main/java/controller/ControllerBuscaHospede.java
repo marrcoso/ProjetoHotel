@@ -62,13 +62,22 @@ public final class ControllerBuscaHospede implements ActionListener, InterfaceCo
     }
 
     private enum FiltroHospede {
-        ID, NOME, CPF;
+        ID, NOME, CPF, RAZAO_SOCIAL, CNPJ, OBSERVACAO, TELEFONE, EMAIL, CEP, CIDADE, BAIRRO, LOGRADOURO;
 
         public static FiltroHospede fromIndex(int index) {
             switch (index) {
                 case 0: return ID;
                 case 1: return NOME;
                 case 2: return CPF;
+                case 3: return RAZAO_SOCIAL;
+                case 4: return CNPJ;
+                case 5: return OBSERVACAO;
+                case 6: return TELEFONE;
+                case 7: return EMAIL;
+                case 8: return CEP;
+                case 9: return CIDADE;
+                case 10: return BAIRRO;
+                case 11: return LOGRADOURO;
                 default: throw new IllegalArgumentException("Filtro inválido");
             }
         }
@@ -80,7 +89,13 @@ public final class ControllerBuscaHospede implements ActionListener, InterfaceCo
             hospede.getId(),
             hospede.getNome(),
             hospede.getCpf(),
-            hospede.getStatus()
+            hospede.getStatus(),
+            hospede.getRazaoSocial(),
+            hospede.getCnpj(),
+            hospede.getFone1(),
+            hospede.getEmail(),
+            hospede.getCidade(),
+            hospede.getObs()
         });
     }
 
@@ -121,6 +136,42 @@ public final class ControllerBuscaHospede implements ActionListener, InterfaceCo
                 }
                 case CPF: {
                     carregarPorAtributo("cpf", filtroTexto, tabela);
+                    break;
+                }
+                case RAZAO_SOCIAL: {
+                    carregarPorAtributo("razao_social", filtroTexto, tabela);
+                    break;
+                }
+                case CNPJ: {
+                    carregarPorAtributo("cnpj", filtroTexto, tabela);
+                    break;
+                }
+                case OBSERVACAO: {
+                    carregarPorAtributo("obs", filtroTexto, tabela);
+                    break;
+                }
+                case TELEFONE: {
+                    carregarPorAtributo("fone", filtroTexto, tabela);
+                    break;
+                }
+                case EMAIL: {
+                    carregarPorAtributo("email", filtroTexto, tabela);
+                    break;
+                }
+                case CEP: {
+                    carregarPorAtributo("cep", filtroTexto, tabela);
+                    break;
+                }
+                case CIDADE: {
+                    carregarPorAtributo("cidade", filtroTexto, tabela);
+                    break;
+                }
+                case BAIRRO: {
+                    carregarPorAtributo("bairro", filtroTexto, tabela);
+                    break;
+                }
+                case LOGRADOURO: {
+                    carregarPorAtributo("logradouro", filtroTexto, tabela);
                     break;
                 }
             }

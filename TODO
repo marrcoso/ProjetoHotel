@@ -19,7 +19,8 @@ Hospedes:
     ✔ Consertar input de cnpj @done(25-10-05 21:59)
     ✔ Permitir limpar um campo de input formatado depois de preenchido (CNPJ) @done(25-10-05 22:10)
     ✔ Implementar data de cadastro automática @done(25-10-05 21:59)
-    ✔ Testar formulário @done(25-10-05 22:10)
+    ✔ Adicionar mais filtros @done(25-10-06 19:42)
+    ✔ Testar formulário @done(25-10-06 19:42)
 Quarto:
     ☐ consertar ordem da validação de form
     ☐ Testar formulário
