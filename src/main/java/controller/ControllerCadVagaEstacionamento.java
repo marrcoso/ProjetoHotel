@@ -64,7 +64,7 @@ public final class ControllerCadVagaEstacionamento implements ActionListener, In
         utilities.Utilities.ativaDesativa(this.telaCadastroVagaEstacionamento.getjPanelBotoes(), false);
         utilities.Utilities.limpaComponentes(this.telaCadastroVagaEstacionamento.getjPanelDados(), true);
         this.telaCadastroVagaEstacionamento.getjTextFieldId().setEnabled(false);
-        this.telaCadastroVagaEstacionamento.getjTextFieldDescricao().requestFocus();
+        this.telaCadastroVagaEstacionamento.getjFormattedTextFieldMetragem().requestFocus();
         this.telaCadastroVagaEstacionamento.getjComboBoxStatus().setSelectedItem("Ativo");
         this.telaCadastroVagaEstacionamento.getjComboBoxStatus().setEnabled(false);
     }
@@ -77,17 +77,7 @@ public final class ControllerCadVagaEstacionamento implements ActionListener, In
 
     @Override
     public boolean isFormularioValido() {
-        if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroVagaEstacionamento.getjTextFieldDescricao().getText())) {
-            JOptionPane.showMessageDialog(null, "O campo Descrição é obrigatório.");
-            telaCadastroVagaEstacionamento.getjTextFieldDescricao().requestFocus();
-            return false;
-        }
-        if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroVagaEstacionamento.getjTextFieldObservacao().getText())) {
-            JOptionPane.showMessageDialog(null, "O campo Observação é obrigatório.");
-            telaCadastroVagaEstacionamento.getjTextFieldObservacao().requestFocus();
-            return false;
-        }
-        if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroVagaEstacionamento.getjFormattedTextFieldMetragem().getText())) {
+        if (!utilities.ValidadorCampos.validarCampoNumero(telaCadastroVagaEstacionamento.getjFormattedTextFieldMetragem().getText())) {
             JOptionPane.showMessageDialog(null, "O campo Metragem é obrigatório.");
             telaCadastroVagaEstacionamento.getjFormattedTextFieldMetragem().requestFocus();
             return false;
@@ -95,6 +85,11 @@ public final class ControllerCadVagaEstacionamento implements ActionListener, In
         if (!utilities.ValidadorCampos.validarStatus(telaCadastroVagaEstacionamento.getjComboBoxStatus().getSelectedItem().toString())) {
             JOptionPane.showMessageDialog(null, "Selecione um Status válido.");
             telaCadastroVagaEstacionamento.getjComboBoxStatus().requestFocus();
+            return false;
+        }
+        if (!utilities.ValidadorCampos.validarCampoTexto(telaCadastroVagaEstacionamento.getjTextFieldDescricao().getText())) {
+            JOptionPane.showMessageDialog(null, "O campo Descrição é obrigatório.");
+            telaCadastroVagaEstacionamento.getjTextFieldDescricao().requestFocus();
             return false;
         }
         return true;

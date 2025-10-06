@@ -15,7 +15,7 @@ public class VagaEstacionamentoDAO implements InterfaceDAO<VagaEstacionamento> {
         String sqlInstrucao = "Insert Into vaga_estacionamento("
                 + " descricao, "
                 + " obs, "
-                + " metragemvaga, "
+                + " metragem_vaga, "
                 + " status) "
                 + " Values (?,?,?,?)";
 
@@ -40,7 +40,7 @@ public class VagaEstacionamentoDAO implements InterfaceDAO<VagaEstacionamento> {
                 + " id, "
                 + " descricao, "
                 + " obs, "
-                + " metragemvaga, "
+                + " metragem_vaga, "
                 + " status "
                 + " From vaga_estacionamento"
                 + " Where id = ? ";
@@ -57,7 +57,7 @@ public class VagaEstacionamentoDAO implements InterfaceDAO<VagaEstacionamento> {
                 vagaEstacionamento.setId(rst.getInt("id"));
                 vagaEstacionamento.setDescricao(rst.getString("descricao"));
                 vagaEstacionamento.setObs(rst.getString("obs"));
-                vagaEstacionamento.setMetragemVaga(rst.getFloat("metragemvaga"));
+                vagaEstacionamento.setMetragemVaga(rst.getFloat("metragem_vaga"));
                 vagaEstacionamento.setStatus(rst.getString("status").charAt(0));
             }
             ConnectionFactory.closeConnection(conexao, pstm, rst);
@@ -74,7 +74,7 @@ public class VagaEstacionamentoDAO implements InterfaceDAO<VagaEstacionamento> {
                 + " id, "
                 + " descricao, "
                 + " obs, "
-                + " metragemvaga, "
+                + " metragem_vaga, "
                 + " status "
                 + " From vaga_estacionamento"
                 + " Where " + atributo + " like ?";
@@ -91,7 +91,7 @@ public class VagaEstacionamentoDAO implements InterfaceDAO<VagaEstacionamento> {
                 vaga.setId(rst.getInt("id"));
                 vaga.setDescricao(rst.getString("descricao"));
                 vaga.setObs(rst.getString("obs"));
-                vaga.setMetragemVaga(rst.getFloat("metragemvaga"));
+                vaga.setMetragemVaga(rst.getFloat("metragem_vaga"));
                 vaga.setStatus(rst.getString("status").charAt(0));
                 listaVagas.add(vaga);
             }
@@ -109,7 +109,7 @@ public class VagaEstacionamentoDAO implements InterfaceDAO<VagaEstacionamento> {
                 + " Set"
                 + " descricao = ?, "
                 + " obs = ?, "
-                + " metragemvaga = ?, "
+                + " metragem_vaga = ?, "
                 + " status = ? "
                 + " Where id = ? ";
 

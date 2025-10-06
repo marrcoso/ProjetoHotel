@@ -62,12 +62,14 @@ public final class ControllerBuscaVagaEstacionamento implements ActionListener, 
     }
 
     private enum FiltroVaga {
-        ID, DESCRICAO;
+        ID, DESCRICAO, OBSERVACAO, METRAGEM;
 
         public static FiltroVaga fromIndex(int index) {
             switch (index) {
                 case 0: return ID;
                 case 1: return DESCRICAO;
+                case 2: return OBSERVACAO;
+                case 3: return METRAGEM;
                 default: throw new IllegalArgumentException("Filtro inválido");
             }
         }
@@ -117,6 +119,14 @@ public final class ControllerBuscaVagaEstacionamento implements ActionListener, 
                 }
                 case DESCRICAO: {
                     carregarPorAtributo("descricao", filtroTexto, tabela);
+                    break;
+                }
+                case OBSERVACAO: {
+                    carregarPorAtributo("obs", filtroTexto, tabela);
+                    break;
+                }
+                case METRAGEM: {
+                    carregarPorAtributo("metragem_vaga", filtroTexto, tabela);
                     break;
                 }
             }

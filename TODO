@@ -22,17 +22,18 @@ Hospedes:
     ✔ Adicionar mais filtros @done(25-10-06 19:42)
     ✔ Testar formulário @done(25-10-06 19:42)
 Quarto:
-    ☐ consertar ordem da validação de form
-    ☐ Testar formulário
+    ✔ consertar ordem da validação de form @done(25-10-06 19:45)
+    ✔ Testar formulário @done(25-10-06 19:47)
 Vaga Estacionamento:
-    ☐ Consertar DAO para retrieve
-    ☐ Testar formulário
+    ✔ Consertar DAO para retrieve @done(25-10-06 19:53)
+    ✔ Testar formulário @done(25-10-06 19:53)
 Veículo:
     ✔ Adicionar sistema de relacionamento para vincular veículo as pessoas @done(25-10-05 16:01)
     ✔ Testar formulário @done(25-10-05 16:18)
 
 Todas as telas:
     ☐ Verificar campo de status para permitir ser trocavel (update banco no cadastro) ou apenas por função na busca
+    ☐ Validar campos que são numericos com validarCampoNumero()
 
 Opcionais:
     ☐ Alterar para data de cadastro ser gerada por trigger no banco e não ter em create e update
