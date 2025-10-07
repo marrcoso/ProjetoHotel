@@ -23,6 +23,7 @@ public final class ControllerCadHospede implements ActionListener, InterfaceCont
         this.hospedeService = new HospedeService();
         Utilities.setAlwaysDisabled(this.telaCadastroHospede.getjTextFieldId(), true);
         Utilities.setAlwaysDisabled(this.telaCadastroHospede.getjComboBoxStatus(), true);
+        Utilities.setAlwaysDisabled(this.telaCadastroHospede.getjFormattedTextFieldDataCadastro(), true);
         Utilities.ativaDesativa(this.telaCadastroHospede.getjPanelBotoes(), true);
         Utilities.limpaComponentes(this.telaCadastroHospede.getjPanelDados(), false);
         Utilities.permiteLimparFormattedField(this.telaCadastroHospede.getjFormattedTextFieldCpf());
@@ -70,13 +71,9 @@ public final class ControllerCadHospede implements ActionListener, InterfaceCont
     public void handleNovo() {
         Utilities.ativaDesativa(this.telaCadastroHospede.getjPanelBotoes(), false);
         Utilities.limpaComponentes(this.telaCadastroHospede.getjPanelDados(), true);
-        this.telaCadastroHospede.getjTextFieldId().setEnabled(false);
+        this.telaCadastroHospede.getjFormattedTextFieldDataCadastro().setText(Utilities.getDataHoje());
         this.telaCadastroHospede.getjTextFieldNomeFantasia().requestFocus();
-        telaCadastroHospede.getjTextFieldId().setEnabled(false);
-        telaCadastroHospede.getjFormattedTextFieldDataCadastro().setText(Utilities.getDataHoje());
-        telaCadastroHospede.getjFormattedTextFieldDataCadastro().setEnabled(false);
         telaCadastroHospede.getjComboBoxStatus().setSelectedItem("Ativo");
-        telaCadastroHospede.getjComboBoxStatus().setEnabled(false);
     }
 
     @Override
@@ -211,7 +208,6 @@ public final class ControllerCadHospede implements ActionListener, InterfaceCont
         hospede.setComplemento(telaCadastroHospede.getjTextFieldComplemento().getText());
         hospede.setContato(telaCadastroHospede.getjTextFieldContato().getText());
         hospede.setObs(telaCadastroHospede.getjTextFieldObs().getText());
-        hospede.setDataCadastro(Utilities.formatarDataToSqlData(telaCadastroHospede.getjFormattedTextFieldDataCadastro().getText()));
 
         Object sexoSelecionado = telaCadastroHospede.getjComboBoxSexo().getSelectedItem();
         hospede.setSexo(
@@ -239,7 +235,6 @@ public final class ControllerCadHospede implements ActionListener, InterfaceCont
             Utilities.limpaComponentes(telaCadastroHospede.getjPanelDados(), true);
 
             telaCadastroHospede.getjTextFieldId().setText(String.valueOf(codigo));
-            telaCadastroHospede.getjTextFieldId().setEnabled(false);
 
             Hospede hospede;
             try {
@@ -250,7 +245,6 @@ public final class ControllerCadHospede implements ActionListener, InterfaceCont
             }
 
             telaCadastroHospede.getjFormattedTextFieldDataCadastro().setText(Utilities.formatarDataFromSqlData(hospede.getDataCadastro()));
-            telaCadastroHospede.getjFormattedTextFieldDataCadastro().setEnabled(false);
             telaCadastroHospede.getjTextFieldNomeFantasia().setText(hospede.getNome());
             telaCadastroHospede.getjTextFieldRazaoSocial().setText(hospede.getRazaoSocial());
             telaCadastroHospede.getjFormattedTextFieldCpf().setText(Utilities.formatarCpf(hospede.getCpf()));

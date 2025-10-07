@@ -65,10 +65,8 @@ public final class ControllerCadMarca implements ActionListener, InterfaceContro
     public void handleNovo() {
         Utilities.ativaDesativa(this.telaCadastroMarca.getjPanelBotoes(), false);
         Utilities.limpaComponentes(this.telaCadastroMarca.getjPanelDados(), true);
-        this.telaCadastroMarca.getjTextFieldId().setEnabled(false);
         this.telaCadastroMarca.getjTextFieldDescricao().requestFocus();
         this.telaCadastroMarca.getjComboBoxStatus().setSelectedItem("Ativo");
-        this.telaCadastroMarca.getjComboBoxStatus().setEnabled(false);
     }
 
     @Override
@@ -151,7 +149,6 @@ public final class ControllerCadMarca implements ActionListener, InterfaceContro
             Utilities.limpaComponentes(telaCadastroMarca.getjPanelDados(), true);
 
             telaCadastroMarca.getjTextFieldId().setText(String.valueOf(codigo));
-            telaCadastroMarca.getjTextFieldId().setEnabled(false);
 
             Marca marca;
             try {

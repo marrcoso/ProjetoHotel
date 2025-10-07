@@ -207,7 +207,6 @@ public final class ControllerCadFornecedor implements ActionListener, InterfaceC
         fornecedor.setComplemento(telaCadastroFornecedor.getjTextFieldComplemento().getText());
         fornecedor.setObs(telaCadastroFornecedor.getjTextFieldObs().getText());
         fornecedor.setContato(telaCadastroFornecedor.getjTextFieldContato().getText());
-        fornecedor.setDataCadastro(Utilities.formatarDataToSqlData(telaCadastroFornecedor.getjFormattedTextFieldDataCadastro().getText()));
 
         Object sexoSelecionado = telaCadastroFornecedor.getjComboBoxSexo().getSelectedItem();
         fornecedor.setSexo(

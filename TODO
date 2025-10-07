@@ -43,6 +43,6 @@ Todas as telas:
     ✔ Fazer filtro de id ser selecionado por padrão igual funcionario @done(25-10-07 19:23)
 
 Opcionais:
-    ☐ Alterar para data de cadastro ser gerada por trigger no banco e não ter em create e update
+    ✔ Alterar para data de cadastro ser gerada por trigger no banco e não ter em create e update @done(25-10-07 19:32)
     ☐ Ocultar automaticamente campos não definidos no create (id, data cadastro) (talvez status se for mudar para não ser atualizado por tela de cadastro)
     ☐ Filtro de ativo e inativo nas telas de busca

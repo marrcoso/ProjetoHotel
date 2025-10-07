@@ -72,10 +72,8 @@ public final class ControllerCadFuncionario implements ActionListener, Interface
         Utilities.ativaDesativa(telaCadastroFuncionario.getjPanelBotoes(), false);
         Utilities.limpaComponentes(telaCadastroFuncionario.getjPanelDados(), true);
         telaCadastroFuncionario.getjTextFieldUsuario().requestFocus();
-        telaCadastroFuncionario.getjTextFieldId().setEnabled(false);
         telaCadastroFuncionario.getjFormattedTextFieldDataCadastro().setText(Utilities.getDataHoje());
         telaCadastroFuncionario.getjComboBoxStatus().setSelectedItem("Ativo");
-        telaCadastroFuncionario.getjComboBoxStatus().setEnabled(false);
     }
     
     @Override
@@ -217,7 +215,6 @@ public final class ControllerCadFuncionario implements ActionListener, Interface
         funcionario.setCidade(telaCadastroFuncionario.getjTextFieldCidade().getText());
         funcionario.setLogradouro(telaCadastroFuncionario.getjTextFieldLogradouro().getText());
         funcionario.setComplemento(telaCadastroFuncionario.getjTextFieldComplemento().getText());
-        funcionario.setDataCadastro(Utilities.formatarDataToSqlData(telaCadastroFuncionario.getjFormattedTextFieldDataCadastro().getText()));
 
         return funcionario;
     }
@@ -235,7 +232,6 @@ public final class ControllerCadFuncionario implements ActionListener, Interface
             Utilities.limpaComponentes(telaCadastroFuncionario.getjPanelDados(), true);
 
             telaCadastroFuncionario.getjTextFieldId().setText(String.valueOf(codigo));
-            telaCadastroFuncionario.getjTextFieldId().setEnabled(false);
 
             Funcionario funcionario;
             try {
@@ -246,7 +242,6 @@ public final class ControllerCadFuncionario implements ActionListener, Interface
             }
 
             telaCadastroFuncionario.getjFormattedTextFieldDataCadastro().setText(Utilities.formatarDataFromSqlData(funcionario.getDataCadastro()));
-            telaCadastroFuncionario.getjFormattedTextFieldDataCadastro().setEnabled(false);
             telaCadastroFuncionario.getjTextFieldNome().setText(funcionario.getNome());
             telaCadastroFuncionario.getjFormattedTextFieldCpf().setText(funcionario.getCpf());
             telaCadastroFuncionario.getjTextFieldRg().setText(funcionario.getRg());
