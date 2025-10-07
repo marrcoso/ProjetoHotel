@@ -261,4 +261,26 @@ public class FornecedorDAO implements InterfaceDAO<Fornecedor> {
         // Implemente aqui se necessário, seguindo o mesmo padrão das demais operações
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public void AtivarInativar(int id, boolean ativar) throws SQLException {
+        String sqlInstrucao = "Update fornecedor "
+                + " Set"
+                + " status = ? "
+                + " Where id = ? ";
+
+        try {
+            Connection conexao = model.DAO.ConnectionFactory.getConnection();
+            PreparedStatement pstm = conexao.prepareStatement(sqlInstrucao);
+
+            pstm.setString(1, ativar ? "A" : "I");
+            pstm.setInt(2, id);
+
+            pstm.execute();
+            ConnectionFactory.closeConnection(conexao, pstm);
+        } catch (SQLException ex) {
+            AppLogger.error("Erro ao ativar/inativar fornecedor", ex);
+            throw new SQLException("Erro ao ativar/inativar fornecedor");
+        }
+    }
 }

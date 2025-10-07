@@ -38,4 +38,9 @@ public class FornecedorService implements InterfaceService<Fornecedor> {
     public void Apagar(Fornecedor objeto) throws SQLException {
         fornecedorDAO.Delete(objeto);
     }
+
+    @Override
+    public void AtivarInativar(int id, boolean ativar) throws SQLException {
+        fornecedorDAO.AtivarInativar(id, ativar);
+    }
 }

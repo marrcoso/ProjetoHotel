@@ -10,4 +10,5 @@ public interface InterfaceDAO<T> {
     public abstract List<T> Retrieve(String atributo, String valor) throws SQLException;
     public abstract void Update(T objeto) throws SQLException;
     public abstract void Delete(T objeto) throws SQLException;
+    public abstract void AtivarInativar(int id, boolean ativar) throws SQLException;
 }

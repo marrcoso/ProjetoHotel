@@ -47,11 +47,7 @@ public class Modelo {
     }
 
     public void setStatus(char status) {
-        if ((status == 'A') || (status == 'C') || (status == 'a') || (status == 'c')) {
-            this.status = status;
-        } else {
-            this.status = 'A';
-        }
+        this.status = status;
     }
 
     @Override

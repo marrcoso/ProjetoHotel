@@ -31,6 +31,23 @@ public final class ControllerBuscaVeiculo implements ActionListener, InterfaceCo
         this.telaBuscaVeiculo.getjButtonCarregar().addActionListener(this);
         this.telaBuscaVeiculo.getjButtonFiltar().addActionListener(this);
         this.telaBuscaVeiculo.getjButtonSair().addActionListener(this);
+        this.telaBuscaVeiculo.getjButtonAtivar().addActionListener(this);
+        this.telaBuscaVeiculo.getjButtonInativar().addActionListener(this);
+        this.telaBuscaVeiculo.getjTableDados().getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting() && telaBuscaVeiculo.getjTableDados().getSelectedRow() != -1) {
+                handleSelecionarItem();
+            }
+        });
+    }
+
+    private void handleSelecionarItem() {
+        int row = telaBuscaVeiculo.getjTableDados().getSelectedRow();
+        Object statusObj = telaBuscaVeiculo.getjTableDados().getValueAt(row, 5); // coluna status
+        if (statusObj != null) {
+            char status = statusObj.toString().charAt(0);
+            telaBuscaVeiculo.getjButtonAtivar().setEnabled(status == 'I');
+            telaBuscaVeiculo.getjButtonInativar().setEnabled(status == 'A');
+        }
     }
 
     @Override
@@ -46,6 +63,14 @@ public final class ControllerBuscaVeiculo implements ActionListener, InterfaceCo
         }
         if (source == telaBuscaVeiculo.getjButtonSair()) {
             handleSair();
+            return;
+        }
+        if (source == telaBuscaVeiculo.getjButtonAtivar()) {
+            handleAtivarInativar(true);
+            return;
+        }
+        if (source == telaBuscaVeiculo.getjButtonInativar()) {
+            handleAtivarInativar(false);
         }
     }
 
@@ -154,5 +179,36 @@ public final class ControllerBuscaVeiculo implements ActionListener, InterfaceCo
     @Override
     public void handleSair() {
         telaBuscaVeiculo.dispose();
+    }
+
+    @Override
+    public void handleAtivarInativar(boolean ativar) {
+        if (telaBuscaVeiculo.getjTableDados().getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Não Existem Dados Selecionados para Edição!");
+            return;
+        }
+
+        int codigo = (int) telaBuscaVeiculo.getjTableDados()
+            .getValueAt(telaBuscaVeiculo.getjTableDados().getSelectedRow(), 0);
+
+        char statusAtual = (char) telaBuscaVeiculo.getjTableDados()
+            .getValueAt(telaBuscaVeiculo.getjTableDados().getSelectedRow(), 5);
+
+        try {
+            if (statusAtual == (ativar ? 'A' : 'I')) {
+                JOptionPane.showMessageDialog(null, String.format("O Veículo já está %s.", ativar ? "Ativo" : "Inativo"));
+                return;
+            }
+
+            veiculoService.AtivarInativar(codigo, ativar);
+            int selectedRow = telaBuscaVeiculo.getjTableDados().getSelectedRow();
+            DefaultTableModel tabela = (DefaultTableModel) telaBuscaVeiculo.getjTableDados().getModel();
+            tabela.setValueAt(ativar ? 'A' : 'I', selectedRow, 5);
+            telaBuscaVeiculo.getjButtonAtivar().setEnabled(!ativar);
+            telaBuscaVeiculo.getjButtonInativar().setEnabled(ativar);
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(telaBuscaVeiculo, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
     }
 }

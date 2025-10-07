@@ -218,4 +218,18 @@ public class VeiculoDAO implements InterfaceDAO<Veiculo> {
         // Implemente aqui se necessário, seguindo o padrão acima
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public void AtivarInativar(int id, boolean ativar) throws SQLException {
+        String sqlInstrucao = "UPDATE veiculo SET status = ? WHERE id = ?";
+        try (Connection conexao = ConnectionFactory.getConnection();
+             PreparedStatement pstm = conexao.prepareStatement(sqlInstrucao)) {
+            pstm.setString(1, ativar ? "A" : "I");
+            pstm.setInt(2, id);
+            pstm.execute();
+        } catch (SQLException ex) {
+            AppLogger.error("Erro ao ativar/inativar veículo", ex);
+            throw new SQLException("Erro ao ativar/inativar veículo");
+        }
+    }
 }

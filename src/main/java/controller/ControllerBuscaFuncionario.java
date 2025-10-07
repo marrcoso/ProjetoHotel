@@ -31,6 +31,23 @@ public final class ControllerBuscaFuncionario implements ActionListener, Interfa
         this.telaBuscaFuncionario.getjButtonCarregar().addActionListener(this);
         this.telaBuscaFuncionario.getjButtonFiltar().addActionListener(this);
         this.telaBuscaFuncionario.getjButtonSair().addActionListener(this);
+        this.telaBuscaFuncionario.getjButtonAtivar().addActionListener(this);
+        this.telaBuscaFuncionario.getjButtonInativar().addActionListener(this);
+        this.telaBuscaFuncionario.getjTableDados().getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting() && telaBuscaFuncionario.getjTableDados().getSelectedRow() != -1) {
+                handleSelecionarItem();
+            }
+        });
+    }
+
+    private void handleSelecionarItem() {
+        int row = telaBuscaFuncionario.getjTableDados().getSelectedRow();
+        Object statusObj = telaBuscaFuncionario.getjTableDados().getValueAt(row, 3); // coluna status
+        if (statusObj != null) {
+            char status = statusObj.toString().charAt(0);
+            telaBuscaFuncionario.getjButtonAtivar().setEnabled(status == 'I');
+            telaBuscaFuncionario.getjButtonInativar().setEnabled(status == 'A');
+        }
     }
 
     @Override
@@ -46,6 +63,14 @@ public final class ControllerBuscaFuncionario implements ActionListener, Interfa
         }
         if (source == telaBuscaFuncionario.getjButtonSair()) {
             handleSair();
+            return;
+        }
+        if (source == telaBuscaFuncionario.getjButtonAtivar()) {
+            handleAtivarInativar(true);
+            return;
+        }
+        if (source == telaBuscaFuncionario.getjButtonInativar()) {
+            handleAtivarInativar(false);
         }
     }
 
@@ -177,5 +202,36 @@ public final class ControllerBuscaFuncionario implements ActionListener, Interfa
     @Override
     public void handleSair() {
         telaBuscaFuncionario.dispose();
+    }
+
+    @Override
+    public void handleAtivarInativar(boolean ativar) {
+        if (telaBuscaFuncionario.getjTableDados().getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Não Existem Dados Selecionados para Edição!");
+            return;
+        }
+
+        int codigo = (int) telaBuscaFuncionario.getjTableDados()
+            .getValueAt(telaBuscaFuncionario.getjTableDados().getSelectedRow(), 0);
+
+        char statusAtual = (char) telaBuscaFuncionario.getjTableDados()
+            .getValueAt(telaBuscaFuncionario.getjTableDados().getSelectedRow(), 3);
+
+        try {
+            if (statusAtual == (ativar ? 'A' : 'I')) {
+                JOptionPane.showMessageDialog(null, String.format("O Funcionário já está %s.", ativar ? "Ativo" : "Inativo"));
+                return;
+            }
+
+            funcionarioService.AtivarInativar(codigo, ativar);
+            int selectedRow = telaBuscaFuncionario.getjTableDados().getSelectedRow();
+            DefaultTableModel tabela = (DefaultTableModel) telaBuscaFuncionario.getjTableDados().getModel();
+            tabela.setValueAt(ativar ? 'A' : 'I', selectedRow, 3);
+            telaBuscaFuncionario.getjButtonAtivar().setEnabled(!ativar);
+            telaBuscaFuncionario.getjButtonInativar().setEnabled(ativar);
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(telaBuscaFuncionario, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
     }
 }

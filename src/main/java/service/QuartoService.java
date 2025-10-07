@@ -38,4 +38,9 @@ public class QuartoService implements InterfaceService<Quarto> {
     public void Apagar(Quarto objeto) throws SQLException {
         quartoDAO.Delete(objeto);
     }
+
+    @Override
+    public void AtivarInativar(int id, boolean ativar) throws SQLException {
+        quartoDAO.AtivarInativar(id, ativar);
+    }
 }

@@ -38,4 +38,9 @@ public class MarcaService implements InterfaceService<Marca> {
     public void Apagar(Marca objeto) throws SQLException {
         marcaDAO.Delete(objeto);
     }
+
+    @Override
+    public void AtivarInativar(int id, boolean ativar) throws SQLException {
+        marcaDAO.AtivarInativar(id, ativar);
+    }
 }

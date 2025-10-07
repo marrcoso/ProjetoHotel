@@ -38,4 +38,9 @@ public class VeiculoService implements InterfaceService<Veiculo> {
     public void Apagar(Veiculo objeto) throws SQLException {
         veiculoDAO.Delete(objeto);
     }
+
+    @Override
+    public void AtivarInativar(int id, boolean ativar) throws SQLException {
+        veiculoDAO.AtivarInativar(id, ativar);
+    }
 }

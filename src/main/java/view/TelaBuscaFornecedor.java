@@ -39,6 +39,14 @@ public class TelaBuscaFornecedor extends javax.swing.JDialog {
         return jButtonSair;
     }
 
+    public JButton getjButtonInativar() {
+        return jButtonInativar;
+    }
+
+    public JButton getjButtonAtivar() {
+        return jButtonAtivar;
+    }
+
     public JTable getjTableDados() {
         return jTableDados;
     }
@@ -136,6 +144,8 @@ public class TelaBuscaFornecedor extends javax.swing.JDialog {
         jButtonCarregar = new javax.swing.JButton();
         jButtonSair = new javax.swing.JButton();
         jButtonFiltar = new javax.swing.JButton();
+        jButtonInativar = new javax.swing.JButton();
+        jButtonAtivar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Projeto de Gestão Hoteleira");
@@ -226,6 +236,24 @@ public class TelaBuscaFornecedor extends javax.swing.JDialog {
         jButtonFiltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Find.png"))); // NOI18N
         jButtonFiltar.setText("Filtrar");
 
+        jButtonInativar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Cancel.png"))); // NOI18N
+        jButtonInativar.setText("Inativar");
+        jButtonInativar.setEnabled(false);
+        jButtonInativar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonInativarActionPerformed(evt);
+            }
+        });
+
+        jButtonAtivar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/OK.png"))); // NOI18N
+        jButtonAtivar.setText("Ativar");
+        jButtonAtivar.setEnabled(false);
+        jButtonAtivar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAtivarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelFiltrosLayout = new javax.swing.GroupLayout(jPanelFiltros);
         jPanelFiltros.setLayout(jPanelFiltrosLayout);
         jPanelFiltrosLayout.setHorizontalGroup(
@@ -233,22 +261,29 @@ public class TelaBuscaFornecedor extends javax.swing.JDialog {
             .addGroup(jPanelFiltrosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonCarregar)
+                    .addGroup(jPanelFiltrosLayout.createSequentialGroup()
+                        .addComponent(jButtonCarregar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonAtivar, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonInativar, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                        .addGap(477, 477, 477)
+                        .addComponent(jButtonSair))
                     .addGroup(jPanelFiltrosLayout.createSequentialGroup()
                         .addGroup(jPanelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jCBFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelFiltrar))
                         .addGroup(jPanelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelFiltrosLayout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(jLabelValor))
-                            .addGroup(jPanelFiltrosLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTFFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(10, 372, Short.MAX_VALUE)
-                .addGroup(jPanelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonFiltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jTFFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonFiltar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanelFiltrosLayout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addComponent(jLabelValor)
+                                .addGap(0, 672, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanelFiltrosLayout.setVerticalGroup(
@@ -266,7 +301,10 @@ public class TelaBuscaFornecedor extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCarregar)
-                    .addComponent(jButtonSair))
+                    .addComponent(jButtonSair)
+                    .addGroup(jPanelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButtonInativar)
+                        .addComponent(jButtonAtivar)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -292,6 +330,14 @@ public class TelaBuscaFornecedor extends javax.swing.JDialog {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonAtivarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtivarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonAtivarActionPerformed
+
+    private void jButtonInativarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInativarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonInativarActionPerformed
 
     private void jButtonCarregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCarregarActionPerformed
         // TODO add your handling code here:
@@ -359,8 +405,10 @@ public class TelaBuscaFornecedor extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAtivar;
     private javax.swing.JButton jButtonCarregar;
     private javax.swing.JButton jButtonFiltar;
+    private javax.swing.JButton jButtonInativar;
     private javax.swing.JButton jButtonSair;
     private javax.swing.JComboBox<String> jCBFiltro;
     private javax.swing.JLabel jLabelFiltrar;

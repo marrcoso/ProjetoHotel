@@ -133,4 +133,18 @@ public class VagaEstacionamentoDAO implements InterfaceDAO<VagaEstacionamento> {
     public void Delete(VagaEstacionamento objeto) throws SQLException {
         // Implemente aqui se necessário, seguindo o mesmo padrão dos métodos acima
     }
+
+    @Override
+    public void AtivarInativar(int id, boolean ativar) throws SQLException {
+        String sqlInstrucao = "UPDATE vaga_estacionamento SET status = ? WHERE id = ?";
+        try (Connection conexao = ConnectionFactory.getConnection();
+             PreparedStatement pstm = conexao.prepareStatement(sqlInstrucao)) {
+            pstm.setString(1, ativar ? "A" : "I");
+            pstm.setInt(2, id);
+            pstm.execute();
+        } catch (SQLException ex) {
+            AppLogger.error("Erro ao ativar/inativar vaga", ex);
+            throw new SQLException("Erro ao ativar/inativar vaga");
+        }
+    }
 }

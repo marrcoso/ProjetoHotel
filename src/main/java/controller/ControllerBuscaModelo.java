@@ -31,6 +31,23 @@ public final class ControllerBuscaModelo implements ActionListener, InterfaceCon
         this.telaBuscaModelo.getjButtonCarregar().addActionListener(this);
         this.telaBuscaModelo.getjButtonFiltar().addActionListener(this);
         this.telaBuscaModelo.getjButtonSair().addActionListener(this);
+        this.telaBuscaModelo.getjButtonAtivar().addActionListener(this);
+        this.telaBuscaModelo.getjButtonInativar().addActionListener(this);
+        this.telaBuscaModelo.getjTableDados().getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting() && telaBuscaModelo.getjTableDados().getSelectedRow() != -1) {
+                handleSelecionarItem();
+            }
+        });
+    }
+
+    private void handleSelecionarItem() {
+        int row = telaBuscaModelo.getjTableDados().getSelectedRow();
+        Object statusObj = telaBuscaModelo.getjTableDados().getValueAt(row, 3); // coluna status
+        if (statusObj != null) {
+            char status = statusObj.toString().charAt(0);
+            telaBuscaModelo.getjButtonAtivar().setEnabled(status == 'I');
+            telaBuscaModelo.getjButtonInativar().setEnabled(status == 'A');
+        }
     }
 
     @Override
@@ -46,6 +63,14 @@ public final class ControllerBuscaModelo implements ActionListener, InterfaceCon
         }
         if (source == telaBuscaModelo.getjButtonSair()) {
             handleSair();
+            return;
+        }
+        if (source == telaBuscaModelo.getjButtonAtivar()) {
+            handleAtivarInativar(true);
+            return;
+        }
+        if (source == telaBuscaModelo.getjButtonInativar()) {
+            handleAtivarInativar(false);
         }
     }
 
@@ -131,4 +156,34 @@ public final class ControllerBuscaModelo implements ActionListener, InterfaceCon
         this.telaBuscaModelo.dispose();
     }
 
+    @Override
+    public void handleAtivarInativar(boolean ativar) {
+        if (telaBuscaModelo.getjTableDados().getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Não Existem Dados Selecionados para Edição!");
+            return;
+        }
+
+        int codigo = (int) telaBuscaModelo.getjTableDados()
+            .getValueAt(telaBuscaModelo.getjTableDados().getSelectedRow(), 0);
+
+        char statusAtual = (char) telaBuscaModelo.getjTableDados()
+            .getValueAt(telaBuscaModelo.getjTableDados().getSelectedRow(), 3);
+
+        try {
+            if (statusAtual == (ativar ? 'A' : 'I')) {
+                JOptionPane.showMessageDialog(null, String.format("O Modelo já está %s.", ativar ? "Ativo" : "Inativo"));
+                return;
+            }
+
+            modeloService.AtivarInativar(codigo, ativar);
+            int selectedRow = telaBuscaModelo.getjTableDados().getSelectedRow();
+            DefaultTableModel tabela = (DefaultTableModel) telaBuscaModelo.getjTableDados().getModel();
+            tabela.setValueAt(ativar ? 'A' : 'I', selectedRow, 3);
+            telaBuscaModelo.getjButtonAtivar().setEnabled(!ativar);
+            telaBuscaModelo.getjButtonInativar().setEnabled(ativar);
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(telaBuscaModelo, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 }

@@ -37,7 +37,8 @@ Marca:
     ✔ Testar formulário @done(25-10-06 19:55)
 
 Todas as telas:
-    ☐ Verificar campo de status para permitir ser trocavel (update banco no cadastro) ou apenas por função na busca
+    ☐ Verifica e conserta input de id ao carregar
+    ✔ Verificar campo de status para permitir ser trocavel (update banco no cadastro) ou apenas por função na busca @done(25-10-06 22:04)
     ✔ Validar campos que são numericos com validarCampoNumero() @done(25-10-06 20:10)
 
 Opcionais:

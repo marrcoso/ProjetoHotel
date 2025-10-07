@@ -38,4 +38,9 @@ public class ModeloService implements InterfaceService<Modelo> {
     public void Apagar(Modelo objeto) throws SQLException {
         modeloDAO.Delete(objeto);
     }
+
+    @Override
+    public void AtivarInativar(int id, boolean ativar) throws SQLException {
+        modeloDAO.AtivarInativar(id, ativar);
+    }
 }

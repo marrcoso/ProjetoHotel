@@ -177,4 +177,18 @@ public class QuartoDAO implements InterfaceDAO<Quarto> {
             throw new SQLException("Erro ao deletar quarto");
         }
     }
+
+    @Override
+    public void AtivarInativar(int id, boolean ativar) throws SQLException {
+        String sqlInstrucao = "UPDATE quarto SET status = ? WHERE id = ?";
+        try (Connection conexao = ConnectionFactory.getConnection();
+             PreparedStatement pstm = conexao.prepareStatement(sqlInstrucao)) {
+            pstm.setString(1, ativar ? "A" : "I");
+            pstm.setInt(2, id);
+            pstm.execute();
+        } catch (SQLException ex) {
+            AppLogger.error("Erro ao ativar/inativar quarto", ex);
+            throw new SQLException("Erro ao ativar/inativar quarto");
+        }
+    }
 }

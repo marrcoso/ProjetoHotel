@@ -38,4 +38,9 @@ public class VagaEstacionamentoService implements InterfaceService<VagaEstaciona
     public void Apagar(VagaEstacionamento objeto) throws SQLException {
         vagaDAO.Delete(objeto);
     }
+
+    @Override
+    public void AtivarInativar(int id, boolean ativar) throws SQLException {
+        vagaDAO.AtivarInativar(id, ativar);
+    }
 }

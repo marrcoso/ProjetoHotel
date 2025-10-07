@@ -38,4 +38,9 @@ public class FuncionarioService implements InterfaceService<Funcionario> {
     public void Apagar(Funcionario objeto) throws SQLException {
         funcionarioDAO.Delete(objeto);
     }
+
+    @Override
+    public void AtivarInativar(int id, boolean ativar) throws SQLException {
+        funcionarioDAO.AtivarInativar(id, ativar);
+    }
 }

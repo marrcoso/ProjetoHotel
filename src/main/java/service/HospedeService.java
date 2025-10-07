@@ -38,4 +38,9 @@ public class HospedeService implements InterfaceService<Hospede> {
     public void Apagar(Hospede objeto) throws SQLException {
         hospedeDAO.Delete(objeto);
     }
+
+    @Override
+    public void AtivarInativar(int id, boolean ativar) throws SQLException {
+        hospedeDAO.AtivarInativar(id, ativar);
+    }
 }

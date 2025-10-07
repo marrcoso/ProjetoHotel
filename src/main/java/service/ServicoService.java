@@ -38,4 +38,9 @@ public class ServicoService implements InterfaceService<Servico> {
     public void Apagar(Servico objeto) throws SQLException {
         servicoDAO.Delete(objeto);
     }
+
+    @Override
+    public void AtivarInativar(int id, boolean ativar) throws SQLException {
+        servicoDAO.AtivarInativar(id, ativar);
+    }
 }

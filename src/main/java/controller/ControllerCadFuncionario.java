@@ -21,6 +21,8 @@ public final class ControllerCadFuncionario implements ActionListener, Interface
     public ControllerCadFuncionario(TelaCadastroFuncionario telaCadastroFuncionario) {
         this.telaCadastroFuncionario = telaCadastroFuncionario;
         this.funcionarioService = new FuncionarioService();
+        Utilities.setAlwaysDisabled(this.telaCadastroFuncionario.getjTextFieldId(), true);
+        Utilities.setAlwaysDisabled(this.telaCadastroFuncionario.getjComboBoxStatus(), true);
         Utilities.setAlwaysDisabled(this.telaCadastroFuncionario.getjFormattedTextFieldDataCadastro(), true);
         Utilities.ativaDesativa(this.telaCadastroFuncionario.getjPanelBotoes(), true);
         Utilities.ativaDesativa(this.telaCadastroFuncionario.getjPanelBotoes(), true);

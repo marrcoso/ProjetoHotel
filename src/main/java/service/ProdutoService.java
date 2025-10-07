@@ -38,4 +38,9 @@ public class ProdutoService implements InterfaceService<Produto> {
     public void Apagar(Produto objeto) throws SQLException {
         produtoDAO.Delete(objeto);
     }
+
+    @Override
+    public void AtivarInativar(int id, boolean ativar) throws SQLException {
+        produtoDAO.AtivarInativar(id, ativar);
+    }
 }
