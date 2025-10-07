@@ -302,6 +302,8 @@ public class TelaCadastroHospede extends javax.swing.JDialog {
 
         jLabelId.setText("ID");
 
+        jTextFieldId.setEnabled(false);
+
         jLabelNomeFantasia.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabelNomeFantasia.setText("* Nome Fantasia");
 
@@ -372,6 +374,7 @@ public class TelaCadastroHospede extends javax.swing.JDialog {
         jLabelObs.setText("OBS.:");
 
         jComboBoxStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ativo", "Inativo" }));
+        jComboBoxStatus.setEnabled(false);
 
         jLabelSexo1.setText("Status");
 
@@ -402,7 +405,7 @@ public class TelaCadastroHospede extends javax.swing.JDialog {
                             .addComponent(jTextFieldObs)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelDadosLayout.createSequentialGroup()
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelId))
                         .addGap(454, 454, 454)
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

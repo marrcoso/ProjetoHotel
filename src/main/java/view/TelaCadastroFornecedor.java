@@ -485,8 +485,8 @@ public class TelaCadastroFornecedor extends javax.swing.JDialog {
 
         jLabelId.setText("ID");
 
-        jTextFieldId.setEditable(false);
         jTextFieldId.setToolTipText("");
+        jTextFieldId.setEnabled(false);
 
         jLabelNomeFantasia.setText("Nome Fantasia");
 
@@ -536,8 +536,12 @@ public class TelaCadastroFornecedor extends javax.swing.JDialog {
         }
 
         jDataCadastro.setEditable(false);
+        try {
+            jDataCadastro.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         jDataCadastro.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jDataCadastro.setText("08/07/2025");
         jDataCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jDataCadastroActionPerformed(evt);
@@ -573,6 +577,7 @@ public class TelaCadastroFornecedor extends javax.swing.JDialog {
         jLabelSexo1.setText("Status");
 
         jComboBoxStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ativo", "Inativo" }));
+        jComboBoxStatus.setEnabled(false);
 
         javax.swing.GroupLayout jPanelDadosLayout = new javax.swing.GroupLayout(jPanelDados);
         jPanelDados.setLayout(jPanelDadosLayout);
@@ -652,7 +657,7 @@ public class TelaCadastroFornecedor extends javax.swing.JDialog {
                             .addGroup(jPanelDadosLayout.createSequentialGroup()
                                 .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabelId)
-                                    .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jComboBoxStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

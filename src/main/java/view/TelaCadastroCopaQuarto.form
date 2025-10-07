@@ -108,14 +108,14 @@
                               <Component id="jLabelObservacao" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabelProduto" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabelId" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTextFieldId" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jTextFieldId" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jFormattedTextFieldProduto" min="-2" pref="291" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jButtonRelacionarProduto" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="104" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jLabelQuarto" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
@@ -205,15 +205,6 @@
             <Property name="text" type="java.lang.String" value="ID"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextFieldId">
-          <Properties>
-            <Property name="editable" type="boolean" value="false"/>
-            <Property name="text" type="java.lang.String" value="123"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldIdActionPerformed"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JLabel" name="jLabelObservacao">
           <Properties>
             <Property name="text" type="java.lang.String" value="Observa&#xe7;&#xe3;o:"/>
@@ -234,6 +225,7 @@
                 <StringItem index="1" value="Inativo"/>
               </StringArray>
             </Property>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -305,6 +297,12 @@
         <Component class="javax.swing.JLabel" name="jLabelCadastro">
           <Properties>
             <Property name="text" type="java.lang.String" value="Data de Cadastro"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jTextFieldId">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
       </SubComponents>

@@ -115,7 +115,7 @@
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jTextFieldId" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
+                              <Component id="jTextFieldId" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
                               <Component id="jLabelId" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="454" max="-2" attributes="0"/>
@@ -382,6 +382,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldId">
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelNomeFantasia">
           <Properties>
@@ -552,6 +555,7 @@
                 <StringItem index="1" value="Inativo"/>
               </StringArray>
             </Property>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>

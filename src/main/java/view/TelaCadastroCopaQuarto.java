@@ -150,7 +150,6 @@ public class TelaCadastroCopaQuarto extends javax.swing.JDialog {
         jLabelTitulo = new javax.swing.JLabel();
         jPanelDados = new javax.swing.JPanel();
         jLabelId = new javax.swing.JLabel();
-        jTextFieldId = new javax.swing.JTextField();
         jLabelObservacao = new javax.swing.JLabel();
         jTextFieldObservacao = new javax.swing.JTextField();
         jLabelStatus = new javax.swing.JLabel();
@@ -163,6 +162,7 @@ public class TelaCadastroCopaQuarto extends javax.swing.JDialog {
         jButtonRelacionarProduto = new javax.swing.JButton();
         jFormattedTextFieldCadastro = new javax.swing.JFormattedTextField();
         jLabelCadastro = new javax.swing.JLabel();
+        jTextFieldId = new javax.swing.JTextField();
         jPanelBotoes = new javax.swing.JPanel();
         jButtonNovo = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
@@ -196,19 +196,12 @@ public class TelaCadastroCopaQuarto extends javax.swing.JDialog {
 
         jLabelId.setText("ID");
 
-        jTextFieldId.setEditable(false);
-        jTextFieldId.setText("123");
-        jTextFieldId.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldIdActionPerformed(evt);
-            }
-        });
-
         jLabelObservacao.setText("Observação:");
 
         jLabelStatus.setText("Status");
 
         jComboBoxStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ativo", "Inativo" }));
+        jComboBoxStatus.setEnabled(false);
 
         jFormattedTextFieldQuarto.setEditable(false);
         jFormattedTextFieldQuarto.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.##"))));
@@ -256,6 +249,9 @@ public class TelaCadastroCopaQuarto extends javax.swing.JDialog {
 
         jLabelCadastro.setText("Data de Cadastro");
 
+        jTextFieldId.setToolTipText("");
+        jTextFieldId.setEnabled(false);
+
         javax.swing.GroupLayout jPanelDadosLayout = new javax.swing.GroupLayout(jPanelDados);
         jPanelDados.setLayout(jPanelDadosLayout);
         jPanelDadosLayout.setHorizontalGroup(
@@ -269,12 +265,12 @@ public class TelaCadastroCopaQuarto extends javax.swing.JDialog {
                             .addComponent(jLabelObservacao)
                             .addComponent(jLabelProduto)
                             .addComponent(jLabelId)
-                            .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanelDadosLayout.createSequentialGroup()
                                 .addComponent(jFormattedTextFieldProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButtonRelacionarProduto)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabelQuarto)
                             .addGroup(jPanelDadosLayout.createSequentialGroup()
@@ -391,10 +387,6 @@ public class TelaCadastroCopaQuarto extends javax.swing.JDialog {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTextFieldIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldIdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldIdActionPerformed
 
     private void jFormattedTextFieldQuartoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldQuartoActionPerformed
         // TODO add your handling code here:

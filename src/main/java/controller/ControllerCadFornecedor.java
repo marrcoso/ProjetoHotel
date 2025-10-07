@@ -23,6 +23,7 @@ public final class ControllerCadFornecedor implements ActionListener, InterfaceC
         this.fornecedorService = new FornecedorService();
         Utilities.setAlwaysDisabled(this.telaCadastroFornecedor.getjTextFieldId(), true);
         Utilities.setAlwaysDisabled(this.telaCadastroFornecedor.getjComboBoxStatus(), true);
+        Utilities.setAlwaysDisabled(this.telaCadastroFornecedor.getjFormattedTextFieldDataCadastro(), true);
         Utilities.ativaDesativa(this.telaCadastroFornecedor.getjPanelBotoes(), true);
         Utilities.limpaComponentes(this.telaCadastroFornecedor.getjPanelDados(), false);
         Utilities.permiteLimparFormattedField(this.telaCadastroFornecedor.getjFormattedTextFieldCpf());
@@ -70,11 +71,8 @@ public final class ControllerCadFornecedor implements ActionListener, InterfaceC
     public void handleNovo() {
         Utilities.ativaDesativa(this.telaCadastroFornecedor.getjPanelBotoes(), false);
         Utilities.limpaComponentes(this.telaCadastroFornecedor.getjPanelDados(), true);
-        this.telaCadastroFornecedor.getjTextFieldId().setEnabled(false);
-        this.telaCadastroFornecedor.getjFormattedTextFieldDataCadastro().setEnabled(false);
         this.telaCadastroFornecedor.getjTextFieldNomeFantasia().requestFocus();
         this.telaCadastroFornecedor.getjComboBoxStatus().setSelectedItem("Ativo");
-        this.telaCadastroFornecedor.getjComboBoxStatus().setEnabled(false);
         this.telaCadastroFornecedor.getjFormattedTextFieldDataCadastro().setText(Utilities.getDataHoje());
     }
 
@@ -236,9 +234,7 @@ public final class ControllerCadFornecedor implements ActionListener, InterfaceC
             Utilities.ativaDesativa(telaCadastroFornecedor.getjPanelBotoes(), false);
             Utilities.limpaComponentes(telaCadastroFornecedor.getjPanelDados(), true);
 
-            telaCadastroFornecedor.getjTextFieldId().setText(String.valueOf(codigo));
-            telaCadastroFornecedor.getjTextFieldId().setEnabled(false);
-
+            
             Fornecedor fornecedor;
             try {
                 fornecedor = new FornecedorService().Carregar(codigo);
@@ -247,7 +243,7 @@ public final class ControllerCadFornecedor implements ActionListener, InterfaceC
                 return;
             }
             telaCadastroFornecedor.getjFormattedTextFieldDataCadastro().setText(Utilities.formatarDataFromSqlData(fornecedor.getDataCadastro()));
-            telaCadastroFornecedor.getjFormattedTextFieldDataCadastro().setEnabled(false);
+            telaCadastroFornecedor.getjTextFieldId().setText(String.valueOf(codigo));
 
             telaCadastroFornecedor.getjTextFieldNomeFantasia().setText(fornecedor.getNome());
             telaCadastroFornecedor.getjTextFieldRazaoSocial().setText(fornecedor.getRazaoSocial());

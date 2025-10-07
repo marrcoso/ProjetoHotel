@@ -37,10 +37,12 @@ Marca:
     ✔ Testar formulário @done(25-10-06 19:55)
 
 Todas as telas:
-    ☐ Verifica e conserta input de id ao carregar
+    ✔ Verifica e conserta input de id ao carregar @done(25-10-07 19:19)
     ✔ Verificar campo de status para permitir ser trocavel (update banco no cadastro) ou apenas por função na busca @done(25-10-06 22:04)
     ✔ Validar campos que são numericos com validarCampoNumero() @done(25-10-06 20:10)
+    ☐ Fazer filtro de id ser selecionado por padrão igual funcionario
 
 Opcionais:
     ☐ Alterar para data de cadastro ser gerada por trigger no banco e não ter em create e update
     ☐ Ocultar automaticamente campos não definidos no create (id, data cadastro) (talvez status se for mudar para não ser atualizado por tela de cadastro)
+    ☐ Filtro de ativo e inativo nas telas de busca

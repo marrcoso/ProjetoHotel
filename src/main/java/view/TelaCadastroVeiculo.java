@@ -235,6 +235,7 @@ public class TelaCadastroVeiculo extends javax.swing.JDialog {
 
         jLabelId.setText("ID");
 
+        jTextFieldId.setEnabled(false);
         jTextFieldId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldIdActionPerformed(evt);
@@ -252,6 +253,7 @@ public class TelaCadastroVeiculo extends javax.swing.JDialog {
         jLabelStatus.setText("Status");
 
         jComboBoxStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ativo", "Inativo" }));
+        jComboBoxStatus.setEnabled(false);
 
         jLabelPlaca.setText("Placa");
 
@@ -280,6 +282,7 @@ public class TelaCadastroVeiculo extends javax.swing.JDialog {
         });
 
         jLabelModelo.setText("Modelo");
+
         jComboBoxTipoProprietario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxTipoProprietarioActionPerformed(evt);
@@ -317,7 +320,7 @@ public class TelaCadastroVeiculo extends javax.swing.JDialog {
                 .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelPlaca)
                     .addComponent(jTextFieldPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelId))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

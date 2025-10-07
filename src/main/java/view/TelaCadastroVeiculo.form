@@ -104,7 +104,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabelPlaca" min="-2" max="-2" attributes="0"/>
                       <Component id="jTextFieldPlaca" min="-2" pref="174" max="-2" attributes="0"/>
-                      <Component id="jTextFieldId" min="-2" pref="35" max="-2" attributes="0"/>
+                      <Component id="jTextFieldId" min="-2" pref="60" max="-2" attributes="0"/>
                       <Component id="jLabelId" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -221,6 +221,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldId">
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldIdActionPerformed"/>
           </Events>
@@ -248,6 +251,7 @@
                 <StringItem index="1" value="Inativo"/>
               </StringArray>
             </Property>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>

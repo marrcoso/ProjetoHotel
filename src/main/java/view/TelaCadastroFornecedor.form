@@ -198,7 +198,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabelId" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jTextFieldId" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jTextFieldId" min="-2" pref="60" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -376,8 +376,8 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldId">
           <Properties>
-            <Property name="editable" type="boolean" value="false"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelNomeFantasia">
@@ -469,8 +469,10 @@
         <Component class="javax.swing.JFormattedTextField" name="jDataCadastro">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
+            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
+              <Format format="##/##/####" subtype="-1" type="5"/>
+            </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="08/07/2025"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jDataCadastroActionPerformed"/>
@@ -566,6 +568,7 @@
                 <StringItem index="1" value="Inativo"/>
               </StringArray>
             </Property>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
