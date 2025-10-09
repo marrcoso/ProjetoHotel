@@ -12,10 +12,12 @@ import model.Hospede;
 import model.Modelo;
 import model.Pessoa;
 import model.Veiculo;
+import service.FornecedorService;
 import service.FuncionarioService;
 import service.HospedeService;
 import service.VeiculoService;
 import utilities.Utilities;
+import view.TelaBuscaFornecedor;
 import view.TelaBuscaFuncionario;
 import view.TelaBuscaHospede;
 import view.TelaBuscaModelo;
@@ -239,7 +241,7 @@ public final class ControllerCadVeiculo implements ActionListener, InterfaceCont
             this.telaCadastroVeiculo.getjTextFieldPlaca().requestFocus();
             this.telaCadastroVeiculo.getjComboBoxStatus().setSelectedItem("Ativo");
 
-            Pessoa proprietario;
+            Hospede proprietario;
             try {
                 proprietario = new HospedeService().Carregar(codigoProprietario);
             } catch (SQLException ex) {
@@ -264,7 +266,7 @@ public final class ControllerCadVeiculo implements ActionListener, InterfaceCont
             this.telaCadastroVeiculo.getjTextFieldPlaca().requestFocus();
             this.telaCadastroVeiculo.getjComboBoxStatus().setSelectedItem("Ativo");
 
-            Pessoa proprietario;
+            Funcionario proprietario;
             try {
                 proprietario = new FuncionarioService().Carregar(codigoProprietario);
             } catch (SQLException ex) {
@@ -279,18 +281,18 @@ public final class ControllerCadVeiculo implements ActionListener, InterfaceCont
 
     private void relacionarProprietarioTelaFornecedor() {
         
-        TelaBuscaFuncionario telaBuscaProprietario = new TelaBuscaFuncionario(null, true);
+        TelaBuscaFornecedor telaBuscaProprietario = new TelaBuscaFornecedor(null, true);
         @SuppressWarnings("unused")
-        ControllerBuscaFuncionario controllerBuscaProprietario = new ControllerBuscaFuncionario(telaBuscaProprietario, codigo -> this.codigoProprietario = codigo);
+        ControllerBuscaFornecedor controllerBuscaProprietario = new ControllerBuscaFornecedor(telaBuscaProprietario, codigo -> this.codigoProprietario = codigo);
         telaBuscaProprietario.setVisible(true);
 
         if (codigoProprietario != 0) {
             Utilities.ativaDesativa(telaCadastroVeiculo.getjPanelBotoes(), false);
             this.telaCadastroVeiculo.getjTextFieldPlaca().requestFocus();
 
-            Pessoa proprietario;
+            Fornecedor proprietario;
             try {
-                proprietario = new FuncionarioService().Carregar(codigoProprietario);
+                proprietario = new FornecedorService().Carregar(codigoProprietario);
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(telaCadastroVeiculo, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
