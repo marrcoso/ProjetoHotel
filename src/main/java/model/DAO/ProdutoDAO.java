@@ -136,7 +136,7 @@ public class ProdutoDAO implements InterfaceDAO<Produto> {
 
     @Override
     public void AtivarInativar(int id, boolean ativar) throws SQLException {
-        String sqlInstrucao = "UPDATE produto SET status = ? WHERE id = ?";
+        String sqlInstrucao = "UPDATE produto_copa SET status = ? WHERE id = ?";
         try (Connection conexao = ConnectionFactory.getConnection();
              PreparedStatement pstm = conexao.prepareStatement(sqlInstrucao)) {
             pstm.setString(1, ativar ? "A" : "I");
