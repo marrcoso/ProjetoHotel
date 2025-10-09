@@ -87,12 +87,13 @@ public final class ControllerBuscaModelo implements ActionListener, InterfaceCon
     }
 
     private enum FiltroModelo {
-        ID, DESCRICAO;
+        ID, DESCRICAO, MARCA;
 
         public static FiltroModelo fromIndex(int index) {
             switch (index) {
                 case 0: return ID;
                 case 1: return DESCRICAO;
+                case 2: return MARCA;
                 default: throw new IllegalArgumentException("Filtro inválido");
             }
         }
@@ -143,6 +144,10 @@ public final class ControllerBuscaModelo implements ActionListener, InterfaceCon
                 }
                 case DESCRICAO: {
                     carregarPorAtributo("descricao", filtroTexto, tabela);
+                    break;
+                }
+                case MARCA: {
+                    carregarPorAtributo("marca_id", filtroTexto, tabela);
                     break;
                 }
             }
