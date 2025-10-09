@@ -10,6 +10,10 @@ public class ValidadorCampos {
         return numero != null && numero.matches("\\d+");
     }
 
+    public static boolean validarCampoValor(String valor) {
+        return valor != null && valor.matches("\\d+(\\.\\d+)?");
+    }
+
     public static boolean validarCampoEmail(String email) {
         return email != null && email.matches("^[\\w-\\.]+@[\\w-\\.]+\\.[a-zA-Z]{2,4}$");
     }
