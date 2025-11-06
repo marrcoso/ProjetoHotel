@@ -34,6 +34,41 @@ public class ValidadorCampos {
         return sexo != null && (sexo.toString().equals("Masculino") || sexo.toString().equals("Feminino"));
     }
 
+    public static boolean validarData(String data) {
+        String padraoData = "^\\d{4}-\\d{2}-\\d{2}$";
+
+        if (data != null) {
+            if (data.matches(padraoData)) {
+                String[] partes = data.split("-");
+                int ano = Integer.parseInt(partes[0]);
+                int mes = Integer.parseInt(partes[1]);
+                int dia = Integer.parseInt(partes[2]);
+                Map<Integer, Integer> diasPorMes = Map.of(
+                    1, 31, 2, 28, 3, 31, 4, 30, 5, 31, 6, 30,
+                    7, 31, 8, 31, 9, 30, 10, 31, 11, 30, 12, 31
+                );
+
+                Integer diasNoMes = diasPorMes.get(mes);
+                if (diasNoMes == null || dia < 1) {
+                    return false;
+                }
+
+                if (mes == 2) {
+                    boolean bissexto = (ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0);
+                    diasNoMes = bissexto ? 29 : 28;
+                }
+
+                return dia <= diasNoMes;
+            }
+            return false;
+        }
+        return false;
+    }
+
+    public static bool compararDatas(String data1, String data2) {
+        return data1 != null && data2 != null && data1.compareTo(data2) <= 0;
+    }
+
     public static boolean validarCpf(String cpf) {
         String apenasNumeros = Utilities.apenasNumeros(cpf);
         if (apenasNumeros.length() != 11 || apenasNumeros.matches("(\\d)\\1{10}")) return false;
