@@ -236,7 +236,7 @@ public final class ControllerBuscaHospede implements ActionListener, InterfaceCo
             telaBuscaHospede.getjButtonAtivar().setEnabled(!ativar);
             telaBuscaHospede.getjButtonInativar().setEnabled(ativar);
 
-        } catch (SQLException ex) {
+        } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(telaBuscaHospede, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }

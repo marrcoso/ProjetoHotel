@@ -235,7 +235,7 @@ public final class ControllerBuscaFornecedor implements ActionListener, Interfac
             telaBuscaFornecedor.getjButtonAtivar().setEnabled(!ativar);
             telaBuscaFornecedor.getjButtonInativar().setEnabled(ativar);
 
-        } catch (SQLException ex) {
+        } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(telaBuscaFornecedor, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }

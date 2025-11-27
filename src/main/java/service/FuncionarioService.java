@@ -1,8 +1,6 @@
 package service;
 
-import java.sql.SQLException;
 import java.util.List;
-
 import model.DAO.FuncionarioDAO;
 import model.Funcionario;
 
@@ -15,32 +13,32 @@ public class FuncionarioService implements InterfaceService<Funcionario> {
     }
 
     @Override
-    public void Criar(Funcionario objeto) throws SQLException {
+    public void Criar(Funcionario objeto) throws RuntimeException {
         funcionarioDAO.Create(objeto);
     }
 
     @Override
-    public Funcionario Carregar(int id) throws SQLException {
+    public Funcionario Carregar(int id) throws RuntimeException {
         return funcionarioDAO.Retrieve(id);
     }
 
     @Override
-    public List<Funcionario> Carregar(String atributo, String valor) throws SQLException {
+    public List<Funcionario> Carregar(String atributo, String valor) throws RuntimeException {
         return funcionarioDAO.Retrieve(atributo, valor);
     }
 
     @Override
-    public void Atualizar(Funcionario objeto) throws SQLException {
+    public void Atualizar(Funcionario objeto) throws RuntimeException {
         funcionarioDAO.Update(objeto);
     }
 
     @Override
-    public void Apagar(Funcionario objeto) throws SQLException {
+    public void Apagar(Funcionario objeto) throws RuntimeException {
         funcionarioDAO.Delete(objeto);
     }
 
     @Override
-    public void AtivarInativar(int id, boolean ativar) throws SQLException {
+    public void AtivarInativar(int id, boolean ativar) throws RuntimeException {
         funcionarioDAO.AtivarInativar(id, ativar);
     }
 }

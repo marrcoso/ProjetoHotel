@@ -1,8 +1,6 @@
 package service;
 
-import java.sql.SQLException;
 import java.util.List;
-
 import model.DAO.HospedeDAO;
 import model.Hospede;
 
@@ -15,32 +13,32 @@ public class HospedeService implements InterfaceService<Hospede> {
     }
 
     @Override
-    public void Criar(Hospede objeto) throws SQLException {
+    public void Criar(Hospede objeto) throws RuntimeException {
         hospedeDAO.Create(objeto);
     }
 
     @Override
-    public Hospede Carregar(int id) throws SQLException {
+    public Hospede Carregar(int id) throws RuntimeException {
         return hospedeDAO.Retrieve(id);
     }
 
     @Override
-    public List<Hospede> Carregar(String atributo, String valor) throws SQLException {
+    public List<Hospede> Carregar(String atributo, String valor) throws RuntimeException {
         return hospedeDAO.Retrieve(atributo, valor);
     }
 
     @Override
-    public void Atualizar(Hospede objeto) throws SQLException {
+    public void Atualizar(Hospede objeto) throws RuntimeException {
         hospedeDAO.Update(objeto);
     }
 
     @Override
-    public void Apagar(Hospede objeto) throws SQLException {
+    public void Apagar(Hospede objeto) throws RuntimeException {
         hospedeDAO.Delete(objeto);
     }
 
     @Override
-    public void AtivarInativar(int id, boolean ativar) throws SQLException {
+    public void AtivarInativar(int id, boolean ativar) throws RuntimeException {
         hospedeDAO.AtivarInativar(id, ativar);
     }
 }

@@ -166,7 +166,7 @@ public final class ControllerCadFuncionario implements ActionListener, Interface
         if (isNovoCadastro) {
             try {
                 funcionarioService.Criar(funcionario);
-            } catch (SQLException ex) {
+            } catch (RuntimeException ex) {
                 JOptionPane.showMessageDialog(telaCadastroFuncionario, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
@@ -178,7 +178,7 @@ public final class ControllerCadFuncionario implements ActionListener, Interface
         funcionario.setId(Integer.parseInt(telaCadastroFuncionario.getjTextFieldId().getText()));
         try {
             funcionarioService.Atualizar(funcionario);
-        } catch (SQLException ex) {
+        } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(telaCadastroFuncionario, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -236,7 +236,7 @@ public final class ControllerCadFuncionario implements ActionListener, Interface
             Funcionario funcionario;
             try {
                 funcionario = funcionarioService.Carregar(codigo);
-            } catch (SQLException ex) {
+            } catch (RuntimeException ex) {
                 JOptionPane.showMessageDialog(telaCadastroFuncionario, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }

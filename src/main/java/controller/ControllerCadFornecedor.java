@@ -167,7 +167,7 @@ public final class ControllerCadFornecedor implements ActionListener, InterfaceC
         if (isNovoCadastro) {
             try {
                 fornecedorService.Criar(fornecedor);
-            } catch (SQLException ex) {
+            } catch (RuntimeException ex) {
                 JOptionPane.showMessageDialog(telaCadastroFornecedor, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
@@ -179,7 +179,7 @@ public final class ControllerCadFornecedor implements ActionListener, InterfaceC
         fornecedor.setId(Integer.parseInt(telaCadastroFornecedor.getjTextFieldId().getText()));
         try {
             fornecedorService.Atualizar(fornecedor);
-        } catch (SQLException ex) {
+        } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(telaCadastroFornecedor, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -237,7 +237,7 @@ public final class ControllerCadFornecedor implements ActionListener, InterfaceC
             Fornecedor fornecedor;
             try {
                 fornecedor = new FornecedorService().Carregar(codigo);
-            } catch (SQLException ex) {
+            } catch (RuntimeException ex) {
                 JOptionPane.showMessageDialog(telaCadastroFornecedor, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }

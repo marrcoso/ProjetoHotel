@@ -13,7 +13,7 @@ public class JPADao {
         return JPAFactory.getEntityManagerFactory();
     }
 
-    public static <R> R executeWithEntityManager(Function<EntityManager, R> work, boolean withTransaction) {
+    public static <R> R executeWithEntityManager(Function<EntityManager, R> work, boolean withTransaction) throws RuntimeException {
         EntityManager em = null;
         try {
             em = getFactory().createEntityManager();
@@ -39,7 +39,7 @@ public class JPADao {
         }, withTransaction);
     }
 
-    public static void validAttribute(Class<?> entityClass, String attr) {
+    public static void validAttribute(Class<?> entityClass, String attr) throws RuntimeException {
         try {
             if (attr == null || attr.trim().isEmpty() || entityClass.getDeclaredField(attr) == null) {
                 throw new RuntimeException("Falha ao validar atributo por reflexão");

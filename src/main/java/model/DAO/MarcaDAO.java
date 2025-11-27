@@ -10,17 +10,17 @@ import model.Marca;
 public class MarcaDAO implements InterfaceDAO<Marca> {
 
     @Override
-    public void Create(Marca objeto) {
+    public void Create(Marca objeto) throws RuntimeException {
         JPADao.executeVoid(em -> em.persist(objeto), true);
     }
 
     @Override
-    public Marca Retrieve(int id) {
+    public Marca Retrieve(int id) throws RuntimeException {
         return JPADao.executeWithEntityManager(em -> em.find(Marca.class, id), false);
     }
 
     @Override
-    public List<Marca> Retrieve(String atributo, String valor) {
+    public List<Marca> Retrieve(String atributo, String valor) throws RuntimeException {
         JPADao.validAttribute(Marca.class, atributo);
         return JPADao.executeWithEntityManager(em -> {
             String jpql = "SELECT m FROM Marca m WHERE m." + atributo + " LIKE :valor";
@@ -31,12 +31,12 @@ public class MarcaDAO implements InterfaceDAO<Marca> {
     }
 
     @Override
-    public void Update(Marca objeto) {
+    public void Update(Marca objeto) throws RuntimeException {
         JPADao.executeVoid(em -> em.merge(objeto), true);
     }
 
     @Override
-    public void Delete(Marca objeto) {
+    public void Delete(Marca objeto) throws RuntimeException {
         JPADao.executeVoid(em -> {
             Marca managed = em.find(Marca.class, objeto.getId());
             if (managed != null) em.remove(managed);
@@ -44,7 +44,7 @@ public class MarcaDAO implements InterfaceDAO<Marca> {
     }
 
     @Override
-    public void AtivarInativar(int id, boolean ativar) {
+    public void AtivarInativar(int id, boolean ativar) throws RuntimeException {
         JPADao.executeVoid(em -> {
             Marca marca = em.find(Marca.class, id);
             if (marca != null) {

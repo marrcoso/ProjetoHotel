@@ -230,7 +230,7 @@ public final class ControllerBuscaFuncionario implements ActionListener, Interfa
             telaBuscaFuncionario.getjButtonAtivar().setEnabled(!ativar);
             telaBuscaFuncionario.getjButtonInativar().setEnabled(ativar);
 
-        } catch (SQLException ex) {
+        } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(telaBuscaFuncionario, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }

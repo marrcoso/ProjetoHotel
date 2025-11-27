@@ -168,7 +168,7 @@ public final class ControllerCadHospede implements ActionListener, InterfaceCont
         if (isNovoCadastro) {
             try {
                 hospedeService.Criar(hospede);
-            } catch (SQLException ex) {
+            } catch (RuntimeException ex) {
                 JOptionPane.showMessageDialog(telaCadastroHospede, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
@@ -180,7 +180,7 @@ public final class ControllerCadHospede implements ActionListener, InterfaceCont
         hospede.setId(Integer.parseInt(telaCadastroHospede.getjTextFieldId().getText()));
         try {
             hospedeService.Atualizar(hospede);
-        } catch (SQLException ex) {
+        } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(telaCadastroHospede, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -239,7 +239,7 @@ public final class ControllerCadHospede implements ActionListener, InterfaceCont
             Hospede hospede;
             try {
                 hospede = new HospedeService().Carregar(codigo);
-            } catch (SQLException ex) {
+            } catch (RuntimeException ex) {
                 JOptionPane.showMessageDialog(telaCadastroHospede, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }

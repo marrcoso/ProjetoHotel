@@ -244,7 +244,7 @@ public final class ControllerCadVeiculo implements ActionListener, InterfaceCont
             Hospede proprietario;
             try {
                 proprietario = new HospedeService().Carregar(codigoProprietario);
-            } catch (SQLException ex) {
+            } catch (RuntimeException ex) {
                 JOptionPane.showMessageDialog(telaCadastroVeiculo, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
@@ -269,7 +269,7 @@ public final class ControllerCadVeiculo implements ActionListener, InterfaceCont
             Funcionario proprietario;
             try {
                 proprietario = new FuncionarioService().Carregar(codigoProprietario);
-            } catch (SQLException ex) {
+            } catch (RuntimeException ex) {
                 JOptionPane.showMessageDialog(telaCadastroVeiculo, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
@@ -293,7 +293,7 @@ public final class ControllerCadVeiculo implements ActionListener, InterfaceCont
             Fornecedor proprietario;
             try {
                 proprietario = new FornecedorService().Carregar(codigoProprietario);
-            } catch (SQLException ex) {
+            } catch (RuntimeException ex) {
                 JOptionPane.showMessageDialog(telaCadastroVeiculo, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
