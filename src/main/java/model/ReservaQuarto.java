@@ -1,20 +1,42 @@
 package model;
 
-import java.time.LocalDateTime;
+import javax.persistence.*;
+import java.util.Date;
 
+@Entity
+@Table(name = "reserva_quarto")
 public class ReservaQuarto {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private LocalDateTime dataHoraInicio;
-    private LocalDateTime dataHoraFim;
+
+    @Column(name = "data_hora_inicio", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataHoraInicio;
+
+    @Column(name = "data_hora_fim", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataHoraFim;
+
+    @Column(name = "obs", nullable = false)
     private String obs;
-    private char status;
+
+    @Column(name = "status", nullable = false)
+    private String status;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "reserva_id")
     private Reserva reserva;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "quarto_id")
     private Quarto quarto;
 
     public ReservaQuarto() {
     }
 
-    public ReservaQuarto(int id, LocalDateTime dataHoraInicio, LocalDateTime dataHoraFim, String obs, char status, Reserva reserva, Quarto quarto) {
+    public ReservaQuarto(int id, Date dataHoraInicio, Date dataHoraFim, String obs, String status, Reserva reserva, Quarto quarto) {
         this.id = id;
         this.dataHoraInicio = dataHoraInicio;
         this.dataHoraFim = dataHoraFim;
@@ -32,19 +54,19 @@ public class ReservaQuarto {
         this.id = id;
     }
 
-    public LocalDateTime getDataHoraInicio() {
+    public Date getDataHoraInicio() {
         return dataHoraInicio;
     }
 
-    public void setDataHoraInicio(LocalDateTime dataHoraInicio) {
+    public void setDataHoraInicio(Date dataHoraInicio) {
         this.dataHoraInicio = dataHoraInicio;
     }
 
-    public LocalDateTime getDataHoraFim() {
+    public Date getDataHoraFim() {
         return dataHoraFim;
     }
 
-    public void setDataHoraFim(LocalDateTime dataHoraFim) {
+    public void setDataHoraFim(Date dataHoraFim) {
         this.dataHoraFim = dataHoraFim;
     }
 
@@ -56,11 +78,11 @@ public class ReservaQuarto {
         this.obs = obs;
     }
 
-    public char getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(char status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 

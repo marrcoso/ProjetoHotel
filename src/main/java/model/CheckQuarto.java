@@ -1,28 +1,43 @@
 package model;
 
-import java.time.LocalDateTime;
+import javax.persistence.*;
+import java.util.Date;
 
+@Entity
+@Table(name = "check_quarto")
 public class CheckQuarto {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private LocalDateTime dataHoraInicio;
-    private LocalDateTime dataHoraFim;
+
+    @Column(name = "data_hora_inicio", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataHoraInicio;
+
+    @Column(name = "data_hora_fim", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataHoraFim;
+
+    @Column(name = "obs", nullable = false)
     private String obs;
+
+    @Column(name = "status", nullable = false)
     private char status;
-    private Check check;
-    private ReservaQuarto reservaQuarto;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "quarto_id")
     private Quarto quarto;
 
     public CheckQuarto() {
     }
 
-    public CheckQuarto(int id, LocalDateTime dataHoraInicio, LocalDateTime dataHoraFim, String obs, char status, Check check, ReservaQuarto reservaQuarto, Quarto quarto) {
+    public CheckQuarto(int id, Date dataHoraInicio, Date dataHoraFim, String obs, char status, Quarto quarto) {
         this.id = id;
         this.dataHoraInicio = dataHoraInicio;
         this.dataHoraFim = dataHoraFim;
         this.obs = obs;
         this.status = status;
-        this.check = check;
-        this.reservaQuarto = reservaQuarto;
         this.quarto = quarto;
     }
 
@@ -34,19 +49,19 @@ public class CheckQuarto {
         this.id = id;
     }
 
-    public LocalDateTime getDataHoraInicio() {
+    public Date getDataHoraInicio() {
         return dataHoraInicio;
     }
 
-    public void setDataHoraInicio(LocalDateTime dataHoraInicio) {
+    public void setDataHoraInicio(Date dataHoraInicio) {
         this.dataHoraInicio = dataHoraInicio;
     }
 
-    public LocalDateTime getDataHoraFim() {
+    public Date getDataHoraFim() {
         return dataHoraFim;
     }
 
-    public void setDataHoraFim(LocalDateTime dataHoraFim) {
+    public void setDataHoraFim(Date dataHoraFim) {
         this.dataHoraFim = dataHoraFim;
     }
 
@@ -66,22 +81,6 @@ public class CheckQuarto {
         this.status = status;
     }
 
-    public Check getCheck() {
-        return check;
-    }
-
-    public void setCheck(Check check) {
-        this.check = check;
-    }
-
-    public ReservaQuarto getReservaQuarto() {
-        return reservaQuarto;
-    }
-
-    public void setReservaQuarto(ReservaQuarto reservaQuarto) {
-        this.reservaQuarto = reservaQuarto;
-    }
-
     public Quarto getQuarto() {
         return quarto;
     }
@@ -97,8 +96,6 @@ public class CheckQuarto {
             "\nData/Hora Fim     = " + this.getDataHoraFim() +
             "\nObs               = " + this.getObs() +
             "\nStatus            = " + this.getStatus() +
-            "\nCheck ID          = " + (this.getCheck() != null ? this.getCheck().getId() : "null") +
-            "\nReservaQuarto ID  = " + (this.getReservaQuarto() != null ? this.getReservaQuarto().getId() : "null") +
             "\nQuarto            = " + (this.getQuarto() != null ? this.getQuarto().getIdentificacao() : "null");
     }
 }

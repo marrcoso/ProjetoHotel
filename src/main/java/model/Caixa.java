@@ -1,21 +1,40 @@
 package model;
 
-import java.time.LocalDateTime;
+import javax.persistence.*;
+import java.util.Date;
 
+@Entity
+@Table(name = "caixa")
 public class Caixa {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "valor_de_abertura", nullable = false)
     private float valorDeAbertura;
+
+    @Column(name = "valor_de_fechamento", nullable = false)
     private float valorDeFechamento;
-    private LocalDateTime dataHoraAbertura;
-    private LocalDateTime dataHoraFechamento;
+
+    @Column(name = "data_hora_abertura", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataHoraAbertura;
+
+    @Column(name = "data_hora_fechamento", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataHoraFechamento;
+
+    @Column(name = "obs", nullable = false)
     private String obs;
+
+    @Column(name = "status", nullable = false)
     private char status;
-    private Funcionario funcionario;
 
     public Caixa() {
     }
 
-    public Caixa(int id, float valorDeAbertura, float valorDeFechamento, LocalDateTime dataHoraAbertura, LocalDateTime dataHoraFechamento, String obs, char status, Funcionario funcionario) {
+    public Caixa(int id, float valorDeAbertura, float valorDeFechamento, Date dataHoraAbertura, Date dataHoraFechamento, String obs, char status) {
         this.id = id;
         this.valorDeAbertura = valorDeAbertura;
         this.valorDeFechamento = valorDeFechamento;
@@ -23,7 +42,6 @@ public class Caixa {
         this.dataHoraFechamento = dataHoraFechamento;
         this.obs = obs;
         this.status = status;
-        this.funcionario = funcionario;
     }
 
     public int getId() {
@@ -50,19 +68,19 @@ public class Caixa {
         this.valorDeFechamento = valorDeFechamento;
     }
 
-    public LocalDateTime getDataHoraAbertura() {
+    public Date getDataHoraAbertura() {
         return dataHoraAbertura;
     }
 
-    public void setDataHoraAbertura(LocalDateTime dataHoraAbertura) {
+    public void setDataHoraAbertura(Date dataHoraAbertura) {
         this.dataHoraAbertura = dataHoraAbertura;
     }
 
-    public LocalDateTime getDataHoraFechamento() {
+    public Date getDataHoraFechamento() {
         return dataHoraFechamento;
     }
 
-    public void setDataHoraFechamento(LocalDateTime dataHoraFechamento) {
+    public void setDataHoraFechamento(Date dataHoraFechamento) {
         this.dataHoraFechamento = dataHoraFechamento;
     }
 
@@ -82,14 +100,6 @@ public class Caixa {
         this.status = status;
     }
 
-    public Funcionario getFuncionario() {
-        return funcionario;
-    }
-
-    public void setFuncionario(Funcionario funcionario) {
-        this.funcionario = funcionario;
-    }
-
     @Override
     public String toString() {
         return  "id                   = " + this.getId() +
@@ -98,7 +108,6 @@ public class Caixa {
                 "\ndataHoraAbertura   = " + this.getDataHoraAbertura() +
                 "\ndataHoraFechamento = " + this.getDataHoraFechamento() +
                 "\nobs                = " + this.getObs() +
-                "\nstatus             = " + this.getStatus() +
-                "\nfuncionario        = " + this.getFuncionario().getNome();
+                "\nstatus             = " + this.getStatus();
     }
 }

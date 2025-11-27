@@ -1,12 +1,32 @@
 package model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "alocacao_vaga")
 public class AlocacaoVaga {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "obs", nullable = false)
     private String obs;
+
+    @Column(name = "status", nullable = false)
     private char status;
-    private Check check;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "veiculo_id")
     private Veiculo veiculo;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "vaga_estacionamento_id")
     private VagaEstacionamento vagaEstacionamento;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "check_id")
+    private Check check;
 
     public AlocacaoVaga() {
     }
@@ -68,13 +88,13 @@ public class AlocacaoVaga {
         this.vagaEstacionamento = vagaEstacionamento;
     }
 
-        @Override
-        public String toString() {
+    @Override
+    public String toString() {
         return "id              = " + this.getId()
             + "\nObs            = " + this.getObs()
             + "\nStatus         = " + this.getStatus()
             + "\nCheck ID       = " + (this.getCheck() != null ? this.getCheck().getId() : "null") 
             + "\nPlaca Veículo  = " + (this.getVeiculo() != null ? this.getVeiculo().getPlaca() : "null")
             + "\nVaga Estac. ID = " + (this.getVagaEstacionamento() != null ? this.getVagaEstacionamento().getId() : "null");
-        }
     }
+}

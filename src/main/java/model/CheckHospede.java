@@ -1,11 +1,30 @@
 package model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "check_hospede")
 public class CheckHospede {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "tipo_hospede", nullable = false)
     private String tipoHospede;
+
+    @Column(name = "obs", nullable = false)
     private String obs;
+
+    @Column(name = "status", nullable = false)
     private char status;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "check_id")
     private Check check;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "hospede_id")
     private Hospede hospede;
 
     public CheckHospede() {

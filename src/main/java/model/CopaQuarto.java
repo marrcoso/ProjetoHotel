@@ -1,28 +1,43 @@
 package model;
 
-import java.time.LocalDateTime;
+import javax.persistence.*;
+import java.util.Date;
 
+@Entity
+@Table(name = "copa_quarto")
 public class CopaQuarto {
-    
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int quantidade;
-    private LocalDateTime dataHoraPedido;
-    private char status;
+
+    @Column(name = "quantidade", nullable = false)
+    private float quantidade;
+
+    @Column(name = "data_hora_pedido", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataHoraPedido;
+
+    @Column(name = "obs", nullable = false)
     private String obs;
-    private Produto produto;
-    private Quarto quarto;
+
+    @Column(name = "status", nullable = false)
+    private String status;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "check_quarto_id")
+    private CheckQuarto checkQuarto;
 
     public CopaQuarto() {
     }
 
-    public CopaQuarto(int id, int quantidade, LocalDateTime dataHoraPedido, char status, String obs, Produto produto, Quarto quarto) {
+    public CopaQuarto(int id, float quantidade, Date dataHoraPedido, String obs, String status, CheckQuarto checkQuarto) {
         this.id = id;
         this.quantidade = quantidade;
         this.dataHoraPedido = dataHoraPedido;
-        this.status = status;
         this.obs = obs;
-        this.produto = produto;
-        this.quarto = quarto;
+        this.status = status;
+        this.checkQuarto = checkQuarto;
     }
 
     public int getId() {
@@ -33,28 +48,20 @@ public class CopaQuarto {
         this.id = id;
     }
 
-    public int getQuantidade() {
+    public float getQuantidade() {
         return quantidade;
     }
 
-    public void setQuantidade(int quantidade) {
+    public void setQuantidade(float quantidade) {
         this.quantidade = quantidade;
     }
 
-    public LocalDateTime getDataHoraPedido() {
+    public Date getDataHoraPedido() {
         return dataHoraPedido;
     }
 
-    public void setDataHoraPedido(LocalDateTime dataHoraPedido) {
+    public void setDataHoraPedido(Date dataHoraPedido) {
         this.dataHoraPedido = dataHoraPedido;
-    }
-
-    public char getStatus() {
-        return status;
-    }
-
-    public void setStatus(char status) {
-        this.status = status;
     }
 
     public String getObs() {
@@ -65,19 +72,31 @@ public class CopaQuarto {
         this.obs = obs;
     }
 
-    public Produto getProduto() {
-        return produto;
+    public String getStatus() {
+        return status;
     }
 
-    public void setProduto(Produto produto) {
-        this.produto = produto;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public Quarto getQuarto() {
-        return quarto;
+    public CheckQuarto getCheckQuarto() {
+        return checkQuarto;
     }
 
-    public void setQuarto(Quarto quarto) {
-        this.quarto = quarto;
+    public void setCheckQuarto(CheckQuarto checkQuarto) {
+        this.checkQuarto = checkQuarto;
+    }
+
+    @Override
+    public String toString() {
+        return "CopaQuarto{" +
+                "id=" + id +
+                ", quantidade=" + quantidade +
+                ", dataHoraPedido=" + dataHoraPedido +
+                ", obs='" + obs + '\'' +
+                ", status='" + status + '\'' +
+                ", checkQuarto=" + checkQuarto +
+                '}';
     }
 }

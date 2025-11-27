@@ -1,21 +1,44 @@
 package model;
 
-import java.time.LocalDateTime;
+import javax.persistence.*;
+import java.util.Date;
 
+@Entity
+@Table(name = "movimento_caixa")
 public class MovimentoCaixa {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private LocalDateTime dataHoraMovimento;
+
+    @Column(name = "data_hora_movimento", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataHoraMovimento;
+
+    @Column(name = "valor", nullable = false)
     private float valor;
+
+    @Column(name = "descricao", nullable = false)
     private String descricao;
+
+    @Column(name = "obs", nullable = false)
     private String obs;
+
+    @Column(name = "status", nullable = false)
     private char status;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "caixa_id")
     private Caixa caixa;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "receber_id")
     private Receber receber;
 
     public MovimentoCaixa() {
     }
 
-    public MovimentoCaixa(int id, LocalDateTime dataHoraMovimento, float valor, String descricao, String obs, char status, Caixa caixa, Receber receber) {
+    public MovimentoCaixa(int id, Date dataHoraMovimento, float valor, String descricao, String obs, char status, Caixa caixa, Receber receber) {
         this.receber = receber;
         this.caixa = caixa;
         this.id = id;
@@ -34,11 +57,11 @@ public class MovimentoCaixa {
         this.id = id;
     }
 
-    public LocalDateTime getDataHoraMovimento() {
+    public Date getDataHoraMovimento() {
         return dataHoraMovimento;
     }
 
-    public void setDataHoraMovimento(LocalDateTime dataHoraMovimento) {
+    public void setDataHoraMovimento(Date dataHoraMovimento) {
         this.dataHoraMovimento = dataHoraMovimento;
     }
 

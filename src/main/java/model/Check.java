@@ -1,27 +1,49 @@
 package model;
 
-import java.time.LocalDateTime;
+import javax.persistence.*;
+import java.util.Date;
 
+@Entity
+@Table(name = "check")
 public class Check {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private LocalDateTime dataHoraCadastro;
-    private LocalDateTime dataHoraEntrada;
-    private LocalDateTime dataHoraSaida;
+
+    @Column(name = "data_hora_cadastro", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataHoraCadastro;
+
+    @Column(name = "data_hora_entrada", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataHoraEntrada;
+
+    @Column(name = "data_hora_saida", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataHoraSaida;
+
+    @Column(name = "obs", nullable = false)
     private String obs;
-    private String status;
-    private Reserva reserva;
+
+    @Column(name = "status", nullable = false)
+    private char status;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "check_quarto_id")
+    private CheckQuarto checkQuarto;
 
     public Check() {
     }
 
-    public Check(int id, LocalDateTime dataHoraCadastro, LocalDateTime dataHoraEntrada, LocalDateTime dataHoraSaida, String obs, String status, Reserva reserva) {
+    public Check(int id, Date dataHoraCadastro, Date dataHoraEntrada, Date dataHoraSaida, String obs, char status, CheckQuarto checkQuarto) {
         this.id = id;
         this.dataHoraCadastro = dataHoraCadastro;
         this.dataHoraEntrada = dataHoraEntrada;
         this.dataHoraSaida = dataHoraSaida;
         this.obs = obs;
         this.status = status;
-        this.reserva = reserva;
+        this.checkQuarto = checkQuarto;
     }
 
     public int getId() {
@@ -32,27 +54,27 @@ public class Check {
         this.id = id;
     }
 
-    public LocalDateTime getDataHoraCadastro() {
+    public Date getDataHoraCadastro() {
         return dataHoraCadastro;
     }
 
-    public void setDataHoraCadastro(LocalDateTime dataHoraCadastro) {
+    public void setDataHoraCadastro(Date dataHoraCadastro) {
         this.dataHoraCadastro = dataHoraCadastro;
     }
 
-    public LocalDateTime getDataHoraEntrada() {
+    public Date getDataHoraEntrada() {
         return dataHoraEntrada;
     }
 
-    public void setDataHoraEntrada(LocalDateTime dataHoraEntrada) {
+    public void setDataHoraEntrada(Date dataHoraEntrada) {
         this.dataHoraEntrada = dataHoraEntrada;
     }
 
-    public LocalDateTime getDataHoraSaida() {
+    public Date getDataHoraSaida() {
         return dataHoraSaida;
     }
 
-    public void setDataHoraSaida(LocalDateTime dataHoraSaida) {
+    public void setDataHoraSaida(Date dataHoraSaida) {
         this.dataHoraSaida = dataHoraSaida;
     }
 
@@ -64,20 +86,20 @@ public class Check {
         this.obs = obs;
     }
 
-    public String getStatus() {
+    public char getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(char status) {
         this.status = status;
     }
 
-    public Reserva getReserva() {
-        return reserva;
+    public CheckQuarto getCheckQuarto() {
+        return checkQuarto;
     }
 
-    public void setReserva(Reserva reserva) {
-        this.reserva = reserva;
+    public void setCheckQuarto(CheckQuarto checkQuarto) {
+        this.checkQuarto = checkQuarto;
     }
 
     @Override
@@ -88,6 +110,6 @@ public class Check {
                 + "\nData/Hora Sai. = " + this.getDataHoraSaida()
                 + "\nObs            = " + this.getObs()
                 + "\nStatus         = " + this.getStatus()
-                + "\nReserva ID     = " + this.getReserva().getId();
+                + "\nReserva ID     = " + this.getCheckQuarto().getId();
     }
 }
