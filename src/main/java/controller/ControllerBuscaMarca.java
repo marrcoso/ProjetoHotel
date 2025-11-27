@@ -2,7 +2,6 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -108,7 +107,7 @@ public final class ControllerBuscaMarca implements ActionListener, InterfaceCont
     }
 
     @Override
-    public void carregarPorAtributo(String atributo, String valor, DefaultTableModel tabela) throws SQLException {
+    public void carregarPorAtributo(String atributo, String valor, DefaultTableModel tabela) throws RuntimeException {
         List<Marca> listaMarcas = marcaService.Carregar(atributo, valor);
         for (Marca m : listaMarcas) {
             adicionarLinhaTabela(tabela, m);
@@ -143,7 +142,7 @@ public final class ControllerBuscaMarca implements ActionListener, InterfaceCont
                     break;
                 }
             }
-        } catch (SQLException ex) {
+        } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(telaBuscaMarca, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -179,7 +178,7 @@ public final class ControllerBuscaMarca implements ActionListener, InterfaceCont
             telaBuscaMarca.getjButtonAtivar().setEnabled(!ativar);
             telaBuscaMarca.getjButtonInativar().setEnabled(ativar);
 
-        } catch (SQLException ex) {
+        } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(telaBuscaMarca, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }

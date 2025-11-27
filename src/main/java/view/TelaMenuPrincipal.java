@@ -28,6 +28,16 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     public TelaMenuPrincipal() {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
+        try {
+            model.DAO.JPA.JPAFactory.getEntityManagerFactory();
+        } catch (RuntimeException ex) {
+            javax.swing.JOptionPane.showMessageDialog(
+                null,
+                "Erro ao conectar ao banco de dados",
+                "Erro",
+                javax.swing.JOptionPane.ERROR_MESSAGE
+            );
+        }
     }
 
     /**

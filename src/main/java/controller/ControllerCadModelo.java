@@ -167,7 +167,7 @@ public final class ControllerCadModelo implements ActionListener, InterfaceContr
             Marca marca;
             try {
                 marca = new MarcaService().Carregar(codigoMarca);
-            } catch (SQLException ex) {
+            } catch (RuntimeException ex) {
                 JOptionPane.showMessageDialog(telaCadastroModelo, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }

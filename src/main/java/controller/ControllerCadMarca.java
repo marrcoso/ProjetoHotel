@@ -2,7 +2,6 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
@@ -102,7 +101,7 @@ public final class ControllerCadMarca implements ActionListener, InterfaceContro
         if (isNovoCadastro) {
             try {
                 marcaService.Criar(marca);
-            } catch (SQLException ex) {
+            } catch (RuntimeException ex) {
                 JOptionPane.showMessageDialog(telaCadastroMarca, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
@@ -114,7 +113,7 @@ public final class ControllerCadMarca implements ActionListener, InterfaceContro
         marca.setId(Integer.parseInt(telaCadastroMarca.getjTextFieldId().getText()));
         try {
             marcaService.Atualizar(marca);
-        } catch (SQLException ex) {
+        } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(telaCadastroMarca, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -153,7 +152,7 @@ public final class ControllerCadMarca implements ActionListener, InterfaceContro
             Marca marca;
             try {
                 marca = new MarcaService().Carregar(codigo);
-            } catch (SQLException ex) {
+            } catch (RuntimeException ex) {
                 JOptionPane.showMessageDialog(telaCadastroMarca, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
