@@ -1,31 +1,67 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
-/**
- *
- * @author MarcusVinicius
- */
+import javax.persistence.*;
+
+@Entity
+@Table(name = "veiculo")
 public class Veiculo {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "placa", nullable = false)
     private String placa;
+
+    @Column(name = "cor")
     private String cor;
+
+    @Column(name = "status", nullable = false)
     private char status;
+    
+    @ManyToOne
+    @JoinColumn(name = "modelo_id")
     private Modelo modelo;
-    private Pessoa proprietario;
 
-    public Veiculo() {
-    }
+    @ManyToOne
+    @JoinColumn(name = "funcionario_id")
+    private Funcionario funcionario;
 
-    public Veiculo(int id, String placa, String cor, char status, Modelo modelo, Pessoa proprietario) {
+    @ManyToOne
+    @JoinColumn(name = "fornecedor_id")
+    private Fornecedor fornecedor;
+
+    @ManyToOne
+    @JoinColumn(name = "hospede_id")
+    private Hospede hospede;
+
+    public Veiculo() {}
+
+    public Veiculo(int id, String placa, String cor, char status, Modelo modelo, Funcionario funcionario) {
         this.id = id;
         this.placa = placa;
         this.cor = cor;
         this.status = status;
         this.modelo = modelo;
-        this.proprietario = proprietario;
+        this.funcionario = funcionario;
+    }
+
+    public Veiculo(int id, String placa, String cor, char status, Modelo modelo, Fornecedor fornecedor) {
+        this.id = id;
+        this.placa = placa;
+        this.cor = cor;
+        this.status = status;
+        this.modelo = modelo;
+        this.fornecedor = fornecedor;
+    }
+
+    public Veiculo(int id, String placa, String cor, char status, Modelo modelo, Hospede hospede) {
+        this.id = id;
+        this.placa = placa;
+        this.cor = cor;
+        this.status = status;
+        this.modelo = modelo;
+        this.hospede = hospede;
     }
 
     public int getId() {
@@ -69,11 +105,54 @@ public class Veiculo {
     }
 
     public Pessoa getProprietario() {
-        return proprietario;
+        if (funcionario instanceof Pessoa) {
+            return funcionario;
+        } else if (fornecedor instanceof Pessoa) {
+            return fornecedor;
+        } else if (hospede instanceof Pessoa) {
+            return hospede;
+        }
+        return null;
     }
 
     public void setProprietario(Pessoa proprietario) {
-        this.proprietario = proprietario;
+        if (proprietario instanceof Funcionario) {
+            this.funcionario = (Funcionario) proprietario;
+            this.fornecedor = null;
+            this.hospede = null;
+        } else if (proprietario instanceof Fornecedor) {
+            this.fornecedor = (Fornecedor) proprietario;
+            this.funcionario = null;
+            this.hospede = null;
+        } else if (proprietario instanceof Hospede) {
+            this.hospede = (Hospede) proprietario;
+            this.funcionario = null;
+            this.fornecedor = null;
+        }
+    }
+
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
+    }
+
+    public Fornecedor getFornecedor() {
+        return fornecedor;
+    }
+
+    public void setFornecedor(Fornecedor fornecedor) {
+        this.fornecedor = fornecedor;
+    }
+
+    public Hospede getHospede() {
+        return hospede;
+    }
+
+    public void setHospede(Hospede hospede) {
+        this.hospede = hospede;
     }
 
     @Override

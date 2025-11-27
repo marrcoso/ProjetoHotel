@@ -2,7 +2,6 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -110,7 +109,7 @@ public final class ControllerBuscaModelo implements ActionListener, InterfaceCon
     }
 
     @Override
-    public void carregarPorAtributo(String atributo, String valor, DefaultTableModel tabela) throws SQLException {
+    public void carregarPorAtributo(String atributo, String valor, DefaultTableModel tabela) throws RuntimeException {
         List<Modelo> listaModelos = modeloService.Carregar(atributo, valor);
         for (Modelo m : listaModelos) {
             adicionarLinhaTabela(tabela, m);
@@ -151,7 +150,7 @@ public final class ControllerBuscaModelo implements ActionListener, InterfaceCon
                     break;
                 }
             }
-        } catch (SQLException ex) {
+        } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(telaBuscaModelo, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }

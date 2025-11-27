@@ -2,7 +2,6 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -110,7 +109,7 @@ public final class ControllerBuscaServico implements ActionListener, InterfaceCo
     }
 
     @Override
-    public void carregarPorAtributo(String atributo, String valor, DefaultTableModel tabela) throws SQLException {
+    public void carregarPorAtributo(String atributo, String valor, DefaultTableModel tabela) throws RuntimeException {
         List<Servico> listaServicos = servicoService.Carregar(atributo, valor);
         for (Servico s : listaServicos) {
             adicionarLinhaTabela(tabela, s);
@@ -148,7 +147,7 @@ public final class ControllerBuscaServico implements ActionListener, InterfaceCo
                     carregarPorAtributo("obs", filtroTexto, tabela);
                     break;
             }
-        } catch (SQLException ex) {
+        } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(telaBuscaServico, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -184,7 +183,7 @@ public final class ControllerBuscaServico implements ActionListener, InterfaceCo
             telaBuscaServico.getjButtonAtivar().setEnabled(!ativar);
             telaBuscaServico.getjButtonInativar().setEnabled(ativar);
 
-        } catch (SQLException ex) {
+        } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(telaBuscaServico, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }

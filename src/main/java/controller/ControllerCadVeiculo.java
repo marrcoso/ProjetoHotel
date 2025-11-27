@@ -2,7 +2,6 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
@@ -156,7 +155,7 @@ public final class ControllerCadVeiculo implements ActionListener, InterfaceCont
         if (isNovoCadastro) {
             try {
                 veiculoService.Criar(veiculo);
-            } catch (SQLException ex) {
+            } catch (RuntimeException ex) {
                 JOptionPane.showMessageDialog(telaCadastroVeiculo, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
@@ -168,7 +167,7 @@ public final class ControllerCadVeiculo implements ActionListener, InterfaceCont
         veiculo.setId(Integer.parseInt(telaCadastroVeiculo.getjTextFieldId().getText()));
         try {
             veiculoService.Atualizar(veiculo);
-        } catch (SQLException ex) {
+        } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(telaCadastroVeiculo, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -357,7 +356,7 @@ public final class ControllerCadVeiculo implements ActionListener, InterfaceCont
             Veiculo veiculo;
             try {
                 veiculo = new VeiculoService().Carregar(codigoVeiculo);
-            } catch (SQLException ex) {
+            } catch (RuntimeException ex) {
                 JOptionPane.showMessageDialog(telaCadastroVeiculo, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }

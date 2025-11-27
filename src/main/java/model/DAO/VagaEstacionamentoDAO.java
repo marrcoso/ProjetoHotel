@@ -1,150 +1,55 @@
 package model.DAO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
-
+import javax.persistence.TypedQuery;
+import model.DAO.JPA.JPADao;
 import model.VagaEstacionamento;
-import util.AppLogger;
 
 public class VagaEstacionamentoDAO implements InterfaceDAO<VagaEstacionamento> {
-    @Override
-    public void Create(VagaEstacionamento objeto) throws SQLException {
-        String sqlInstrucao = "Insert Into vaga_estacionamento("
-                + " descricao, "
-                + " obs, "
-                + " metragem_vaga, "
-                + " status) "
-                + " Values (?,?,?,?)";
 
-        try {
-            Connection conexao = model.DAO.ConnectionFactory.getConnection();
-            PreparedStatement pstm = conexao.prepareStatement(sqlInstrucao);
-            pstm.setString(1, objeto.getDescricao());
-            pstm.setString(2, objeto.getObs());
-            pstm.setFloat(3, objeto.getMetragemVaga());
-            pstm.setString(4, String.valueOf(objeto.getStatus()));
-            pstm.execute();
-            ConnectionFactory.closeConnection(conexao, pstm);
-        } catch (SQLException ex) {
-            AppLogger.error("Erro ao criar vaga de estacionamento", ex);
-            throw new SQLException("Erro ao criar vaga de estacionamento");
-        }
+    @Override
+    public void Create(VagaEstacionamento objeto) throws RuntimeException {
+        JPADao.executeVoid(em -> em.persist(objeto), true);
     }
 
     @Override
-    public VagaEstacionamento Retrieve(int id) throws SQLException {
-        String sqlInstrucao = "Select "
-                + " id, "
-                + " descricao, "
-                + " obs, "
-                + " metragem_vaga, "
-                + " status "
-                + " From vaga_estacionamento"
-                + " Where id = ? ";
+    public VagaEstacionamento Retrieve(int id) throws RuntimeException {
+        return JPADao.executeWithEntityManager(em -> em.find(VagaEstacionamento.class, id), false);
+    }
 
-        try {
-            Connection conexao = model.DAO.ConnectionFactory.getConnection();
-            PreparedStatement pstm = conexao.prepareStatement(sqlInstrucao);
-            pstm.setInt(1, id);
-            ResultSet rst = pstm.executeQuery();
-            VagaEstacionamento vagaEstacionamento = null;
+    @Override
+    public List<VagaEstacionamento> Retrieve(String atributo, String valor) throws RuntimeException {
+        JPADao.validAttribute(VagaEstacionamento.class, atributo);
+        return JPADao.executeWithEntityManager(em -> {
+            String jpql = "SELECT v FROM VagaEstacionamento v WHERE v." + atributo + " LIKE :valor";
+            TypedQuery<VagaEstacionamento> q = em.createQuery(jpql, VagaEstacionamento.class);
+            q.setParameter("valor", "%" + valor + "%");
+            return q.getResultList();
+        }, false);
+    }
 
-            while (rst.next()) {
-                vagaEstacionamento = new VagaEstacionamento();
-                vagaEstacionamento.setId(rst.getInt("id"));
-                vagaEstacionamento.setDescricao(rst.getString("descricao"));
-                vagaEstacionamento.setObs(rst.getString("obs"));
-                vagaEstacionamento.setMetragemVaga(rst.getFloat("metragem_vaga"));
-                vagaEstacionamento.setStatus(rst.getString("status").charAt(0));
+    @Override
+    public void Update(VagaEstacionamento objeto) throws RuntimeException {
+        JPADao.executeVoid(em -> em.merge(objeto), true);
+    }
+
+    @Override
+    public void Delete(VagaEstacionamento objeto) throws RuntimeException {
+        JPADao.executeVoid(em -> {
+            VagaEstacionamento managed = em.find(VagaEstacionamento.class, objeto.getId());
+            if (managed != null)
+                em.remove(managed);
+        }, true);
+    }
+
+    @Override
+    public void AtivarInativar(int id, boolean ativar) throws RuntimeException {
+        JPADao.executeVoid(em -> {
+            VagaEstacionamento vaga = em.find(VagaEstacionamento.class, id);
+            if (vaga != null) {
+                vaga.setStatus(ativar ? 'A' : 'I');
+                em.merge(vaga);
             }
-            ConnectionFactory.closeConnection(conexao, pstm, rst);
-            return vagaEstacionamento;
-        } catch (SQLException ex) {
-            AppLogger.error("Erro ao carregar vaga de estacionamento", ex);
-            throw new SQLException("Erro ao carregar vaga de estacionamento");
-        }
-    }
-
-    @Override
-    public List<VagaEstacionamento> Retrieve(String atributo, String valor) throws SQLException {
-        String sqlInstrucao = "Select "
-                + " id, "
-                + " descricao, "
-                + " obs, "
-                + " metragem_vaga, "
-                + " status "
-                + " From vaga_estacionamento"
-                + " Where " + atributo + " like ?";
-
-        try {
-            Connection conexao = model.DAO.ConnectionFactory.getConnection();
-            PreparedStatement pstm = conexao.prepareStatement(sqlInstrucao);
-            pstm.setString(1, "%" + valor + "%");
-            ResultSet rst = pstm.executeQuery();
-            List<VagaEstacionamento> listaVagas = new java.util.ArrayList<>();
-
-            while (rst.next()) {
-                VagaEstacionamento vaga = new VagaEstacionamento();
-                vaga.setId(rst.getInt("id"));
-                vaga.setDescricao(rst.getString("descricao"));
-                vaga.setObs(rst.getString("obs"));
-                vaga.setMetragemVaga(rst.getFloat("metragem_vaga"));
-                vaga.setStatus(rst.getString("status").charAt(0));
-                listaVagas.add(vaga);
-            }
-            ConnectionFactory.closeConnection(conexao, pstm, rst);
-            return listaVagas;
-        } catch (SQLException ex) {
-            AppLogger.error("Erro ao buscar vagas de estacionamento", ex);
-            throw new SQLException("Erro ao buscar vagas de estacionamento");
-        }
-    }
-
-    @Override
-    public void Update(VagaEstacionamento objeto) throws SQLException {
-        String sqlInstrucao = "Update vaga_estacionamento "
-                + " Set"
-                + " descricao = ?, "
-                + " obs = ?, "
-                + " metragem_vaga = ?, "
-                + " status = ? "
-                + " Where id = ? ";
-
-        try {
-            Connection conexao = model.DAO.ConnectionFactory.getConnection();
-            PreparedStatement pstm = conexao.prepareStatement(sqlInstrucao);
-            pstm.setString(1, objeto.getDescricao());
-            pstm.setString(2, objeto.getObs());
-            pstm.setFloat(3, objeto.getMetragemVaga());
-            pstm.setString(4, String.valueOf(objeto.getStatus()));
-            pstm.setInt(5, objeto.getId());
-            pstm.execute();
-            ConnectionFactory.closeConnection(conexao, pstm);
-        } catch (SQLException ex) {
-            AppLogger.error("Erro ao atualizar vaga de estacionamento", ex);
-            throw new SQLException("Erro ao atualizar vaga de estacionamento");
-        }
-    }
-
-    @Override
-    public void Delete(VagaEstacionamento objeto) throws SQLException {
-        // Implemente aqui se necessário, seguindo o mesmo padrão dos métodos acima
-    }
-
-    @Override
-    public void AtivarInativar(int id, boolean ativar) throws SQLException {
-        String sqlInstrucao = "UPDATE vaga_estacionamento SET status = ? WHERE id = ?";
-        try (Connection conexao = ConnectionFactory.getConnection();
-             PreparedStatement pstm = conexao.prepareStatement(sqlInstrucao)) {
-            pstm.setString(1, ativar ? "A" : "I");
-            pstm.setInt(2, id);
-            pstm.execute();
-        } catch (SQLException ex) {
-            AppLogger.error("Erro ao ativar/inativar vaga", ex);
-            throw new SQLException("Erro ao ativar/inativar vaga");
-        }
+        }, true);
     }
 }

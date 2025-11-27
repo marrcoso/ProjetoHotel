@@ -2,7 +2,6 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
@@ -103,7 +102,7 @@ public final class ControllerCadServico implements ActionListener, InterfaceCont
         if (isNovoCadastro) {
             try {
                 servicoService.Criar(servico);
-            } catch (SQLException ex) {
+            } catch (RuntimeException ex) {
                 JOptionPane.showMessageDialog(telaCadastroServico, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
@@ -115,7 +114,7 @@ public final class ControllerCadServico implements ActionListener, InterfaceCont
         servico.setId(Integer.parseInt(telaCadastroServico.getjTextFieldId().getText()));
         try {
             servicoService.Atualizar(servico);
-        } catch (SQLException ex) {
+        } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(telaCadastroServico, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -155,7 +154,7 @@ public final class ControllerCadServico implements ActionListener, InterfaceCont
             Servico servico;
             try {
                 servico = new ServicoService().Carregar(codigo);
-            } catch (SQLException ex) {
+            } catch (RuntimeException ex) {
                 JOptionPane.showMessageDialog(telaCadastroServico, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }

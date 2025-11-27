@@ -2,7 +2,6 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -124,7 +123,7 @@ public final class ControllerBuscaFornecedor implements ActionListener, Interfac
     }
 
     @Override
-    public void carregarPorAtributo(String atributo, String valor, DefaultTableModel tabela) throws SQLException {
+    public void carregarPorAtributo(String atributo, String valor, DefaultTableModel tabela) throws RuntimeException {
         List<Fornecedor> listaFornecedores = fornecedorService.Carregar(atributo, valor);
         for (Fornecedor f : listaFornecedores) {
             adicionarLinhaTabela(tabela, f);
@@ -199,7 +198,7 @@ public final class ControllerBuscaFornecedor implements ActionListener, Interfac
                     break;
                 }
             }
-        } catch (SQLException ex) {
+        } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(telaBuscaFornecedor, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }

@@ -1,23 +1,30 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
-/**
- *
- * @author MarcusVinicius
- */
+import javax.persistence.*;
+
+@Entity
+@Table(name = "vaga_estacionamento")
 public class VagaEstacionamento {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "descricao")
     private String descricao;
+
+    @Column(name = "obs")
     private String obs;
+
+    @Column(name = "metragem_vaga")
     private float metragemVaga;
+
+    @Column(name = "status", nullable = false)
     private char status;
 
     public VagaEstacionamento() {
     }
-    
+
     public VagaEstacionamento(int id, String descricao, String obs, float metragemVaga, char status) {
         this.id = id;
         this.descricao = descricao;
@@ -68,15 +75,10 @@ public class VagaEstacionamento {
 
     @Override
     public String toString() {
-        return 
-        "id             = " + id + 
-        "\ndescricao    = " + descricao + 
-        "\nobs          = " + obs + 
-        "\nmetragemVaga = " + metragemVaga + 
-        "\nstatus       = " + status;
+        return "id = " + id +
+                " Descrição = " + descricao +
+                " Obs = " + obs +
+                " Metragem = " + metragemVaga +
+                " Status = " + status;
     }
-    
-    
-    
-    
 }

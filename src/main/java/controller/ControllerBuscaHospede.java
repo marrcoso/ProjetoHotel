@@ -2,7 +2,6 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -125,7 +124,7 @@ public final class ControllerBuscaHospede implements ActionListener, InterfaceCo
     }
 
     @Override
-    public void carregarPorAtributo(String atributo, String valor, DefaultTableModel tabela) throws SQLException {
+    public void carregarPorAtributo(String atributo, String valor, DefaultTableModel tabela) throws RuntimeException {
         List<Hospede> listaHospedes = hospedeService.Carregar(atributo, valor);
         for (Hospede h : listaHospedes) {
             adicionarLinhaTabela(tabela, h);
@@ -200,7 +199,7 @@ public final class ControllerBuscaHospede implements ActionListener, InterfaceCo
                     break;
                 }
             }
-        } catch (SQLException ex) {
+        } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(telaBuscaHospede, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }

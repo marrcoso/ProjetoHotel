@@ -2,7 +2,6 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
@@ -108,7 +107,7 @@ public final class ControllerCadVagaEstacionamento implements ActionListener, In
         if (isNovoCadastro) {
             try {
                 vagaService.Criar(vaga);
-            } catch (SQLException ex) {
+            } catch (RuntimeException ex) {
                 JOptionPane.showMessageDialog(telaCadastroVagaEstacionamento, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
@@ -120,7 +119,7 @@ public final class ControllerCadVagaEstacionamento implements ActionListener, In
         vaga.setId(Integer.parseInt(telaCadastroVagaEstacionamento.getjTextFieldId().getText()));
         try {
             vagaService.Atualizar(vaga);
-        } catch (SQLException ex) {
+        } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(telaCadastroVagaEstacionamento, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -161,7 +160,7 @@ public final class ControllerCadVagaEstacionamento implements ActionListener, In
             VagaEstacionamento vaga;
             try {
                 vaga = new VagaEstacionamentoService().Carregar(codigo);
-            } catch (SQLException ex) {
+            } catch (RuntimeException ex) {
                 JOptionPane.showMessageDialog(telaCadastroVagaEstacionamento, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }

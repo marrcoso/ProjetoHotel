@@ -1,11 +1,22 @@
-
 package model;
 
+import javax.persistence.*;
 
+@Entity
+@Table(name = "servico")
 public class Servico {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "descricao", nullable = false)
     private String descricao;
+
+    @Column(name = "obs")
     private String obs;
+
+    @Column(name = "status", nullable = false)
     private char status;
 
     public Servico() {
@@ -52,14 +63,6 @@ public class Servico {
 
     @Override
     public String toString() {
-        return 
-        "id          = " + this.id + 
-        "\ndescricao = " + this.descricao + 
-        "\nobs       = " + this.obs + 
-        "\nstatus    = " + this.status;
+        return "id = " + id + " Desc. = " + descricao + " Obs = " + obs + " Status = " + status;
     }
-    
-    
-    
-    
 }
