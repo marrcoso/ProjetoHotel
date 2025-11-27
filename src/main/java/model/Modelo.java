@@ -1,11 +1,24 @@
 package model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "modelo")
 public class Modelo {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "descricao", nullable = false)
     private String descricao;
+
+    @Column(name = "status", nullable = false)
     private char status;
 
+    // Relação com Marca
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "marca_id", referencedColumnName = "id")
     private Marca marca;
 
     public Modelo() {
@@ -34,14 +47,6 @@ public class Modelo {
         this.descricao = descricao;
     }
 
-    public Marca getMarca() {
-        return marca;
-    }
-
-    public void setMarca(Marca marca) {
-        this.marca = marca;
-    }
-
     public char getStatus() {
         return status;
     }
@@ -50,12 +55,17 @@ public class Modelo {
         this.status = status;
     }
 
-    @Override
-    public String toString() {
-        return "id     = " + this.getId()
-                + "\nDescr. = " + this.getDescricao()
-                + "\nMarca  = " + this.getMarca().getDescricao()
-                + "\nStatus = " + this.getStatus();
+    public Marca getMarca() {
+        return marca;
     }
 
+    public void setMarca(Marca marca) {
+        this.marca = marca;
+    }
+
+    @Override
+    public String toString() {
+        return "id = " + id + " Desc. = " + descricao + " Status= " + status + " Marca= "
+                + (marca != null ? marca.getDescricao() : "");
+    }
 }

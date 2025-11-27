@@ -114,7 +114,7 @@ public final class ControllerCadQuarto implements ActionListener, InterfaceContr
         if (isNovoCadastro) {
             try {
                 quartoService.Criar(quarto);
-            } catch (SQLException ex) {
+            } catch (RuntimeException ex) {
                 JOptionPane.showMessageDialog(telaCadastroQuarto, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
@@ -126,7 +126,7 @@ public final class ControllerCadQuarto implements ActionListener, InterfaceContr
         quarto.setId(Integer.parseInt(telaCadastroQuarto.getjTextFieldId().getText()));
         try {
             quartoService.Atualizar(quarto);
-        } catch (SQLException ex) {
+        } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(telaCadastroQuarto, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -171,7 +171,7 @@ public final class ControllerCadQuarto implements ActionListener, InterfaceContr
             Quarto quarto;
             try {
                 quarto = new QuartoService().Carregar(codigo);
-            } catch (SQLException ex) {
+            } catch (RuntimeException ex) {
                 JOptionPane.showMessageDialog(telaCadastroQuarto, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }

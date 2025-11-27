@@ -1,143 +1,54 @@
 package model.DAO;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
-
+import javax.persistence.TypedQuery;
+import model.DAO.JPA.JPADao;
 import model.Modelo;
-import util.AppLogger;
 
 public class ModeloDAO implements InterfaceDAO<Modelo> {
 
     @Override
-    public void Create(Modelo objeto) throws SQLException {
-        String sqlInstrucao = "Insert Into modelo("
-                + " descricao, "
-                + " marca_id, "
-                + " status) "
-                + " Values (?,?,?)";
-
-        try {
-            Connection conexao = model.DAO.ConnectionFactory.getConnection();
-            PreparedStatement pstm = conexao.prepareStatement(sqlInstrucao);
-            pstm.setString(1, objeto.getDescricao());
-            pstm.setInt(2, objeto.getMarca().getId());
-            pstm.setString(3, String.valueOf(objeto.getStatus()));
-            pstm.execute();
-            ConnectionFactory.closeConnection(conexao, pstm);
-        } catch (SQLException ex) {
-            AppLogger.error("Erro ao criar modelo", ex);
-            throw new SQLException("Erro ao criar modelo");
-        }
+    public void Create(Modelo objeto) throws RuntimeException {
+        JPADao.executeVoid(em -> em.persist(objeto), true);
     }
 
     @Override
-    public Modelo Retrieve(int id) throws SQLException {
-        String sqlInstrucao = "Select "
-                + " id, "
-                + " descricao, "
-                + " marca_id, "
-                + " status "
-                + " From modelo"
-                + " Where id = ? ";
+    public Modelo Retrieve(int id) throws RuntimeException {
+        return JPADao.executeWithEntityManager(em -> em.find(Modelo.class, id), false);
+    }
 
-        try {
-            Connection conexao = model.DAO.ConnectionFactory.getConnection();
-            PreparedStatement pstm = conexao.prepareStatement(sqlInstrucao);
-            pstm.setInt(1, id);
-            ResultSet rst = pstm.executeQuery();
-            Modelo modelo = null;
+    @Override
+    public List<Modelo> Retrieve(String atributo, String valor) throws RuntimeException {
+        JPADao.validAttribute(Modelo.class, atributo);
+        return JPADao.executeWithEntityManager(em -> {
+            String jpql = "SELECT m FROM Modelo m WHERE m." + atributo + " LIKE :valor";
+            TypedQuery<Modelo> q = em.createQuery(jpql, Modelo.class);
+            q.setParameter("valor", "%" + valor + "%");
+            return q.getResultList();
+        }, false);
+    }
 
-            while (rst.next()) {
-                modelo = new Modelo();
-                modelo.setId(rst.getInt("id"));
-                modelo.setDescricao(rst.getString("descricao")); 
-                modelo.setStatus(rst.getString("status").charAt(0));
-                modelo.setMarca(new MarcaDAO().Retrieve(rst.getInt("marca_id")));
+    @Override
+    public void Update(Modelo objeto) throws RuntimeException {
+        JPADao.executeVoid(em -> em.merge(objeto), true);
+    }
+
+    @Override
+    public void Delete(Modelo objeto) throws RuntimeException {
+        JPADao.executeVoid(em -> {
+            Modelo managed = em.find(Modelo.class, objeto.getId());
+            if (managed != null) em.remove(managed);
+        }, true);
+    }
+
+    @Override
+    public void AtivarInativar(int id, boolean ativar) throws RuntimeException {
+        JPADao.executeVoid(em -> {
+            Modelo modelo = em.find(Modelo.class, id);
+            if (modelo != null) {
+                modelo.setStatus(ativar ? 'A' : 'I');
+                em.merge(modelo);
             }
-            ConnectionFactory.closeConnection(conexao, pstm, rst);
-            return modelo;
-        } catch (SQLException ex) {
-            AppLogger.error("Erro ao carregar modelo", ex);
-            throw new SQLException("Erro ao carregar modelo");
-        }
-    }
-
-    @Override
-    public List<Modelo> Retrieve(String atributo, String valor) throws SQLException {
-        String sqlInstrucao = "Select "
-                + " id, "
-                + " descricao, "
-                + " marca_id, "
-                + " status "
-                + " From modelo"
-                + " Where " + atributo + " like ?";
-
-        try {
-            Connection conexao = model.DAO.ConnectionFactory.getConnection();
-            PreparedStatement pstm = conexao.prepareStatement(sqlInstrucao);
-            pstm.setString(1, "%" + valor + "%");
-            ResultSet rst = pstm.executeQuery();
-            List<Modelo> listaModelos = new java.util.ArrayList<>();
-
-            while (rst.next()) {
-                Modelo modelo = new Modelo();
-                modelo.setId(rst.getInt("id"));
-                modelo.setDescricao(rst.getString("descricao"));
-                modelo.setStatus(rst.getString("status").charAt(0));
-                modelo.setMarca(new MarcaDAO().Retrieve(rst.getInt("marca_id")));
-                listaModelos.add(modelo);
-            }
-            ConnectionFactory.closeConnection(conexao, pstm, rst);
-            return listaModelos;
-        } catch (SQLException ex) {
-            AppLogger.error("Erro ao buscar modelos", ex);
-            throw new SQLException("Erro ao buscar modelos");
-        }
-    }
-
-    @Override
-    public void Update(Modelo objeto) throws SQLException {
-        String sqlInstrucao = "Update modelo "
-                + " Set"
-                + " descricao = ?, "
-                + " marca_id = ?, "
-                + " status = ? "
-                + " Where id = ? ";
-
-        try {
-            Connection conexao = model.DAO.ConnectionFactory.getConnection();
-            PreparedStatement pstm = conexao.prepareStatement(sqlInstrucao);
-            pstm.setString(1, objeto.getDescricao());
-            pstm.setInt(2, objeto.getMarca().getId());
-            pstm.setString(3, String.valueOf(objeto.getStatus()));
-            pstm.setInt(4, objeto.getId());
-            pstm.execute();
-            ConnectionFactory.closeConnection(conexao, pstm);
-        } catch (SQLException ex) {
-            AppLogger.error("Erro ao atualizar modelo", ex);
-            throw new SQLException("Erro ao atualizar modelo");
-        }
-    }
-
-    @Override
-    public void Delete(Modelo objeto) throws SQLException {
-        // Implemente aqui se necessário, seguindo o mesmo padrão.
-    }
-
-    @Override
-    public void AtivarInativar(int id, boolean ativar) throws SQLException {
-        String sqlInstrucao = "UPDATE modelo SET status = ? WHERE id = ?";
-        try (Connection conexao = ConnectionFactory.getConnection();
-             PreparedStatement pstm = conexao.prepareStatement(sqlInstrucao)) {
-            pstm.setString(1, ativar ? "A" : "I");
-            pstm.setInt(2, id);
-            pstm.execute();
-        } catch (SQLException ex) {
-            AppLogger.error("Erro ao ativar/inativar modelo", ex);
-            throw new SQLException("Erro ao ativar/inativar modelo");
-        }
+        }, true);
     }
 }

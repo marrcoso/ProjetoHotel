@@ -118,7 +118,7 @@ public final class ControllerCadModelo implements ActionListener, InterfaceContr
         if (isNovoCadastro) {
             try {
                 modeloService.Criar(modelo);
-            } catch (SQLException ex) {
+            } catch (RuntimeException ex) {
                 JOptionPane.showMessageDialog(telaCadastroModelo, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
@@ -130,7 +130,7 @@ public final class ControllerCadModelo implements ActionListener, InterfaceContr
         modelo.setId(Integer.parseInt(telaCadastroModelo.getjTextFieldId().getText()));
         try {
             modeloService.Atualizar(modelo);
-        } catch (SQLException ex) {
+        } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(telaCadastroModelo, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -202,7 +202,7 @@ public final class ControllerCadModelo implements ActionListener, InterfaceContr
             Modelo modelo;
             try {
                 modelo = new ModeloService().Carregar(codigoModelo);
-            } catch (SQLException ex) {
+            } catch (RuntimeException ex) {
                 JOptionPane.showMessageDialog(telaCadastroModelo, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }

@@ -205,7 +205,7 @@ public final class ControllerBuscaQuarto implements ActionListener, InterfaceCon
             telaBuscaQuarto.getjButtonAtivar().setEnabled(!ativar);
             telaBuscaQuarto.getjButtonInativar().setEnabled(ativar);
 
-        } catch (SQLException ex) {
+        } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(telaBuscaQuarto, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }

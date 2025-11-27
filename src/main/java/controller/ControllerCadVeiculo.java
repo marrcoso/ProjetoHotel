@@ -324,7 +324,7 @@ public final class ControllerCadVeiculo implements ActionListener, InterfaceCont
             Modelo modelo;
             try {
                 modelo = new service.ModeloService().Carregar(codigoModelo);
-            } catch (SQLException ex) {
+            } catch (RuntimeException ex) {
                 JOptionPane.showMessageDialog(telaCadastroVeiculo, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }

@@ -191,7 +191,7 @@ public final class ControllerBuscaProduto implements ActionListener, InterfaceCo
             telaBuscaProduto.getjButtonAtivar().setEnabled(!ativar);
             telaBuscaProduto.getjButtonInativar().setEnabled(ativar);
 
-        } catch (SQLException ex) {
+        } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(telaBuscaProduto, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }

@@ -1,20 +1,44 @@
 package model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "quarto")
 public class Quarto {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "descricao", nullable = false)
     private String descricao;
+
+    @Column(name = "capacidade_hospedes", nullable = false)
     private int capacidadeHospedes;
+
+    @Column(name = "metragem", nullable = false)
     private float metragem;
+
+    @Column(name = "identificacao", nullable = false)
     private String identificacao;
+
+    @Column(name = "andar", nullable = false)
     private int andar;
+
+    @Column(name = "flag_animais", nullable = false)
     private boolean flagAnimais;
+
+    @Column(name = "obs")
     private String obs;
+
+    @Column(name = "status", nullable = false)
     private char status;
 
     public Quarto() {
     }
 
-    public Quarto(int id, String descricao, int capacidadeHospedes, float metragem, String identificacao, int andar, boolean flagAnimais, String obs, char status) {
+    public Quarto(int id, String descricao, int capacidadeHospedes, float metragem, String identificacao, int andar,
+            boolean flagAnimais, String obs, char status) {
         this.id = id;
         this.descricao = descricao;
         this.capacidadeHospedes = capacidadeHospedes;
@@ -100,15 +124,8 @@ public class Quarto {
 
     @Override
     public String toString() {
-        return 
-        "id                   = " + id + 
-        "\ndescricao          = " + descricao + 
-        "\ncapacidadeHospedes = " + capacidadeHospedes + 
-        "\nmetragem           = " + metragem + 
-        "\nidentificacao      = " + identificacao + 
-        "\nandar              = " + andar + 
-        "\nflagAnimais        = " + flagAnimais + 
-        "\nobs                = " + obs + 
-        "\nstatus             = " + status;
+        return "id = " + id + " Desc. = " + descricao + " Capacidade = " + capacidadeHospedes +
+                " Metragem = " + metragem + " Identificação = " + identificacao + " Andar = " + andar +
+                " Animais = " + flagAnimais + " Obs = " + obs + " Status = " + status;
     }
 }

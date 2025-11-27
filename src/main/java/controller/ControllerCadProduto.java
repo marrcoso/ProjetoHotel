@@ -103,7 +103,7 @@ public final class ControllerCadProduto implements ActionListener, InterfaceCont
         if (isNovoCadastro) {
             try {
                 produtoService.Criar(produto);
-            } catch (SQLException ex) {
+            } catch (RuntimeException ex) {
                 JOptionPane.showMessageDialog(telaCadastroProduto, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }
@@ -115,7 +115,7 @@ public final class ControllerCadProduto implements ActionListener, InterfaceCont
         produto.setId(Integer.parseInt(telaCadastroProduto.getjTextFieldId().getText()));
         try {
             produtoService.Atualizar(produto);
-        } catch (SQLException ex) {
+        } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(telaCadastroProduto, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -156,7 +156,7 @@ public final class ControllerCadProduto implements ActionListener, InterfaceCont
             Produto produto;
             try {
                 produto = new ProdutoService().Carregar(codigo);
-            } catch (SQLException ex) {
+            } catch (RuntimeException ex) {
                 JOptionPane.showMessageDialog(telaCadastroProduto, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
                 return;
             }

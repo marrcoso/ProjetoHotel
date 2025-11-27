@@ -4,15 +4,30 @@
  */
 package model;
 
+import javax.persistence.*;
+
 /**
  *
  * @author MarcusVinicius
  */
+@Entity
+@Table(name = "produto")
 public class Produto {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "descricao", nullable = false)
     private String descricao;
+
+    @Column(name = "valor", nullable = false)
     private float valor;
+
+    @Column(name = "obs")
     private String obs;
+
+    @Column(name = "status", nullable = false)
     private char status;
 
     public Produto() {
@@ -68,11 +83,6 @@ public class Produto {
 
     @Override
     public String toString() {
-        return 
-        "id          = " + id + 
-        "\ndescricao = " + descricao + 
-        "\nvalor     = " + valor + 
-        "\nobs       = " + obs + 
-        "status      = " + status;
+        return "id = " + id + " Desc. = " + descricao + " Valor = " + valor + " Obs = " + obs + " Status = " + status;
     }
 }

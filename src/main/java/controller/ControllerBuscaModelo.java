@@ -187,7 +187,7 @@ public final class ControllerBuscaModelo implements ActionListener, InterfaceCon
             telaBuscaModelo.getjButtonAtivar().setEnabled(!ativar);
             telaBuscaModelo.getjButtonInativar().setEnabled(ativar);
 
-        } catch (SQLException ex) {
+        } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(telaBuscaModelo, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
