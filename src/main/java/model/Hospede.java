@@ -1,9 +1,25 @@
 package model;
-public class Hospede extends Pessoa{
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "hospede")
+public class Hospede extends Pessoa {
+
+    @Column(name = "razao_social")
     private String razaoSocial;
+
+    @Column(name = "cnpj")
     private String cnpj;
+
+    @Column(name = "inscricao_estadual")
     private String inscricaoEstadual;
+
+    @Column(name = "contato")
     private String contato;
+
     public static final String TIPO = "Hóspede";
 
     public Hospede() {
@@ -62,9 +78,4 @@ public class Hospede extends Pessoa{
                 "\nContato    = " + this.getContato()+
                 "\nStatus = " + this.getStatus();
     }
-    
-    
-    
-    
-    
 }

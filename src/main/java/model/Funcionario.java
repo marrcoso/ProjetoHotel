@@ -1,13 +1,22 @@
 package model;
-public class Funcionario extends Pessoa{
-   
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "funcionario")
+public class Funcionario extends Pessoa {
+
+    @Column(name = "usuario", nullable = false)
     private String usuario;
+
+    @Column(name = "senha", nullable = false)
     private String senha;
+
     public static final String TIPO = "Funcionário";
 
-    public Funcionario() {
-  
-    }
+    public Funcionario() {}
 
     public Funcionario( int id, String nome, String fone1, String fone2, String email, String cep, String logradouro, String bairro, String cidade, String complemento, String dataCadastro, String cpf, String rg,String usuario, String senha, String obs, char status, char sexo) {
         super(id, nome, fone1, fone2, email, cep, logradouro, bairro, cidade, complemento, dataCadastro, cpf, rg, obs, status, sexo);
@@ -38,10 +47,4 @@ public class Funcionario extends Pessoa{
                 "\nUsuário = " + this.getUsuario()+
                 "\nSenha   = " + this.getSenha();
     }
-    
-    
-    
-    
-    
-    
 }

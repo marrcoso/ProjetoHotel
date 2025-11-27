@@ -1,22 +1,57 @@
 package model;
 
+import javax.persistence.*;
+
+@MappedSuperclass
 public class Pessoa {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "nome", nullable = false)
     private String nome;
+
+    @Column(name = "fone")
     private String fone1;
+
+    @Column(name = "fone2")
     private String fone2;
+
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "cep")
     private String cep;
+
+    @Column(name = "logradouro")
     private String logradouro;
+
+    @Column(name = "bairro")
     private String bairro;
+
+    @Column(name = "cidade")
     private String cidade;
+
+    @Column(name = "complemento")
     private String complemento;
+
+    @Column(name = "data_cadastro")
     private String dataCadastro;
+
+    @Column(name = "cpf")
     private String cpf;
+
+    @Column(name = "rg")
     private String rg;
+
+    @Column(name = "obs")
     private String obs;
+
+    @Column(name = "status")
     private char status;
+
+    @Column(name = "sexo")
     private char sexo;
 
     public Pessoa() {
