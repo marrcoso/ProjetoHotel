@@ -9,7 +9,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import io.github.cdimascio.dotenv.Dotenv;
-import util.AppLogger;
+import utilities.AppLogger;
 
 public final class JPAFactory {
 

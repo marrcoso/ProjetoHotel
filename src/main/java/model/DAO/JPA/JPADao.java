@@ -5,7 +5,7 @@ import java.util.function.Function;
 
 import javax.persistence.EntityManager;
 
-import util.AppLogger;
+import utilities.AppLogger;
 
 public class JPADao {
 
