@@ -52,10 +52,22 @@ public class JPADao {
 
     public static void validAttribute(Class<?> clazz, String attr) throws RuntimeException {
         try {
-            if (attr == null || attr.trim().isEmpty() || clazz.getDeclaredField(attr) == null) {
+            Class<?> current = clazz;
+            boolean found = false;
+            while (current != null && !found) {
+                try {
+                    if (attr != null && !attr.trim().isEmpty() && current.getDeclaredField(attr) != null) {
+                        found = true;
+                    }
+                } catch (NoSuchFieldException e) {
+                    // Continua procurando na superclasse
+                    current = current.getSuperclass();
+                }
+            }
+            if (!found) {
                 throw new RuntimeException("Falha ao validar atributo por reflexão");
             }
-        } catch (NoSuchFieldException | RuntimeException ex) {
+        } catch (RuntimeException ex) {
             AppLogger.error("Falha ao validar atributo por reflexão", ex);
             throw new RuntimeException("Falha ao validar atributo por reflexão", ex);
         }
