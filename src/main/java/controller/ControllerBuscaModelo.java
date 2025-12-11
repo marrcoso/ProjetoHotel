@@ -146,7 +146,7 @@ public final class ControllerBuscaModelo implements ActionListener, InterfaceCon
                     break;
                 }
                 case MARCA: {
-                    carregarPorAtributo("marca_id", filtroTexto, tabela);
+                    carregarPorAtributo("marca.id", filtroTexto, tabela);
                     break;
                 }
             }

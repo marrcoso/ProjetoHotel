@@ -154,19 +154,19 @@ public final class ControllerBuscaVeiculo implements ActionListener, InterfaceCo
                     break;
                 }
                 case MODELO: {
-                    carregarPorAtributo("modelo_id", filtroTexto, tabela);
+                    carregarPorAtributo("modelo.id", filtroTexto, tabela);
                     break;
                 }
                 case HOSPEDE: {
-                    carregarPorAtributo("hospede_id", filtroTexto, tabela);
+                    carregarPorAtributo("hospede.id", filtroTexto, tabela);
                     break;
                 }
                 case FUNCIONARIO: {
-                    carregarPorAtributo("funcionario_id", filtroTexto, tabela);
+                    carregarPorAtributo("funcionario.id", filtroTexto, tabela);
                     break;
                 }
                 case FORNECEDOR: {
-                    carregarPorAtributo("fornecedor_id", filtroTexto, tabela);
+                    carregarPorAtributo("fornecedor.id", filtroTexto, tabela);
                     break;
                 }
             }

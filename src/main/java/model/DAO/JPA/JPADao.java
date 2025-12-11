@@ -51,21 +51,25 @@ public class JPADao {
     }
 
     public static void validAttribute(Class<?> clazz, String attr) throws RuntimeException {
+        if (attr == null || attr.trim().isEmpty()) {
+            throw new RuntimeException("Atributo vazio");
+        }
+        if (attr.endsWith(".id")) {
+            attr = attr.substring(0, attr.length() - 3);
+        }
         try {
             Class<?> current = clazz;
             boolean found = false;
             while (current != null && !found) {
                 try {
-                    if (attr != null && !attr.trim().isEmpty() && current.getDeclaredField(attr) != null) {
-                        found = true;
-                    }
+                    current.getDeclaredField(attr);
+                    found = true;
                 } catch (NoSuchFieldException e) {
-                    // Continua procurando na superclasse
                     current = current.getSuperclass();
                 }
             }
             if (!found) {
-                throw new RuntimeException("Falha ao validar atributo por reflexão");
+                throw new RuntimeException("Atributo não encontrado: " + attr + " em " + clazz.getSimpleName());
             }
         } catch (RuntimeException ex) {
             AppLogger.error("Falha ao validar atributo por reflexão", ex);
@@ -93,12 +97,21 @@ public class JPADao {
         }, true);
     }
 
-    public static <T> List<T> findByAttribute(Class<T> clazz, String entityName, String atributo, String valor) throws RuntimeException {
+    public static <T> List<T> findByAttribute(Class<T> clazz, String entityName, String atributo, String valor)
+            throws RuntimeException {
         validAttribute(clazz, atributo);
         return executeWithEntityManager(em -> {
-            String jpql = "SELECT e FROM " + entityName + " e WHERE e." + atributo + " LIKE :valor";
-            TypedQuery<T> q = em.createQuery(jpql, clazz);
-            q.setParameter("valor", "%" + valor + "%");
+            String jpql;
+            TypedQuery<T> q;
+            if (atributo.endsWith(".id")) {
+                jpql = "SELECT e FROM " + entityName + " e WHERE e." + atributo + " = :valor";
+                q = em.createQuery(jpql, clazz);
+                q.setParameter("valor", Integer.valueOf(valor));
+            } else {
+                jpql = "SELECT e FROM " + entityName + " e WHERE e." + atributo + " LIKE :valor";
+                q = em.createQuery(jpql, clazz);
+                q.setParameter("valor", "%" + valor + "%");
+            }
             return q.getResultList();
         }, false);
     }
@@ -110,7 +123,8 @@ public class JPADao {
                 try {
                     clazz.getMethod("setStatus", char.class).invoke(entity, ativar ? 'A' : 'I');
                     em.merge(entity);
-                } catch (IllegalAccessException | NoSuchMethodException | SecurityException | InvocationTargetException ex) {
+                } catch (IllegalAccessException | NoSuchMethodException | SecurityException
+                        | InvocationTargetException ex) {
                     AppLogger.error("Erro ao definir status via reflexão", ex);
                     throw new RuntimeException("Erro ao definir status via reflexão", ex);
                 }
