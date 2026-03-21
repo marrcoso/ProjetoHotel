@@ -64,6 +64,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         jMenuItemSair = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        jMenuItemCheck = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -76,65 +77,119 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
 
         jMenuItemProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Bomb.png"))); // NOI18N
         jMenuItemProduto.setText("Produto");
-        jMenuItemProduto.addActionListener(this::jMenuItemProdutoActionPerformed);
+        jMenuItemProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemProdutoActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItemProduto);
 
         jMenuItemServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Equipment.png"))); // NOI18N
         jMenuItemServico.setText("Servico");
-        jMenuItemServico.addActionListener(this::jMenuItemServicoActionPerformed);
+        jMenuItemServico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemServicoActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItemServico);
 
         jMenuItemFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Male.png"))); // NOI18N
         jMenuItemFuncionario.setText("Funcionário");
-        jMenuItemFuncionario.addActionListener(this::jMenuItemFuncionarioActionPerformed);
+        jMenuItemFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemFuncionarioActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItemFuncionario);
 
         jMenuItemFornecedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Boss.png"))); // NOI18N
         jMenuItemFornecedor.setText("Fornecedor");
-        jMenuItemFornecedor.addActionListener(this::jMenuItemFornecedorActionPerformed);
+        jMenuItemFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemFornecedorActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItemFornecedor);
         jMenu2.add(jSeparator1);
 
         jMenuItemHospede.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/People.png"))); // NOI18N
         jMenuItemHospede.setText("Hóspede");
-        jMenuItemHospede.addActionListener(this::jMenuItemHospedeActionPerformed);
+        jMenuItemHospede.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemHospedeActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItemHospede);
 
         jMenuItemQuarto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Home.png"))); // NOI18N
         jMenuItemQuarto.setText("Quarto");
-        jMenuItemQuarto.addActionListener(this::jMenuItemQuartoActionPerformed);
+        jMenuItemQuarto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemQuartoActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItemQuarto);
 
         jMenuItemVeiculo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Blue pin.png"))); // NOI18N
         jMenuItemVeiculo1.setText("Vaga");
-        jMenuItemVeiculo1.addActionListener(this::jMenuItemVeiculo1ActionPerformed);
+        jMenuItemVeiculo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemVeiculo1ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItemVeiculo1);
 
         jMenuItemVeiculo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Delivery.png"))); // NOI18N
         jMenuItemVeiculo.setText("Veiculo");
-        jMenuItemVeiculo.addActionListener(this::jMenuItemVeiculoActionPerformed);
+        jMenuItemVeiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemVeiculoActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItemVeiculo);
 
         jMenuItemModelo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/List.png"))); // NOI18N
         jMenuItemModelo.setText("Modelo");
-        jMenuItemModelo.addActionListener(this::jMenuItemModeloActionPerformed);
+        jMenuItemModelo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemModeloActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItemModelo);
 
         jMenuItemMarca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/How-to.png"))); // NOI18N
         jMenuItemMarca.setText("Marca");
-        jMenuItemMarca.addActionListener(this::jMenuItemMarcaActionPerformed);
+        jMenuItemMarca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemMarcaActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItemMarca);
         jMenu2.add(jSeparator2);
 
         jMenuItemSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Exit.png"))); // NOI18N
         jMenuItemSair.setText("Sair");
         jMenuItemSair.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jMenuItemSair.addActionListener(this::jMenuItemSairActionPerformed);
+        jMenuItemSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemSairActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItemSair);
 
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Movimentos");
+
+        jMenuItemCheck.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Clipboard.png"))); // NOI18N
+        jMenuItemCheck.setText("Check");
+        jMenuItemCheck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCheckActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItemCheck);
+
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Relatórios");
@@ -231,6 +286,12 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         telaCadastroVagaEstacionamento.setVisible(true);
     }//GEN-LAST:event_jMenuItemVeiculo1ActionPerformed
 
+    private void jMenuItemCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCheckActionPerformed
+        TelaCheck telaCheck = new TelaCheck(null,true);
+        // Controller
+        telaCheck.setVisible(true);
+    }//GEN-LAST:event_jMenuItemCheckActionPerformed
+
     @SuppressWarnings("unused")
     private void jMenuItemProdutoActionPerformed(java.awt.event.ActionEvent evt) {                                           
         TelaCadastroProduto telaCadastroProduto = new TelaCadastroProduto(null,true);
@@ -274,6 +335,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItemCheck;
     private javax.swing.JMenuItem jMenuItemFornecedor;
     private javax.swing.JMenuItem jMenuItemFuncionario;
     private javax.swing.JMenuItem jMenuItemHospede;
