@@ -29,7 +29,7 @@ public class Check {
     @Column(name = "status", nullable = false)
     private char status;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     @JoinColumn(name = "check_quarto_id")
     private CheckQuarto checkQuarto;
 
@@ -110,6 +110,6 @@ public class Check {
                 + "\nData/Hora Sai. = " + this.getDataHoraSaida()
                 + "\nObs            = " + this.getObs()
                 + "\nStatus         = " + this.getStatus()
-                + "\nReserva ID     = " + this.getCheckQuarto().getId();
+                + "\nCheck Quarto   = " + (this.getCheckQuarto() != null ? this.getCheckQuarto().getId() : "null");
     }
 }

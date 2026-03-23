@@ -7,7 +7,9 @@ package view;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 
 /**
@@ -52,6 +54,26 @@ public class TelaCheck extends javax.swing.JDialog {
         return jPanelCheck;
     }
 
+    public JPanel getjPanelCheck() {
+        return jPanelCheck;
+    }
+
+    public JPanel getjPanelHospedes() {
+        return jPanelHospedes;
+    }
+
+    public JPanel getjPanelReserva() {
+        return jPanelReserva;
+    }
+
+    public JPanel getjPanelVaga() {
+        return jPanelVaga;
+    }
+
+    public JPanel getjPanelRecebimento() {
+        return jPanelRecebimento;
+    }
+
     public JComboBox<String> getjComboBoxStatus() {
         return jComboBoxStatus;
     }
@@ -74,6 +96,86 @@ public class TelaCheck extends javax.swing.JDialog {
 
     public void setjTextFieldObs(JTextField jTextFieldObs) {
         this.jTextFieldObs = jTextFieldObs;
+    }
+
+    public JButton getjButtonBuscarHospede() {
+        return jButtonBuscarHospede;
+    }
+
+    public JButton getjButtonBuscarVaga() {
+        return jButtonBuscarVaga;
+    }
+
+    public JComboBox<String> getjComboBoxStatusRecebimento() {
+        return jComboBoxStatusRecebimento;
+    }
+
+    public JComboBox<String> getjComboBoxStatusReserva() {
+        return jComboBoxStatusReserva;
+    }
+
+    public JFormattedTextField getjFormattedTextFieldDataCadastro() {
+        return jFormattedTextFieldDataCadastro;
+    }
+
+    public JFormattedTextField getjFormattedTextFieldDataEntrada() {
+        return jFormattedTextFieldDataEntrada;
+    }
+
+    public JFormattedTextField getjFormattedTextFieldDataEntradaReserva() {
+        return jFormattedTextFieldDataEntradaReserva;
+    }
+
+    public JFormattedTextField getjFormattedTextFieldDataReserva() {
+        return jFormattedTextFieldDataReserva;
+    }
+
+    public JFormattedTextField getjFormattedTextFieldDataSaida() {
+        return jFormattedTextFieldDataSaida;
+    }
+
+    public JFormattedTextField getjFormattedTextFieldDataSaidaReserva() {
+        return jFormattedTextFieldDataSaidaReserva;
+    }
+
+    public JTable getjTableHospedes() {
+        return jTableHospedes;
+    }
+
+    public JTable getjTableVaga() {
+        return jTableVaga;
+    }
+
+    public JTextField getjTextFieldAcrescimo() {
+        return jTextFieldAcrescimo;
+    }
+
+    public JTextField getjTextFieldDesconto() {
+        return jTextFieldDesconto;
+    }
+
+    public JTextField getjTextFieldIdReserva() {
+        return jTextFieldIdReserva;
+    }
+
+    public JTextField getjTextFieldObsRecebimento() {
+        return jTextFieldObsRecebimento;
+    }
+
+    public JTextField getjTextFieldObsReserva() {
+        return jTextFieldObsReserva;
+    }
+
+    public JTextField getjTextFieldValorOriginal() {
+        return jTextFieldValorOriginal;
+    }
+
+    public JTextField getjTextFieldValorPagar() {
+        return jTextFieldValorPagar;
+    }
+
+    public JTextField getjTextFieldValorPago() {
+        return jTextFieldValorPago;
     }
 
     /**
@@ -145,7 +247,7 @@ public class TelaCheck extends javax.swing.JDialog {
         jTextFieldValorPagar = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cadastro de Hóspedes");
+        setTitle("Cadastro de Check-in/Check-out");
         setResizable(false);
 
         jPanelTitulo.setBackground(new java.awt.Color(153, 153, 255));
@@ -323,10 +425,7 @@ public class TelaCheck extends javax.swing.JDialog {
 
         jTableHospedes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "ID", "Nome", "CPF", "Status"
@@ -506,10 +605,7 @@ public class TelaCheck extends javax.swing.JDialog {
 
         jTableVaga.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "ID", "Descrição", "OBS", "Status"

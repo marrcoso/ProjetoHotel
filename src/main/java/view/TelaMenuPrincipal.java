@@ -5,6 +5,7 @@
  */
 package view;
 
+import controller.ControllerCadCheck;
 import controller.ControllerCadFornecedor;
 import controller.ControllerCadFuncionario;
 import controller.ControllerCadHospede;
@@ -288,7 +289,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
 
     private void jMenuItemCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCheckActionPerformed
         TelaCheck telaCheck = new TelaCheck(null,true);
-        // Controller
+        ControllerCadCheck controllerCadCheck = new ControllerCadCheck(telaCheck);
         telaCheck.setVisible(true);
     }//GEN-LAST:event_jMenuItemCheckActionPerformed
 
