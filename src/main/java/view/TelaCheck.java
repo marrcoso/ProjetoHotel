@@ -704,7 +704,7 @@ public class TelaCheck extends javax.swing.JDialog {
         jPanelRecebimentoLayout.setHorizontalGroup(
             jPanelRecebimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRecebimentoLayout.createSequentialGroup()
-                .addContainerGap(259, Short.MAX_VALUE)
+                .addContainerGap(260, Short.MAX_VALUE)
                 .addGroup(jPanelRecebimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanelRecebimentoLayout.createSequentialGroup()
                         .addGroup(jPanelRecebimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -732,7 +732,7 @@ public class TelaCheck extends javax.swing.JDialog {
                                 .addComponent(jLabelAcrescimo)
                                 .addComponent(jTextFieldAcrescimo)
                                 .addComponent(jComboBoxStatusRecebimento, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(257, 257, 257))
+                .addGap(256, 256, 256))
         );
         jPanelRecebimentoLayout.setVerticalGroup(
             jPanelRecebimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
