@@ -126,6 +126,10 @@ public class TelaCheck extends javax.swing.JDialog {
         return jFormattedTextFieldVaga;
     }
 
+    public JTextField getjTextFieldObsVaga() {
+        return jTextFieldObsVaga;
+    }
+
     public JComboBox<String> getjComboBoxStatusRecebimento() {
         return jComboBoxStatusRecebimento;
     }
@@ -251,6 +255,8 @@ public class TelaCheck extends javax.swing.JDialog {
         jLabelQuarto1 = new javax.swing.JLabel();
         jFormattedTextFieldVeiculo = new javax.swing.JFormattedTextField();
         jButtonRelacionarVeiculo = new javax.swing.JButton();
+        jTextFieldObsVaga = new javax.swing.JTextField();
+        jLabelObsVaga = new javax.swing.JLabel();
         jPanelReserva = new javax.swing.JPanel();
         jTextFieldIdReserva = new javax.swing.JTextField();
         jLabelIdReserva = new javax.swing.JLabel();
@@ -293,12 +299,6 @@ public class TelaCheck extends javax.swing.JDialog {
 
         jTextFieldId.setEditable(false);
         jTextFieldId.setEnabled(false);
-        
-        jFormattedTextFieldVaga.setEditable(false);
-        jFormattedTextFieldVaga.setEnabled(false);
-        
-        jFormattedTextFieldVeiculo.setEditable(false);
-        jFormattedTextFieldVeiculo.setEnabled(false);
 
         jLabelId.setText("ID");
 
@@ -572,21 +572,19 @@ public class TelaCheck extends javax.swing.JDialog {
 
         jTableAlocacoesVagas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "ID", "Vaga", "Placa Veiculo", "Status"
+                "ID", "Vaga", "Placa Veiculo", "Obs", "Status"
             }
         ));
         jScrollPane3.setViewportView(jTableAlocacoesVagas);
         if (jTableAlocacoesVagas.getColumnModel().getColumnCount() > 0) {
-            jTableAlocacoesVagas.getColumnModel().getColumn(0).setMinWidth(60);
-            jTableAlocacoesVagas.getColumnModel().getColumn(0).setMaxWidth(60);
-            jTableAlocacoesVagas.getColumnModel().getColumn(3).setMinWidth(80);
-            jTableAlocacoesVagas.getColumnModel().getColumn(3).setMaxWidth(80);
+            jTableAlocacoesVagas.getColumnModel().getColumn(0).setMaxWidth(100);
+            jTableAlocacoesVagas.getColumnModel().getColumn(4).setMaxWidth(100);
         }
 
         jButtonAlocarVaga.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Load.png"))); // NOI18N
@@ -634,6 +632,8 @@ public class TelaCheck extends javax.swing.JDialog {
             }
         });
 
+        jLabelObsVaga.setText("OBS.:");
+
         javax.swing.GroupLayout jPanelVagaLayout = new javax.swing.GroupLayout(jPanelVaga);
         jPanelVaga.setLayout(jPanelVagaLayout);
         jPanelVagaLayout.setHorizontalGroup(
@@ -642,20 +642,25 @@ public class TelaCheck extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanelVagaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 818, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelVagaLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabelQuarto1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jFormattedTextFieldVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonRelacionarVeiculo)
+                    .addGroup(jPanelVagaLayout.createSequentialGroup()
+                        .addGroup(jPanelVagaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelObsVaga)
+                            .addGroup(jPanelVagaLayout.createSequentialGroup()
+                                .addComponent(jLabelQuarto1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanelVagaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanelVagaLayout.createSequentialGroup()
+                                        .addComponent(jFormattedTextFieldVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButtonRelacionarVeiculo)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabelQuarto)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jFormattedTextFieldVaga)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButtonRelacionarVaga))
+                                    .addComponent(jTextFieldObsVaga))))
                         .addGap(18, 18, 18)
-                        .addComponent(jLabelQuarto)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jFormattedTextFieldVaga, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonRelacionarVaga)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButtonAlocarVaga)))
                 .addContainerGap())
         );
@@ -663,21 +668,23 @@ public class TelaCheck extends javax.swing.JDialog {
             jPanelVagaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelVagaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelVagaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanelVagaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jButtonAlocarVaga)
-                        .addGroup(jPanelVagaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelVagaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jFormattedTextFieldVaga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabelQuarto))
-                            .addComponent(jButtonRelacionarVaga, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanelVagaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jFormattedTextFieldVaga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelQuarto))
+                    .addComponent(jButtonRelacionarVaga, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanelVagaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jFormattedTextFieldVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabelQuarto1))
                     .addComponent(jButtonRelacionarVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelVagaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldObsVaga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelObsVaga)
+                    .addComponent(jButtonAlocarVaga))
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Vagas", jPanelVaga);
@@ -1085,6 +1092,7 @@ public class TelaCheck extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelObsDesconto;
     private javax.swing.JLabel jLabelObsRecebimento;
     private javax.swing.JLabel jLabelObsReserva;
+    private javax.swing.JLabel jLabelObsVaga;
     private javax.swing.JLabel jLabelQuarto;
     private javax.swing.JLabel jLabelQuarto1;
     private javax.swing.JLabel jLabelStatus;
@@ -1116,6 +1124,7 @@ public class TelaCheck extends javax.swing.JDialog {
     private javax.swing.JTextField jTextFieldObs;
     private javax.swing.JTextField jTextFieldObsRecebimento;
     private javax.swing.JTextField jTextFieldObsReserva;
+    private javax.swing.JTextField jTextFieldObsVaga;
     private javax.swing.JTextField jTextFieldValorOriginal;
     private javax.swing.JTextField jTextFieldValorPagar;
     private javax.swing.JTextField jTextFieldValorPago;

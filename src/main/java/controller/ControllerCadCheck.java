@@ -424,17 +424,20 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
                 return;
             }
         }
+
+        String obs = this.telaCheck.getjTextFieldObsVaga().getText().trim();
         model.AlocacaoVaga alocacao = new model.AlocacaoVaga();
         alocacao.setVagaEstacionamento(vaga);
         alocacao.setVeiculo(veiculo);
         alocacao.setStatus('A');
-        alocacao.setObs("");
+        alocacao.setObs(obs);
         this.alocacoesVagasSelecionadas.add(alocacao);
         DefaultTableModel tabela = (DefaultTableModel) this.telaCheck.getjTableVaga().getModel();
         tabela.addRow(new Object[]{
             alocacao.getId() == 0 ? "" : alocacao.getId(),
             vaga.getDescricao(),
             veiculo.getPlaca(),
+            alocacao.getObs(),
             vaga.getStatus(),
         });
     }
