@@ -1,7 +1,15 @@
 package model;
 
-import javax.persistence.*;
 import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "check")
@@ -29,21 +37,16 @@ public class Check {
     @Column(name = "status", nullable = false)
     private char status;
 
-    @ManyToOne(optional = true)
-    @JoinColumn(name = "check_quarto_id")
-    private CheckQuarto checkQuarto;
-
     public Check() {
     }
 
-    public Check(int id, Date dataHoraCadastro, Date dataHoraEntrada, Date dataHoraSaida, String obs, char status, CheckQuarto checkQuarto) {
+    public Check(int id, Date dataHoraCadastro, Date dataHoraEntrada, Date dataHoraSaida, String obs, char status) {
         this.id = id;
         this.dataHoraCadastro = dataHoraCadastro;
         this.dataHoraEntrada = dataHoraEntrada;
         this.dataHoraSaida = dataHoraSaida;
         this.obs = obs;
         this.status = status;
-        this.checkQuarto = checkQuarto;
     }
 
     public int getId() {
@@ -94,14 +97,6 @@ public class Check {
         this.status = status;
     }
 
-    public CheckQuarto getCheckQuarto() {
-        return checkQuarto;
-    }
-
-    public void setCheckQuarto(CheckQuarto checkQuarto) {
-        this.checkQuarto = checkQuarto;
-    }
-
     @Override
     public String toString() {
         return "id              = " + this.getId()
@@ -109,7 +104,6 @@ public class Check {
                 + "\nData/Hora Ent. = " + this.getDataHoraEntrada()
                 + "\nData/Hora Sai. = " + this.getDataHoraSaida()
                 + "\nObs            = " + this.getObs()
-                + "\nStatus         = " + this.getStatus()
-                + "\nCheck Quarto   = " + (this.getCheckQuarto() != null ? this.getCheckQuarto().getId() : "null");
+                + "\nStatus         = " + this.getStatus();
     }
 }

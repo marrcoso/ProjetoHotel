@@ -29,16 +29,21 @@ public class CheckQuarto {
     @JoinColumn(name = "quarto_id")
     private Quarto quarto;
 
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "check_id")
+    private Check check;
+
     public CheckQuarto() {
     }
 
-    public CheckQuarto(int id, Date dataHoraInicio, Date dataHoraFim, String obs, char status, Quarto quarto) {
+    public CheckQuarto(int id, Date dataHoraInicio, Date dataHoraFim, String obs, char status, Quarto quarto, Check check) {
         this.id = id;
         this.dataHoraInicio = dataHoraInicio;
         this.dataHoraFim = dataHoraFim;
         this.obs = obs;
         this.status = status;
         this.quarto = quarto;
+        this.check = check;
     }
 
     public int getId() {
@@ -87,6 +92,14 @@ public class CheckQuarto {
 
     public void setQuarto(Quarto quarto) {
         this.quarto = quarto;
+    }
+
+    public Check getCheck() {
+        return check;
+    }
+
+    public void setCheck(Check check) {
+        this.check = check;
     }
 
     @Override
