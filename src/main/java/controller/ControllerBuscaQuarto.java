@@ -17,12 +17,13 @@ public final class ControllerBuscaQuarto implements ActionListener, InterfaceCon
     private final TelaBuscaQuarto telaBuscaQuarto;
     private final QuartoService quartoService;
     private final Consumer<Integer> atualizaCodigo;
-    
+    private final boolean apenasDisponiveis;
 
-    public ControllerBuscaQuarto(TelaBuscaQuarto telaBuscaQuarto, Consumer<Integer> atualizaCodigo) {
+    public ControllerBuscaQuarto(TelaBuscaQuarto telaBuscaQuarto, Consumer<Integer> atualizaCodigo, boolean apenasDisponiveis) {
         this.telaBuscaQuarto = telaBuscaQuarto;
         this.quartoService = new QuartoService();
         this.atualizaCodigo = atualizaCodigo;
+        this.apenasDisponiveis = apenasDisponiveis;
         initListeners();
     }
 
@@ -115,6 +116,14 @@ public final class ControllerBuscaQuarto implements ActionListener, InterfaceCon
     @Override
     public void carregarPorAtributo(String atributo, String valor, DefaultTableModel tabela) throws RuntimeException {
         List<Quarto> listaQuartos = quartoService.Carregar(atributo, valor);
+        if (apenasDisponiveis) {
+            List<Integer> disponiveis = quartoService.carregarQuartosDisponiveis().stream()
+                .map(Quarto::getId)
+                .collect(java.util.stream.Collectors.toList());
+            listaQuartos = listaQuartos.stream()
+                .filter(q -> disponiveis.contains(q.getId()))
+                .collect(java.util.stream.Collectors.toList());
+        }
         for (Quarto q : listaQuartos) {
             adicionarLinhaTabela(tabela, q);
         }
@@ -138,6 +147,16 @@ public final class ControllerBuscaQuarto implements ActionListener, InterfaceCon
             switch (filtro) {
                 case ID: {
                     Quarto quarto = quartoService.Carregar(Integer.parseInt(filtroTexto));
+                    if (apenasDisponiveis) {
+                        List<Integer> disponiveis = quartoService.carregarQuartosDisponiveis().stream()
+                            .map(Quarto::getId)
+                            .collect(java.util.stream.Collectors.toList());
+                        boolean disponivel = quarto != null && disponiveis.contains(quarto.getId());
+                        if (!disponivel) {
+                            JOptionPane.showMessageDialog(null, "Quarto já está alocado e não pode ser selecionado.");
+                            return;
+                        }
+                    }
                     if (quarto != null) {
                         adicionarLinhaTabela(tabela, quarto);
                     }

@@ -1,11 +1,9 @@
 package service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import model.CheckQuarto;
 import model.DAO.CheckQuartoDAO;
-import model.Quarto;
 
 public class CheckQuartoService implements InterfaceService<CheckQuarto> {
 
@@ -49,10 +47,7 @@ public class CheckQuartoService implements InterfaceService<CheckQuarto> {
         return checkQuartoDAO.RetrieveByCheck(checkId);
     }
 
-    public void substituirQuartosDoCheck(int checkId, List<Quarto> quartos) throws RuntimeException {
-        List<Integer> idsQuartos = quartos.stream()
-            .map(Quarto::getId)
-            .collect(Collectors.toList());
-        checkQuartoDAO.ReplaceQuartosDoCheck(checkId, idsQuartos);
+    public void substituirCheckQuartos(int checkId, List<CheckQuarto> checkQuartos) throws RuntimeException {
+        checkQuartoDAO.ReplaceCheckQuartos(checkId, checkQuartos);
     }
 }

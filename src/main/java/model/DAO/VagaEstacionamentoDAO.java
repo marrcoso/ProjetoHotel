@@ -41,7 +41,7 @@ public class VagaEstacionamentoDAO implements InterfaceDAO<VagaEstacionamento> {
         return JPADao.executeWithEntityManager(em -> {
             return em.createQuery(
                 "SELECT v FROM VagaEstacionamento v WHERE v.status = 'A' AND v.id NOT IN " +
-                "(SELECT av.vagaEstacionamento.id FROM AlocacaoVaga av WHERE av.check.status = 'A')",
+                "(SELECT av.vagaEstacionamento.id FROM AlocacaoVaga av WHERE av.status = 'A' AND av.check.status = 'A')",
                 VagaEstacionamento.class
             ).getResultList();
         }, false);

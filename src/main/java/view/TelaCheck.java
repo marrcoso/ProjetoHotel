@@ -62,6 +62,10 @@ public class TelaCheck extends javax.swing.JDialog {
         return jPanelHospedes;
     }
 
+    public JPanel getjPanelQuartos() {
+        return jPanelQuartos;
+    }
+
     public JPanel getjPanelReserva() {
         return jPanelReserva;
     }
@@ -118,8 +122,20 @@ public class TelaCheck extends javax.swing.JDialog {
         return jFormattedTextFieldHospede;
     }
 
-    public JButton getjButtonBuscarQuarto() {
-        return jButtonBuscarQuarto;
+    public JButton getjButtonAlocarQuarto() {
+        return jButtonAlocarQuarto;
+    }
+
+    public JButton getjButtonRelacionarQuarto() {
+        return jButtonRelacionarQuarto;
+    }
+
+    public JTextField getjTextFieldObsQuarto() {
+        return jTextFieldObsQuarto;
+    }
+
+    public JFormattedTextField getjFormattedTextFieldQuarto() {
+        return jFormattedTextFieldQuarto;
     }
 
     public JButton getjButtonAlocarVaga() {
@@ -267,7 +283,12 @@ public class TelaCheck extends javax.swing.JDialog {
         jPanelQuartos = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableQuartos = new javax.swing.JTable();
-        jButtonBuscarQuarto = new javax.swing.JButton();
+        jButtonAlocarQuarto = new javax.swing.JButton();
+        jLabelQuarto = new javax.swing.JLabel();
+        jFormattedTextFieldQuarto = new javax.swing.JFormattedTextField();
+        jButtonRelacionarQuarto = new javax.swing.JButton();
+        jLabelObsQuarto = new javax.swing.JLabel();
+        jTextFieldObsQuarto = new javax.swing.JTextField();
         jPanelVaga = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableAlocacoesVagas = new javax.swing.JTable();
@@ -604,7 +625,7 @@ public class TelaCheck extends javax.swing.JDialog {
                 {null, null, null, null}
             },
             new String [] {
-                "ID", "Nome", "CPF", "Status"
+                "ID", "Nome", "Obs", "Status"
             }
         ));
         jScrollPane2.setViewportView(jTableQuartos);
@@ -614,14 +635,34 @@ public class TelaCheck extends javax.swing.JDialog {
             jTableQuartos.getColumnModel().getColumn(3).setMaxWidth(100);
         }
 
-        jButtonBuscarQuarto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Load.png"))); // NOI18N
-        jButtonBuscarQuarto.setActionCommand("0");
-        jButtonBuscarQuarto.setLabel("Buscar Quarto");
-        jButtonBuscarQuarto.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAlocarQuarto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Load.png"))); // NOI18N
+        jButtonAlocarQuarto.setText("Alocar Quarto");
+        jButtonAlocarQuarto.setActionCommand("0");
+        jButtonAlocarQuarto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonBuscarQuartoActionPerformed(evt);
+                jButtonAlocarQuartoActionPerformed(evt);
             }
         });
+
+        jLabelQuarto.setText("Quarto:");
+
+        jFormattedTextFieldQuarto.setEditable(false);
+        jFormattedTextFieldQuarto.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.##"))));
+        jFormattedTextFieldQuarto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFormattedTextFieldQuartoActionPerformed(evt);
+            }
+        });
+
+        jButtonRelacionarQuarto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Find.png"))); // NOI18N
+        jButtonRelacionarQuarto.setActionCommand("1");
+        jButtonRelacionarQuarto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRelacionarQuartoActionPerformed(evt);
+            }
+        });
+
+        jLabelObsQuarto.setText("OBS.:");
 
         javax.swing.GroupLayout jPanelQuartosLayout = new javax.swing.GroupLayout(jPanelQuartos);
         jPanelQuartos.setLayout(jPanelQuartosLayout);
@@ -630,20 +671,45 @@ public class TelaCheck extends javax.swing.JDialog {
             .addGroup(jPanelQuartosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelQuartosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 818, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelQuartosLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButtonBuscarQuarto)))
+                    .addComponent(jScrollPane2)
+                    .addGroup(jPanelQuartosLayout.createSequentialGroup()
+                        .addGroup(jPanelQuartosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelQuartosLayout.createSequentialGroup()
+                                .addComponent(jLabelQuarto)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanelQuartosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanelQuartosLayout.createSequentialGroup()
+                                        .addComponent(jFormattedTextFieldQuarto, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButtonRelacionarQuarto)
+                                        .addGap(313, 313, 313))
+                                    .addComponent(jTextFieldObsQuarto, javax.swing.GroupLayout.DEFAULT_SIZE, 616, Short.MAX_VALUE)))
+                            .addGroup(jPanelQuartosLayout.createSequentialGroup()
+                                .addComponent(jLabelObsQuarto)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 625, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(31, 31, 31)
+                        .addComponent(jButtonAlocarQuarto, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanelQuartosLayout.setVerticalGroup(
             jPanelQuartosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelQuartosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonBuscarQuarto)
-                .addContainerGap())
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanelQuartosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonAlocarQuarto, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelQuartosLayout.createSequentialGroup()
+                        .addGroup(jPanelQuartosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanelQuartosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jFormattedTextFieldQuarto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabelQuarto))
+                            .addComponent(jButtonRelacionarQuarto, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanelQuartosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextFieldObsQuarto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelObsQuarto))))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Quartos", jPanelQuartos);
@@ -1075,9 +1141,9 @@ public class TelaCheck extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldObsRecebimentoActionPerformed
 
-    private void jButtonBuscarQuartoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarQuartoActionPerformed
+    private void jButtonAlocarQuartoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlocarQuartoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonBuscarQuartoActionPerformed
+    }//GEN-LAST:event_jButtonAlocarQuartoActionPerformed
 
     private void jFormattedTextFieldVagaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldVagaActionPerformed
         // TODO add your handling code here:
@@ -1102,6 +1168,14 @@ public class TelaCheck extends javax.swing.JDialog {
     private void jButtonRelacionarHospedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRelacionarHospedeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonRelacionarHospedeActionPerformed
+
+    private void jFormattedTextFieldQuartoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldQuartoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFormattedTextFieldQuartoActionPerformed
+
+    private void jButtonRelacionarQuartoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRelacionarQuartoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonRelacionarQuartoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1147,13 +1221,14 @@ public class TelaCheck extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAlocarHospede;
+    private javax.swing.JButton jButtonAlocarQuarto;
     private javax.swing.JButton jButtonAlocarVaga;
     private javax.swing.JButton jButtonBuscar;
-    private javax.swing.JButton jButtonBuscarQuarto;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonGravar;
     private javax.swing.JButton jButtonNovo;
     private javax.swing.JButton jButtonRelacionarHospede;
+    private javax.swing.JButton jButtonRelacionarQuarto;
     private javax.swing.JButton jButtonRelacionarVaga;
     private javax.swing.JButton jButtonRelacionarVeiculo;
     private javax.swing.JButton jButtonSair;
@@ -1168,6 +1243,7 @@ public class TelaCheck extends javax.swing.JDialog {
     private javax.swing.JFormattedTextField jFormattedTextFieldDataSaida;
     private javax.swing.JFormattedTextField jFormattedTextFieldDataSaidaReserva;
     private javax.swing.JFormattedTextField jFormattedTextFieldHospede;
+    private javax.swing.JFormattedTextField jFormattedTextFieldQuarto;
     private javax.swing.JFormattedTextField jFormattedTextFieldVaga;
     private javax.swing.JFormattedTextField jFormattedTextFieldVeiculo;
     private javax.swing.JLabel jLabelAcrescimo;
@@ -1183,9 +1259,11 @@ public class TelaCheck extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelObs;
     private javax.swing.JLabel jLabelObsDesconto;
     private javax.swing.JLabel jLabelObsHospede;
+    private javax.swing.JLabel jLabelObsQuarto;
     private javax.swing.JLabel jLabelObsRecebimento;
     private javax.swing.JLabel jLabelObsReserva;
     private javax.swing.JLabel jLabelObsVaga;
+    private javax.swing.JLabel jLabelQuarto;
     private javax.swing.JLabel jLabelStatus;
     private javax.swing.JLabel jLabelStatusRecebimento;
     private javax.swing.JLabel jLabelStatusReserva;
@@ -1217,6 +1295,7 @@ public class TelaCheck extends javax.swing.JDialog {
     private javax.swing.JTextField jTextFieldIdReserva;
     private javax.swing.JTextField jTextFieldObs;
     private javax.swing.JTextField jTextFieldObsHospede;
+    private javax.swing.JTextField jTextFieldObsQuarto;
     private javax.swing.JTextField jTextFieldObsRecebimento;
     private javax.swing.JTextField jTextFieldObsReserva;
     private javax.swing.JTextField jTextFieldObsVaga;

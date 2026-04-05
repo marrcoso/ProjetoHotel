@@ -41,7 +41,7 @@ public class VeiculoDAO implements InterfaceDAO<Veiculo> {
         return JPADao.executeWithEntityManager(em -> {
             return em.createQuery(
                 "SELECT v FROM Veiculo v WHERE v.status = 'A' AND v.id NOT IN " +
-                "(SELECT av.veiculo.id FROM AlocacaoVaga av LEFT JOIN av.check c WHERE av.status = 'A' and c.status = 'A')",
+                "(SELECT av.veiculo.id FROM AlocacaoVaga av WHERE av.status = 'A' AND av.check.status = 'A')",
                 Veiculo.class
             ).getResultList();
         }, false);

@@ -36,4 +36,14 @@ public class QuartoDAO implements InterfaceDAO<Quarto> {
     public void AtivarInativar(int id, boolean ativar) throws RuntimeException {
         JPADao.setActiveStatus(Quarto.class, id, ativar);
     }
+
+    public List<Quarto> RetrieveAvailableQuartos() throws RuntimeException {
+        return JPADao.executeWithEntityManager(em -> {
+            return em.createQuery(
+                "SELECT q FROM Quarto q WHERE q.status = 'A' AND q.id NOT IN " +
+                "(SELECT cq.quarto.id FROM CheckQuarto cq WHERE cq.status = 'A' AND cq.check.status = 'A')",
+                Quarto.class
+            ).getResultList();
+        }, false);
+    }
 }

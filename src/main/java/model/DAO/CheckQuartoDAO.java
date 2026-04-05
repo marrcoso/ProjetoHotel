@@ -7,7 +7,6 @@ import javax.persistence.TypedQuery;
 import model.Check;
 import model.CheckQuarto;
 import model.DAO.JPA.JPADao;
-import model.Quarto;
 
 public class CheckQuartoDAO implements InterfaceDAO<CheckQuarto> {
 
@@ -52,7 +51,7 @@ public class CheckQuartoDAO implements InterfaceDAO<CheckQuarto> {
         }, false);
     }
 
-    public void ReplaceQuartosDoCheck(int checkId, List<Integer> quartoIds) throws RuntimeException {
+     public void ReplaceCheckQuartos(int checkId, List<CheckQuarto> checkQuartos) throws RuntimeException {
         JPADao.executeVoid(em -> {
             Check check = em.find(Check.class, checkId);
             if (check == null) {
@@ -69,20 +68,9 @@ public class CheckQuartoDAO implements InterfaceDAO<CheckQuarto> {
                 em.remove(checkQuarto);
             }
 
-            for (int i = 0; i < quartoIds.size(); i++) {
-                Quarto quarto = em.find(Quarto.class, quartoIds.get(i));
-                if (quarto == null) {
-                    throw new RuntimeException("Quarto não encontrado para vincular ao check.");
-                }
-
-                CheckQuarto novo = new CheckQuarto();
-                novo.setCheck(check);
-                novo.setQuarto(quarto);
-                novo.setDataHoraInicio(new java.util.Date()); // ou defina conforme necessário
-                novo.setDataHoraFim(new java.util.Date()); // ou defina conforme necessário
-                novo.setObs("");
-                novo.setStatus('A');
-                em.persist(novo);
+            for (CheckQuarto cq : checkQuartos) {
+                cq.setCheck(check);
+                em.persist(cq);
             }
         }, true);
     }

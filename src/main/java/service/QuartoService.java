@@ -37,4 +37,8 @@ public class QuartoService implements InterfaceService<Quarto> {
     public void AtivarInativar(int id, boolean ativar) throws RuntimeException {
         quartoDAO.AtivarInativar(id, ativar);
     }
+
+    public List<Quarto> carregarQuartosDisponiveis() throws RuntimeException {
+        return quartoDAO.RetrieveAvailableQuartos();
+    }
 }
