@@ -32,6 +32,7 @@ import service.VagaEstacionamentoService;
 import service.VeiculoService;
 import utilities.Utilities;
 import utilities.ValidadorCampos;
+import view.TelaBuscaCheck;
 import view.TelaBuscaHospede;
 import view.TelaBuscaQuarto;
 import view.TelaBuscaVaga;
@@ -288,20 +289,18 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
 
     @Override
     public void handleBuscar() {
-        String valor = JOptionPane.showInputDialog(this.telaCheck, "Informe o ID do Check:");
-        if (valor == null) {
-            return;
-        }
+        final int[] codigoCheck = {0};
+        TelaBuscaCheck telaBuscaCheck = new TelaBuscaCheck(null, true);
+        new ControllerBuscaCheck(telaBuscaCheck, valor -> codigoCheck[0] = valor);
+        telaBuscaCheck.setVisible(true);
 
-        valor = valor.trim();
-        if (!ValidadorCampos.validarCampoNumero(valor)) {
-            JOptionPane.showMessageDialog(this.telaCheck, "Informe um ID numérico válido.");
+        if (codigoCheck[0] == 0) {
             return;
         }
 
         Check check;
         try {
-            check = this.checkService.Carregar(Integer.parseInt(valor));
+            check = this.checkService.Carregar(codigoCheck[0]);
         } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(this.telaCheck, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             return;

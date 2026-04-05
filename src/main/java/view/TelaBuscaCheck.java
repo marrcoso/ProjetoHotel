@@ -9,12 +9,12 @@ package view;
  *
  * @author house
  */
-public class TemplateBuscas2025 extends javax.swing.JDialog {
+public class TelaBuscaCheck extends javax.swing.JDialog {
 
     /**
      * Creates new form ModeloBuscas_2024
      */
-    public TemplateBuscas2025(java.awt.Frame parent, boolean modal) {
+    public TelaBuscaCheck(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -35,12 +35,22 @@ public class TemplateBuscas2025 extends javax.swing.JDialog {
         jTableDados = new javax.swing.JTable();
         jPanelFiltros = new javax.swing.JPanel();
         jCBFiltro = new javax.swing.JComboBox<>();
+        jCBFiltro.addItem("ID");
+        jCBFiltro.addItem("Data de Cadastro");
+        jCBFiltro.addItem("Data de Entrada");
+        jCBFiltro.addItem("Data de Saída");
+        jCBFiltro.addItem("Observação");
+        jCBFiltro.addItem("Status");
         jLabelFiltrar = new javax.swing.JLabel();
         jLabelValor = new javax.swing.JLabel();
         jTFFiltro = new javax.swing.JTextField();
         jButtonCarregar = new javax.swing.JButton();
         jButtonSair = new javax.swing.JButton();
         jButtonFiltar = new javax.swing.JButton();
+        jButtonAtivar = new javax.swing.JButton();
+        jButtonAtivar.setText("Ativar");
+        jButtonInativar = new javax.swing.JButton();
+        jButtonInativar.setText("Inativar");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Projeto de Gestão Hospitalar");
@@ -53,7 +63,7 @@ public class TemplateBuscas2025 extends javax.swing.JDialog {
         jLabelTitulo.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabelTitulo.setForeground(new java.awt.Color(0, 51, 204));
         jLabelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelTitulo.setText("Titulo");
+        jLabelTitulo.setText("Buscar Check");
         jLabelTitulo.setToolTipText("");
 
         javax.swing.GroupLayout jPaneltituloLayout = new javax.swing.GroupLayout(jPaneltitulo);
@@ -74,7 +84,7 @@ public class TemplateBuscas2025 extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Data de Cadastro", "Data de Entrada", "Data de Saída", "Observação", "Status"
             }
         ));
         jScrollPane1.setViewportView(jTableDados);
@@ -119,6 +129,10 @@ public class TemplateBuscas2025 extends javax.swing.JDialog {
                 .addGroup(jPanelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelFiltrosLayout.createSequentialGroup()
                         .addComponent(jButtonCarregar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonAtivar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonInativar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonSair))
                     .addGroup(jPanelFiltrosLayout.createSequentialGroup()
@@ -151,6 +165,8 @@ public class TemplateBuscas2025 extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCarregar)
+                    .addComponent(jButtonAtivar)
+                    .addComponent(jButtonInativar)
                     .addComponent(jButtonSair))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -198,14 +214,18 @@ public class TemplateBuscas2025 extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TemplateBuscas2025.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaBuscaCheck.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TemplateBuscas2025.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaBuscaCheck.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TemplateBuscas2025.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaBuscaCheck.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TemplateBuscas2025.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaBuscaCheck.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -214,7 +234,7 @@ public class TemplateBuscas2025 extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                TemplateBuscas2025 dialog = new TemplateBuscas2025(new javax.swing.JFrame(), true);
+                TelaBuscaCheck dialog = new TelaBuscaCheck(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -227,8 +247,10 @@ public class TemplateBuscas2025 extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAtivar;
     private javax.swing.JButton jButtonCarregar;
     private javax.swing.JButton jButtonFiltar;
+    private javax.swing.JButton jButtonInativar;
     private javax.swing.JButton jButtonSair;
     private javax.swing.JComboBox<String> jCBFiltro;
     private javax.swing.JLabel jLabelFiltrar;
@@ -241,4 +263,36 @@ public class TemplateBuscas2025 extends javax.swing.JDialog {
     private javax.swing.JTextField jTFFiltro;
     private javax.swing.JTable jTableDados;
     // End of variables declaration//GEN-END:variables
+
+    public javax.swing.JButton getjButtonAtivar() {
+        return jButtonAtivar;
+    }
+
+    public javax.swing.JButton getjButtonCarregar() {
+        return jButtonCarregar;
+    }
+
+    public javax.swing.JButton getjButtonFiltar() {
+        return jButtonFiltar;
+    }
+
+    public javax.swing.JButton getjButtonInativar() {
+        return jButtonInativar;
+    }
+
+    public javax.swing.JButton getjButtonSair() {
+        return jButtonSair;
+    }
+
+    public javax.swing.JComboBox<String> getjCBFiltro() {
+        return jCBFiltro;
+    }
+
+    public javax.swing.JTextField getjTFFiltro() {
+        return jTFFiltro;
+    }
+
+    public javax.swing.JTable getjTableDados() {
+        return jTableDados;
+    }
 }

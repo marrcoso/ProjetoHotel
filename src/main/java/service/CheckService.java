@@ -63,4 +63,8 @@ public class CheckService implements InterfaceService<Check> {
             check.setObs("");
         }
     }
+
+    public List<Check> carregarChecksDisponiveis() throws RuntimeException {
+        return checkDAO.RetrieveAvailableChecks();
+    }
 }

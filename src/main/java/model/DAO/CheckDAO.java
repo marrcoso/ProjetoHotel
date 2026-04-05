@@ -36,4 +36,13 @@ public class CheckDAO implements InterfaceDAO<Check> {
     public void AtivarInativar(int id, boolean ativar) throws RuntimeException {
         JPADao.setActiveStatus(Check.class, id, ativar);
     }
+
+    public List<Check> RetrieveAvailableChecks() throws RuntimeException {
+        return JPADao.executeWithEntityManager(em -> {
+            return em.createQuery(
+                "SELECT c FROM Check c WHERE c.status = 'A'",
+                Check.class
+            ).getResultList();
+        }, false);
+    }
 }
