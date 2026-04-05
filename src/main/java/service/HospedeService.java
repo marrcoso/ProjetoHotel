@@ -41,4 +41,8 @@ public class HospedeService implements InterfaceService<Hospede> {
     public void AtivarInativar(int id, boolean ativar) throws RuntimeException {
         hospedeDAO.AtivarInativar(id, ativar);
     }
+
+    public List<Hospede> carregarHospedesDisponiveis() throws RuntimeException {
+        return hospedeDAO.RetrieveAvailableHospedes();
+    }
 }

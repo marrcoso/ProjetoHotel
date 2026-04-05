@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -17,12 +18,21 @@ public final class ControllerBuscaHospede implements ActionListener, InterfaceCo
     private final TelaBuscaHospede telaBuscaHospede;
     private final HospedeService hospedeService;
     private final Consumer<Integer> atualizaCodigo;
+    private final boolean apenasDisponiveis;
 
     public ControllerBuscaHospede(TelaBuscaHospede telaBuscaHospede, Consumer<Integer> atualizaCodigo) {
+        this(telaBuscaHospede, atualizaCodigo, false);
+    }
+
+    public ControllerBuscaHospede(TelaBuscaHospede telaBuscaHospede, Consumer<Integer> atualizaCodigo, boolean apenasDisponiveis) {
         this.telaBuscaHospede = telaBuscaHospede;
         this.hospedeService = new HospedeService();
         this.atualizaCodigo = atualizaCodigo;
+        this.apenasDisponiveis = apenasDisponiveis;
         initListeners();
+        if (apenasDisponiveis) {
+            carregarHospedesDisponiveis();
+        }
     }
 
     @Override
@@ -46,6 +56,19 @@ public final class ControllerBuscaHospede implements ActionListener, InterfaceCo
             char status = statusObj.toString().charAt(0);
             telaBuscaHospede.getjButtonAtivar().setEnabled(status == 'I');
             telaBuscaHospede.getjButtonInativar().setEnabled(status == 'A');
+        }
+    }
+
+    private void carregarHospedesDisponiveis() {
+        DefaultTableModel tabela = (DefaultTableModel) telaBuscaHospede.getjTableDados().getModel();
+        tabela.setRowCount(0);
+        try {
+            List<Hospede> hospedes = hospedeService.carregarHospedesDisponiveis();
+            for (Hospede h : hospedes) {
+                adicionarLinhaTabela(tabela, h);
+            }
+        } catch (RuntimeException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao carregar hospedes disponíveis: " + ex.getMessage());
         }
     }
 
@@ -126,6 +149,12 @@ public final class ControllerBuscaHospede implements ActionListener, InterfaceCo
     @Override
     public void carregarPorAtributo(String atributo, String valor, DefaultTableModel tabela) throws RuntimeException {
         List<Hospede> listaHospedes = hospedeService.Carregar(atributo, valor);
+        if (apenasDisponiveis) {
+            List<Hospede> disponiveis = hospedeService.carregarHospedesDisponiveis();
+            listaHospedes = listaHospedes.stream()
+                .filter(disponiveis::contains)
+                .collect(Collectors.toList());
+        }
         for (Hospede h : listaHospedes) {
             adicionarLinhaTabela(tabela, h);
         }

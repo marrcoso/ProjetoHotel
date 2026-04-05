@@ -37,4 +37,8 @@ public class VagaEstacionamentoService implements InterfaceService<VagaEstaciona
     public void AtivarInativar(int id, boolean ativar) throws RuntimeException {
         vagaDAO.AtivarInativar(id, ativar);
     }
+
+    public List<VagaEstacionamento> carregarVagasDisponiveis() throws RuntimeException {
+        return vagaDAO.RetrieveAvailableVagas();
+    }
 }

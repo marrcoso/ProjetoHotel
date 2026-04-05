@@ -36,4 +36,14 @@ public class VagaEstacionamentoDAO implements InterfaceDAO<VagaEstacionamento> {
     public void AtivarInativar(int id, boolean ativar) throws RuntimeException {
         JPADao.setActiveStatus(VagaEstacionamento.class, id, ativar);
     }
+
+    public List<VagaEstacionamento> RetrieveAvailableVagas() throws RuntimeException {
+        return JPADao.executeWithEntityManager(em -> {
+            return em.createQuery(
+                "SELECT v FROM VagaEstacionamento v WHERE v.status = 'A' AND v.id NOT IN " +
+                "(SELECT av.vagaEstacionamento.id FROM AlocacaoVaga av WHERE av.check.status = 'A')",
+                VagaEstacionamento.class
+            ).getResultList();
+        }, false);
+    }
 }

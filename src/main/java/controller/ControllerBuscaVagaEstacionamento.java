@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -17,12 +18,21 @@ public final class ControllerBuscaVagaEstacionamento implements ActionListener, 
     private final TelaBuscaVaga telaBuscaVaga;
     private final VagaEstacionamentoService vagaService;
     private final Consumer<Integer> atualizaCodigo;
+    private final boolean apenasDisponiveis;
 
     public ControllerBuscaVagaEstacionamento(TelaBuscaVaga telaBuscaVaga, Consumer<Integer> atualizaCodigo) {
+        this(telaBuscaVaga, atualizaCodigo, false);
+    }
+
+    public ControllerBuscaVagaEstacionamento(TelaBuscaVaga telaBuscaVaga, Consumer<Integer> atualizaCodigo, boolean apenasDisponiveis) {
         this.telaBuscaVaga = telaBuscaVaga;
         this.vagaService = new VagaEstacionamentoService();
         this.atualizaCodigo = atualizaCodigo;
+        this.apenasDisponiveis = apenasDisponiveis;
         initListeners();
+        if (apenasDisponiveis) {
+            carregarVagasDisponiveis();
+        }
     }
 
     @Override
@@ -46,6 +56,19 @@ public final class ControllerBuscaVagaEstacionamento implements ActionListener, 
             char status = statusObj.toString().charAt(0);
             telaBuscaVaga.getjButtonAtivar().setEnabled(status == 'I');
             telaBuscaVaga.getjButtonInativar().setEnabled(status == 'A');
+        }
+    }
+
+    private void carregarVagasDisponiveis() {
+        DefaultTableModel tabela = (DefaultTableModel) telaBuscaVaga.getjTableDados().getModel();
+        tabela.setRowCount(0);
+        try {
+            List<VagaEstacionamento> vagas = vagaService.carregarVagasDisponiveis();
+            for (VagaEstacionamento v : vagas) {
+                adicionarLinhaTabela(tabela, v);
+            }
+        } catch (RuntimeException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao carregar vagas disponíveis: " + ex.getMessage());
         }
     }
 
@@ -113,6 +136,12 @@ public final class ControllerBuscaVagaEstacionamento implements ActionListener, 
     @Override
     public void carregarPorAtributo(String atributo, String valor, DefaultTableModel tabela) throws RuntimeException {
         List<VagaEstacionamento> listaVagas = vagaService.Carregar(atributo, valor);
+        if (apenasDisponiveis) {
+            List<VagaEstacionamento> disponiveis = vagaService.carregarVagasDisponiveis();
+            listaVagas = listaVagas.stream()
+                .filter(disponiveis::contains)
+                .collect(java.util.stream.Collectors.toList());
+        }
         for (VagaEstacionamento v : listaVagas) {
             adicionarLinhaTabela(tabela, v);
         }

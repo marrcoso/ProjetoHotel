@@ -36,4 +36,14 @@ public class HospedeDAO implements InterfaceDAO<Hospede> {
     public void AtivarInativar(int id, boolean ativar) throws RuntimeException {
         JPADao.setActiveStatus(Hospede.class, id, ativar);
     }
+
+    public List<Hospede> RetrieveAvailableHospedes() throws RuntimeException {
+        return JPADao.executeWithEntityManager(em -> {
+            return em.createQuery(
+                "SELECT h FROM Hospede h WHERE h.status = 'A' AND h.id NOT IN " +
+                "(SELECT ch.hospede.id FROM CheckHospede ch WHERE ch.check.status = 'A')",
+                Hospede.class
+            ).getResultList();
+        }, false);
+    }
 }

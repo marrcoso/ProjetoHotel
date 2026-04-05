@@ -98,8 +98,20 @@ public class TelaCheck extends javax.swing.JDialog {
         this.jTextFieldObs = jTextFieldObs;
     }
 
-    public JButton getjButtonBuscarHospede() {
-        return jButtonBuscarHospede;
+    public JButton getjButtonAlocarHospede() {
+        return jButtonAlocarHospede;
+    }
+
+    public JButton getjButtonRelacionarHospede() {
+        return jButtonRelacionarHospede;
+    }
+
+    public JComboBox<String> getjComboBoxTipoHospede() {
+        return jComboBoxTipoHospede;
+    }
+
+    public JFormattedTextField getjFormattedTextFieldHospede() {
+        return jFormattedTextFieldHospede;
     }
 
     public JButton getjButtonBuscarQuarto() {
@@ -240,7 +252,14 @@ public class TelaCheck extends javax.swing.JDialog {
         jPanelHospedes = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableHospedes = new javax.swing.JTable();
-        jButtonBuscarHospede = new javax.swing.JButton();
+        jButtonAlocarHospede = new javax.swing.JButton();
+        jLabelHospede = new javax.swing.JLabel();
+        jFormattedTextFieldHospede = new javax.swing.JFormattedTextField();
+        jButtonRelacionarHospede = new javax.swing.JButton();
+        jLabelTipoHospede = new javax.swing.JLabel();
+        jLabelObsHospede = new javax.swing.JLabel();
+        jTextFieldObsHospede = new javax.swing.JTextField();
+        jComboBoxTipoHospede = new javax.swing.JComboBox<>();
         jPanelQuartos = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableQuartos = new javax.swing.JTable();
@@ -251,8 +270,8 @@ public class TelaCheck extends javax.swing.JDialog {
         jButtonAlocarVaga = new javax.swing.JButton();
         jFormattedTextFieldVaga = new javax.swing.JFormattedTextField();
         jButtonRelacionarVaga = new javax.swing.JButton();
-        jLabelQuarto = new javax.swing.JLabel();
-        jLabelQuarto1 = new javax.swing.JLabel();
+        jLabelVaga = new javax.swing.JLabel();
+        jLabelVeiculo = new javax.swing.JLabel();
         jFormattedTextFieldVeiculo = new javax.swing.JFormattedTextField();
         jButtonRelacionarVeiculo = new javax.swing.JButton();
         jTextFieldObsVaga = new javax.swing.JTextField();
@@ -455,7 +474,7 @@ public class TelaCheck extends javax.swing.JDialog {
                 .addComponent(jLabelObs)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldObs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addContainerGap(120, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Check", jPanelCheck);
@@ -464,30 +483,58 @@ public class TelaCheck extends javax.swing.JDialog {
 
         jTableHospedes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "ID", "Nome", "CPF", "Status"
+                "ID", "Nome", "CPF", "Tipo", "Status"
             }
         ));
         jScrollPane1.setViewportView(jTableHospedes);
         if (jTableHospedes.getColumnModel().getColumnCount() > 0) {
             jTableHospedes.getColumnModel().getColumn(0).setMaxWidth(40);
-            jTableHospedes.getColumnModel().getColumn(3).setMinWidth(100);
-            jTableHospedes.getColumnModel().getColumn(3).setMaxWidth(100);
+            jTableHospedes.getColumnModel().getColumn(3).setMinWidth(150);
+            jTableHospedes.getColumnModel().getColumn(3).setMaxWidth(150);
+            jTableHospedes.getColumnModel().getColumn(4).setMinWidth(150);
+            jTableHospedes.getColumnModel().getColumn(4).setMaxWidth(150);
         }
 
-        jButtonBuscarHospede.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Load.png"))); // NOI18N
-        jButtonBuscarHospede.setText("Buscar Hóspede");
-        jButtonBuscarHospede.setActionCommand("0");
-        jButtonBuscarHospede.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAlocarHospede.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Load.png"))); // NOI18N
+        jButtonAlocarHospede.setText("Alocar Hóspede");
+        jButtonAlocarHospede.setActionCommand("0");
+        jButtonAlocarHospede.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonBuscarHospedeActionPerformed(evt);
+                jButtonAlocarHospedeActionPerformed(evt);
             }
         });
+
+        jLabelHospede.setText("Hóspede");
+
+        jFormattedTextFieldHospede.setEditable(false);
+        jFormattedTextFieldHospede.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.##"))));
+        jFormattedTextFieldHospede.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFormattedTextFieldHospedeActionPerformed(evt);
+            }
+        });
+
+        jButtonRelacionarHospede.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Find.png"))); // NOI18N
+        jButtonRelacionarHospede.setActionCommand("1");
+        jButtonRelacionarHospede.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRelacionarHospedeActionPerformed(evt);
+            }
+        });
+
+        jLabelTipoHospede.setText("Tipo");
+
+        jLabelObsHospede.setText("OBS.:");
+
+        jComboBoxTipoHospede.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Titular", "Acompanhante" }));
+        jComboBoxTipoHospede.setSelectedIndex(-1);
+        jComboBoxTipoHospede.setSelectedItem(-1);
 
         javax.swing.GroupLayout jPanelHospedesLayout = new javax.swing.GroupLayout(jPanelHospedes);
         jPanelHospedes.setLayout(jPanelHospedesLayout);
@@ -496,20 +543,49 @@ public class TelaCheck extends javax.swing.JDialog {
             .addGroup(jPanelHospedesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelHospedesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 818, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelHospedesLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButtonBuscarHospede)))
+                        .addGroup(jPanelHospedesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelHospedesLayout.createSequentialGroup()
+                                .addComponent(jLabelHospede)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanelHospedesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanelHospedesLayout.createSequentialGroup()
+                                        .addComponent(jFormattedTextFieldHospede, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButtonRelacionarHospede)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabelTipoHospede)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jComboBoxTipoHospede, 0, 261, Short.MAX_VALUE))
+                                    .addComponent(jTextFieldObsHospede))
+                                .addGap(34, 34, 34))
+                            .addGroup(jPanelHospedesLayout.createSequentialGroup()
+                                .addComponent(jLabelObsHospede)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jButtonAlocarHospede)))
                 .addContainerGap())
         );
         jPanelHospedesLayout.setVerticalGroup(
             jPanelHospedesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelHospedesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanelHospedesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelHospedesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabelTipoHospede)
+                        .addComponent(jComboBoxTipoHospede, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelHospedesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jFormattedTextFieldHospede, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelHospede))
+                    .addComponent(jButtonRelacionarHospede, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonBuscarHospede)
-                .addContainerGap())
+                .addGroup(jPanelHospedesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldObsHospede, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelObsHospede)
+                    .addComponent(jButtonAlocarHospede))
+                .addGap(13, 13, 13))
         );
 
         jTabbedPane1.addTab("Hóspedes", jPanelHospedes);
@@ -560,7 +636,7 @@ public class TelaCheck extends javax.swing.JDialog {
             jPanelQuartosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelQuartosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonBuscarQuarto)
                 .addContainerGap())
@@ -612,9 +688,9 @@ public class TelaCheck extends javax.swing.JDialog {
             }
         });
 
-        jLabelQuarto.setText("Vaga");
+        jLabelVaga.setText("Vaga");
 
-        jLabelQuarto1.setText("Veiculo");
+        jLabelVeiculo.setText("Veiculo");
 
         jFormattedTextFieldVeiculo.setEditable(false);
         jFormattedTextFieldVeiculo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.##"))));
@@ -646,7 +722,7 @@ public class TelaCheck extends javax.swing.JDialog {
                         .addGroup(jPanelVagaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelObsVaga)
                             .addGroup(jPanelVagaLayout.createSequentialGroup()
-                                .addComponent(jLabelQuarto1)
+                                .addComponent(jLabelVeiculo)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanelVagaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanelVagaLayout.createSequentialGroup()
@@ -654,7 +730,7 @@ public class TelaCheck extends javax.swing.JDialog {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jButtonRelacionarVeiculo)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jLabelQuarto)
+                                        .addComponent(jLabelVaga)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jFormattedTextFieldVaga)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -673,18 +749,18 @@ public class TelaCheck extends javax.swing.JDialog {
                 .addGroup(jPanelVagaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanelVagaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jFormattedTextFieldVaga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabelQuarto))
+                        .addComponent(jLabelVaga))
                     .addComponent(jButtonRelacionarVaga, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanelVagaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jFormattedTextFieldVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabelQuarto1))
+                        .addComponent(jLabelVeiculo))
                     .addComponent(jButtonRelacionarVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelVagaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldObsVaga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelObsVaga)
                     .addComponent(jButtonAlocarVaga))
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Vagas", jPanelVaga);
@@ -802,7 +878,7 @@ public class TelaCheck extends javax.swing.JDialog {
                 .addComponent(jLabelObsReserva)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldObsReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Reserva", jPanelReserva);
@@ -926,7 +1002,7 @@ public class TelaCheck extends javax.swing.JDialog {
                         .addGroup(jPanelRecebimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextFieldValorPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextFieldValorPagar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(101, Short.MAX_VALUE))
+                .addContainerGap(118, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Recebimento", jPanelRecebimento);
@@ -971,9 +1047,9 @@ public class TelaCheck extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jFormattedTextFieldDataReservaActionPerformed
 
-    private void jButtonBuscarHospedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarHospedeActionPerformed
+    private void jButtonAlocarHospedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlocarHospedeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonBuscarHospedeActionPerformed
+    }//GEN-LAST:event_jButtonAlocarHospedeActionPerformed
 
     private void jFormattedTextFieldDataEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldDataEntradaActionPerformed
         // TODO add your handling code here:
@@ -1014,6 +1090,14 @@ public class TelaCheck extends javax.swing.JDialog {
     private void jButtonRelacionarVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRelacionarVeiculoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonRelacionarVeiculoActionPerformed
+
+    private void jFormattedTextFieldHospedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldHospedeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFormattedTextFieldHospedeActionPerformed
+
+    private void jButtonRelacionarHospedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRelacionarHospedeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonRelacionarHospedeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1058,25 +1142,28 @@ public class TelaCheck extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAlocarHospede;
     private javax.swing.JButton jButtonAlocarVaga;
     private javax.swing.JButton jButtonBuscar;
-    private javax.swing.JButton jButtonBuscarHospede;
     private javax.swing.JButton jButtonBuscarQuarto;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonGravar;
     private javax.swing.JButton jButtonNovo;
+    private javax.swing.JButton jButtonRelacionarHospede;
     private javax.swing.JButton jButtonRelacionarVaga;
     private javax.swing.JButton jButtonRelacionarVeiculo;
     private javax.swing.JButton jButtonSair;
     private javax.swing.JComboBox<String> jComboBoxStatus;
     private javax.swing.JComboBox<String> jComboBoxStatusRecebimento;
     private javax.swing.JComboBox<String> jComboBoxStatusReserva;
+    private javax.swing.JComboBox<String> jComboBoxTipoHospede;
     private javax.swing.JFormattedTextField jFormattedTextFieldDataCadastro;
     private javax.swing.JFormattedTextField jFormattedTextFieldDataEntrada;
     private javax.swing.JFormattedTextField jFormattedTextFieldDataEntradaReserva;
     private javax.swing.JFormattedTextField jFormattedTextFieldDataReserva;
     private javax.swing.JFormattedTextField jFormattedTextFieldDataSaida;
     private javax.swing.JFormattedTextField jFormattedTextFieldDataSaidaReserva;
+    private javax.swing.JFormattedTextField jFormattedTextFieldHospede;
     private javax.swing.JFormattedTextField jFormattedTextFieldVaga;
     private javax.swing.JFormattedTextField jFormattedTextFieldVeiculo;
     private javax.swing.JLabel jLabelAcrescimo;
@@ -1086,22 +1173,25 @@ public class TelaCheck extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelDataReserva;
     private javax.swing.JLabel jLabelDataSaida;
     private javax.swing.JLabel jLabelDataSaidaReserva;
+    private javax.swing.JLabel jLabelHospede;
     private javax.swing.JLabel jLabelId;
     private javax.swing.JLabel jLabelIdReserva;
     private javax.swing.JLabel jLabelObs;
     private javax.swing.JLabel jLabelObsDesconto;
+    private javax.swing.JLabel jLabelObsHospede;
     private javax.swing.JLabel jLabelObsRecebimento;
     private javax.swing.JLabel jLabelObsReserva;
     private javax.swing.JLabel jLabelObsVaga;
-    private javax.swing.JLabel jLabelQuarto;
-    private javax.swing.JLabel jLabelQuarto1;
     private javax.swing.JLabel jLabelStatus;
     private javax.swing.JLabel jLabelStatusRecebimento;
     private javax.swing.JLabel jLabelStatusReserva;
+    private javax.swing.JLabel jLabelTipoHospede;
     private javax.swing.JLabel jLabelTitulo;
+    private javax.swing.JLabel jLabelVaga;
     private javax.swing.JLabel jLabelValorOriginal;
     private javax.swing.JLabel jLabelValorPagar;
     private javax.swing.JLabel jLabelValorPago;
+    private javax.swing.JLabel jLabelVeiculo;
     private javax.swing.JPanel jPanelBotoes;
     private javax.swing.JPanel jPanelCheck;
     private javax.swing.JPanel jPanelHospedes;
@@ -1122,6 +1212,7 @@ public class TelaCheck extends javax.swing.JDialog {
     private javax.swing.JTextField jTextFieldId;
     private javax.swing.JTextField jTextFieldIdReserva;
     private javax.swing.JTextField jTextFieldObs;
+    private javax.swing.JTextField jTextFieldObsHospede;
     private javax.swing.JTextField jTextFieldObsRecebimento;
     private javax.swing.JTextField jTextFieldObsReserva;
     private javax.swing.JTextField jTextFieldObsVaga;
