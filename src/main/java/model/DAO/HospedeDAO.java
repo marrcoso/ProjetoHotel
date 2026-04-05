@@ -41,7 +41,7 @@ public class HospedeDAO implements InterfaceDAO<Hospede> {
         return JPADao.executeWithEntityManager(em -> {
             return em.createQuery(
                 "SELECT h FROM Hospede h WHERE h.status = 'A' AND h.id NOT IN " +
-                "(SELECT ch.hospede.id FROM CheckHospede ch WHERE ch.check.status = 'A')",
+                "(SELECT ch.hospede.id FROM CheckHospede ch LEFT JOIN ch.check c WHERE ch.status = 'A' and c.status = 'A')",
                 Hospede.class
             ).getResultList();
         }, false);

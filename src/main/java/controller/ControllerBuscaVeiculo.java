@@ -17,11 +17,17 @@ public final class ControllerBuscaVeiculo implements ActionListener, InterfaceCo
     private final TelaBuscaVeiculo telaBuscaVeiculo;
     private final VeiculoService veiculoService;
     private final Consumer<Integer> atualizaCodigo;
+    private final boolean apenasDisponiveis;
 
     public ControllerBuscaVeiculo(TelaBuscaVeiculo telaBuscaVeiculo, Consumer<Integer> atualizaCodigo) {
+        this(telaBuscaVeiculo, atualizaCodigo, false);
+    }
+
+    public ControllerBuscaVeiculo(TelaBuscaVeiculo telaBuscaVeiculo, Consumer<Integer> atualizaCodigo, boolean apenasDisponiveis) {
         this.telaBuscaVeiculo = telaBuscaVeiculo;
         this.veiculoService = new VeiculoService();
         this.atualizaCodigo = atualizaCodigo;
+        this.apenasDisponiveis = apenasDisponiveis;
         initListeners();
     }
 
@@ -117,6 +123,14 @@ public final class ControllerBuscaVeiculo implements ActionListener, InterfaceCo
     @Override
     public void carregarPorAtributo(String atributo, String valor, DefaultTableModel tabela) throws RuntimeException {
         List<Veiculo> listaVeiculos = veiculoService.Carregar(atributo, valor);
+        if (apenasDisponiveis) {
+            List<Integer> disponiveis = veiculoService.carregarVeiculosDisponiveis().stream()
+                .map(Veiculo::getId)
+                .collect(java.util.stream.Collectors.toList());
+            listaVeiculos = listaVeiculos.stream()
+                .filter(v -> disponiveis.contains(v.getId()))
+                .collect(java.util.stream.Collectors.toList());
+        }
         for (Veiculo v : listaVeiculos) {
             adicionarLinhaTabela(tabela, v);
         }
@@ -140,6 +154,16 @@ public final class ControllerBuscaVeiculo implements ActionListener, InterfaceCo
             switch (filtro) {
                 case ID: {
                     Veiculo veiculo = veiculoService.Carregar(Integer.parseInt(filtroTexto));
+                    if (apenasDisponiveis) {
+                        List<Integer> disponiveis = veiculoService.carregarVeiculosDisponiveis().stream()
+                            .map(Veiculo::getId)
+                            .collect(java.util.stream.Collectors.toList());
+                        boolean disponivel = veiculo != null && disponiveis.contains(veiculo.getId());
+                        if (!disponivel) {
+                            JOptionPane.showMessageDialog(null, "Veículo já está alocado e não pode ser selecionado.");
+                            return;
+                        }
+                    }
                     if (veiculo != null) {
                         adicionarLinhaTabela(tabela, veiculo);
                     }

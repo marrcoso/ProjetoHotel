@@ -36,4 +36,14 @@ public class VeiculoDAO implements InterfaceDAO<Veiculo> {
     public void AtivarInativar(int id, boolean ativar) throws RuntimeException {
         JPADao.setActiveStatus(Veiculo.class, id, ativar);
     }
+
+    public List<Veiculo> RetrieveAvailableVeiculos() throws RuntimeException {
+        return JPADao.executeWithEntityManager(em -> {
+            return em.createQuery(
+                "SELECT v FROM Veiculo v WHERE v.status = 'A' AND v.id NOT IN " +
+                "(SELECT av.veiculo.id FROM AlocacaoVaga av LEFT JOIN av.check c WHERE av.status = 'A' and c.status = 'A')",
+                Veiculo.class
+            ).getResultList();
+        }, false);
+    }
 }

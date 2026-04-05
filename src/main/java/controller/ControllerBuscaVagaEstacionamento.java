@@ -30,9 +30,6 @@ public final class ControllerBuscaVagaEstacionamento implements ActionListener, 
         this.atualizaCodigo = atualizaCodigo;
         this.apenasDisponiveis = apenasDisponiveis;
         initListeners();
-        if (apenasDisponiveis) {
-            carregarVagasDisponiveis();
-        }
     }
 
     @Override
@@ -58,20 +55,7 @@ public final class ControllerBuscaVagaEstacionamento implements ActionListener, 
             telaBuscaVaga.getjButtonInativar().setEnabled(status == 'A');
         }
     }
-
-    private void carregarVagasDisponiveis() {
-        DefaultTableModel tabela = (DefaultTableModel) telaBuscaVaga.getjTableDados().getModel();
-        tabela.setRowCount(0);
-        try {
-            List<VagaEstacionamento> vagas = vagaService.carregarVagasDisponiveis();
-            for (VagaEstacionamento v : vagas) {
-                adicionarLinhaTabela(tabela, v);
-            }
-        } catch (RuntimeException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao carregar vagas disponíveis: " + ex.getMessage());
-        }
-    }
-
+    
     @Override
     public void actionPerformed(ActionEvent evento) {
         Object source = evento.getSource();
@@ -137,10 +121,12 @@ public final class ControllerBuscaVagaEstacionamento implements ActionListener, 
     public void carregarPorAtributo(String atributo, String valor, DefaultTableModel tabela) throws RuntimeException {
         List<VagaEstacionamento> listaVagas = vagaService.Carregar(atributo, valor);
         if (apenasDisponiveis) {
-            List<VagaEstacionamento> disponiveis = vagaService.carregarVagasDisponiveis();
+            List<Integer> disponiveis = vagaService.carregarVagasDisponiveis().stream()
+                .map(VagaEstacionamento::getId)
+                .collect(Collectors.toList());
             listaVagas = listaVagas.stream()
-                .filter(disponiveis::contains)
-                .collect(java.util.stream.Collectors.toList());
+                .filter(v -> disponiveis.contains(v.getId()))
+                .collect(Collectors.toList());
         }
         for (VagaEstacionamento v : listaVagas) {
             adicionarLinhaTabela(tabela, v);
@@ -165,6 +151,16 @@ public final class ControllerBuscaVagaEstacionamento implements ActionListener, 
             switch (filtro) {
                 case ID: {
                     VagaEstacionamento vaga = vagaService.Carregar(Integer.parseInt(filtroTexto));
+                    if (apenasDisponiveis) {
+                        List<Integer> disponiveis = vagaService.carregarVagasDisponiveis().stream()
+                            .map(VagaEstacionamento::getId)
+                            .collect(java.util.stream.Collectors.toList());
+                        boolean disponivel = vaga != null && disponiveis.contains(vaga.getId());
+                        if (!disponivel) {
+                            JOptionPane.showMessageDialog(null, "Vaga já está alocado e não pode ser selecionado.");
+                            return;
+                        }
+                    }
                     if (vaga != null) {
                         adicionarLinhaTabela(tabela, vaga);
                     }

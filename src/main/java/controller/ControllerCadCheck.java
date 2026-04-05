@@ -401,7 +401,7 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
         final int[] codigoVeiculo = {0};
         TelaBuscaVeiculo telaBuscaVeiculo = new TelaBuscaVeiculo(null, true);
         @SuppressWarnings("unused")
-        ControllerBuscaVeiculo ControllerBuscaVeiculo = new ControllerBuscaVeiculo(telaBuscaVeiculo, valor -> codigoVeiculo[0] = valor);
+        ControllerBuscaVeiculo ControllerBuscaVeiculo = new ControllerBuscaVeiculo(telaBuscaVeiculo, valor -> codigoVeiculo[0] = valor, true);
         telaBuscaVeiculo.setVisible(true);
 
         if (codigoVeiculo[0] == 0) {
@@ -480,11 +480,16 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
         DefaultTableModel tabela = (DefaultTableModel) this.telaCheck.getjTableVaga().getModel();
         tabela.addRow(new Object[]{
             alocacao.getId() == 0 ? "" : alocacao.getId(),
-            vaga.getDescricao(),
-            veiculo.getPlaca(),
+            alocacao.getVagaEstacionamento().getDescricao(),
+            alocacao.getVeiculo().getPlaca(),
             alocacao.getObs(),
             alocacao.getStatus(),
         });
+        this.vagaSelecionada = null;
+        this.veiculoSelecionado = null;
+        this.telaCheck.getjTextFieldVaga().setText("");
+        this.telaCheck.getjTextFieldVeiculo().setText("");
+        this.telaCheck.getjTextFieldObsVaga().setText("");
     }
 
     private void adicionarAlocacaoHospede(Hospede hospede) {
@@ -578,12 +583,11 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
                 this.alocacoesVagasSelecionadas.add(aloc);
                 DefaultTableModel tabela = (DefaultTableModel) this.telaCheck.getjTableVaga().getModel();
                 tabela.addRow(new Object[]{
-                    aloc.getVagaEstacionamento().getId(),
+                    aloc.getId() == 0 ? "" : aloc.getId(),
                     aloc.getVagaEstacionamento().getDescricao(),
-                    aloc.getVagaEstacionamento().getObs(),
-                    aloc.getVagaEstacionamento().getStatus(),
-                    aloc.getVeiculo().getId(),
-                    aloc.getVeiculo().getPlaca()
+                    aloc.getVeiculo().getPlaca(),
+                    aloc.getObs(),
+                    aloc.getStatus(),
                 });
             }
         } catch (RuntimeException ex) {

@@ -1,6 +1,7 @@
 package service;
 
 import java.util.List;
+
 import model.DAO.VeiculoDAO;
 import model.Veiculo;
 
@@ -36,5 +37,9 @@ public class VeiculoService implements InterfaceService<Veiculo> {
     @Override
     public void AtivarInativar(int id, boolean ativar) throws RuntimeException {
         veiculoDAO.AtivarInativar(id, ativar);
+    }
+
+    public List<Veiculo> carregarVeiculosDisponiveis() throws RuntimeException {
+        return veiculoDAO.RetrieveAvailableVeiculos();
     }
 }
