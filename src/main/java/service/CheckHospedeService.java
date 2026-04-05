@@ -1,11 +1,9 @@
 package service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import model.CheckHospede;
 import model.DAO.CheckHospedeDAO;
-import model.Hospede;
 
 public class CheckHospedeService implements InterfaceService<CheckHospede> {
 
@@ -49,10 +47,7 @@ public class CheckHospedeService implements InterfaceService<CheckHospede> {
         return checkHospedeDAO.RetrieveByCheck(checkId);
     }
 
-    public void substituirHospedesDoCheck(int checkId, List<Hospede> hospedes) throws RuntimeException {
-        List<Integer> idsHospedes = hospedes.stream()
-            .map(Hospede::getId)
-            .collect(Collectors.toList());
-        checkHospedeDAO.ReplaceHospedesDoCheck(checkId, idsHospedes);
+    public void substituirCheckHospedes(int checkId, List<CheckHospede> checkHospedes) throws RuntimeException {
+        checkHospedeDAO.ReplaceCheckHospedes(checkId, checkHospedes);
     }
 }

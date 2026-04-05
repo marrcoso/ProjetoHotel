@@ -50,7 +50,7 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
     private final QuartoService quartoService;
     private final VagaEstacionamentoService vagaService;
     private final VeiculoService veiculoService;
-    private final List<Hospede> hospedesSelecionados;
+    private final List<CheckHospede> hospedesSelecionados;
     private final List<Quarto> quartosSelecionados;
     private final List<AlocacaoVaga> alocacoesVagasSelecionadas;
     private Veiculo veiculoSelecionado;
@@ -259,7 +259,7 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
                 check.setId(Integer.parseInt(this.telaCheck.getjTextFieldId().getText()));
                 this.checkService.Atualizar(check);
             }
-            this.checkHospedeService.substituirHospedesDoCheck(check.getId(), this.hospedesSelecionados);
+            this.checkHospedeService.substituirCheckHospedes(check.getId(), this.hospedesSelecionados);
             this.alocacaoVagaService.substituirAlocacoesDoCheck(check.getId(), this.alocacoesVagasSelecionadas);
             this.checkQuartoService.substituirQuartosDoCheck(check.getId(), this.quartosSelecionados);
         } catch (RuntimeException ex) {
@@ -289,18 +289,19 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
 
     @Override
     public void handleBuscar() {
-        final int[] codigoCheck = {0};
+        codigo = 0;
         TelaBuscaCheck telaBuscaCheck = new TelaBuscaCheck(null, true);
-        new ControllerBuscaCheck(telaBuscaCheck, valor -> codigoCheck[0] = valor);
+        @SuppressWarnings("unused")
+        ControllerBuscaCheck ControllerBuscaCheck = new ControllerBuscaCheck(telaBuscaCheck, valor -> this.codigo = valor);
         telaBuscaCheck.setVisible(true);
 
-        if (codigoCheck[0] == 0) {
+        if (codigo == 0) {
             return;
         }
 
         Check check;
         try {
-            check = this.checkService.Carregar(codigoCheck[0]);
+            check = this.checkService.Carregar(codigo);
         } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(this.telaCheck, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             return;
@@ -325,7 +326,8 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
     private void handleRelacionarHospede() {
         final int[] codigoHospede = {0};
         TelaBuscaHospede telaBuscaHospede = new TelaBuscaHospede(null, true);
-        new ControllerBuscaHospede(telaBuscaHospede, valor -> codigoHospede[0] = valor, true);
+        @SuppressWarnings("unused")
+        ControllerBuscaHospede ControllerBuscaHospede = new ControllerBuscaHospede(telaBuscaHospede, valor -> codigoHospede[0] = valor, true);
         telaBuscaHospede.setVisible(true);
 
         if (codigoHospede[0] == 0) {
@@ -333,7 +335,8 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
         }
 
         try {
-            this.hospedeSelecionado = this.hospedeService.Carregar(codigoHospede[0]);
+            Hospede hospede = this.hospedeService.Carregar(codigoHospede[0]);
+            adicionarHospede(hospede);
         } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(this.telaCheck, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
@@ -364,7 +367,8 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
     private void handleBuscarQuarto() {
         final int[] codigoQuarto = {0};
         TelaBuscaQuarto telaBuscaQuarto = new TelaBuscaQuarto(null, true);
-        new ControllerBuscaQuarto(telaBuscaQuarto, valor -> codigoQuarto[0] = valor);
+        @SuppressWarnings("unused")
+        ControllerBuscaQuarto ControllerBuscaQuarto = new ControllerBuscaQuarto(telaBuscaQuarto, valor -> codigoQuarto[0] = valor);
         telaBuscaQuarto.setVisible(true);
 
         if (codigoQuarto[0] == 0) {
@@ -396,7 +400,8 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
     private void handleRelacionarVeiculo() {
         final int[] codigoVeiculo = {0};
         TelaBuscaVeiculo telaBuscaVeiculo = new TelaBuscaVeiculo(null, true);
-        new ControllerBuscaVeiculo(telaBuscaVeiculo, valor -> codigoVeiculo[0] = valor);
+        @SuppressWarnings("unused")
+        ControllerBuscaVeiculo ControllerBuscaVeiculo = new ControllerBuscaVeiculo(telaBuscaVeiculo, valor -> codigoVeiculo[0] = valor);
         telaBuscaVeiculo.setVisible(true);
 
         if (codigoVeiculo[0] == 0) {
@@ -414,7 +419,8 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
     private void handleRelacionarVaga() {
         final int[] codigoVaga = {0};
         TelaBuscaVaga telaBuscaVaga = new TelaBuscaVaga(null, true);
-        new ControllerBuscaVagaEstacionamento(telaBuscaVaga, valor -> codigoVaga[0] = valor, true);
+        @SuppressWarnings("unused")
+        ControllerBuscaVagaEstacionamento ControllerBuscaVagaEstacionamento = new ControllerBuscaVagaEstacionamento(telaBuscaVaga, valor -> codigoVaga[0] = valor, true);
         telaBuscaVaga.setVisible(true);
 
         if (codigoVaga[0] == 0) {
@@ -427,6 +433,14 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
         } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(this.telaCheck, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    private void adicionarHospede(Hospede hospede) {
+        if (hospede == null) {
+            return;
+        }
+        this.hospedeSelecionado = hospede;
+        this.telaCheck.getjFormattedTextFieldHospede().setText(hospede.getNome());
     }
 
     private void adicionarVaga(VagaEstacionamento vaga) {
@@ -469,7 +483,7 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
             vaga.getDescricao(),
             veiculo.getPlaca(),
             alocacao.getObs(),
-            vaga.getStatus(),
+            alocacao.getStatus(),
         });
     }
 
@@ -478,21 +492,40 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
             return;
         }
 
-        for (Hospede selecionado : this.hospedesSelecionados) {
-            if (selecionado.getId() == hospede.getId()) {
+        for (CheckHospede selecionado : this.hospedesSelecionados) {
+            if (selecionado.getHospede().getId() == hospede.getId()) {
                 JOptionPane.showMessageDialog(this.telaCheck, "Este hóspede já foi adicionado ao check.");
                 return;
             }
         }
 
-        this.hospedesSelecionados.add(hospede);
+        String tipoSelecionado = this.telaCheck.getjComboBoxTipoHospede().getSelectedItem().toString();
+        if ("Titular".equals(tipoSelecionado)) {
+            boolean jaTemTitular = this.hospedesSelecionados.stream()
+                .anyMatch(ch -> "Titular".equals(ch.getTipoHospede()));
+            if (jaTemTitular) {
+                JOptionPane.showMessageDialog(this.telaCheck, "Só é permitido um hóspede titular por check-in.");
+                return;
+            }
+        }
+
+        CheckHospede checkHospede = new CheckHospede();
+        checkHospede.setHospede(hospede);
+        checkHospede.setTipoHospede(this.telaCheck.getjComboBoxTipoHospede().getSelectedItem().toString());
+        checkHospede.setObs(this.telaCheck.getjTextFieldObsHospede().getText().trim());
+        this.hospedesSelecionados.add(checkHospede);
         DefaultTableModel tabela = (DefaultTableModel) this.telaCheck.getjTableHospedes().getModel();
         tabela.addRow(new Object[]{
-            hospede.getId(),
-            hospede.getNome(),
-            hospede.getCpf(),
-            hospede.getStatus()
+            checkHospede.getId() == 0 ? "" : checkHospede.getId(),
+            checkHospede.getHospede().getNome(),
+            checkHospede.getTipoHospede(),
+            checkHospede.getObs(),
+            checkHospede.getHospede().getStatus()
         });
+        this.telaCheck.getjFormattedTextFieldHospede().setText("");
+        this.telaCheck.getjComboBoxTipoHospede().setSelectedIndex(-1);
+        this.telaCheck.getjTextFieldObsHospede().setText("");
+        this.hospedeSelecionado = null;
     }
 
     private void adicionarQuarto(Quarto quarto) {
@@ -563,9 +596,17 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
         limparTabela(this.telaCheck.getjTableHospedes());
 
         try {
-            List<CheckHospede> vinculos = this.checkHospedeService.carregarPorCheck(checkId);
-            for (CheckHospede vinculo : vinculos) {
-                adicionarAlocacaoHospede(vinculo.getHospede());
+            List<CheckHospede> checkHospedes = this.checkHospedeService.carregarPorCheck(checkId);
+            for (CheckHospede checkHospede : checkHospedes) {
+                this.hospedesSelecionados.add(checkHospede);
+                DefaultTableModel tabela = (DefaultTableModel) this.telaCheck.getjTableHospedes().getModel();
+                tabela.addRow(new Object[]{
+                    checkHospede.getId() == 0 ? "" : checkHospede.getId(),
+                    checkHospede.getHospede().getNome(),
+                    checkHospede.getTipoHospede(),
+                    checkHospede.getObs(),
+                    checkHospede.getHospede().getStatus()
+                });
             }
         } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(this.telaCheck, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
@@ -641,11 +682,6 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
 
     private void limparTabela(JTable tabela) {
         ((DefaultTableModel) tabela.getModel()).setRowCount(0);
-    }
-
-    private void setEditavel(javax.swing.JFormattedTextField campo, boolean editavel) {
-        campo.setEnabled(editavel);
-        campo.setEditable(editavel);
     }
 
     private boolean validarDataObrigatoria(String valor, String nomeCampo) {

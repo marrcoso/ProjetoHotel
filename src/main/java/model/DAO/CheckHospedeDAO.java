@@ -7,7 +7,6 @@ import javax.persistence.TypedQuery;
 import model.Check;
 import model.CheckHospede;
 import model.DAO.JPA.JPADao;
-import model.Hospede;
 
 public class CheckHospedeDAO implements InterfaceDAO<CheckHospede> {
 
@@ -52,7 +51,7 @@ public class CheckHospedeDAO implements InterfaceDAO<CheckHospede> {
         }, false);
     }
 
-    public void ReplaceHospedesDoCheck(int checkId, List<Integer> hospedeIds) throws RuntimeException {
+    public void ReplaceCheckHospedes(int checkId, List<CheckHospede> checkHospedes) throws RuntimeException {
         JPADao.executeVoid(em -> {
             Check check = em.find(Check.class, checkId);
             if (check == null) {
@@ -69,19 +68,9 @@ public class CheckHospedeDAO implements InterfaceDAO<CheckHospede> {
                 em.remove(checkHospede);
             }
 
-            for (int i = 0; i < hospedeIds.size(); i++) {
-                Hospede hospede = em.find(Hospede.class, hospedeIds.get(i));
-                if (hospede == null) {
-                    throw new RuntimeException("Hóspede não encontrado para vincular ao check.");
-                }
-
-                CheckHospede novo = new CheckHospede();
-                novo.setCheck(check);
-                novo.setHospede(hospede);
-                novo.setTipoHospede(i == 0 ? "Titular" : "Acompanhante");
-                novo.setObs("");
-                novo.setStatus('A');
-                em.persist(novo);
+            for (CheckHospede ch : checkHospedes) {
+                ch.setCheck(check);
+                em.persist(ch);
             }
         }, true);
     }

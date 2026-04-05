@@ -30,9 +30,6 @@ public final class ControllerBuscaHospede implements ActionListener, InterfaceCo
         this.atualizaCodigo = atualizaCodigo;
         this.apenasDisponiveis = apenasDisponiveis;
         initListeners();
-        if (apenasDisponiveis) {
-            carregarHospedesDisponiveis();
-        }
     }
 
     @Override
@@ -56,19 +53,6 @@ public final class ControllerBuscaHospede implements ActionListener, InterfaceCo
             char status = statusObj.toString().charAt(0);
             telaBuscaHospede.getjButtonAtivar().setEnabled(status == 'I');
             telaBuscaHospede.getjButtonInativar().setEnabled(status == 'A');
-        }
-    }
-
-    private void carregarHospedesDisponiveis() {
-        DefaultTableModel tabela = (DefaultTableModel) telaBuscaHospede.getjTableDados().getModel();
-        tabela.setRowCount(0);
-        try {
-            List<Hospede> hospedes = hospedeService.carregarHospedesDisponiveis();
-            for (Hospede h : hospedes) {
-                adicionarLinhaTabela(tabela, h);
-            }
-        } catch (RuntimeException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao carregar hospedes disponíveis: " + ex.getMessage());
         }
     }
 
@@ -152,8 +136,8 @@ public final class ControllerBuscaHospede implements ActionListener, InterfaceCo
         if (apenasDisponiveis) {
             List<Hospede> disponiveis = hospedeService.carregarHospedesDisponiveis();
             listaHospedes = listaHospedes.stream()
-                .filter(disponiveis::contains)
-                .collect(Collectors.toList());
+            .filter(h -> disponiveis.stream().anyMatch(d -> d.getId() == h.getId()))
+            .collect(Collectors.toList());
         }
         for (Hospede h : listaHospedes) {
             adicionarLinhaTabela(tabela, h);
@@ -178,6 +162,14 @@ public final class ControllerBuscaHospede implements ActionListener, InterfaceCo
             switch (filtro) {
                 case ID: {
                     Hospede hospede = hospedeService.Carregar(Integer.parseInt(filtroTexto));
+                    if (apenasDisponiveis) {
+                        List<Hospede> disponiveis = hospedeService.carregarHospedesDisponiveis();
+                        boolean disponivel = disponiveis.stream().anyMatch(h -> h.getId() == hospede.getId());
+                        if (!disponivel) {
+                            JOptionPane.showMessageDialog(null, "Hóspede indisponível para seleção.");
+                            return;
+                        }
+                    }
                     if (hospede != null) {
                         adicionarLinhaTabela(tabela, hospede);
                     }

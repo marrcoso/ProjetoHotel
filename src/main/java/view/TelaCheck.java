@@ -110,6 +110,10 @@ public class TelaCheck extends javax.swing.JDialog {
         return jComboBoxTipoHospede;
     }
 
+    public JTextField getjTextFieldObsHospede() {
+        return jTextFieldObsHospede;
+    }
+
     public JFormattedTextField getjFormattedTextFieldHospede() {
         return jFormattedTextFieldHospede;
     }
@@ -489,14 +493,14 @@ public class TelaCheck extends javax.swing.JDialog {
                 {null, null, null, null, null}
             },
             new String [] {
-                "ID", "Nome", "CPF", "Tipo", "Status"
+                "ID", "Nome", "Tipo", "Obs", "Status"
             }
         ));
         jScrollPane1.setViewportView(jTableHospedes);
         if (jTableHospedes.getColumnModel().getColumnCount() > 0) {
             jTableHospedes.getColumnModel().getColumn(0).setMaxWidth(40);
-            jTableHospedes.getColumnModel().getColumn(3).setMinWidth(150);
-            jTableHospedes.getColumnModel().getColumn(3).setMaxWidth(150);
+            jTableHospedes.getColumnModel().getColumn(2).setMinWidth(150);
+            jTableHospedes.getColumnModel().getColumn(2).setMaxWidth(150);
             jTableHospedes.getColumnModel().getColumn(4).setMinWidth(150);
             jTableHospedes.getColumnModel().getColumn(4).setMaxWidth(150);
         }
