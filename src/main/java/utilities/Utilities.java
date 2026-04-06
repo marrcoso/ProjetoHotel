@@ -142,9 +142,24 @@ public class Utilities {
     }
 
     public static String getDataHoje() {
-        java.time.LocalDate hoje = java.time.LocalDate.now();
-        java.time.format.DateTimeFormatter formatter = java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        java.time.LocalDateTime hoje = java.time.LocalDateTime.now();
+        java.time.format.DateTimeFormatter formatter = java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         return hoje.format(formatter);
+    }
+
+    public static String formatarDataHoraFromDate(java.util.Date date) {
+        if (date == null) return "";
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm");
+        return sdf.format(date);
+    }
+
+    public static java.util.Date parseDataHora(String dataHora) {
+        try {
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm");
+            return sdf.parse(dataHora);
+        } catch (java.text.ParseException e) {
+            return null;
+        }
     }
 
     public static String formatarDataFromSqlData(String data) {

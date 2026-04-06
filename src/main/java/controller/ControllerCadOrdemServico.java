@@ -16,7 +16,6 @@ import service.OrdemServicoService;
 import service.QuartoService;
 import service.ServicoService;
 import utilities.Utilities;
-import utilities.ValidadorCampos;
 import view.TelaBuscaCheck;
 import view.TelaBuscaOrdemServico;
 import view.TelaBuscaQuarto;
@@ -36,7 +35,7 @@ public class ControllerCadOrdemServico implements ActionListener, InterfaceContr
     private Quarto quartoSelecionado;
     private int codigo;
 
-    private final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    private final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
     public ControllerCadOrdemServico(TelaCadastroOrdemServico telaCad) {
         this.telaCad = telaCad;
@@ -157,14 +156,32 @@ public class ControllerCadOrdemServico implements ActionListener, InterfaceContr
             JOptionPane.showMessageDialog(telaCad, "Selecione um Serviço!", "Erro", JOptionPane.ERROR_MESSAGE);
             return false;
         }
-        if (!ValidadorCampos.validarCampoTexto(telaCad.getjFormattedTextFieldPrevInicio().getText().replace("/", "").trim())) {
-             JOptionPane.showMessageDialog(telaCad, "Informe a data de início prevista!", "Erro", JOptionPane.ERROR_MESSAGE);
-            return false;
+        if (telaCad.getjFormattedTextFieldPrevInicio().getText().contains(" ")) {
+            String checkDay = telaCad.getjFormattedTextFieldPrevInicio().getText().split(" ")[0].replace("/", "").trim();
+            if (checkDay.isEmpty()) {
+                JOptionPane.showMessageDialog(telaCad, "Informe a data de início prevista!", "Erro", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
         }
-        if (!ValidadorCampos.validarCampoTexto(telaCad.getjFormattedTextFieldPrevTermino().getText().replace("/", "").trim())) {
-             JOptionPane.showMessageDialog(telaCad, "Informe a data de término prevista!", "Erro", JOptionPane.ERROR_MESSAGE);
-            return false;
+        if (telaCad.getjFormattedTextFieldPrevTermino().getText().contains(" ")) {
+            String checkDay = telaCad.getjFormattedTextFieldPrevTermino().getText().split(" ")[0].replace("/", "").trim();
+            if (checkDay.isEmpty()) {
+                JOptionPane.showMessageDialog(telaCad, "Informe a data de término prevista!", "Erro", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
         }
+        try {
+            java.util.Date inicio = sdf.parse(telaCad.getjFormattedTextFieldPrevInicio().getText());
+            java.util.Date termino = sdf.parse(telaCad.getjFormattedTextFieldPrevTermino().getText());
+
+            if (termino.before(inicio)) {
+                JOptionPane.showMessageDialog(telaCad, "A data de término não pode ser antes da data de início!", "Erro", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        } catch (Exception e) {
+            // Erro de parse ignorado aqui, pois a validação de campos obrigatórios já reporta se estiver incompleto
+        }
+
         return true;
     }
 

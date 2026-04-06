@@ -42,7 +42,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanelTitulo" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanelDados" min="-2" pref="350" max="-2" attributes="0"/>
+              <Component id="jPanelDados" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanelBotoes" min="-2" pref="51" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -103,23 +103,6 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jTextFieldObservacao" alignment="0" max="32767" attributes="0"/>
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabelId" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTextFieldId" min="-2" pref="60" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabelStatus" min="-2" max="-2" attributes="0"/>
-                              <Component id="jComboBoxStatus" min="-2" pref="140" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabelCadastro" min="-2" max="-2" attributes="0"/>
-                              <Component id="jFormattedTextFieldCadastro" min="-2" pref="150" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
@@ -135,38 +118,54 @@
                                   <Component id="jLabelServico" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
-                              <Group type="102" attributes="0">
-                                  <Component id="jFormattedTextFieldServico" max="32767" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jLabelPrevInicio" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jFormattedTextFieldPrevInicio" min="-2" pref="170" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jFormattedTextFieldPrevTermino" min="-2" pref="170" max="-2" attributes="0"/>
+                                              <Component id="jLabelPrevTermino" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Component id="jFormattedTextFieldServico" max="32767" attributes="0"/>
+                                  </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jButtonRelacionarServico" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jFormattedTextFieldQuarto" min="-2" pref="250" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jButtonRelacionarQuarto" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="jLabelQuarto" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jFormattedTextFieldQuarto" min="-2" pref="250" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jButtonRelacionarQuarto" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabelPrevInicio" min="-2" max="-2" attributes="0"/>
-                              <Component id="jFormattedTextFieldPrevInicio" min="-2" pref="150" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="jLabelPrevTermino" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              </Group>
-                              <Component id="jFormattedTextFieldPrevTermino" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="jLabelQuarto" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
-                          <Component id="jLabelObservacao" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabelId" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jTextFieldId" min="-2" pref="60" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabelStatus" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jComboBoxStatus" min="-2" pref="140" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabelCadastro" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jFormattedTextFieldCadastro" min="-2" pref="150" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Component id="jLabelObservacao" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -211,30 +210,31 @@
                       <Component id="jButtonRelacionarServico" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="jLabelQuarto" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jFormattedTextFieldQuarto" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="jLabelQuarto" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jFormattedTextFieldQuarto" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jButtonRelacionarQuarto" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="jButtonRelacionarQuarto" min="-2" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabelPrevInicio" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabelPrevTermino" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="jLabelPrevTermino" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="baseline" attributes="0">
-                              <Component id="jFormattedTextFieldPrevInicio" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jFormattedTextFieldPrevTermino" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="jFormattedTextFieldPrevTermino" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Component id="jLabelPrevInicio" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jFormattedTextFieldPrevInicio" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jLabelObservacao" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jTextFieldObservacao" min="-2" pref="60" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="58" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -276,18 +276,14 @@
             <Property name="text" type="java.lang.String" value="Data do Cadastro"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldCadastro">
+        <Component class="view.components.DateTimePicker" name="jFormattedTextFieldCadastro">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
-            <Property name="horizontalAlignment" type="int" value="0"/>
           </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(Utilities.getMascaraDataHora())"/>
-          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelCheck">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Check (Obrigat&#xf3;rio)"/>
+            <Property name="text" type="java.lang.String" value="Check"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldCheck">
@@ -304,7 +300,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelServico">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Servi&#xe7;o (Obrigat&#xf3;rio)"/>
+            <Property name="text" type="java.lang.String" value="Servi&#xe7;o"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldServico">
@@ -321,7 +317,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelQuarto">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Quarto (Opcional)"/>
+            <Property name="text" type="java.lang.String" value="Quarto"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldQuarto">
@@ -341,33 +337,22 @@
             <Property name="text" type="java.lang.String" value="Prev. In&#xed;cio"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldPrevInicio">
-          <Properties>
-            <Property name="horizontalAlignment" type="int" value="0"/>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(Utilities.getMascaraDataHora())"/>
-          </AuxValues>
+        <Component class="view.components.DateTimePicker" name="jFormattedTextFieldPrevInicio">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelPrevTermino">
           <Properties>
             <Property name="text" type="java.lang.String" value="Prev. T&#xe9;rmino"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldPrevTermino">
-          <Properties>
-            <Property name="horizontalAlignment" type="int" value="0"/>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(Utilities.getMascaraDataHora())"/>
-          </AuxValues>
+        <Component class="view.components.DateTimePicker" name="jFormattedTextFieldPrevTermino">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelObservacao">
           <Properties>
             <Property name="text" type="java.lang.String" value="Observa&#xe7;&#xe3;o:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextFieldObservacao"/>
+        <Component class="javax.swing.JTextField" name="jTextFieldObservacao">
+        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="jPanelBotoes">
