@@ -87,6 +87,30 @@ public class TelaCaixa extends javax.swing.JDialog {
         return jTabbedPaneCaixa;
     }
 
+    public JButton getjButtonAdicionarMovManual() {
+        return jButtonAdicionarMovManual;
+    }
+
+    public JButton getjButtonAtivarInativarMovimento() {
+        return jButtonAtivarInativarMovimento;
+    }
+
+    public JComboBox<String> getjComboBoxFiltroStatusMovimento() {
+        return jComboBoxFiltroStatusMovimento;
+    }
+
+    public JTextField getjTextFieldDescMovManual() {
+        return jTextFieldDescMovManual;
+    }
+
+    public JTextField getjTextFieldValorMovManual() {
+        return jTextFieldValorMovManual;
+    }
+
+    public JPanel getjPanelNovoMovimentoManual() {
+        return jPanelNovoMovimentoManual;
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -113,6 +137,15 @@ public class TelaCaixa extends javax.swing.JDialog {
         jPanelMovimentos = new javax.swing.JPanel();
         jScrollPaneMovimentos = new javax.swing.JScrollPane();
         jTableMovimentos = new javax.swing.JTable();
+        jLabelFiltroStatus = new javax.swing.JLabel();
+        jComboBoxFiltroStatusMovimento = new javax.swing.JComboBox<>();
+        jButtonAtivarInativarMovimento = new javax.swing.JButton();
+        jPanelNovoMovimentoManual = new javax.swing.JPanel();
+        jLabelDescManual = new javax.swing.JLabel();
+        jTextFieldDescMovManual = new javax.swing.JTextField();
+        jLabelValorManual = new javax.swing.JLabel();
+        jTextFieldValorMovManual = new javax.swing.JTextField();
+        jButtonAdicionarMovManual = new javax.swing.JButton();
         jLabelTotalMovimentos = new javax.swing.JLabel();
         jTextFieldTotalMovimentos = new javax.swing.JTextField();
         jLabelDiferenca = new javax.swing.JLabel();
@@ -254,11 +287,11 @@ public class TelaCaixa extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Data/Hora", "Descrição", "Valor"
+                "Data/Hora", "Descrição", "Valor", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -268,17 +301,87 @@ public class TelaCaixa extends javax.swing.JDialog {
         jScrollPaneMovimentos.setViewportView(jTableMovimentos);
         if (jTableMovimentos.getColumnModel().getColumnCount() > 0) {
             jTableMovimentos.getColumnModel().getColumn(2).setMaxWidth(100);
+            jTableMovimentos.getColumnModel().getColumn(3).setMaxWidth(100);
         }
+
+        jLabelFiltroStatus.setText("Filtro:");
+
+        jComboBoxFiltroStatusMovimento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ativos", "Inativados", "Todos" }));
+
+        jButtonAtivarInativarMovimento.setText("Ativar/Inativar Selecionado");
+        jButtonAtivarInativarMovimento.setActionCommand("0");
+
+        jPanelNovoMovimentoManual.setBorder(javax.swing.BorderFactory.createTitledBorder("Novo Lançamento Manual"));
+
+        jLabelDescManual.setText("Descrição");
+
+        jLabelValorManual.setText("Valor");
+
+        jButtonAdicionarMovManual.setText("Adicionar");
+        jButtonAdicionarMovManual.setActionCommand("0");
+
+        javax.swing.GroupLayout jPanelNovoMovimentoManualLayout = new javax.swing.GroupLayout(jPanelNovoMovimentoManual);
+        jPanelNovoMovimentoManual.setLayout(jPanelNovoMovimentoManualLayout);
+        jPanelNovoMovimentoManualLayout.setHorizontalGroup(
+            jPanelNovoMovimentoManualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelNovoMovimentoManualLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelNovoMovimentoManualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelDescManual)
+                    .addComponent(jTextFieldDescMovManual, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanelNovoMovimentoManualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelValorManual)
+                    .addGroup(jPanelNovoMovimentoManualLayout.createSequentialGroup()
+                        .addComponent(jTextFieldValorMovManual, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonAdicionarMovManual)))
+                .addContainerGap())
+        );
+        jPanelNovoMovimentoManualLayout.setVerticalGroup(
+            jPanelNovoMovimentoManualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelNovoMovimentoManualLayout.createSequentialGroup()
+                .addGroup(jPanelNovoMovimentoManualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelDescManual)
+                    .addComponent(jLabelValorManual))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelNovoMovimentoManualLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldDescMovManual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldValorMovManual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonAdicionarMovManual))
+                .addGap(0, 10, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jPanelMovimentosLayout = new javax.swing.GroupLayout(jPanelMovimentos);
         jPanelMovimentos.setLayout(jPanelMovimentosLayout);
         jPanelMovimentosLayout.setHorizontalGroup(
             jPanelMovimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPaneMovimentos, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE)
+            .addGroup(jPanelMovimentosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelMovimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPaneMovimentos, javax.swing.GroupLayout.DEFAULT_SIZE, 622, Short.MAX_VALUE)
+                    .addGroup(jPanelMovimentosLayout.createSequentialGroup()
+                        .addComponent(jLabelFiltroStatus)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBoxFiltroStatusMovimento, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonAtivarInativarMovimento))
+                    .addComponent(jPanelNovoMovimentoManual, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanelMovimentosLayout.setVerticalGroup(
             jPanelMovimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPaneMovimentos, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMovimentosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanelNovoMovimentoManual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelMovimentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelFiltroStatus)
+                    .addComponent(jComboBoxFiltroStatusMovimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonAtivarInativarMovimento))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPaneMovimentos, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jTabbedPaneCaixa.addTab("Lançamentos", jPanelMovimentos);
@@ -315,7 +418,7 @@ public class TelaCaixa extends javax.swing.JDialog {
             jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelDadosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPaneCaixa, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTabbedPaneCaixa, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabelTotalMovimentos)
@@ -374,7 +477,7 @@ public class TelaCaixa extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jPanelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelDados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelDados, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -385,17 +488,22 @@ public class TelaCaixa extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAdicionarMovManual;
+    private javax.swing.JButton jButtonAtivarInativarMovimento;
     private javax.swing.JButton jButtonBuscar;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonGravar;
     private javax.swing.JButton jButtonNovo;
     private javax.swing.JButton jButtonSair;
+    private javax.swing.JComboBox<String> jComboBoxFiltroStatusMovimento;
     private javax.swing.JComboBox<String> jComboBoxStatus;
     private javax.swing.JFormattedTextField jFormattedTextFieldDataAbertura;
     private javax.swing.JFormattedTextField jFormattedTextFieldDataFechamento;
     private javax.swing.JLabel jLabelDataAbertura;
     private javax.swing.JLabel jLabelDataFechamento;
+    private javax.swing.JLabel jLabelDescManual;
     private javax.swing.JLabel jLabelDiferenca;
+    private javax.swing.JLabel jLabelFiltroStatus;
     private javax.swing.JLabel jLabelId;
     private javax.swing.JLabel jLabelObs;
     private javax.swing.JLabel jLabelStatus;
@@ -403,19 +511,23 @@ public class TelaCaixa extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelTotalMovimentos;
     private javax.swing.JLabel jLabelValorAbertura;
     private javax.swing.JLabel jLabelValorFechamento;
+    private javax.swing.JLabel jLabelValorManual;
     private javax.swing.JPanel jPanelBotoes;
     private javax.swing.JPanel jPanelDados;
     private javax.swing.JPanel jPanelFichaDados;
     private javax.swing.JPanel jPanelMovimentos;
+    private javax.swing.JPanel jPanelNovoMovimentoManual;
     private javax.swing.JPanel jPanelTitulo;
     private javax.swing.JScrollPane jScrollPaneMovimentos;
     private javax.swing.JTabbedPane jTabbedPaneCaixa;
     private javax.swing.JTable jTableMovimentos;
+    private javax.swing.JTextField jTextFieldDescMovManual;
     private javax.swing.JTextField jTextFieldDiferenca;
     private javax.swing.JTextField jTextFieldId;
     private javax.swing.JTextField jTextFieldObs;
     private javax.swing.JTextField jTextFieldTotalMovimentos;
     private javax.swing.JTextField jTextFieldValorAbertura;
     private javax.swing.JTextField jTextFieldValorFechamento;
+    private javax.swing.JTextField jTextFieldValorMovManual;
     // End of variables declaration//GEN-END:variables
 }

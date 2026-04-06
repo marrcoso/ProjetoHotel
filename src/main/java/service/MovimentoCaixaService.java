@@ -59,6 +59,14 @@ public class MovimentoCaixaService implements InterfaceService<MovimentoCaixa> {
     }
 
     public List<MovimentoCaixa> CarregarPorCaixa(int caixaId) throws RuntimeException {
-        return movimentoCaixaDAO.Retrieve("caixa.id", String.valueOf(caixaId));
+        return movimentoCaixaDAO.RetrievePorCaixa(caixaId, "Todos");
+    }
+
+    public List<MovimentoCaixa> CarregarPorCaixa(int caixaId, String statusFilter) throws RuntimeException {
+        return movimentoCaixaDAO.RetrievePorCaixa(caixaId, statusFilter);
+    }
+
+    public float getTotalAtivos(int caixaId) throws RuntimeException {
+        return movimentoCaixaDAO.getSumAtivosByCaixa(caixaId);
     }
 }

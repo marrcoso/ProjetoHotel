@@ -31,8 +31,8 @@ public class MovimentoCaixa {
     @JoinColumn(name = "caixa_id")
     private Caixa caixa;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "receber_id")
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "receber_id", nullable = true)
     private Receber receber;
 
     public MovimentoCaixa() {
