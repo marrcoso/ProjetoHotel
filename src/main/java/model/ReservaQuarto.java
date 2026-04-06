@@ -23,7 +23,7 @@ public class ReservaQuarto {
     private String obs;
 
     @Column(name = "status", nullable = false)
-    private String status;
+    private char status;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "reserva_id")
@@ -36,7 +36,7 @@ public class ReservaQuarto {
     public ReservaQuarto() {
     }
 
-    public ReservaQuarto(int id, Date dataHoraInicio, Date dataHoraFim, String obs, String status, Reserva reserva, Quarto quarto) {
+    public ReservaQuarto(int id, Date dataHoraInicio, Date dataHoraFim, String obs, char status, Reserva reserva, Quarto quarto) {
         this.id = id;
         this.dataHoraInicio = dataHoraInicio;
         this.dataHoraFim = dataHoraFim;
@@ -78,11 +78,11 @@ public class ReservaQuarto {
         this.obs = obs;
     }
 
-    public String getStatus() {
+    public char getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(char status) {
         this.status = status;
     }
 

@@ -2,6 +2,7 @@ package model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "reserva")
@@ -27,16 +28,15 @@ public class Reserva {
     private String obs;
 
     @Column(name = "status", nullable = false)
-    private String status;
+    private char status;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "check_id")
-    private Check check;
+    @OneToMany(mappedBy = "reserva")
+    private List<Check> checks;
 
     public Reserva() {
     }
 
-    public Reserva(int id, Date dataHoraReserva, Date dataPrevistaEntrada, Date dataPrevistaSaida, String obs, String status) {
+    public Reserva(int id, Date dataHoraReserva, Date dataPrevistaEntrada, Date dataPrevistaSaida, String obs, char status) {
         this.id = id;
         this.dataHoraReserva = dataHoraReserva;
         this.dataPrevistaEntrada = dataPrevistaEntrada;
@@ -85,20 +85,20 @@ public class Reserva {
         this.obs = obs;
     }
 
-    public String getStatus() {
+    public char getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(char status) {
         this.status = status;
     }
 
-    public Check getCheck() {
-        return check;
+    public List<Check> getChecks() {
+        return checks;
     }
 
-    public void setCheck(Check check) {
-        this.check = check;
+    public void setChecks(List<Check> checks) {
+        this.checks = checks;
     }
 
     @Override

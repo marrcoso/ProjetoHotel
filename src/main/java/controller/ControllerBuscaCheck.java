@@ -110,7 +110,7 @@ public final class ControllerBuscaCheck implements ActionListener, InterfaceCont
     }
 
     private enum FiltroCheck {
-        ID, DATA_CADASTRO, DATA_ENTRADA, DATA_SAIDA, OBS, STATUS;
+        ID, DATA_CADASTRO, DATA_ENTRADA, DATA_SAIDA, OBS, STATUS, RESERVA;
 
         public static FiltroCheck fromIndex(int index) {
             switch (index) {
@@ -120,6 +120,7 @@ public final class ControllerBuscaCheck implements ActionListener, InterfaceCont
                 case 3: return DATA_SAIDA;
                 case 4: return OBS;
                 case 5: return STATUS;
+                case 6: return RESERVA;
                 default: throw new IllegalArgumentException("Filtro inválido");
             }
         }
@@ -134,7 +135,8 @@ public final class ControllerBuscaCheck implements ActionListener, InterfaceCont
             sdf.format(check.getDataHoraEntrada()),
             sdf.format(check.getDataHoraSaida()),
             check.getObs(),
-            check.getStatus()
+            check.getStatus(),
+            check.getReserva() != null ? check.getReserva().getId() : ""
         });
     }
 
@@ -203,6 +205,10 @@ public final class ControllerBuscaCheck implements ActionListener, InterfaceCont
                 }
                 case STATUS: {
                     carregarPorAtributo("status", filtroTexto, tabela);
+                    break;
+                }
+                case RESERVA: {
+                    carregarPorAtributo("reserva_id", filtroTexto, tabela);
                     break;
                 }
             }

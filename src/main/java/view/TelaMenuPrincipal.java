@@ -16,6 +16,8 @@ import controller.ControllerCadQuarto;
 import controller.ControllerCadServico;
 import controller.ControllerCadVagaEstacionamento;
 import controller.ControllerCadVeiculo;
+import controller.ControllerCadReserva;
+import view.TelaReserva;
 
 /**
  *
@@ -66,6 +68,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         jMenuItemSair = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItemCheck = new javax.swing.JMenuItem();
+        jMenuItemReserva = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -191,6 +194,15 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItemCheck);
 
+        jMenuItemReserva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Calendar.png"))); // NOI18N
+        jMenuItemReserva.setText("Reserva");
+        jMenuItemReserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemReservaActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItemReserva);
+
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Relatórios");
@@ -293,6 +305,12 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         telaCheck.setVisible(true);
     }//GEN-LAST:event_jMenuItemCheckActionPerformed
 
+    private void jMenuItemReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemReservaActionPerformed
+        TelaReserva telaReserva = new TelaReserva(null,true);
+        ControllerCadReserva controllerCadReserva = new ControllerCadReserva(telaReserva);
+        telaReserva.setVisible(true);
+    }//GEN-LAST:event_jMenuItemReservaActionPerformed
+
     @SuppressWarnings("unused")
     private void jMenuItemProdutoActionPerformed(java.awt.event.ActionEvent evt) {                                           
         TelaCadastroProduto telaCadastroProduto = new TelaCadastroProduto(null,true);
@@ -344,6 +362,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemModelo;
     private javax.swing.JMenuItem jMenuItemProduto;
     private javax.swing.JMenuItem jMenuItemQuarto;
+    private javax.swing.JMenuItem jMenuItemReserva;
     private javax.swing.JMenuItem jMenuItemSair;
     private javax.swing.JMenuItem jMenuItemServico;
     private javax.swing.JMenuItem jMenuItemVeiculo;

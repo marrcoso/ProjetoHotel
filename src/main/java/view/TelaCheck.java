@@ -66,10 +66,6 @@ public class TelaCheck extends javax.swing.JDialog {
         return jPanelQuartos;
     }
 
-    public JPanel getjPanelReserva() {
-        return jPanelReserva;
-    }
-
     public JPanel getjPanelVaga() {
         return jPanelVaga;
     }
@@ -166,10 +162,6 @@ public class TelaCheck extends javax.swing.JDialog {
         return jComboBoxStatusRecebimento;
     }
 
-    public JComboBox<String> getjComboBoxStatusReserva() {
-        return jComboBoxStatusReserva;
-    }
-
     public JFormattedTextField getjFormattedTextFieldDataCadastro() {
         return jFormattedTextFieldDataCadastro;
     }
@@ -178,20 +170,8 @@ public class TelaCheck extends javax.swing.JDialog {
         return jFormattedTextFieldDataEntrada;
     }
 
-    public JFormattedTextField getjFormattedTextFieldDataEntradaReserva() {
-        return jFormattedTextFieldDataEntradaReserva;
-    }
-
-    public JFormattedTextField getjFormattedTextFieldDataReserva() {
-        return jFormattedTextFieldDataReserva;
-    }
-
     public JFormattedTextField getjFormattedTextFieldDataSaida() {
         return jFormattedTextFieldDataSaida;
-    }
-
-    public JFormattedTextField getjFormattedTextFieldDataSaidaReserva() {
-        return jFormattedTextFieldDataSaidaReserva;
     }
 
     public JTable getjTableHospedes() {
@@ -214,16 +194,8 @@ public class TelaCheck extends javax.swing.JDialog {
         return jTextFieldDesconto;
     }
 
-    public JTextField getjTextFieldIdReserva() {
-        return jTextFieldIdReserva;
-    }
-
     public JTextField getjTextFieldObsRecebimento() {
         return jTextFieldObsRecebimento;
-    }
-
-    public JTextField getjTextFieldObsReserva() {
-        return jTextFieldObsReserva;
     }
 
     public JTextField getjTextFieldValorOriginal() {
@@ -236,6 +208,14 @@ public class TelaCheck extends javax.swing.JDialog {
 
     public JTextField getjTextFieldValorPago() {
         return jTextFieldValorPago;
+    }
+
+    public JButton getjButtonRelacionarReserva() {
+        return jButtonRelacionarReserva;
+    }
+
+    public JFormattedTextField getjFormattedTextFieldReserva() {
+        return jFormattedTextFieldReserva;
     }
 
     /**
@@ -269,6 +249,9 @@ public class TelaCheck extends javax.swing.JDialog {
         jLabelDataEntrada = new javax.swing.JLabel();
         jFormattedTextFieldDataSaida = new javax.swing.JFormattedTextField();
         jLabelDataSaida = new javax.swing.JLabel();
+        jButtonRelacionarReserva = new javax.swing.JButton();
+        jFormattedTextFieldReserva = new javax.swing.JFormattedTextField();
+        jLabelReserva = new javax.swing.JLabel();
         jPanelHospedes = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableHospedes = new javax.swing.JTable();
@@ -301,20 +284,6 @@ public class TelaCheck extends javax.swing.JDialog {
         jButtonRelacionarVeiculo = new javax.swing.JButton();
         jTextFieldObsVaga = new javax.swing.JTextField();
         jLabelObsVaga = new javax.swing.JLabel();
-        jPanelReserva = new javax.swing.JPanel();
-        jTextFieldIdReserva = new javax.swing.JTextField();
-        jLabelIdReserva = new javax.swing.JLabel();
-        jFormattedTextFieldDataReserva = new javax.swing.JFormattedTextField();
-        jLabelDataReserva = new javax.swing.JLabel();
-        jFormattedTextFieldDataEntradaReserva = new javax.swing.JFormattedTextField();
-        jLabelDataEntradaReserva = new javax.swing.JLabel();
-        jFormattedTextFieldDataSaidaReserva = new javax.swing.JFormattedTextField();
-        jLabelDataSaidaReserva = new javax.swing.JLabel();
-        jComboBoxStatusReserva = new javax.swing.JComboBox<>();
-        jLabelStatusReserva = new javax.swing.JLabel();
-        jTextFieldObsReserva = new javax.swing.JTextField();
-        jLabelObsReserva = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         jPanelRecebimento = new javax.swing.JPanel();
         jComboBoxStatusRecebimento = new javax.swing.JComboBox<>();
         jLabelStatusRecebimento = new javax.swing.JLabel();
@@ -448,6 +417,24 @@ public class TelaCheck extends javax.swing.JDialog {
 
         jLabelDataSaida.setText("Data de Saída");
 
+        jButtonRelacionarReserva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Find.png"))); // NOI18N
+        jButtonRelacionarReserva.setActionCommand("1");
+        jButtonRelacionarReserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRelacionarReservaActionPerformed(evt);
+            }
+        });
+
+        jFormattedTextFieldReserva.setEditable(false);
+        jFormattedTextFieldReserva.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.##"))));
+        jFormattedTextFieldReserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFormattedTextFieldReservaActionPerformed(evt);
+            }
+        });
+
+        jLabelReserva.setText("Reserva:");
+
         javax.swing.GroupLayout jPanelCheckLayout = new javax.swing.GroupLayout(jPanelCheck);
         jPanelCheck.setLayout(jPanelCheckLayout);
         jPanelCheckLayout.setHorizontalGroup(
@@ -455,6 +442,12 @@ public class TelaCheck extends javax.swing.JDialog {
             .addGroup(jPanelCheckLayout.createSequentialGroup()
                 .addGap(206, 206, 206)
                 .addGroup(jPanelCheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanelCheckLayout.createSequentialGroup()
+                        .addComponent(jLabelReserva)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jFormattedTextFieldReserva)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonRelacionarReserva))
                     .addComponent(jLabelObs)
                     .addGroup(jPanelCheckLayout.createSequentialGroup()
                         .addGroup(jPanelCheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -469,7 +462,7 @@ public class TelaCheck extends javax.swing.JDialog {
                             .addComponent(jLabelStatus)
                             .addComponent(jComboBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jTextFieldObs))
-                .addContainerGap(212, Short.MAX_VALUE))
+                .addContainerGap(246, Short.MAX_VALUE))
         );
         jPanelCheckLayout.setVerticalGroup(
             jPanelCheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -498,7 +491,13 @@ public class TelaCheck extends javax.swing.JDialog {
                 .addComponent(jLabelObs)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldObs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(120, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelCheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelCheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jFormattedTextFieldReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelReserva))
+                    .addComponent(jButtonRelacionarReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(88, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Check", jPanelCheck);
@@ -834,131 +833,6 @@ public class TelaCheck extends javax.swing.JDialog {
 
         jTabbedPane1.addTab("Vagas", jPanelVaga);
 
-        jPanelReserva.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        jTextFieldIdReserva.setEnabled(false);
-
-        jLabelIdReserva.setText("ID");
-
-        try {
-            jFormattedTextFieldDataReserva.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        jFormattedTextFieldDataReserva.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jFormattedTextFieldDataReserva.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFormattedTextFieldDataReservaActionPerformed(evt);
-            }
-        });
-
-        jLabelDataReserva.setText("Data da Reserva");
-
-        try {
-            jFormattedTextFieldDataEntradaReserva.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        jFormattedTextFieldDataEntradaReserva.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jFormattedTextFieldDataEntradaReserva.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFormattedTextFieldDataEntradaReservaActionPerformed(evt);
-            }
-        });
-
-        jLabelDataEntradaReserva.setText("Previsão de Entrada");
-
-        try {
-            jFormattedTextFieldDataSaidaReserva.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        jFormattedTextFieldDataSaidaReserva.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jFormattedTextFieldDataSaidaReserva.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFormattedTextFieldDataSaidaReservaActionPerformed(evt);
-            }
-        });
-
-        jLabelDataSaidaReserva.setText("Previsão de Saída");
-
-        jComboBoxStatusReserva.setEditable(true);
-        jComboBoxStatusReserva.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ativo", "Inativo" }));
-        jComboBoxStatusReserva.setEnabled(false);
-
-        jLabelStatusReserva.setText("Status");
-
-        jLabelObsReserva.setText("OBS.:");
-
-        jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(204, 0, 0));
-        jLabel1.setText("FUNCIONALIDADE DESATIVADA TEMPORARIAMENTE");
-
-        javax.swing.GroupLayout jPanelReservaLayout = new javax.swing.GroupLayout(jPanelReserva);
-        jPanelReserva.setLayout(jPanelReservaLayout);
-        jPanelReservaLayout.setHorizontalGroup(
-            jPanelReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelReservaLayout.createSequentialGroup()
-                .addGap(204, 204, 204)
-                .addGroup(jPanelReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabelIdReserva)
-                    .addComponent(jTextFieldIdReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanelReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(jPanelReservaLayout.createSequentialGroup()
-                            .addGroup(jPanelReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanelReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jFormattedTextFieldDataReserva, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jFormattedTextFieldDataEntradaReserva, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jLabelDataReserva)
-                                .addComponent(jLabelDataEntradaReserva))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanelReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jFormattedTextFieldDataSaidaReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabelDataSaidaReserva)
-                                .addComponent(jLabelStatusReserva)
-                                .addComponent(jComboBoxStatusReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(jPanelReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelObsReserva)
-                            .addComponent(jTextFieldObsReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(186, Short.MAX_VALUE))
-        );
-        jPanelReservaLayout.setVerticalGroup(
-            jPanelReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelReservaLayout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addComponent(jLabelIdReserva)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldIdReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanelReservaLayout.createSequentialGroup()
-                        .addComponent(jLabelDataReserva)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jFormattedTextFieldDataReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabelDataEntradaReserva)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jFormattedTextFieldDataEntradaReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelReservaLayout.createSequentialGroup()
-                        .addComponent(jLabelStatusReserva)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBoxStatusReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabelDataSaidaReserva)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jFormattedTextFieldDataSaidaReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelObsReserva)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldObsReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
-                .addContainerGap(75, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("Reserva", jPanelReserva);
-
         jPanelRecebimento.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jComboBoxStatusRecebimento.setEditable(true);
@@ -1111,18 +985,6 @@ public class TelaCheck extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jFormattedTextFieldDataSaidaReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldDataSaidaReservaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFormattedTextFieldDataSaidaReservaActionPerformed
-
-    private void jFormattedTextFieldDataEntradaReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldDataEntradaReservaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFormattedTextFieldDataEntradaReservaActionPerformed
-
-    private void jFormattedTextFieldDataReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldDataReservaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFormattedTextFieldDataReservaActionPerformed
-
     private void jButtonAlocarHospedeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlocarHospedeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonAlocarHospedeActionPerformed
@@ -1183,6 +1045,14 @@ public class TelaCheck extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonRelacionarQuartoActionPerformed
 
+    private void jButtonRelacionarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRelacionarReservaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonRelacionarReservaActionPerformed
+
+    private void jFormattedTextFieldReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldReservaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFormattedTextFieldReservaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1235,45 +1105,37 @@ public class TelaCheck extends javax.swing.JDialog {
     private javax.swing.JButton jButtonNovo;
     private javax.swing.JButton jButtonRelacionarHospede;
     private javax.swing.JButton jButtonRelacionarQuarto;
+    private javax.swing.JButton jButtonRelacionarReserva;
     private javax.swing.JButton jButtonRelacionarVaga;
     private javax.swing.JButton jButtonRelacionarVeiculo;
     private javax.swing.JButton jButtonSair;
     private javax.swing.JComboBox<String> jComboBoxStatus;
     private javax.swing.JComboBox<String> jComboBoxStatusRecebimento;
-    private javax.swing.JComboBox<String> jComboBoxStatusReserva;
     private javax.swing.JComboBox<String> jComboBoxTipoHospede;
     private javax.swing.JFormattedTextField jFormattedTextFieldDataCadastro;
     private javax.swing.JFormattedTextField jFormattedTextFieldDataEntrada;
-    private javax.swing.JFormattedTextField jFormattedTextFieldDataEntradaReserva;
-    private javax.swing.JFormattedTextField jFormattedTextFieldDataReserva;
     private javax.swing.JFormattedTextField jFormattedTextFieldDataSaida;
-    private javax.swing.JFormattedTextField jFormattedTextFieldDataSaidaReserva;
     private javax.swing.JFormattedTextField jFormattedTextFieldHospede;
     private javax.swing.JFormattedTextField jFormattedTextFieldQuarto;
+    private javax.swing.JFormattedTextField jFormattedTextFieldReserva;
     private javax.swing.JFormattedTextField jFormattedTextFieldVaga;
     private javax.swing.JFormattedTextField jFormattedTextFieldVeiculo;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelAcrescimo;
     private javax.swing.JLabel jLabelDataCadastro;
     private javax.swing.JLabel jLabelDataEntrada;
-    private javax.swing.JLabel jLabelDataEntradaReserva;
-    private javax.swing.JLabel jLabelDataReserva;
     private javax.swing.JLabel jLabelDataSaida;
-    private javax.swing.JLabel jLabelDataSaidaReserva;
     private javax.swing.JLabel jLabelHospede;
     private javax.swing.JLabel jLabelId;
-    private javax.swing.JLabel jLabelIdReserva;
     private javax.swing.JLabel jLabelObs;
     private javax.swing.JLabel jLabelObsDesconto;
     private javax.swing.JLabel jLabelObsHospede;
     private javax.swing.JLabel jLabelObsQuarto;
     private javax.swing.JLabel jLabelObsRecebimento;
-    private javax.swing.JLabel jLabelObsReserva;
     private javax.swing.JLabel jLabelObsVaga;
     private javax.swing.JLabel jLabelQuarto;
+    private javax.swing.JLabel jLabelReserva;
     private javax.swing.JLabel jLabelStatus;
     private javax.swing.JLabel jLabelStatusRecebimento;
-    private javax.swing.JLabel jLabelStatusReserva;
     private javax.swing.JLabel jLabelTipoHospede;
     private javax.swing.JLabel jLabelTitulo;
     private javax.swing.JLabel jLabelVaga;
@@ -1286,7 +1148,6 @@ public class TelaCheck extends javax.swing.JDialog {
     private javax.swing.JPanel jPanelHospedes;
     private javax.swing.JPanel jPanelQuartos;
     private javax.swing.JPanel jPanelRecebimento;
-    private javax.swing.JPanel jPanelReserva;
     private javax.swing.JPanel jPanelTitulo;
     private javax.swing.JPanel jPanelVaga;
     private javax.swing.JScrollPane jScrollPane1;
@@ -1299,12 +1160,10 @@ public class TelaCheck extends javax.swing.JDialog {
     private javax.swing.JTextField jTextFieldAcrescimo;
     private javax.swing.JTextField jTextFieldDesconto;
     private javax.swing.JTextField jTextFieldId;
-    private javax.swing.JTextField jTextFieldIdReserva;
     private javax.swing.JTextField jTextFieldObs;
     private javax.swing.JTextField jTextFieldObsHospede;
     private javax.swing.JTextField jTextFieldObsQuarto;
     private javax.swing.JTextField jTextFieldObsRecebimento;
-    private javax.swing.JTextField jTextFieldObsReserva;
     private javax.swing.JTextField jTextFieldObsVaga;
     private javax.swing.JTextField jTextFieldValorOriginal;
     private javax.swing.JTextField jTextFieldValorPagar;

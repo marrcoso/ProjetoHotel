@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view;
 
 import javax.swing.JButton;
@@ -10,9 +5,9 @@ import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
-public class TelaBuscaCheck extends javax.swing.JDialog {
+public class TelaBuscaReserva extends javax.swing.JDialog {
 
-    public TelaBuscaCheck(java.awt.Frame parent, boolean modal) {
+    public TelaBuscaReserva(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -84,7 +79,7 @@ public class TelaBuscaCheck extends javax.swing.JDialog {
         jLabelTitulo.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabelTitulo.setForeground(new java.awt.Color(0, 51, 204));
         jLabelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelTitulo.setText("Check in/Check out");
+        jLabelTitulo.setText("Reserva");
         jLabelTitulo.setToolTipText("");
 
         javax.swing.GroupLayout jPaneltituloLayout = new javax.swing.GroupLayout(jPaneltitulo);
@@ -105,7 +100,7 @@ public class TelaBuscaCheck extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Id", "Data Cadastro", "Data Entrada", "Data Saída", "Obs", "Status", "Reserva"
+                "Id", "Data Reserva", "Previsão Entrada", "Previsão Saída", "Obs", "Status"
             }
         ));
         jTableDados.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -113,7 +108,6 @@ public class TelaBuscaCheck extends javax.swing.JDialog {
         if (jTableDados.getColumnModel().getColumnCount() > 0) {
             jTableDados.getColumnModel().getColumn(0).setMaxWidth(40);
             jTableDados.getColumnModel().getColumn(5).setMaxWidth(100);
-            jTableDados.getColumnModel().getColumn(6).setMaxWidth(100);
         }
 
         javax.swing.GroupLayout jPanelDadosLayout = new javax.swing.GroupLayout(jPanelDados);
@@ -129,7 +123,7 @@ public class TelaBuscaCheck extends javax.swing.JDialog {
 
         jPanelFiltros.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jCBFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Id", "Data de Cadastro", "Data de Entrada", "Data de Saída", "Observação", "Status", "Reserva" }));
+        jCBFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Id", "Data da Reserva", "Previsão Entrada", "Previsão Saída", "Observação", "Status" }));
 
         jLabelFiltrar.setText("Filtrar Por");
 
@@ -265,7 +259,7 @@ public class TelaBuscaCheck extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonInativarActionPerformed
 
-     /**
+    /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -282,27 +276,20 @@ public class TelaBuscaCheck extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaBuscaCheck.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaBuscaReserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaBuscaCheck.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaBuscaReserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaBuscaCheck.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaBuscaReserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaBuscaCheck.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaBuscaReserva.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                TelaBuscaCheck dialog = new TelaBuscaCheck(new javax.swing.JFrame(), true);
+                TelaBuscaReserva dialog = new TelaBuscaReserva(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

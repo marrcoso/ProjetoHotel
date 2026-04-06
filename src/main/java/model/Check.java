@@ -2,14 +2,7 @@ package model;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "check")
@@ -37,16 +30,21 @@ public class Check {
     @Column(name = "status", nullable = false)
     private char status;
 
+    @ManyToOne
+    @JoinColumn(name = "reserva_id")
+    private Reserva reserva;
+
     public Check() {
     }
 
-    public Check(int id, Date dataHoraCadastro, Date dataHoraEntrada, Date dataHoraSaida, String obs, char status) {
+    public Check(int id, Date dataHoraCadastro, Date dataHoraEntrada, Date dataHoraSaida, String obs, char status, Reserva reserva) {
         this.id = id;
         this.dataHoraCadastro = dataHoraCadastro;
         this.dataHoraEntrada = dataHoraEntrada;
         this.dataHoraSaida = dataHoraSaida;
         this.obs = obs;
         this.status = status;
+        this.reserva = reserva;
     }
 
     public int getId() {
@@ -97,6 +95,14 @@ public class Check {
         this.status = status;
     }
 
+    public Reserva getReserva() {
+        return reserva;
+    }
+
+    public void setReserva(Reserva reserva) {
+        this.reserva = reserva;
+    }
+
     @Override
     public String toString() {
         return "id              = " + this.getId()
@@ -104,6 +110,7 @@ public class Check {
                 + "\nData/Hora Ent. = " + this.getDataHoraEntrada()
                 + "\nData/Hora Sai. = " + this.getDataHoraSaida()
                 + "\nObs            = " + this.getObs()
-                + "\nStatus         = " + this.getStatus();
+                + "\nStatus         = " + this.getStatus()
+                + "\nReserva        = " + (this.getReserva() != null ? this.getReserva().getId() : "null");
     }
 }
