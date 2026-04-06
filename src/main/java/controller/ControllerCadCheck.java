@@ -21,6 +21,7 @@ import model.CheckHospede;
 import model.CheckQuarto;
 import model.Hospede;
 import model.Quarto;
+import model.Receber;
 import model.VagaEstacionamento;
 import model.Veiculo;
 import service.AlocacaoVagaService;
@@ -29,6 +30,7 @@ import service.CheckQuartoService;
 import service.CheckService;
 import service.HospedeService;
 import service.QuartoService;
+import service.ReceberService;
 import service.VagaEstacionamentoService;
 import service.VeiculoService;
 import utilities.Utilities;
@@ -51,6 +53,7 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
     private final QuartoService quartoService;
     private final VagaEstacionamentoService vagaService;
     private final VeiculoService veiculoService;
+    private final ReceberService receberService;
     private final List<CheckHospede> hospedesSelecionados;
     private final List<CheckQuarto> quartosSelecionados;
     private final List<AlocacaoVaga> alocacoesVagasSelecionadas;
@@ -70,6 +73,7 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
         this.quartoService = new QuartoService();
         this.vagaService = new VagaEstacionamentoService();
         this.veiculoService = new VeiculoService();
+        this.receberService = new ReceberService();
         this.hospedesSelecionados = new ArrayList<>();
         this.quartosSelecionados = new ArrayList<>();
         this.alocacoesVagasSelecionadas = new ArrayList<>();
@@ -287,6 +291,15 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
             this.checkHospedeService.substituirCheckHospedes(check.getId(), this.hospedesSelecionados);
             this.alocacaoVagaService.substituirAlocacoesDoCheck(check.getId(), this.alocacoesVagasSelecionadas);
             this.checkQuartoService.substituirCheckQuartos(check.getId(), this.quartosSelecionados);
+
+            Receber receber = construirReceberDoFormulario(check);
+            Receber existing = this.receberService.CarregarPorCheck(check.getId());
+            if (existing != null) {
+                receber.setId(existing.getId());
+                this.receberService.Atualizar(receber);
+            } else {
+                this.receberService.Criar(receber);
+            }
         } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(this.telaCheck, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             return;
@@ -302,6 +315,19 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
         this.veiculoSelecionado = null;
         this.vagaSelecionada = null;
         this.codigo = 0;
+    }
+
+    private Receber construirReceberDoFormulario(Check check) {
+        Receber receber = new Receber();
+        receber.setCheck(check);
+        receber.setDataHoraCadastro(new Date());
+        receber.setValorOriginal(lerValorMonetario(this.telaCheck.getjTextFieldValorOriginal().getText()));
+        receber.setDesconto(lerValorMonetario(this.telaCheck.getjTextFieldDesconto().getText()));
+        receber.setAcrescimo(lerValorMonetario(this.telaCheck.getjTextFieldAcrescimo().getText()));
+        receber.setValorPago(lerValorMonetario(this.telaCheck.getjTextFieldValorPago().getText()));
+        receber.setObs(this.telaCheck.getjTextFieldObsRecebimento().getText().trim());
+        receber.setStatus('A');
+        return receber;
     }
 
     @Override
@@ -648,8 +674,28 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
         carregarHospedesDoCheck(check.getId());
         carregarQuartosDoCheck(check.getId());
         carregarVagasDoCheck(check.getId());
+        carregarRecebimentoDoCheck(check.getId());
         recalcularValorPagar();
 
+    }
+
+    private void carregarRecebimentoDoCheck(int checkId) {
+        try {
+            Receber receber = this.receberService.CarregarPorCheck(checkId);
+            if (receber != null) {
+                this.telaCheck.getjTextFieldValorOriginal().setText(String.format(Locale.US, "%.2f", receber.getValorOriginal()));
+                this.telaCheck.getjTextFieldDesconto().setText(String.format(Locale.US, "%.2f", receber.getDesconto()));
+                this.telaCheck.getjTextFieldAcrescimo().setText(String.format(Locale.US, "%.2f", receber.getAcrescimo()));
+                this.telaCheck.getjTextFieldValorPago().setText(String.format(Locale.US, "%.2f", receber.getValorPago()));
+            } else {
+                this.telaCheck.getjTextFieldValorOriginal().setText("0.00");
+                this.telaCheck.getjTextFieldDesconto().setText("0.00");
+                this.telaCheck.getjTextFieldAcrescimo().setText("0.00");
+                this.telaCheck.getjTextFieldValorPago().setText("0.00");
+            }
+        } catch (RuntimeException ex) {
+            JOptionPane.showMessageDialog(this.telaCheck, "Erro ao carregar dados do recebimento: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void carregarVagasDoCheck(int checkId) {

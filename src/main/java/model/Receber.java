@@ -33,14 +33,14 @@ public class Receber {
     @Column(name = "status", nullable = false)
     private char status;
 
-    @ManyToOne
-    @JoinColumn(name = "check_quarto_id")
-    private CheckQuarto checkQuarto;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "check_id")
+    private Check check;
 
     public Receber() {
     }
 
-    public Receber(int id, Date dataHoraCadastro, float valorOriginal, float desconto, float acrescimo, float valorPago, String obs, char status, CheckQuarto checkQuarto) {
+    public Receber(int id, Date dataHoraCadastro, float valorOriginal, float desconto, float acrescimo, float valorPago, String obs, char status, Check check) {
         this.id = id;
         this.dataHoraCadastro = dataHoraCadastro;
         this.valorOriginal = valorOriginal;
@@ -49,7 +49,7 @@ public class Receber {
         this.valorPago = valorPago;
         this.obs = obs;
         this.status = status;
-        this.checkQuarto = checkQuarto;
+        this.check = check;
     }
 
     public int getId() {
@@ -116,12 +116,12 @@ public class Receber {
         this.status = status;
     }
 
-    public CheckQuarto getCheckQuarto() {
-        return checkQuarto;
+    public Check getCheck() {
+        return check;
     }
 
-    public void setCheckQuarto(CheckQuarto checkQuarto) {
-        this.checkQuarto = checkQuarto;
+    public void setCheck(Check check) {
+        this.check = check;
     }
 
     @Override
@@ -134,7 +134,7 @@ public class Receber {
                 "\nValor Pago      = " + this.getValorPago() +
                 "\nObs             = " + this.getObs() +
                 "\nStatus          = " + this.getStatus() +
-                "\nCheck ID        = " + (this.getCheckQuarto() != null ? this.getCheckQuarto().getId() : "null");
+                "\nCheck ID        = " + (this.getCheck() != null ? this.getCheck().getId() : "null");
     }
 
 
