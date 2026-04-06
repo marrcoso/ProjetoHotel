@@ -1,6 +1,8 @@
 package model.DAO.JPA;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Date;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -107,12 +109,23 @@ public class JPADao {
                 jpql = "SELECT e FROM " + entityName + " e WHERE e." + atributo + " = :valor";
                 q = em.createQuery(jpql, clazz);
                 q.setParameter("valor", Integer.valueOf(valor));
-            } else {
-                jpql = "SELECT e FROM " + entityName + " e WHERE e." + atributo + " LIKE :valor";
-                q = em.createQuery(jpql, clazz);
-                q.setParameter("valor", "%" + valor + "%");
+                return q.getResultList();
             }
-            return q.getResultList();
+            
+            try {
+                Field field = clazz.getDeclaredField(atributo);
+                if (field.getType().equals(Date.class)) {
+                    jpql = "SELECT e FROM " + entityName + " e WHERE FUNCTION('DATE_FORMAT', e." + atributo + ", '%d/%m/%Y %H:%i:%s') LIKE :valor";                    q = em.createQuery(jpql, clazz);
+                    q.setParameter("valor", "%" + valor + "%");
+                } else {
+                    jpql = "SELECT e FROM " + entityName + " e WHERE e." + atributo + " LIKE :valor";
+                    q = em.createQuery(jpql, clazz);
+                    q.setParameter("valor", "%" + valor + "%");
+                }
+                return q.getResultList();
+            } catch (NoSuchFieldException ex) {
+                throw new RuntimeException("Atributo não encontrado para consulta: " + atributo, ex);
+            }
         }, false);
     }
 

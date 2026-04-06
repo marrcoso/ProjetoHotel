@@ -17,7 +17,9 @@ import controller.ControllerCadServico;
 import controller.ControllerCadVagaEstacionamento;
 import controller.ControllerCadVeiculo;
 import controller.ControllerCadReserva;
+import controller.ControllerCaixa;
 import view.TelaReserva;
+import view.TelaCaixa;
 
 /**
  *
@@ -67,8 +69,9 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         jMenuItemSair = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
-        jMenuItemCheck = new javax.swing.JMenuItem();
+        jMenuItemCaixa = new javax.swing.JMenuItem();
         jMenuItemReserva = new javax.swing.JMenuItem();
+        jMenuItemCheck = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -185,14 +188,14 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
 
         jMenu3.setText("Movimentos");
 
-        jMenuItemCheck.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Clipboard.png"))); // NOI18N
-        jMenuItemCheck.setText("Check");
-        jMenuItemCheck.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemCaixa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Calculator.png"))); // NOI18N
+        jMenuItemCaixa.setText("Caixa");
+        jMenuItemCaixa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemCheckActionPerformed(evt);
+                jMenuItemCaixaActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItemCheck);
+        jMenu3.add(jMenuItemCaixa);
 
         jMenuItemReserva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Calendar.png"))); // NOI18N
         jMenuItemReserva.setText("Reserva");
@@ -202,6 +205,15 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu3.add(jMenuItemReserva);
+
+        jMenuItemCheck.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Clipboard.png"))); // NOI18N
+        jMenuItemCheck.setText("Check");
+        jMenuItemCheck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCheckActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItemCheck);
 
         jMenuBar1.add(jMenu3);
 
@@ -311,6 +323,12 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         telaReserva.setVisible(true);
     }//GEN-LAST:event_jMenuItemReservaActionPerformed
 
+    private void jMenuItemCaixaActionPerformed(java.awt.event.ActionEvent evt) {
+        TelaCaixa telaCaixa = new TelaCaixa(null, true);
+        ControllerCaixa controllerCaixa = new ControllerCaixa(telaCaixa);
+        telaCaixa.setVisible(true);
+    }
+
     @SuppressWarnings("unused")
     private void jMenuItemProdutoActionPerformed(java.awt.event.ActionEvent evt) {                                           
         TelaCadastroProduto telaCadastroProduto = new TelaCadastroProduto(null,true);
@@ -354,6 +372,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItemCaixa;
     private javax.swing.JMenuItem jMenuItemCheck;
     private javax.swing.JMenuItem jMenuItemFornecedor;
     private javax.swing.JMenuItem jMenuItemFuncionario;

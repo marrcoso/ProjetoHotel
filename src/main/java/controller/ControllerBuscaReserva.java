@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.function.Consumer;
-import java.util.stream.Collectors;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -170,15 +169,15 @@ public final class ControllerBuscaReserva implements ActionListener, InterfaceCo
                     break;
                 }
                 case DATA_RESERVA: {
-                    carregarPorAtributo("data_hora_reserva", filtroTexto, tabela);
+                    carregarPorAtributo("dataHoraReserva", filtroTexto, tabela);
                     break;
                 }
                 case DATA_ENTRADA: {
-                    carregarPorAtributo("previsao_entrada", filtroTexto, tabela);
+                    carregarPorAtributo("dataPrevistaEntrada", filtroTexto, tabela);
                     break;
                 }
                 case DATA_SAIDA: {
-                    carregarPorAtributo("previsao_saida", filtroTexto, tabela);
+                    carregarPorAtributo("dataPrevistaSaida", filtroTexto, tabela);
                     break;
                 }
                 case OBS: {

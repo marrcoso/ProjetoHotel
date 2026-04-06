@@ -44,6 +44,9 @@ import view.TelaBuscaReserva;
 import view.TelaCheck;
 import service.ReservaQuartoService;
 import service.ReservaService;
+import service.CaixaService;
+import service.MovimentoCaixaService;
+import model.Caixa;
 import model.Reserva;
 import model.ReservaQuarto;
 
@@ -68,6 +71,8 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
     private Quarto QuartoSelecionado;
     private final ReservaService reservaService;
     private final ReservaQuartoService reservaQuartoService;
+    private final CaixaService caixaService;
+    private final MovimentoCaixaService movimentoCaixaService;
     private Reserva reservaSelecionada;
     private int codigo;
 
@@ -84,6 +89,8 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
         this.receberService = new ReceberService();
         this.reservaService = new ReservaService();
         this.reservaQuartoService = new ReservaQuartoService();
+        this.caixaService = new CaixaService();
+        this.movimentoCaixaService = new MovimentoCaixaService();
         this.hospedesSelecionados = new ArrayList<>();
         this.quartosSelecionados = new ArrayList<>();
         this.alocacoesVagasSelecionadas = new ArrayList<>();
@@ -294,6 +301,17 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
             return;
         }
 
+        float valorPago = lerValorMonetario(this.telaCheck.getjTextFieldValorPago().getText());
+        Caixa caixaAberto = null;
+
+        if (valorPago > 0) {
+            caixaAberto = this.caixaService.getCaixaAberto();
+            if (caixaAberto == null) {
+                JOptionPane.showMessageDialog(this.telaCheck, "Não há nenhum caixa aberto. Abra o caixa para realizar o pagamento.", "Caixa Fechado", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        }
+
         Check check = construirDoFormulario();
         boolean novoCadastro = this.telaCheck.getjTextFieldId().getText().trim().isEmpty();
 
@@ -315,6 +333,10 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
                 this.receberService.Atualizar(receber);
             } else {
                 this.receberService.Criar(receber);
+            }
+
+            if (receber.getValorPago() > 0 && caixaAberto != null) {
+                this.movimentoCaixaService.gerarMovimentoCheckHospede(receber, caixaAberto);
             }
         } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(this.telaCheck, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);

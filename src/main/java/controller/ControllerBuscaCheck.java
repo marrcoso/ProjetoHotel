@@ -146,7 +146,7 @@ public final class ControllerBuscaCheck implements ActionListener, InterfaceCont
         if (apenasDisponiveis) {
             List<Check> disponiveis = checkService.carregarChecksDisponiveis();
             listaChecks = listaChecks.stream()
-                .filter(disponiveis::contains)
+                .filter(c -> disponiveis.stream().anyMatch(d -> d.getId() == c.getId()))
                 .collect(Collectors.toList());
         }
         for (Check c : listaChecks) {
@@ -188,15 +188,15 @@ public final class ControllerBuscaCheck implements ActionListener, InterfaceCont
                     break;
                 }
                 case DATA_CADASTRO: {
-                    carregarPorAtributo("data_hora_cadastro", filtroTexto, tabela);
+                    carregarPorAtributo("dataHoraCadastro", filtroTexto, tabela);
                     break;
                 }
                 case DATA_ENTRADA: {
-                    carregarPorAtributo("data_hora_entrada", filtroTexto, tabela);
+                    carregarPorAtributo("dataHoraEntrada", filtroTexto, tabela);
                     break;
                 }
                 case DATA_SAIDA: {
-                    carregarPorAtributo("data_hora_saida", filtroTexto, tabela);
+                    carregarPorAtributo("dataHoraSaida", filtroTexto, tabela);
                     break;
                 }
                 case OBS: {
@@ -208,7 +208,7 @@ public final class ControllerBuscaCheck implements ActionListener, InterfaceCont
                     break;
                 }
                 case RESERVA: {
-                    carregarPorAtributo("reserva_id", filtroTexto, tabela);
+                    carregarPorAtributo("reserva.id", filtroTexto, tabela);
                     break;
                 }
             }
