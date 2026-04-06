@@ -59,4 +59,14 @@ public class MovimentoCaixaDAO implements InterfaceDAO<MovimentoCaixa> {
                     .getResultList();
         }, false);
     }
+
+    public MovimentoCaixa RetrievePorReceber(int receberId) throws RuntimeException {
+        return JPADao.executeWithEntityManager(em -> {
+            String jpql = "SELECT m FROM MovimentoCaixa m WHERE m.receber.id = :receberId";
+            List<MovimentoCaixa> results = em.createQuery(jpql, MovimentoCaixa.class)
+                    .setParameter("receberId", receberId)
+                    .getResultList();
+            return results.isEmpty() ? null : results.get(0);
+        }, false);
+    }
 }

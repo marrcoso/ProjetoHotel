@@ -46,16 +46,29 @@ public class MovimentoCaixaService implements InterfaceService<MovimentoCaixa> {
     }
 
     public void gerarMovimentoCheckHospede(Receber receber, Caixa caixa) throws RuntimeException {
-        MovimentoCaixa movimento = new MovimentoCaixa();
+        MovimentoCaixa movimento = this.CarregarPorReceber(receber.getId());
+        
+        if (movimento == null) {
+            movimento = new MovimentoCaixa();
+            movimento.setReceber(receber);
+            movimento.setStatus('A');
+        }
+        
         movimento.setCaixa(caixa);
-        movimento.setReceber(receber);
         movimento.setDataHoraMovimento(new Date());
         movimento.setValor(receber.getValorPago());
         movimento.setDescricao("Pagamento de Hospedagem - Check #" + receber.getCheck().getId());
         movimento.setObs(receber.getObs());
-        movimento.setStatus('A');
         
-        this.Criar(movimento);
+        if (movimento.getId() == 0) {
+            this.Criar(movimento);
+        } else {
+            this.Atualizar(movimento);
+        }
+    }
+
+    public MovimentoCaixa CarregarPorReceber(int receberId) throws RuntimeException {
+        return movimentoCaixaDAO.RetrievePorReceber(receberId);
     }
 
     public List<MovimentoCaixa> CarregarPorCaixa(int caixaId) throws RuntimeException {
