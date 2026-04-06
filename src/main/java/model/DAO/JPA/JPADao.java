@@ -117,6 +117,10 @@ public class JPADao {
                 if (field.getType().equals(Date.class)) {
                     jpql = "SELECT e FROM " + entityName + " e WHERE FUNCTION('DATE_FORMAT', e." + atributo + ", '%d/%m/%Y %H:%i:%s') LIKE :valor";                    q = em.createQuery(jpql, clazz);
                     q.setParameter("valor", "%" + valor + "%");
+                } else if (field.getType().equals(Character.class) || field.getType().equals(char.class)) {
+                    jpql = "SELECT e FROM " + entityName + " e WHERE e." + atributo + " = :valor";
+                    q = em.createQuery(jpql, clazz);
+                    q.setParameter("valor", valor.charAt(0));
                 } else {
                     jpql = "SELECT e FROM " + entityName + " e WHERE e." + atributo + " LIKE :valor";
                     q = em.createQuery(jpql, clazz);

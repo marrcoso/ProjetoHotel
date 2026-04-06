@@ -5,9 +5,9 @@ import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
-public class TelaBuscaCaixa extends javax.swing.JDialog {
+public class TelaBuscaCheckQuarto extends javax.swing.JDialog {
 
-    public TelaBuscaCaixa(java.awt.Frame parent, boolean modal) {
+    public TelaBuscaCheckQuarto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -24,16 +24,16 @@ public class TelaBuscaCaixa extends javax.swing.JDialog {
         return jButtonSair;
     }
 
-    public JComboBox<String> getjCBFiltro() {
-        return jCBFiltro;
+    public JTable getjTableDados() {
+        return jTableDados;
     }
 
     public JTextField getjTFFiltro() {
         return jTFFiltro;
     }
 
-    public JTable getjTableDados() {
-        return jTableDados;
+    public JComboBox<String> getjCBFiltro() {
+        return jCBFiltro;
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
@@ -54,7 +54,8 @@ public class TelaBuscaCaixa extends javax.swing.JDialog {
         jButtonFiltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Busca de Caixa");
+        setTitle("Busca de Quartos Ocupados");
+        setAlwaysOnTop(true);
         setResizable(false);
 
         jPaneltitulo.setBackground(new java.awt.Color(153, 255, 102));
@@ -63,7 +64,7 @@ public class TelaBuscaCaixa extends javax.swing.JDialog {
         jLabelTitulo.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabelTitulo.setForeground(new java.awt.Color(0, 51, 204));
         jLabelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelTitulo.setText("Caixas");
+        jLabelTitulo.setText("Seleção de Quarto (Ocupação Ativa)");
 
         javax.swing.GroupLayout jPaneltituloLayout = new javax.swing.GroupLayout(jPaneltitulo);
         jPaneltitulo.setLayout(jPaneltituloLayout);
@@ -83,33 +84,38 @@ public class TelaBuscaCaixa extends javax.swing.JDialog {
 
             },
             new String [] {
-                "ID", "Data Abertura", "Data Fechamento", "Status"
+                "Id", "Quarto", "Data Entrada", "Hóspede Principal", "Check ID"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        jTableDados.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jTableDados);
+        if (jTableDados.getColumnModel().getColumnCount() > 0) {
+            jTableDados.getColumnModel().getColumn(0).setMaxWidth(50);
+            jTableDados.getColumnModel().getColumn(4).setMaxWidth(80);
+        }
 
         javax.swing.GroupLayout jPanelDadosLayout = new javax.swing.GroupLayout(jPanelDados);
         jPanelDados.setLayout(jPanelDadosLayout);
         jPanelDadosLayout.setHorizontalGroup(
             jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 750, Short.MAX_VALUE)
         );
         jPanelDadosLayout.setVerticalGroup(
             jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
         );
 
         jPanelFiltros.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jCBFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Data Abertura", "Status" }));
+        jCBFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Quarto", "Hóspede", "Check ID" }));
 
         jLabelFiltrar.setText("Filtrar Por");
 
@@ -122,7 +128,7 @@ public class TelaBuscaCaixa extends javax.swing.JDialog {
         jButtonSair.setText("Fechar");
 
         jButtonFiltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Find.png"))); // NOI18N
-        jButtonFiltar.setText("Filtar");
+        jButtonFiltar.setText("Filtrar");
 
         javax.swing.GroupLayout jPanelFiltrosLayout = new javax.swing.GroupLayout(jPanelFiltros);
         jPanelFiltros.setLayout(jPanelFiltrosLayout);
@@ -139,15 +145,16 @@ public class TelaBuscaCaixa extends javax.swing.JDialog {
                         .addGroup(jPanelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jCBFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelFiltrar))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelFiltrosLayout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(jLabelValor))
+                                .addComponent(jLabelValor)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanelFiltrosLayout.createSequentialGroup()
+                                .addComponent(jTFFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTFFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonFiltar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jButtonFiltar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanelFiltrosLayout.setVerticalGroup(
@@ -182,9 +189,10 @@ public class TelaBuscaCaixa extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPaneltitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelDados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelDados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelFiltros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanelFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2))
         );
 
         pack();

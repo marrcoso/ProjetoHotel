@@ -30,7 +30,7 @@ public final class ControllerBuscaReserva implements ActionListener, InterfaceCo
         this.atualizaCodigo = atualizaCodigo;
         this.apenasDisponiveis = apenasDisponiveis;
         initListeners();
-        if (apenasDisponiveis) {
+        if (this.apenasDisponiveis) {
             carregarReservasDisponiveis();
         }
     }

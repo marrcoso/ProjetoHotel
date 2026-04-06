@@ -43,6 +43,10 @@ public class CheckQuartoService implements InterfaceService<CheckQuarto> {
         checkQuartoDAO.AtivarInativar(id, ativar);
     }
 
+    public List<model.DTO.CheckQuartoBuscaDTO> carregarAtivosComFiltro(String atributo, String valor) throws RuntimeException {
+        return checkQuartoDAO.RetrieveAtivosComFiltro(atributo, valor);
+    }
+
     public List<CheckQuarto> carregarPorCheck(int checkId) throws RuntimeException {
         return checkQuartoDAO.RetrieveByCheck(checkId);
     }

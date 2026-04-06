@@ -18,8 +18,7 @@ import controller.ControllerCadVagaEstacionamento;
 import controller.ControllerCadVeiculo;
 import controller.ControllerCadReserva;
 import controller.ControllerCaixa;
-import view.TelaReserva;
-import view.TelaCaixa;
+import controller.ControllerCadCopaQuarto;
 
 /**
  *
@@ -72,6 +71,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         jMenuItemCaixa = new javax.swing.JMenuItem();
         jMenuItemReserva = new javax.swing.JMenuItem();
         jMenuItemCheck = new javax.swing.JMenuItem();
+        jMenuItemCopa = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -82,7 +82,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
 
         jMenu2.setText("Cadastros");
 
-        jMenuItemProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Bomb.png"))); // NOI18N
+        jMenuItemProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Black tag.png"))); // NOI18N
         jMenuItemProduto.setText("Produto");
         jMenuItemProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -215,6 +215,15 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItemCheck);
 
+        jMenuItemCopa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Blue tag.png"))); // NOI18N
+        jMenuItemCopa.setText("Copa");
+        jMenuItemCopa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCopaActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItemCopa);
+
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Relatórios");
@@ -313,13 +322,13 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
 
     private void jMenuItemCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCheckActionPerformed
         TelaCheck telaCheck = new TelaCheck(null,true);
-        ControllerCadCheck controllerCadCheck = new ControllerCadCheck(telaCheck);
+        new ControllerCadCheck(telaCheck);
         telaCheck.setVisible(true);
     }//GEN-LAST:event_jMenuItemCheckActionPerformed
 
     private void jMenuItemReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemReservaActionPerformed
         TelaReserva telaReserva = new TelaReserva(null,true);
-        ControllerCadReserva controllerCadReserva = new ControllerCadReserva(telaReserva);
+        new ControllerCadReserva(telaReserva);
         telaReserva.setVisible(true);
     }//GEN-LAST:event_jMenuItemReservaActionPerformed
 
@@ -327,6 +336,12 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         TelaCaixa telaCaixa = new TelaCaixa(null, true);
         ControllerCaixa controllerCaixa = new ControllerCaixa(telaCaixa);
         telaCaixa.setVisible(true);
+    }
+
+    private void jMenuItemCopaActionPerformed(java.awt.event.ActionEvent evt) {
+        TelaCadastroCopaQuarto telaCopa = new TelaCadastroCopaQuarto(null, true);
+        new ControllerCadCopaQuarto(telaCopa);
+        telaCopa.setVisible(true);
     }
 
     @SuppressWarnings("unused")
@@ -374,6 +389,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItemCaixa;
     private javax.swing.JMenuItem jMenuItemCheck;
+    private javax.swing.JMenuItem jMenuItemCopa;
     private javax.swing.JMenuItem jMenuItemFornecedor;
     private javax.swing.JMenuItem jMenuItemFuncionario;
     private javax.swing.JMenuItem jMenuItemHospede;
