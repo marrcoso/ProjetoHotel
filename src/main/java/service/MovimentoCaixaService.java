@@ -57,4 +57,8 @@ public class MovimentoCaixaService implements InterfaceService<MovimentoCaixa> {
         
         this.Criar(movimento);
     }
+
+    public List<MovimentoCaixa> CarregarPorCaixa(int caixaId) throws RuntimeException {
+        return movimentoCaixaDAO.Retrieve("caixa.id", String.valueOf(caixaId));
+    }
 }

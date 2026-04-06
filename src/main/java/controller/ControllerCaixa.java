@@ -6,9 +6,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableModel;
 
 import model.Caixa;
+import model.MovimentoCaixa;
 import service.CaixaService;
+import service.MovimentoCaixaService;
 import utilities.Utilities;
 import view.TelaBuscaCaixa;
 import view.TelaCaixa;
@@ -17,12 +22,14 @@ public final class ControllerCaixa implements ActionListener, InterfaceControlle
 
     private final TelaCaixa telaCaixa;
     private final CaixaService caixaService;
+    private final MovimentoCaixaService movimentoCaixaService;
     private int codigo;
     private final SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
     public ControllerCaixa(TelaCaixa telaCaixa) {
         this.telaCaixa = telaCaixa;
         this.caixaService = new CaixaService();
+        this.movimentoCaixaService = new MovimentoCaixaService();
         
         Utilities.ativaDesativa(this.telaCaixa.getjPanelBotoes(), true);
         Utilities.limpaComponentes(this.telaCaixa.getjPanelDados(), false);
@@ -31,6 +38,8 @@ public final class ControllerCaixa implements ActionListener, InterfaceControlle
         Utilities.setAlwaysDisabled(this.telaCaixa.getjComboBoxStatus(), true);
         Utilities.setAlwaysDisabled(this.telaCaixa.getjFormattedTextFieldDataAbertura(), true);
         Utilities.setAlwaysDisabled(this.telaCaixa.getjFormattedTextFieldDataFechamento(), true);
+        Utilities.setAlwaysDisabled(this.telaCaixa.getjTextFieldTotalMovimentos(), true);
+        Utilities.setAlwaysDisabled(this.telaCaixa.getjTextFieldDiferenca(), true);
         initListeners();
     }
 
@@ -41,8 +50,18 @@ public final class ControllerCaixa implements ActionListener, InterfaceControlle
         this.telaCaixa.getjButtonGravar().addActionListener(this);
         this.telaCaixa.getjButtonBuscar().addActionListener(this);
         this.telaCaixa.getjButtonSair().addActionListener(this);
+        
+        this.telaCaixa.getjTextFieldValorFechamento().getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) { recalcularDiferenca(); }
+            @Override
+            public void removeUpdate(DocumentEvent e) { recalcularDiferenca(); }
+            @Override
+            public void changedUpdate(DocumentEvent e) { recalcularDiferenca(); }
+        });
     }
-
+    
+    // ... (actionPerformed remains the same)
     @Override
     public void actionPerformed(ActionEvent evento) {
         Object source = evento.getSource();
@@ -84,12 +103,18 @@ public final class ControllerCaixa implements ActionListener, InterfaceControlle
         // Desabilita campos de fechamento ao abrir
         this.telaCaixa.getjTextFieldValorFechamento().setEnabled(false);
         this.telaCaixa.getjFormattedTextFieldDataFechamento().setEnabled(false);
+        
+        // Limpa tabela de lançamentos
+        ((DefaultTableModel) this.telaCaixa.getjTableMovimentos().getModel()).setRowCount(0);
+        this.telaCaixa.getjTextFieldTotalMovimentos().setText("0.00");
+        this.telaCaixa.getjTextFieldDiferenca().setText("0.00");
     }
 
     @Override
     public void handleCancelar() {
         Utilities.ativaDesativa(this.telaCaixa.getjPanelBotoes(), true);
         Utilities.limpaComponentes(this.telaCaixa.getjPanelDados(), false);
+        ((DefaultTableModel) this.telaCaixa.getjTableMovimentos().getModel()).setRowCount(0);
     }
 
     @Override
@@ -164,11 +189,11 @@ public final class ControllerCaixa implements ActionListener, InterfaceControlle
 
         Utilities.ativaDesativa(telaCaixa.getjPanelBotoes(), true);
         Utilities.limpaComponentes(telaCaixa.getjPanelDados(), false);
+        ((DefaultTableModel) this.telaCaixa.getjTableMovimentos().getModel()).setRowCount(0);
     }
 
     @Override
     public Caixa construirDoFormulario() {
-        // Not used directly as handleGravar differentiates opening/closing
         return null;
     }
 
@@ -189,29 +214,83 @@ public final class ControllerCaixa implements ActionListener, InterfaceControlle
                 return;
             }
 
-            Utilities.ativaDesativa(telaCaixa.getjPanelBotoes(), false);
-            Utilities.limpaComponentes(telaCaixa.getjPanelDados(), true);
+            preencherDados(caixa);
+        }
+    }
 
-            telaCaixa.getjTextFieldId().setText(String.valueOf(caixa.getId()));
-            telaCaixa.getjFormattedTextFieldDataAbertura().setText(sdf.format(caixa.getDataHoraAbertura()));
-            telaCaixa.getjTextFieldValorAbertura().setText(String.valueOf(caixa.getValorDeAbertura()));
-            telaCaixa.getjTextFieldObs().setText(caixa.getObs());
-            telaCaixa.getjComboBoxStatus().setSelectedItem(caixa.getStatus() == 'A' ? "Aberto" : "Fechado");
+    private void preencherDados(Caixa caixa) {
+        Utilities.ativaDesativa(telaCaixa.getjPanelBotoes(), false);
+        Utilities.limpaComponentes(telaCaixa.getjPanelDados(), true);
 
-            if (caixa.getStatus() == 'A') {
-                this.telaCaixa.getjTextFieldValorAbertura().setEnabled(false);
-                this.telaCaixa.getjTextFieldValorFechamento().setEnabled(true);
-                this.telaCaixa.getjTextFieldValorFechamento().requestFocus();
-            } else {
-                this.telaCaixa.getjFormattedTextFieldDataFechamento().setText(sdf.format(caixa.getDataHoraFechamento()));
-                this.telaCaixa.getjTextFieldValorFechamento().setText(String.valueOf(caixa.getValorDeFechamento()));
-                
-                // Tudo desabilitado se já estiver fechado
-                this.telaCaixa.getjTextFieldValorAbertura().setEnabled(false);
-                this.telaCaixa.getjTextFieldValorFechamento().setEnabled(false);
-                this.telaCaixa.getjTextFieldObs().setEnabled(false);
-                this.telaCaixa.getjButtonGravar().setEnabled(false);
+        telaCaixa.getjTextFieldId().setText(String.valueOf(caixa.getId()));
+        telaCaixa.getjFormattedTextFieldDataAbertura().setText(sdf.format(caixa.getDataHoraAbertura()));
+        telaCaixa.getjTextFieldValorAbertura().setText(String.format("%.2f", caixa.getValorDeAbertura()));
+        telaCaixa.getjTextFieldObs().setText(caixa.getObs());
+        telaCaixa.getjComboBoxStatus().setSelectedItem(caixa.getStatus() == 'A' ? "Aberto" : "Fechado");
+
+        // Preencher movimentos
+        DefaultTableModel tabela = (DefaultTableModel) telaCaixa.getjTableMovimentos().getModel();
+        tabela.setRowCount(0);
+        float totalMovimentos = 0;
+        
+        java.util.List<MovimentoCaixa> movimentos = movimentoCaixaService.CarregarPorCaixa(caixa.getId());
+        for (MovimentoCaixa m : movimentos) {
+            tabela.addRow(new Object[]{
+                sdf.format(m.getDataHoraMovimento()),
+                m.getDescricao(),
+                String.format("%.2f", m.getValor()),
+            });
+            totalMovimentos += m.getValor();
+        }
+        
+        telaCaixa.getjTextFieldTotalMovimentos().setText(String.format("%.2f", totalMovimentos));
+
+        if (caixa.getStatus() == 'A') {
+            this.telaCaixa.getjTextFieldValorAbertura().setEnabled(false);
+            this.telaCaixa.getjTextFieldValorFechamento().setEnabled(true);
+            this.telaCaixa.getjTextFieldValorFechamento().setText("");
+            this.telaCaixa.getjFormattedTextFieldDataFechamento().setText("");
+            this.telaCaixa.getjTextFieldValorFechamento().requestFocus();
+        } else {
+            this.telaCaixa.getjFormattedTextFieldDataFechamento().setText(sdf.format(caixa.getDataHoraFechamento()));
+            this.telaCaixa.getjTextFieldValorFechamento().setText(String.format("%.2f", caixa.getValorDeFechamento()));
+            
+            // Tudo desabilitado se já estiver fechado
+            this.telaCaixa.getjTextFieldValorAbertura().setEnabled(false);
+            this.telaCaixa.getjTextFieldValorFechamento().setEnabled(false);
+            this.telaCaixa.getjTextFieldObs().setEnabled(false);
+            this.telaCaixa.getjButtonGravar().setEnabled(false);
+        }
+        
+        recalcularDiferenca();
+    }
+
+    private void recalcularDiferenca() {
+        try {
+            float valorAbertura = 0;
+            String textAbertura = telaCaixa.getjTextFieldValorAbertura().getText().replace(",", ".");
+            if (!textAbertura.isEmpty()) {
+                valorAbertura = Float.parseFloat(textAbertura);
             }
+
+            float totalMovimentos = 0;
+            String textTotalMovimentos = telaCaixa.getjTextFieldTotalMovimentos().getText().replace(",", ".");
+            if (!textTotalMovimentos.isEmpty()) {
+                totalMovimentos = Float.parseFloat(textTotalMovimentos);
+            }
+
+            float valorFechamento = 0;
+            String textFechamento = telaCaixa.getjTextFieldValorFechamento().getText().replace(",", ".");
+            if (!textFechamento.isEmpty()) {
+                valorFechamento = Float.parseFloat(textFechamento);
+            }
+
+            float esperado = valorAbertura + totalMovimentos;
+            float diferenca = valorFechamento - esperado;
+
+            this.telaCaixa.getjTextFieldDiferenca().setText(String.format("%.2f", diferenca));
+        } catch (NumberFormatException e) {
+            this.telaCaixa.getjTextFieldDiferenca().setText("0.00");
         }
     }
 
