@@ -229,13 +229,11 @@ public class TelaCheck extends javax.swing.JDialog {
 
         jPanelTitulo = new javax.swing.JPanel();
         jLabelTitulo = new javax.swing.JLabel();
-        jTextFieldId = new javax.swing.JTextField();
-        jLabelId = new javax.swing.JLabel();
-        jButtonNovo = new javax.swing.JButton();
-        jButtonBuscar = new javax.swing.JButton();
         jPanelBotoes = new javax.swing.JPanel();
+        jButtonNovo = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
         jButtonGravar = new javax.swing.JButton();
+        jButtonBuscar = new javax.swing.JButton();
         jButtonSair = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanelCheck = new javax.swing.JPanel();
@@ -252,6 +250,8 @@ public class TelaCheck extends javax.swing.JDialog {
         jButtonRelacionarReserva = new javax.swing.JButton();
         jFormattedTextFieldReserva = new javax.swing.JFormattedTextField();
         jLabelReserva = new javax.swing.JLabel();
+        jTextFieldId = new javax.swing.JTextField();
+        jLabelId = new javax.swing.JLabel();
         jPanelHospedes = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableHospedes = new javax.swing.JTable();
@@ -311,19 +311,6 @@ public class TelaCheck extends javax.swing.JDialog {
         jLabelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelTitulo.setText("Check-in/Check-out");
 
-        jTextFieldId.setEditable(false);
-        jTextFieldId.setEnabled(false);
-
-        jLabelId.setText("ID");
-
-        jButtonNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Create.png"))); // NOI18N
-        jButtonNovo.setText("Novo");
-        jButtonNovo.setActionCommand("0");
-
-        jButtonBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Load.png"))); // NOI18N
-        jButtonBuscar.setText("Buscar");
-        jButtonBuscar.setActionCommand("0");
-
         javax.swing.GroupLayout jPanelTituloLayout = new javax.swing.GroupLayout(jPanelTitulo);
         jPanelTitulo.setLayout(jPanelTituloLayout);
         jPanelTituloLayout.setHorizontalGroup(
@@ -331,32 +318,19 @@ public class TelaCheck extends javax.swing.JDialog {
             .addGroup(jPanelTituloLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelTituloLayout.createSequentialGroup()
-                        .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonNovo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonBuscar))
-                    .addComponent(jLabelId))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelTituloLayout.setVerticalGroup(
             jPanelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelTituloLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabelId)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonNovo)
-                    .addComponent(jButtonBuscar))
-                .addGap(0, 13, Short.MAX_VALUE))
-            .addComponent(jLabelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
         );
 
         jPanelBotoes.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jButtonNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Create.png"))); // NOI18N
+        jButtonNovo.setText("Novo");
+        jButtonNovo.setActionCommand("0");
+        jPanelBotoes.add(jButtonNovo);
 
         jButtonCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Cancel.png"))); // NOI18N
         jButtonCancelar.setText("Cancelar");
@@ -369,6 +343,11 @@ public class TelaCheck extends javax.swing.JDialog {
         jButtonGravar.setActionCommand("1");
         jButtonGravar.setEnabled(false);
         jPanelBotoes.add(jButtonGravar);
+
+        jButtonBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Load.png"))); // NOI18N
+        jButtonBuscar.setText("Buscar");
+        jButtonBuscar.setActionCommand("0");
+        jPanelBotoes.add(jButtonBuscar);
 
         jButtonSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Exit.png"))); // NOI18N
         jButtonSair.setText("Sair");
@@ -435,39 +414,51 @@ public class TelaCheck extends javax.swing.JDialog {
 
         jLabelReserva.setText("Reserva:");
 
+        jTextFieldId.setEditable(false);
+        jTextFieldId.setEnabled(false);
+
+        jLabelId.setText("ID");
+
         javax.swing.GroupLayout jPanelCheckLayout = new javax.swing.GroupLayout(jPanelCheck);
         jPanelCheck.setLayout(jPanelCheckLayout);
         jPanelCheckLayout.setHorizontalGroup(
             jPanelCheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCheckLayout.createSequentialGroup()
                 .addGap(206, 206, 206)
-                .addGroup(jPanelCheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanelCheckLayout.createSequentialGroup()
-                        .addComponent(jLabelReserva)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jFormattedTextFieldReserva)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonRelacionarReserva))
-                    .addComponent(jLabelObs)
-                    .addGroup(jPanelCheckLayout.createSequentialGroup()
-                        .addGroup(jPanelCheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jFormattedTextFieldDataCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelDataCadastro)
-                            .addComponent(jFormattedTextFieldDataEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelDataEntrada))
-                        .addGap(32, 32, 32)
-                        .addGroup(jPanelCheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jFormattedTextFieldDataSaida)
-                            .addComponent(jLabelDataSaida)
-                            .addComponent(jLabelStatus)
-                            .addComponent(jComboBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jTextFieldObs))
+                .addGroup(jPanelCheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelId)
+                    .addGroup(jPanelCheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanelCheckLayout.createSequentialGroup()
+                            .addComponent(jLabelReserva)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jFormattedTextFieldReserva)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButtonRelacionarReserva))
+                        .addComponent(jLabelObs)
+                        .addGroup(jPanelCheckLayout.createSequentialGroup()
+                            .addGroup(jPanelCheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jFormattedTextFieldDataCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabelDataCadastro)
+                                .addComponent(jFormattedTextFieldDataEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabelDataEntrada))
+                            .addGap(32, 32, 32)
+                            .addGroup(jPanelCheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jFormattedTextFieldDataSaida)
+                                .addComponent(jLabelDataSaida)
+                                .addComponent(jLabelStatus)
+                                .addComponent(jComboBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextFieldObs)))
                 .addContainerGap(246, Short.MAX_VALUE))
         );
         jPanelCheckLayout.setVerticalGroup(
             jPanelCheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCheckLayout.createSequentialGroup()
-                .addGap(74, 74, 74)
+                .addGap(20, 20, 20)
+                .addComponent(jLabelId)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelCheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanelCheckLayout.createSequentialGroup()
                         .addGroup(jPanelCheckLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

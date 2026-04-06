@@ -30,7 +30,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jPanelTitulo" alignment="0" max="32767" attributes="0"/>
                   <Component id="jPanelDados" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jPanelBotoes" alignment="0" pref="650" max="32767" attributes="0"/>
+                  <Component id="jPanelBotoes" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -42,7 +42,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanelTitulo" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanelDados" pref="450" max="32767" attributes="0"/>
+              <Component id="jPanelDados" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanelBotoes" min="-2" pref="51" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
@@ -102,7 +102,7 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jTabbedPaneCaixa" alignment="0" pref="634" max="32767" attributes="0"/>
+                      <Component id="jTabbedPaneCaixa" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
                           <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -125,7 +125,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jTabbedPaneCaixa" pref="350" max="32767" attributes="0"/>
+                  <Component id="jTabbedPaneCaixa" pref="355" max="32767" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="2" attributes="0">
                       <Component id="jLabelTotalMovimentos" alignment="2" min="-2" max="-2" attributes="0"/>
@@ -136,13 +136,14 @@
                       <Component id="jTextFieldTotalMovimentos" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jTextFieldDiferenca" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="15" max="32767" attributes="0"/>
+                  <EmptySpace pref="21" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
         <Container class="javax.swing.JTabbedPane" name="jTabbedPaneCaixa">
+
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
           <SubComponents>
             <Container class="javax.swing.JPanel" name="jPanelFichaDados">
@@ -218,7 +219,7 @@
                               <Component id="jTextFieldId" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jComboBoxStatus" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="20" max="32767" attributes="0"/>
+                          <EmptySpace pref="89" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="jLabelDataAbertura" min="-2" max="-2" attributes="0"/>
@@ -299,6 +300,7 @@
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="formatterFactory" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabelValorFechamento">
@@ -317,6 +319,7 @@
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="formatterFactory" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabelObs">
@@ -369,7 +372,7 @@
                               <Component id="jButtonAtivarInativarMovimento" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPaneMovimentos" pref="180" max="32767" attributes="0"/>
+                          <Component id="jScrollPaneMovimentos" pref="189" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>

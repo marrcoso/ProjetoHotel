@@ -70,34 +70,12 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabelTitulo" min="-2" pref="219" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="jTextFieldId" min="-2" pref="60" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jButtonNovo" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jButtonBuscar" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Component id="jLabelId" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabelId" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTextFieldId" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButtonNovo" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButtonBuscar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="0" pref="13" max="32767" attributes="0"/>
-              </Group>
-              <Component id="jLabelTitulo" alignment="0" max="32767" attributes="0"/>
+              <Component id="jLabelTitulo" alignment="0" pref="67" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -109,35 +87,6 @@
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="Reserva"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="jTextFieldId">
-          <Properties>
-            <Property name="editable" type="boolean" value="false"/>
-            <Property name="enabled" type="boolean" value="false"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabelId">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="ID"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="jButtonNovo">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/imagens/Create.png"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Novo"/>
-            <Property name="actionCommand" type="java.lang.String" value="0"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="jButtonBuscar">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/imagens/Load.png"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Buscar"/>
-            <Property name="actionCommand" type="java.lang.String" value="0"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -153,6 +102,15 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
       <SubComponents>
+        <Component class="javax.swing.JButton" name="jButtonNovo">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/imagens/Create.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Novo"/>
+            <Property name="actionCommand" type="java.lang.String" value="0"/>
+          </Properties>
+        </Component>
         <Component class="javax.swing.JButton" name="jButtonCancelar">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -171,6 +129,15 @@
             <Property name="text" type="java.lang.String" value="Gravar"/>
             <Property name="actionCommand" type="java.lang.String" value="1"/>
             <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButtonBuscar">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/imagens/Load.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Buscar"/>
+            <Property name="actionCommand" type="java.lang.String" value="0"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jButtonSair">
@@ -209,24 +176,28 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="206" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jLabelObs" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jFormattedTextFieldDataReserva" min="-2" pref="190" max="-2" attributes="0"/>
-                                  <Component id="jLabelDataReserva" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jFormattedTextFieldDataEntrada" alignment="0" min="-2" pref="190" max="-2" attributes="0"/>
-                                  <Component id="jLabelDataEntrada" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jTextFieldId" min="-2" pref="60" max="-2" attributes="0"/>
+                          <Component id="jLabelId" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jLabelObs" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jFormattedTextFieldDataReserva" min="-2" pref="190" max="-2" attributes="0"/>
+                                      <Component id="jLabelDataReserva" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jFormattedTextFieldDataEntrada" alignment="0" min="-2" pref="190" max="-2" attributes="0"/>
+                                      <Component id="jLabelDataEntrada" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="jFormattedTextFieldDataSaida" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jLabelDataSaida" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelStatus" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jComboBoxStatus" min="-2" pref="190" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jFormattedTextFieldDataSaida" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jLabelDataSaida" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabelStatus" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jComboBoxStatus" min="-2" pref="190" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="jTextFieldObs" alignment="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="jTextFieldObs" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace pref="212" max="32767" attributes="0"/>
                   </Group>
@@ -235,7 +206,11 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                      <Component id="jLabelId" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jTextFieldId" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -297,44 +272,48 @@
                 <Property name="text" type="java.lang.String" value="Status"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldDataReserva">
+            <Component class="view.components.DateTimePicker" name="jFormattedTextFieldDataReserva">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
-                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-                  <Format format="##/##/####" subtype="-1" type="5"/>
-                </Property>
-                <Property name="horizontalAlignment" type="int" value="0"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new view.components.DateTimePicker(false, false)"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelDataReserva">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Data da Reserva"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldDataEntrada">
-              <Properties>
-                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-                  <Format format="##/##/####" subtype="-1" type="5"/>
-                </Property>
-                <Property name="horizontalAlignment" type="int" value="0"/>
-              </Properties>
+            <Component class="view.components.DateTimePicker" name="jFormattedTextFieldDataEntrada">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new view.components.DateTimePicker(true, false)"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelDataEntrada">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Previs&#xe3;o de Entrada"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldDataSaida">
-              <Properties>
-                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-                  <Format format="##/##/####" subtype="-1" type="5"/>
-                </Property>
-                <Property name="horizontalAlignment" type="int" value="0"/>
-              </Properties>
+            <Component class="view.components.DateTimePicker" name="jFormattedTextFieldDataSaida">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new view.components.DateTimePicker(true, false)"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelDataSaida">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Previs&#xe3;o de Sa&#xed;da"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jTextFieldId">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabelId">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="ID"/>
               </Properties>
             </Component>
           </SubComponents>

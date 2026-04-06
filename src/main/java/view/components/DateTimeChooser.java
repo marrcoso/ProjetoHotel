@@ -13,10 +13,12 @@ public class DateTimeChooser extends JDialog {
     private JPanel panelDays;
     private JSpinner spinnerHour;
     private JSpinner spinnerMinute;
+    private final boolean showTime;
     private boolean confirmed = false;
 
-    public DateTimeChooser(Window parent, LocalDateTime initialDateTime) {
-        super(parent, "Selecionar Data e Hora", DEFAULT_MODALITY_TYPE);
+    public DateTimeChooser(Window parent, LocalDateTime initialDateTime, boolean showTime) {
+        super(parent, showTime ? "Selecionar Data e Hora" : "Selecionar Data", DEFAULT_MODALITY_TYPE);
+        this.showTime = showTime;
         this.dateTime = (initialDateTime != null) ? initialDateTime : LocalDateTime.now();
         initComponents();
         updateCalendar();
@@ -60,27 +62,31 @@ public class DateTimeChooser extends JDialog {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
 
-        gbc.gridx = 0; gbc.gridy = 0;
-        panelFooter.add(new JLabel("Hora:"), gbc);
+        if (showTime) {
+            gbc.gridx = 0; gbc.gridy = 0;
+            panelFooter.add(new JLabel("Hora:"), gbc);
 
-        spinnerHour = new JSpinner(new SpinnerNumberModel(dateTime.getHour(), 0, 23, 1));
-        gbc.gridx = 1;
-        panelFooter.add(spinnerHour, gbc);
+            spinnerHour = new JSpinner(new SpinnerNumberModel(dateTime.getHour(), 0, 23, 1));
+            gbc.gridx = 1;
+            panelFooter.add(spinnerHour, gbc);
 
-        gbc.gridx = 2;
-        panelFooter.add(new JLabel("Min:"), gbc);
+            gbc.gridx = 2;
+            panelFooter.add(new JLabel("Min:"), gbc);
 
-        spinnerMinute = new JSpinner(new SpinnerNumberModel(dateTime.getMinute(), 0, 59, 1));
-        gbc.gridx = 3;
-        panelFooter.add(spinnerMinute, gbc);
+            spinnerMinute = new JSpinner(new SpinnerNumberModel(dateTime.getMinute(), 0, 59, 1));
+            gbc.gridx = 3;
+            panelFooter.add(spinnerMinute, gbc);
+        }
 
         JButton btnOk = new JButton("OK");
         btnOk.setBackground(new Color(100, 150, 255));
         btnOk.setForeground(Color.WHITE);
         btnOk.addActionListener(e -> {
             confirmed = true;
-            dateTime = dateTime.withHour((int) spinnerHour.getValue())
-                             .withMinute((int) spinnerMinute.getValue());
+            if (showTime) {
+                dateTime = dateTime.withHour((int) spinnerHour.getValue())
+                                 .withMinute((int) spinnerMinute.getValue());
+            }
             dispose();
         });
         gbc.gridx = 4;
@@ -147,8 +153,8 @@ public class DateTimeChooser extends JDialog {
         return confirmed ? dateTime : null;
     }
 
-    public static LocalDateTime showDialog(Window parent, LocalDateTime initial) {
-        DateTimeChooser chooser = new DateTimeChooser(parent, initial);
+    public static LocalDateTime showDialog(Window parent, LocalDateTime initial, boolean showTime) {
+        DateTimeChooser chooser = new DateTimeChooser(parent, initial, showTime);
         chooser.setVisible(true);
         return chooser.getSelectedDateTime();
     }

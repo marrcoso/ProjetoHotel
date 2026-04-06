@@ -333,7 +333,7 @@ public final class ControllerCadReserva implements ActionListener, InterfaceCont
 
     private Date parseData(String data) {
         try {
-            if (data == null || data.trim().isEmpty() || data.contains(" ")) return null;
+            if (data == null || data.trim().isEmpty() || data.trim().length() < 10) return null;
             return new SimpleDateFormat("dd/MM/yyyy").parse(data);
         } catch (ParseException e) {
             return null;

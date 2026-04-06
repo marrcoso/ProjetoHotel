@@ -74,15 +74,15 @@ public class TelaReserva extends javax.swing.JDialog {
         return jFormattedTextFieldQuarto;
     }
 
-    public JFormattedTextField getjFormattedTextFieldDataReserva() {
+    public view.components.DateTimePicker getjFormattedTextFieldDataReserva() {
         return jFormattedTextFieldDataReserva;
     }
 
-    public JFormattedTextField getjFormattedTextFieldDataEntrada() {
+    public view.components.DateTimePicker getjFormattedTextFieldDataEntrada() {
         return jFormattedTextFieldDataEntrada;
     }
 
-    public JFormattedTextField getjFormattedTextFieldDataSaida() {
+    public view.components.DateTimePicker getjFormattedTextFieldDataSaida() {
         return jFormattedTextFieldDataSaida;
     }
 
@@ -96,13 +96,11 @@ public class TelaReserva extends javax.swing.JDialog {
 
         jPanelTitulo = new javax.swing.JPanel();
         jLabelTitulo = new javax.swing.JLabel();
-        jTextFieldId = new javax.swing.JTextField();
-        jLabelId = new javax.swing.JLabel();
-        jButtonNovo = new javax.swing.JButton();
-        jButtonBuscar = new javax.swing.JButton();
         jPanelBotoes = new javax.swing.JPanel();
+        jButtonNovo = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
         jButtonGravar = new javax.swing.JButton();
+        jButtonBuscar = new javax.swing.JButton();
         jButtonSair = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanelReserva = new javax.swing.JPanel();
@@ -110,12 +108,14 @@ public class TelaReserva extends javax.swing.JDialog {
         jLabelObs = new javax.swing.JLabel();
         jComboBoxStatus = new javax.swing.JComboBox<>();
         jLabelStatus = new javax.swing.JLabel();
-        jFormattedTextFieldDataReserva = new javax.swing.JFormattedTextField();
+        jFormattedTextFieldDataReserva = new view.components.DateTimePicker(false, false);
         jLabelDataReserva = new javax.swing.JLabel();
-        jFormattedTextFieldDataEntrada = new javax.swing.JFormattedTextField();
+        jFormattedTextFieldDataEntrada = new view.components.DateTimePicker(true, false);
         jLabelDataEntrada = new javax.swing.JLabel();
-        jFormattedTextFieldDataSaida = new javax.swing.JFormattedTextField();
+        jFormattedTextFieldDataSaida = new view.components.DateTimePicker(true, false);
         jLabelDataSaida = new javax.swing.JLabel();
+        jTextFieldId = new javax.swing.JTextField();
+        jLabelId = new javax.swing.JLabel();
         jPanelQuartos = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableQuartos = new javax.swing.JTable();
@@ -137,19 +137,6 @@ public class TelaReserva extends javax.swing.JDialog {
         jLabelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelTitulo.setText("Reserva");
 
-        jTextFieldId.setEditable(false);
-        jTextFieldId.setEnabled(false);
-
-        jLabelId.setText("ID");
-
-        jButtonNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Create.png"))); // NOI18N
-        jButtonNovo.setText("Novo");
-        jButtonNovo.setActionCommand("0");
-
-        jButtonBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Load.png"))); // NOI18N
-        jButtonBuscar.setText("Buscar");
-        jButtonBuscar.setActionCommand("0");
-
         javax.swing.GroupLayout jPanelTituloLayout = new javax.swing.GroupLayout(jPanelTitulo);
         jPanelTitulo.setLayout(jPanelTituloLayout);
         jPanelTituloLayout.setHorizontalGroup(
@@ -157,32 +144,19 @@ public class TelaReserva extends javax.swing.JDialog {
             .addGroup(jPanelTituloLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelTituloLayout.createSequentialGroup()
-                        .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonNovo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonBuscar))
-                    .addComponent(jLabelId))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelTituloLayout.setVerticalGroup(
             jPanelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelTituloLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabelId)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonNovo)
-                    .addComponent(jButtonBuscar))
-                .addGap(0, 13, Short.MAX_VALUE))
-            .addComponent(jLabelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
         );
 
         jPanelBotoes.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jButtonNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Create.png"))); // NOI18N
+        jButtonNovo.setText("Novo");
+        jButtonNovo.setActionCommand("0");
+        jPanelBotoes.add(jButtonNovo);
 
         jButtonCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Cancel.png"))); // NOI18N
         jButtonCancelar.setText("Cancelar");
@@ -195,6 +169,11 @@ public class TelaReserva extends javax.swing.JDialog {
         jButtonGravar.setActionCommand("1");
         jButtonGravar.setEnabled(false);
         jPanelBotoes.add(jButtonGravar);
+
+        jButtonBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Load.png"))); // NOI18N
+        jButtonBuscar.setText("Buscar");
+        jButtonBuscar.setActionCommand("0");
+        jPanelBotoes.add(jButtonBuscar);
 
         jButtonSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Exit.png"))); // NOI18N
         jButtonSair.setText("Sair");
@@ -211,32 +190,17 @@ public class TelaReserva extends javax.swing.JDialog {
         jLabelStatus.setText("Status");
 
         jFormattedTextFieldDataReserva.setEditable(false);
-        try {
-            jFormattedTextFieldDataReserva.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        jFormattedTextFieldDataReserva.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jLabelDataReserva.setText("Data da Reserva");
 
-        try {
-            jFormattedTextFieldDataEntrada.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        jFormattedTextFieldDataEntrada.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-
         jLabelDataEntrada.setText("Previsão de Entrada");
 
-        try {
-            jFormattedTextFieldDataSaida.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        jFormattedTextFieldDataSaida.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-
         jLabelDataSaida.setText("Previsão de Saída");
+
+        jTextFieldId.setEditable(false);
+        jTextFieldId.setEnabled(false);
+
+        jLabelId.setText("ID");
 
         javax.swing.GroupLayout jPanelReservaLayout = new javax.swing.GroupLayout(jPanelReserva);
         jPanelReserva.setLayout(jPanelReservaLayout);
@@ -244,27 +208,34 @@ public class TelaReserva extends javax.swing.JDialog {
             jPanelReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelReservaLayout.createSequentialGroup()
                 .addGap(206, 206, 206)
-                .addGroup(jPanelReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabelObs)
-                    .addGroup(jPanelReservaLayout.createSequentialGroup()
-                        .addGroup(jPanelReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jFormattedTextFieldDataReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelDataReserva)
-                            .addComponent(jFormattedTextFieldDataEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelDataEntrada))
-                        .addGap(32, 32, 32)
-                        .addGroup(jPanelReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jFormattedTextFieldDataSaida, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                            .addComponent(jLabelDataSaida)
-                            .addComponent(jLabelStatus)
-                            .addComponent(jComboBoxStatus, 0, 190, Short.MAX_VALUE)))
-                    .addComponent(jTextFieldObs))
+                .addGroup(jPanelReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelId)
+                    .addGroup(jPanelReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabelObs)
+                        .addGroup(jPanelReservaLayout.createSequentialGroup()
+                            .addGroup(jPanelReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jFormattedTextFieldDataReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabelDataReserva)
+                                .addComponent(jFormattedTextFieldDataEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabelDataEntrada))
+                            .addGap(32, 32, 32)
+                            .addGroup(jPanelReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jFormattedTextFieldDataSaida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabelDataSaida)
+                                .addComponent(jLabelStatus)
+                                .addComponent(jComboBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextFieldObs)))
                 .addContainerGap(212, Short.MAX_VALUE))
         );
         jPanelReservaLayout.setVerticalGroup(
             jPanelReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelReservaLayout.createSequentialGroup()
-                .addGap(74, 74, 74)
+                .addGap(20, 20, 20)
+                .addComponent(jLabelId)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanelReservaLayout.createSequentialGroup()
                         .addGroup(jPanelReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -458,12 +429,12 @@ public class TelaReserva extends javax.swing.JDialog {
     private javax.swing.JButton jButtonRelacionarQuarto;
     private javax.swing.JButton jButtonSair;
     private javax.swing.JComboBox<String> jComboBoxStatus;
-    private javax.swing.JFormattedTextField jFormattedTextFieldDataReserva;
-    private javax.swing.JFormattedTextField jFormattedTextFieldDataEntrada;
-    private javax.swing.JFormattedTextField jFormattedTextFieldDataSaida;
+    private view.components.DateTimePicker jFormattedTextFieldDataEntrada;
+    private view.components.DateTimePicker jFormattedTextFieldDataReserva;
+    private view.components.DateTimePicker jFormattedTextFieldDataSaida;
     private javax.swing.JFormattedTextField jFormattedTextFieldQuarto;
-    private javax.swing.JLabel jLabelDataReserva;
     private javax.swing.JLabel jLabelDataEntrada;
+    private javax.swing.JLabel jLabelDataReserva;
     private javax.swing.JLabel jLabelDataSaida;
     private javax.swing.JLabel jLabelId;
     private javax.swing.JLabel jLabelObs;

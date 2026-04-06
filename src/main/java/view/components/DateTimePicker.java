@@ -15,21 +15,33 @@ public class DateTimePicker extends JPanel {
 
     private JFormattedTextField textField;
     private JButton button;
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+    private final boolean showTime;
+    private final DateTimeFormatter formatter;
 
     public DateTimePicker() {
-        this(true);
+        this(true, true);
     }
 
     public DateTimePicker(boolean showButton) {
+        this(showButton, true);
+    }
+
+    public DateTimePicker(boolean showButton, boolean showTime) {
+        this.showTime = showTime;
+        this.formatter = DateTimeFormatter.ofPattern(showTime ? "dd/MM/yyyy HH:mm" : "dd/MM/yyyy");
         initComponents(showButton);
     }
 
     private void initComponents(boolean showButton) {
         setLayout(new BorderLayout());
 
-        textField = new JFormattedTextField(Utilities.getMascaraDataHora());
-        textField.setColumns(14);
+        if (showTime) {
+            textField = new JFormattedTextField(Utilities.getMascaraDataHora());
+            textField.setColumns(14);
+        } else {
+            textField = new JFormattedTextField(Utilities.getMascaraData());
+            textField.setColumns(10);
+        }
         textField.setHorizontalAlignment(JFormattedTextField.CENTER);
 
         button = new JButton(new javax.swing.ImageIcon(getClass().getResource("/imagens/Calendar.png")));
@@ -38,16 +50,22 @@ public class DateTimePicker extends JPanel {
 
         button.addActionListener(e -> {
             LocalDateTime initial = null;
-            String text = textField.getText().replace("/", "").replace(":", "").trim();
-            if (text.length() == 12) { // ddMMyyyyHHmm
+            String text = textField.getText().replace("/", "").replace(":", "").replace(" ", "").trim();
+            int expectedLength = showTime ? 12 : 8; // ddMMyyyyHHmm or ddMMyyyy
+            
+            if (text.length() == expectedLength) {
                 try {
-                    initial = LocalDateTime.parse(textField.getText(), formatter);
+                    if (showTime) {
+                        initial = LocalDateTime.parse(textField.getText(), formatter);
+                    } else {
+                        initial = java.time.LocalDate.parse(textField.getText(), formatter).atStartOfDay();
+                    }
                 } catch (Exception ex) {}
             }
             if (initial == null) initial = LocalDateTime.now();
 
             Window parent = SwingUtilities.getWindowAncestor(this);
-            LocalDateTime selected = DateTimeChooser.showDialog(parent, initial);
+            LocalDateTime selected = DateTimeChooser.showDialog(parent, initial, showTime);
             if (selected != null) {
                 textField.setText(selected.format(formatter));
             }
