@@ -314,6 +314,7 @@ public class TelaCheck extends javax.swing.JDialog {
         jLabelStatusReserva = new javax.swing.JLabel();
         jTextFieldObsReserva = new javax.swing.JTextField();
         jLabelObsReserva = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jPanelRecebimento = new javax.swing.JPanel();
         jComboBoxStatusRecebimento = new javax.swing.JComboBox<>();
         jLabelStatusRecebimento = new javax.swing.JLabel();
@@ -889,6 +890,10 @@ public class TelaCheck extends javax.swing.JDialog {
 
         jLabelObsReserva.setText("OBS.:");
 
+        jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(204, 0, 0));
+        jLabel1.setText("FUNCIONALIDADE DESATIVADA TEMPORARIAMENTE");
+
         javax.swing.GroupLayout jPanelReservaLayout = new javax.swing.GroupLayout(jPanelReserva);
         jPanelReserva.setLayout(jPanelReservaLayout);
         jPanelReservaLayout.setHorizontalGroup(
@@ -896,6 +901,7 @@ public class TelaCheck extends javax.swing.JDialog {
             .addGroup(jPanelReservaLayout.createSequentialGroup()
                 .addGap(204, 204, 204)
                 .addGroup(jPanelReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
                     .addComponent(jLabelIdReserva)
                     .addComponent(jTextFieldIdReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanelReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -915,7 +921,7 @@ public class TelaCheck extends javax.swing.JDialog {
                         .addGroup(jPanelReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelObsReserva)
                             .addComponent(jTextFieldObsReserva, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(214, Short.MAX_VALUE))
+                .addContainerGap(186, Short.MAX_VALUE))
         );
         jPanelReservaLayout.setVerticalGroup(
             jPanelReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -946,7 +952,9 @@ public class TelaCheck extends javax.swing.JDialog {
                 .addComponent(jLabelObsReserva)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldObsReserva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(103, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addContainerGap(75, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Reserva", jPanelReserva);
@@ -1244,6 +1252,7 @@ public class TelaCheck extends javax.swing.JDialog {
     private javax.swing.JFormattedTextField jFormattedTextFieldQuarto;
     private javax.swing.JFormattedTextField jFormattedTextFieldVaga;
     private javax.swing.JFormattedTextField jFormattedTextFieldVeiculo;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelAcrescimo;
     private javax.swing.JLabel jLabelDataCadastro;
     private javax.swing.JLabel jLabelDataEntrada;

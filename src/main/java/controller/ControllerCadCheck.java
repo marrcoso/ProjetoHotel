@@ -92,6 +92,11 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
         Utilities.setAlwaysDisabled(this.telaCheck.getjTextFieldValorPagar(), true);
         Utilities.setAlwaysDisabled(this.telaCheck.getjFormattedTextFieldHospede(), true);
         Utilities.setAlwaysDisabled(this.telaCheck.getjFormattedTextFieldQuarto(), true);
+        
+        Utilities.setAlwaysDisabled(this.telaCheck.getjFormattedTextFieldDataReserva(), true);
+        Utilities.setAlwaysDisabled(this.telaCheck.getjFormattedTextFieldDataEntradaReserva(), true);
+        Utilities.setAlwaysDisabled(this.telaCheck.getjFormattedTextFieldDataSaidaReserva(), true);
+        Utilities.setAlwaysDisabled(this.telaCheck.getjTextFieldObsReserva(), true);
 
         Utilities.ativaDesativa(this.telaCheck.getjPanelBotoes(), true);
         limparFormulario(false);
