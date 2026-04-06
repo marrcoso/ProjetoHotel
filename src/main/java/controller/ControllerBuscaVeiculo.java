@@ -19,6 +19,10 @@ public final class ControllerBuscaVeiculo implements ActionListener, InterfaceCo
     private final Consumer<Integer> atualizaCodigo;
     private final boolean apenasDisponiveis;
 
+    public ControllerBuscaVeiculo(TelaBuscaVeiculo telaBuscaVeiculo, Consumer<Integer> atualizaCodigo) {
+        this(telaBuscaVeiculo, atualizaCodigo, false);
+    }
+
     public ControllerBuscaVeiculo(TelaBuscaVeiculo telaBuscaVeiculo, Consumer<Integer> atualizaCodigo, boolean apenasDisponiveis) {
         this.telaBuscaVeiculo = telaBuscaVeiculo;
         this.veiculoService = new VeiculoService();

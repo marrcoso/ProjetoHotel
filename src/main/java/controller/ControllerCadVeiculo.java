@@ -345,7 +345,7 @@ public final class ControllerCadVeiculo implements ActionListener, InterfaceCont
         codigoVeiculo = 0;
         TelaBuscaVeiculo telaBuscaVeiculo = new TelaBuscaVeiculo(null, true);
         @SuppressWarnings("unused")
-        ControllerBuscaVeiculo controllerBuscaVeiculo = new ControllerBuscaVeiculo(telaBuscaVeiculo, codigo -> this.codigoVeiculo = codigo, false);
+        ControllerBuscaVeiculo controllerBuscaVeiculo = new ControllerBuscaVeiculo(telaBuscaVeiculo, codigo -> this.codigoVeiculo = codigo);
         telaBuscaVeiculo.setVisible(true);
 
         if (codigoVeiculo != 0) {

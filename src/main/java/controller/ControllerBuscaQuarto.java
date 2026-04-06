@@ -19,6 +19,10 @@ public final class ControllerBuscaQuarto implements ActionListener, InterfaceCon
     private final Consumer<Integer> atualizaCodigo;
     private final boolean apenasDisponiveis;
 
+    public ControllerBuscaQuarto(TelaBuscaQuarto telaBuscaQuarto, Consumer<Integer> atualizaCodigo) {
+        this(telaBuscaQuarto, atualizaCodigo, false);
+    }
+
     public ControllerBuscaQuarto(TelaBuscaQuarto telaBuscaQuarto, Consumer<Integer> atualizaCodigo, boolean apenasDisponiveis) {
         this.telaBuscaQuarto = telaBuscaQuarto;
         this.quartoService = new QuartoService();
