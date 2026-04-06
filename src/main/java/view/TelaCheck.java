@@ -424,7 +424,6 @@ public class TelaCheck extends javax.swing.JDialog {
 
         jLabelDataCadastro.setText("Data de Cadastro");
 
-        jFormattedTextFieldDataEntrada.setEditable(false);
         try {
             jFormattedTextFieldDataEntrada.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
@@ -439,7 +438,6 @@ public class TelaCheck extends javax.swing.JDialog {
 
         jLabelDataEntrada.setText("Data de Entrada");
 
-        jFormattedTextFieldDataSaida.setEditable(false);
         try {
             jFormattedTextFieldDataSaida.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {

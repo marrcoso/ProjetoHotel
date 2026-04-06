@@ -212,10 +212,6 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
             this.telaCheck.getjFormattedTextFieldDataEntrada().requestFocus();
             return false;
         }
-        if (!validarDataObrigatoria(this.telaCheck.getjFormattedTextFieldDataSaida().getText(), "Data de Saída")) {
-            this.telaCheck.getjFormattedTextFieldDataSaida().requestFocus();
-            return false;
-        }
 
         String dataCadastro = Utilities.formatarDataToSqlData(this.telaCheck.getjFormattedTextFieldDataCadastro().getText());
         String dataEntrada = Utilities.formatarDataToSqlData(this.telaCheck.getjFormattedTextFieldDataEntrada().getText());
@@ -226,10 +222,13 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
             this.telaCheck.getjFormattedTextFieldDataEntrada().requestFocus();
             return false;
         }
-        if (!ValidadorCampos.compararDatas(dataEntrada, dataSaida)) {
-            JOptionPane.showMessageDialog(this.telaCheck, "A data de saída não pode ser menor que a data de entrada.");
-            this.telaCheck.getjFormattedTextFieldDataSaida().requestFocus();
-            return false;
+
+        if (this.telaCheck.getjFormattedTextFieldDataSaida().getText().trim().length() > 0) {
+            if (!ValidadorCampos.compararDatas(dataEntrada, dataSaida)) {
+                JOptionPane.showMessageDialog(this.telaCheck, "A data de saída não pode ser menor que a data de entrada.");
+                this.telaCheck.getjFormattedTextFieldDataSaida().requestFocus();
+                return false;
+            }
         }
 
         if (this.hospedesSelecionados.isEmpty()) {
@@ -246,10 +245,21 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
         }
 
         try {
-            lerValorMonetario(this.telaCheck.getjTextFieldValorOriginal().getText());
-            lerValorMonetario(this.telaCheck.getjTextFieldDesconto().getText());
-            lerValorMonetario(this.telaCheck.getjTextFieldAcrescimo().getText());
-            lerValorMonetario(this.telaCheck.getjTextFieldValorPago().getText());
+            float valorOriginal = lerValorMonetario(this.telaCheck.getjTextFieldValorOriginal().getText());
+            float desconto = lerValorMonetario(this.telaCheck.getjTextFieldDesconto().getText());
+            float acrescimo = lerValorMonetario(this.telaCheck.getjTextFieldAcrescimo().getText());
+            float valorPago = lerValorMonetario(this.telaCheck.getjTextFieldValorPago().getText());
+
+            if (valorOriginal < 0 || desconto < 0 || acrescimo < 0 || valorPago < 0) {
+                JOptionPane.showMessageDialog(this.telaCheck, "Os valores monetários não podem ser negativos.");
+                return false;
+            }
+
+            float valorPagar = this.checkService.calcularValorPagar(valorOriginal, desconto, acrescimo);
+            if (valorPagar < 0) {
+                JOptionPane.showMessageDialog(this.telaCheck, "O valor a pagar não pode ser negativo.");
+                return false;
+            }
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this.telaCheck, "Os valores do recebimento devem ser numéricos.");
             return false;
