@@ -320,7 +320,7 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
         codigo = 0;
         TelaBuscaCheck telaBuscaCheck = new TelaBuscaCheck(null, true);
         @SuppressWarnings("unused")
-        ControllerBuscaCheck ControllerBuscaCheck = new ControllerBuscaCheck(telaBuscaCheck, valor -> this.codigo = valor);
+        ControllerBuscaCheck ControllerBuscaCheck = new ControllerBuscaCheck(telaBuscaCheck, valor -> this.codigo = valor, true);
         telaBuscaCheck.setVisible(true);
 
         if (codigo == 0) {
@@ -605,17 +605,15 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
 
         String dataEntrada = this.telaCheck.getjFormattedTextFieldDataEntrada().getText();
         String dataSaida = this.telaCheck.getjFormattedTextFieldDataSaida().getText();
+        String dataEntradaSql = Utilities.formatarDataToSqlData(dataEntrada);
+        String dataSaidaSql = Utilities.formatarDataToSqlData(dataSaida);
 
-        if (!ValidadorCampos.validarData(dataEntrada) || !ValidadorCampos.validarData(dataSaida)) {
+        if (!ValidadorCampos.validarData(dataEntradaSql) || !ValidadorCampos.validarData(dataSaidaSql)) {
             JOptionPane.showMessageDialog(this.telaCheck, "As datas de entrada e saída devem ser preenchidas para alocar um quarto.");
             return;
         }
 
-        dataEntrada = Utilities.formatarDataToSqlData(dataEntrada);
-        dataSaida = Utilities.formatarDataToSqlData(dataSaida);
-
-
-        if (!ValidadorCampos.compararDatas(dataEntrada, dataSaida)) {
+        if (!ValidadorCampos.compararDatas(dataEntradaSql, dataSaidaSql)) {
             JOptionPane.showMessageDialog(this.telaCheck, "A data de saída do quarto não pode ser menor que a data de entrada.");
             return;
         }

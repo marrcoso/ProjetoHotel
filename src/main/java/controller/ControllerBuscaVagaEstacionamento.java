@@ -157,7 +157,7 @@ public final class ControllerBuscaVagaEstacionamento implements ActionListener, 
                             .collect(java.util.stream.Collectors.toList());
                         boolean disponivel = vaga != null && disponiveis.contains(vaga.getId());
                         if (!disponivel) {
-                            JOptionPane.showMessageDialog(null, "Vaga já está alocado e não pode ser selecionado.");
+                            JOptionPane.showMessageDialog(null, "Vaga não disponivel para seleção.");
                             return;
                         }
                     }

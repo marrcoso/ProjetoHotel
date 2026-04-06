@@ -78,13 +78,17 @@ public class AlocacaoVagaDAO implements InterfaceDAO<AlocacaoVaga> {
                 if (vaga == null || veiculo == null) {
                     throw new RuntimeException("Vaga ou veículo não encontrado para vincular ao check.");
                 }
-                AlocacaoVaga novo = new AlocacaoVaga();
-                novo.setCheck(check);
-                novo.setVagaEstacionamento(vaga);
-                novo.setVeiculo(veiculo);
-                novo.setObs(aloc.getObs() != null ? aloc.getObs() : "");
-                novo.setStatus(aloc.getStatus());
-                em.persist(novo);
+                AlocacaoVaga av = new AlocacaoVaga();
+                av.setCheck(check);
+                av.setVagaEstacionamento(vaga);
+                av.setVeiculo(veiculo);
+                av.setObs(aloc.getObs() != null ? aloc.getObs() : "");
+                av.setStatus(aloc.getStatus());
+                if (av.getId() == 0) {
+                    em.persist(av);
+                } else {
+                    em.merge(av);
+                }
             }
         }, true);
     }

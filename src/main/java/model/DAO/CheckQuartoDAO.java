@@ -70,7 +70,11 @@ public class CheckQuartoDAO implements InterfaceDAO<CheckQuarto> {
 
             for (CheckQuarto cq : checkQuartos) {
                 cq.setCheck(check);
-                em.persist(cq);
+                if (cq.getId() == 0) {
+                    em.persist(cq);
+                } else {
+                    em.merge(cq);
+                }
             }
         }, true);
     }

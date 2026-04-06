@@ -70,7 +70,11 @@ public class CheckHospedeDAO implements InterfaceDAO<CheckHospede> {
 
             for (CheckHospede ch : checkHospedes) {
                 ch.setCheck(check);
-                em.persist(ch);
+                if (ch.getId() == 0) {
+                    em.persist(ch);
+                } else {
+                    em.merge(ch);
+                }
             }
         }, true);
     }
