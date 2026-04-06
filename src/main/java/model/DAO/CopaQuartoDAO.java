@@ -43,4 +43,15 @@ public class CopaQuartoDAO implements InterfaceDAO<CopaQuarto> {
             Update(copa);
         }
     }
+
+    public float sumTotalFinalizadoPorCheck(int checkId) throws RuntimeException {
+        return JPADao.executeWithEntityManager(em -> {
+            String jpql = "SELECT SUM(c.quantidade * c.valorUnitario) FROM CopaQuarto c " +
+                          "WHERE c.status = 'F' AND c.checkQuarto.check.id = :checkId";
+            Double result = em.createQuery(jpql, Double.class)
+                             .setParameter("checkId", checkId)
+                             .getSingleResult();
+            return result != null ? result.floatValue() : 0.0f;
+        }, false);
+    }
 }

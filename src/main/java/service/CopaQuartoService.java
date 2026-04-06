@@ -45,4 +45,8 @@ public class CopaQuartoService implements InterfaceService<CopaQuarto> {
     public void mudarStatus(int id, char status) throws RuntimeException {
         copaQuartoDAO.mudarStatus(id, status);
     }
+
+    public float calcularTotalPorCheck(int checkId) throws RuntimeException {
+        return copaQuartoDAO.sumTotalFinalizadoPorCheck(checkId);
+    }
 }

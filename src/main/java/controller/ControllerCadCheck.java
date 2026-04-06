@@ -33,6 +33,7 @@ import service.QuartoService;
 import service.ReceberService;
 import service.VagaEstacionamentoService;
 import service.VeiculoService;
+import service.CopaQuartoService;
 import utilities.Utilities;
 import utilities.ValidadorCampos;
 import view.TelaBuscaCheck;
@@ -62,6 +63,7 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
     private final VagaEstacionamentoService vagaService;
     private final VeiculoService veiculoService;
     private final ReceberService receberService;
+    private final CopaQuartoService copaQuartoService;
     private final List<CheckHospede> hospedesSelecionados;
     private final List<CheckQuarto> quartosSelecionados;
     private final List<AlocacaoVaga> alocacoesVagasSelecionadas;
@@ -87,6 +89,7 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
         this.vagaService = new VagaEstacionamentoService();
         this.veiculoService = new VeiculoService();
         this.receberService = new ReceberService();
+        this.copaQuartoService = new CopaQuartoService();
         this.reservaService = new ReservaService();
         this.reservaQuartoService = new ReservaQuartoService();
         this.caixaService = new CaixaService();
@@ -103,11 +106,11 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
         Utilities.setAlwaysDisabled(this.telaCheck.getjComboBoxStatus(), true);
         Utilities.setAlwaysDisabled(this.telaCheck.getjTextFieldVaga(), true);
         Utilities.setAlwaysDisabled(this.telaCheck.getjTextFieldVeiculo(), true);
-        Utilities.setAlwaysDisabled(this.telaCheck.getjComboBoxStatusRecebimento(), true);
         Utilities.setAlwaysDisabled(this.telaCheck.getjTextFieldValorPagar(), true);
         Utilities.setAlwaysDisabled(this.telaCheck.getjFormattedTextFieldHospede(), true);
         Utilities.setAlwaysDisabled(this.telaCheck.getjFormattedTextFieldQuarto(), true);
         Utilities.setAlwaysDisabled(this.telaCheck.getjFormattedTextFieldReserva(), true);
+        Utilities.setAlwaysDisabled(this.telaCheck.getjTextFieldValorProdutos(), true);
         
         Utilities.ativaDesativa(this.telaCheck.getjPanelBotoes(), true);
         limparFormulario(false);
@@ -204,6 +207,7 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
 
         Utilities.ativaDesativa(this.telaCheck.getjPanelBotoes(), false);
         limparFormulario(true);
+        Utilities.limpaComponentes(this.telaCheck.getjPanelRecebimento(), false);
         preencherPadroesNovoCadastro();
         this.telaCheck.getjFormattedTextFieldDataEntrada().requestFocus();
     }
@@ -780,12 +784,15 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
             this.telaCheck.getjFormattedTextFieldReserva().setText("");
         }
 
-        this.telaCheck.getjComboBoxStatusRecebimento().setSelectedItem("Ativo");
         this.telaCheck.getjFormattedTextFieldDataEntrada().requestFocus();
 
         carregarHospedesDoCheck(check.getId());
         carregarQuartosDoCheck(check.getId());
         carregarVagasDoCheck(check.getId());
+        
+        float totalCopa = this.copaQuartoService.calcularTotalPorCheck(check.getId());
+        this.telaCheck.getjTextFieldValorProdutos().setText(String.format(Locale.US, "%.2f", totalCopa));
+        
         carregarRecebimentoDoCheck(check.getId());
         recalcularValorPagar();
 
@@ -900,13 +907,13 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
         this.telaCheck.getjTextFieldVaga().setText("");
         this.telaCheck.getjTextFieldVeiculo().setText("");
         this.telaCheck.getjComboBoxStatus().setSelectedIndex(-1);
-        this.telaCheck.getjComboBoxStatusRecebimento().setSelectedIndex(-1);
         this.telaCheck.getjComboBoxTipoHospede().setSelectedIndex(-1);
 
         this.telaCheck.getjTextFieldValorOriginal().setText("");
         this.telaCheck.getjTextFieldDesconto().setText("");
         this.telaCheck.getjTextFieldAcrescimo().setText("");
         this.telaCheck.getjTextFieldValorPago().setText("");
+        this.telaCheck.getjTextFieldValorProdutos().setText("");
         this.telaCheck.getjTextFieldValorPagar().setText("");
         this.telaCheck.getjFormattedTextFieldReserva().setText("");
         this.reservaSelecionada = null;
@@ -916,7 +923,6 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
         String hoje = Utilities.getDataHoje();
 
         this.telaCheck.getjComboBoxStatus().setSelectedItem("Ativo");
-        this.telaCheck.getjComboBoxStatusRecebimento().setSelectedItem("Ativo");
         this.telaCheck.getjComboBoxTipoHospede().setSelectedIndex(-1);
 
         this.telaCheck.getjFormattedTextFieldDataCadastro().setText(hoje);
@@ -924,6 +930,7 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
         this.telaCheck.getjTextFieldValorOriginal().setText("0.00");
         this.telaCheck.getjTextFieldDesconto().setText("0.00");
         this.telaCheck.getjTextFieldAcrescimo().setText("0.00");
+        this.telaCheck.getjTextFieldValorProdutos().setText("0.00");
         this.telaCheck.getjTextFieldValorPago().setText("0.00");
         this.telaCheck.getjTextFieldValorPagar().setText("0.00");
     }
@@ -982,6 +989,7 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
         };
 
         this.telaCheck.getjTextFieldValorOriginal().getDocument().addDocumentListener(listener);
+        this.telaCheck.getjTextFieldValorProdutos().getDocument().addDocumentListener(listener);
         this.telaCheck.getjTextFieldDesconto().getDocument().addDocumentListener(listener);
         this.telaCheck.getjTextFieldAcrescimo().getDocument().addDocumentListener(listener);
     }
@@ -989,9 +997,10 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
     private void recalcularValorPagar() {
         try {
             float valorOriginal = lerValorMonetario(this.telaCheck.getjTextFieldValorOriginal().getText());
+            float valorProdutos = lerValorMonetario(this.telaCheck.getjTextFieldValorProdutos().getText());
             float desconto = lerValorMonetario(this.telaCheck.getjTextFieldDesconto().getText());
             float acrescimo = lerValorMonetario(this.telaCheck.getjTextFieldAcrescimo().getText());
-            float valorPagar = this.checkService.calcularValorPagar(valorOriginal, desconto, acrescimo);
+            float valorPagar = valorOriginal + valorProdutos - desconto + acrescimo;
             this.telaCheck.getjTextFieldValorPagar().setText(String.format(Locale.US, "%.2f", valorPagar));
         } catch (NumberFormatException ex) {
             this.telaCheck.getjTextFieldValorPagar().setText("");

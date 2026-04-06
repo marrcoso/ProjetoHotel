@@ -158,10 +158,6 @@ public class TelaCheck extends javax.swing.JDialog {
         return jTextFieldObsVaga;
     }
 
-    public JComboBox<String> getjComboBoxStatusRecebimento() {
-        return jComboBoxStatusRecebimento;
-    }
-
     public JFormattedTextField getjFormattedTextFieldDataCadastro() {
         return jFormattedTextFieldDataCadastro;
     }
@@ -216,6 +212,10 @@ public class TelaCheck extends javax.swing.JDialog {
 
     public JFormattedTextField getjFormattedTextFieldReserva() {
         return jFormattedTextFieldReserva;
+    }
+
+    public JTextField getjTextFieldValorProdutos() {
+        return jTextFieldValorProdutos;
     }
 
     /**
@@ -285,8 +285,6 @@ public class TelaCheck extends javax.swing.JDialog {
         jTextFieldObsVaga = new javax.swing.JTextField();
         jLabelObsVaga = new javax.swing.JLabel();
         jPanelRecebimento = new javax.swing.JPanel();
-        jComboBoxStatusRecebimento = new javax.swing.JComboBox<>();
-        jLabelStatusRecebimento = new javax.swing.JLabel();
         jTextFieldObsRecebimento = new javax.swing.JTextField();
         jLabelObsRecebimento = new javax.swing.JLabel();
         jTextFieldDesconto = new javax.swing.JTextField();
@@ -299,6 +297,8 @@ public class TelaCheck extends javax.swing.JDialog {
         jTextFieldValorPago = new javax.swing.JTextField();
         jLabelValorPago = new javax.swing.JLabel();
         jTextFieldValorPagar = new javax.swing.JTextField();
+        jTextFieldValorProdutos = new javax.swing.JTextField();
+        jLabelValorOriginal1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Hóspedes");
@@ -835,12 +835,6 @@ public class TelaCheck extends javax.swing.JDialog {
 
         jPanelRecebimento.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jComboBoxStatusRecebimento.setEditable(true);
-        jComboBoxStatusRecebimento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ativo", "Inativo" }));
-        jComboBoxStatusRecebimento.setEnabled(false);
-
-        jLabelStatusRecebimento.setText("Status");
-
         jTextFieldObsRecebimento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldObsRecebimentoActionPerformed(evt);
@@ -851,7 +845,7 @@ public class TelaCheck extends javax.swing.JDialog {
 
         jTextFieldDesconto.setText("R$");
 
-        jLabelValorOriginal.setText("Valor original");
+        jLabelValorOriginal.setText("Estadia");
 
         jLabelObsDesconto.setText("Desconto");
 
@@ -882,12 +876,21 @@ public class TelaCheck extends javax.swing.JDialog {
         jTextFieldValorPagar.setForeground(new java.awt.Color(0, 103, 37));
         jTextFieldValorPagar.setText("R$");
 
+        jTextFieldValorProdutos.setText("R$");
+        jTextFieldValorProdutos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldValorProdutosActionPerformed(evt);
+            }
+        });
+
+        jLabelValorOriginal1.setText("Produtos da Copa");
+
         javax.swing.GroupLayout jPanelRecebimentoLayout = new javax.swing.GroupLayout(jPanelRecebimento);
         jPanelRecebimento.setLayout(jPanelRecebimentoLayout);
         jPanelRecebimentoLayout.setHorizontalGroup(
             jPanelRecebimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRecebimentoLayout.createSequentialGroup()
-                .addContainerGap(264, Short.MAX_VALUE)
+                .addContainerGap(298, Short.MAX_VALUE)
                 .addGroup(jPanelRecebimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanelRecebimentoLayout.createSequentialGroup()
                         .addGroup(jPanelRecebimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -909,12 +912,17 @@ public class TelaCheck extends javax.swing.JDialog {
                                     .addComponent(jTextFieldValorOriginal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabelValorOriginal, javax.swing.GroupLayout.Alignment.LEADING))
                                 .addComponent(jLabelObsDesconto))
-                            .addGap(20, 20, 20)
-                            .addGroup(jPanelRecebimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabelStatusRecebimento)
-                                .addComponent(jLabelAcrescimo)
-                                .addComponent(jTextFieldAcrescimo)
-                                .addComponent(jComboBoxStatusRecebimento, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(jPanelRecebimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanelRecebimentoLayout.createSequentialGroup()
+                                    .addGap(20, 20, 20)
+                                    .addGroup(jPanelRecebimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabelAcrescimo)
+                                        .addComponent(jTextFieldAcrescimo, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanelRecebimentoLayout.createSequentialGroup()
+                                    .addGap(18, 18, 18)
+                                    .addGroup(jPanelRecebimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jTextFieldValorProdutos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabelValorOriginal1, javax.swing.GroupLayout.Alignment.LEADING)))))))
                 .addGap(256, 256, 256))
         );
         jPanelRecebimentoLayout.setVerticalGroup(
@@ -923,19 +931,20 @@ public class TelaCheck extends javax.swing.JDialog {
                 .addGap(44, 44, 44)
                 .addGroup(jPanelRecebimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanelRecebimentoLayout.createSequentialGroup()
-                        .addGroup(jPanelRecebimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBoxStatusRecebimento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanelRecebimentoLayout.createSequentialGroup()
-                                .addGroup(jPanelRecebimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabelValorOriginal)
-                                    .addComponent(jLabelStatusRecebimento))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldValorOriginal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabelValorOriginal)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldValorOriginal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelRecebimentoLayout.createSequentialGroup()
+                        .addComponent(jLabelValorOriginal1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldValorProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelRecebimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRecebimentoLayout.createSequentialGroup()
                         .addComponent(jLabelObsDesconto)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextFieldDesconto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelRecebimentoLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRecebimentoLayout.createSequentialGroup()
                         .addComponent(jLabelAcrescimo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextFieldAcrescimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -952,7 +961,7 @@ public class TelaCheck extends javax.swing.JDialog {
                         .addGroup(jPanelRecebimentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextFieldValorPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextFieldValorPagar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(118, Short.MAX_VALUE))
+                .addContainerGap(120, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Recebimento", jPanelRecebimento);
@@ -1053,6 +1062,10 @@ public class TelaCheck extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jFormattedTextFieldReservaActionPerformed
 
+    private void jTextFieldValorProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldValorProdutosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldValorProdutosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1110,7 +1123,6 @@ public class TelaCheck extends javax.swing.JDialog {
     private javax.swing.JButton jButtonRelacionarVeiculo;
     private javax.swing.JButton jButtonSair;
     private javax.swing.JComboBox<String> jComboBoxStatus;
-    private javax.swing.JComboBox<String> jComboBoxStatusRecebimento;
     private javax.swing.JComboBox<String> jComboBoxTipoHospede;
     private javax.swing.JFormattedTextField jFormattedTextFieldDataCadastro;
     private javax.swing.JFormattedTextField jFormattedTextFieldDataEntrada;
@@ -1135,11 +1147,11 @@ public class TelaCheck extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelQuarto;
     private javax.swing.JLabel jLabelReserva;
     private javax.swing.JLabel jLabelStatus;
-    private javax.swing.JLabel jLabelStatusRecebimento;
     private javax.swing.JLabel jLabelTipoHospede;
     private javax.swing.JLabel jLabelTitulo;
     private javax.swing.JLabel jLabelVaga;
     private javax.swing.JLabel jLabelValorOriginal;
+    private javax.swing.JLabel jLabelValorOriginal1;
     private javax.swing.JLabel jLabelValorPagar;
     private javax.swing.JLabel jLabelValorPago;
     private javax.swing.JLabel jLabelVeiculo;
@@ -1168,5 +1180,6 @@ public class TelaCheck extends javax.swing.JDialog {
     private javax.swing.JTextField jTextFieldValorOriginal;
     private javax.swing.JTextField jTextFieldValorPagar;
     private javax.swing.JTextField jTextFieldValorPago;
+    private javax.swing.JTextField jTextFieldValorProdutos;
     // End of variables declaration//GEN-END:variables
 }
