@@ -41,4 +41,8 @@ public class CopaQuartoService implements InterfaceService<CopaQuarto> {
     public void AtivarInativar(int id, boolean ativar) throws RuntimeException {
         copaQuartoDAO.AtivarInativar(id, ativar);
     }
+
+    public void mudarStatus(int id, char status) throws RuntimeException {
+        copaQuartoDAO.mudarStatus(id, status);
+    }
 }

@@ -84,6 +84,14 @@ public class TelaCadastroCopaQuarto extends javax.swing.JDialog {
         return jFormattedTextFieldCadastro;
     }
 
+    public JButton getjButtonStatusAvancar() {
+        return jButtonStatusAvancar;
+    }
+
+    public JButton getjButtonStatusCancelar() {
+        return jButtonStatusCancelar;
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -115,6 +123,8 @@ public class TelaCadastroCopaQuarto extends javax.swing.JDialog {
         jButtonNovo = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
         jButtonGravar = new javax.swing.JButton();
+        jButtonStatusAvancar = new javax.swing.JButton();
+        jButtonStatusCancelar = new javax.swing.JButton();
         jButtonBuscar = new javax.swing.JButton();
         jButtonSair = new javax.swing.JButton();
 
@@ -148,7 +158,8 @@ public class TelaCadastroCopaQuarto extends javax.swing.JDialog {
 
         jLabelStatus.setText("Status");
 
-        jComboBoxStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pendente", "Finalizado", "Cancelado" }));
+        jComboBoxStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pendente", "Em Processo", "Finalizado", "Cancelado" }));
+        jComboBoxStatus.setEnabled(false);
 
         jFormattedTextFieldQuarto.setEditable(false);
 
@@ -203,7 +214,7 @@ public class TelaCadastroCopaQuarto extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelStatus)
-                            .addComponent(jComboBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jComboBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelCadastro)
@@ -220,7 +231,7 @@ public class TelaCadastroCopaQuarto extends javax.swing.JDialog {
                         .addGroup(jPanelDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelDadosLayout.createSequentialGroup()
                                 .addComponent(jLabelProduto)
-                                .addGap(0, 362, Short.MAX_VALUE))
+                                .addGap(0, 342, Short.MAX_VALUE))
                             .addGroup(jPanelDadosLayout.createSequentialGroup()
                                 .addComponent(jFormattedTextFieldProduto)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -313,6 +324,16 @@ public class TelaCadastroCopaQuarto extends javax.swing.JDialog {
         jButtonGravar.setEnabled(false);
         jPanelBotoes.add(jButtonGravar);
 
+        jButtonStatusAvancar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Next.png"))); // NOI18N
+        jButtonStatusAvancar.setText("Próximo Status");
+        jButtonStatusAvancar.setEnabled(false);
+        jPanelBotoes.add(jButtonStatusAvancar);
+
+        jButtonStatusCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/No.png"))); // NOI18N
+        jButtonStatusCancelar.setText("Anular Pedido");
+        jButtonStatusCancelar.setEnabled(false);
+        jPanelBotoes.add(jButtonStatusCancelar);
+
         jButtonBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Load.png"))); // NOI18N
         jButtonBuscar.setText("Buscar");
         jButtonBuscar.setActionCommand("0");
@@ -359,6 +380,8 @@ public class TelaCadastroCopaQuarto extends javax.swing.JDialog {
     private javax.swing.JButton jButtonRelacionarProduto;
     private javax.swing.JButton jButtonRelacionarQuarto;
     private javax.swing.JButton jButtonSair;
+    private javax.swing.JButton jButtonStatusAvancar;
+    private javax.swing.JButton jButtonStatusCancelar;
     private javax.swing.JComboBox<String> jComboBoxStatus;
     private javax.swing.JFormattedTextField jFormattedTextFieldCadastro;
     private javax.swing.JFormattedTextField jFormattedTextFieldProduto;

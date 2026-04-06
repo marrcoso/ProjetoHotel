@@ -42,6 +42,15 @@ public class ControllerCadCopaQuarto implements ActionListener, InterfaceControl
         this.produtoService = new ProdutoService();
 
         initListeners();
+        
+        // Define campos que são sempre apenas leitura (automatizados ou lookup)
+        Utilities.setAlwaysDisabled(telaCadCopa.getjTextFieldId(), true);
+        Utilities.setAlwaysDisabled(telaCadCopa.getjFormattedTextFieldCadastro(), true);
+        Utilities.setAlwaysDisabled(telaCadCopa.getjFormattedTextFieldQuarto(), true);
+        Utilities.setAlwaysDisabled(telaCadCopa.getjFormattedTextFieldProduto(), true);
+        Utilities.setAlwaysDisabled(telaCadCopa.getjTextFieldValorUnitario(), true);
+        Utilities.setAlwaysDisabled(telaCadCopa.getjTextFieldTotal(), true);
+        
         Utilities.ativaDesativa(telaCadCopa.getjPanelBotoes(), true);
         Utilities.limpaComponentes(telaCadCopa.getjPanelDados(), false);
         
@@ -59,6 +68,8 @@ public class ControllerCadCopaQuarto implements ActionListener, InterfaceControl
         this.telaCadCopa.getjButtonSair().addActionListener(this);
         this.telaCadCopa.getjButtonRelacionarQuarto().addActionListener(this);
         this.telaCadCopa.getjButtonRelacionarProduto().addActionListener(this);
+        this.telaCadCopa.getjButtonStatusAvancar().addActionListener(this);
+        this.telaCadCopa.getjButtonStatusCancelar().addActionListener(this);
 
         this.telaCadCopa.getjTextFieldQuantidade().getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -86,6 +97,10 @@ public class ControllerCadCopaQuarto implements ActionListener, InterfaceControl
             handleBuscarQuarto();
         } else if (e.getSource() == telaCadCopa.getjButtonRelacionarProduto()) {
             handleBuscarProduto();
+        } else if (e.getSource() == telaCadCopa.getjButtonStatusAvancar()) {
+            handleStatusAvancar();
+        } else if (e.getSource() == telaCadCopa.getjButtonStatusCancelar()) {
+            handleStatusCancelar();
         }
     }
 
@@ -99,6 +114,8 @@ public class ControllerCadCopaQuarto implements ActionListener, InterfaceControl
         telaCadCopa.getjComboBoxStatus().setSelectedIndex(0); // Pendente
         checkQuartoSelecionado = null;
         produtoSelecionado = null;
+        configurarEstadoBotoesStatus('P');
+        bloquearCamposPorStatus('P');
     }
 
     @Override
@@ -108,6 +125,7 @@ public class ControllerCadCopaQuarto implements ActionListener, InterfaceControl
         Utilities.limpaComponentes(telaCadCopa.getjPanelDados(), false);
         checkQuartoSelecionado = null;
         produtoSelecionado = null;
+        configurarEstadoBotoesStatus(' ');
     }
 
     @Override
@@ -185,8 +203,9 @@ public class ControllerCadCopaQuarto implements ActionListener, InterfaceControl
         
         int statusIdx = telaCadCopa.getjComboBoxStatus().getSelectedIndex();
         if (statusIdx == 0) copa.setStatus('P');
-        else if (statusIdx == 1) copa.setStatus('F');
-        else if (statusIdx == 2) copa.setStatus('C');
+        else if (statusIdx == 1) copa.setStatus('E');
+        else if (statusIdx == 2) copa.setStatus('F');
+        else if (statusIdx == 3) copa.setStatus('C');
         
         try {
             copa.setDataHoraPedido(sdf.parse(telaCadCopa.getjFormattedTextFieldCadastro().getText()));
@@ -242,6 +261,7 @@ public class ControllerCadCopaQuarto implements ActionListener, InterfaceControl
         
         checkQuartoSelecionado = copa.getCheckQuarto();
         produtoSelecionado = copa.getProduto();
+        char s = copa.getStatus();
         
         telaCadCopa.getjTextFieldId().setText(String.valueOf(copa.getId()));
         telaCadCopa.getjFormattedTextFieldQuarto().setText(String.valueOf(checkQuartoSelecionado.getId()));
@@ -250,13 +270,78 @@ public class ControllerCadCopaQuarto implements ActionListener, InterfaceControl
         telaCadCopa.getjTextFieldValorUnitario().setText(String.format("%.2f", copa.getValorUnitario()));
         telaCadCopa.getjTextFieldObservacao().setText(copa.getObs());
         
-        char s = copa.getStatus();
         if (s == 'P') telaCadCopa.getjComboBoxStatus().setSelectedIndex(0);
-        else if (s == 'F') telaCadCopa.getjComboBoxStatus().setSelectedIndex(1);
-        else if (s == 'C') telaCadCopa.getjComboBoxStatus().setSelectedIndex(2);
+        else if (s == 'E') telaCadCopa.getjComboBoxStatus().setSelectedIndex(1);
+        else if (s == 'F') telaCadCopa.getjComboBoxStatus().setSelectedIndex(2);
+        else if (s == 'C') telaCadCopa.getjComboBoxStatus().setSelectedIndex(3);
         
         telaCadCopa.getjFormattedTextFieldCadastro().setText(sdf.format(copa.getDataHoraPedido()));
         
         calculaTotal();
+        configurarEstadoBotoesStatus(s);
+        bloquearCamposPorStatus(s);
+    }
+
+    private void configurarEstadoBotoesStatus(char status) {
+        String idStr = telaCadCopa.getjTextFieldId().getText();
+        boolean hasId = !idStr.isEmpty() && !idStr.equals("0");
+        
+        boolean canAvancar = (status == 'P' || status == 'E') && hasId;
+        // Permitir anular até mesmo os Finalizados
+        boolean canCancelar = (status != 'C' && status != ' ') && hasId;
+        
+        telaCadCopa.getjButtonStatusAvancar().setEnabled(canAvancar);
+        telaCadCopa.getjButtonStatusCancelar().setEnabled(canCancelar);
+    }
+
+    private void bloquearCamposPorStatus(char status) {
+        boolean pendente = (status == 'P');
+        
+        telaCadCopa.getjButtonGravar().setEnabled(pendente);
+        telaCadCopa.getjTextFieldQuantidade().setEnabled(pendente);
+        telaCadCopa.getjTextFieldObservacao().setEnabled(pendente);
+        telaCadCopa.getjButtonRelacionarQuarto().setEnabled(pendente);
+        telaCadCopa.getjButtonRelacionarProduto().setEnabled(pendente);
+        telaCadCopa.getjComboBoxStatus().setEnabled(false); // Sempre desativado para seleção manual
+    }
+
+    private void handleStatusAvancar() {
+        String idStr = telaCadCopa.getjTextFieldId().getText();
+        if (idStr.isEmpty()) return;
+
+        if (JOptionPane.showConfirmDialog(telaCadCopa, 
+                "Deseja realmente avançar o status deste pedido?", "Confirmação", 
+                JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
+            return;
+        }
+        
+        int id = Integer.parseInt(idStr);
+        int statusIdx = telaCadCopa.getjComboBoxStatus().getSelectedIndex();
+        char novoStatus = ' ';
+        
+        if (statusIdx == 0) novoStatus = 'E'; // Pendente -> Em Processo
+        else if (statusIdx == 1) novoStatus = 'F'; // Em Processo -> Finalizado
+        
+        if (novoStatus != ' ') {
+            copaQuartoService.mudarStatus(id, novoStatus);
+            CopaQuarto atualizado = copaQuartoService.Carregar(id);
+            carregarDados(atualizado);
+        }
+    }
+
+    private void handleStatusCancelar() {
+        String idStr = telaCadCopa.getjTextFieldId().getText();
+        if (idStr.isEmpty()) return;
+
+        if (JOptionPane.showConfirmDialog(telaCadCopa, 
+                "AVISO: Deseja realmente CANCELAR este pedido?", "Confirmação", 
+                JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) != JOptionPane.YES_OPTION) {
+            return;
+        }
+        
+        int id = Integer.parseInt(idStr);
+        copaQuartoService.mudarStatus(id, 'C');
+        CopaQuarto atualizado = copaQuartoService.Carregar(id);
+        carregarDados(atualizado);
     }
 }

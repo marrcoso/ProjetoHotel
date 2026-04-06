@@ -3,7 +3,7 @@
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
-    <Property name="title" type="java.lang.String" value="Cadastro de Produto"/>
+    <Property name="title" type="java.lang.String" value="Lan&#xe7;amento de Copa Quarto"/>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
@@ -42,10 +42,10 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanelTitulo" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanelDados" max="32767" attributes="0"/>
+              <Component id="jPanelDados" min="-2" pref="350" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanelBotoes" min="-2" pref="51" max="-2" attributes="0"/>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -82,7 +82,7 @@
               <Font name="Times New Roman" size="24" style="1"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="Copa"/>
+            <Property name="text" type="java.lang.String" value="Lan&#xe7;amento de Copa"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -101,43 +101,69 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jTextFieldObservacao" alignment="0" max="32767" attributes="0"/>
-                      <Group type="102" alignment="1" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabelObservacao" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabelProduto" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabelId" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jTextFieldId" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabelStatus" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jComboBoxStatus" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabelCadastro" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jFormattedTextFieldCadastro" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jFormattedTextFieldProduto" min="-2" pref="291" max="-2" attributes="0"/>
+                                  <Component id="jFormattedTextFieldQuarto" min="-2" pref="300" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jButtonRelacionarQuarto" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="jLabelQuarto" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="jLabelProduto" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="342" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="jFormattedTextFieldProduto" max="32767" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jButtonRelacionarProduto" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="104" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jLabelQuarto" min="-2" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="jComboBoxStatus" alignment="0" max="32767" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jLabelStatus" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="156" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jFormattedTextFieldCadastro" alignment="1" max="32767" attributes="0"/>
-                                      <Component id="jLabelCadastro" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jFormattedTextFieldQuarto" max="32767" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jButtonRelacionarQuarto" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabelQuantidade" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jTextFieldQuantidade" alignment="0" min="-2" pref="80" max="-2" attributes="0"/>
                           </Group>
+                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabelValorUnitario" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jTextFieldValorUnitario" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jLabelTotal" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
+                              <Component id="jTextFieldTotal" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Component id="jLabelObservacao" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -147,54 +173,62 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace pref="12" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
                           <Component id="jLabelId" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="13" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="jTextFieldId" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="jLabelCadastro" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jFormattedTextFieldCadastro" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="jLabelStatus" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="jComboBoxStatus" alignment="1" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                  </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="jLabelProduto" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelStatus" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jFormattedTextFieldProduto" max="32767" attributes="0"/>
+                          <Component id="jComboBoxStatus" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="jLabelQuarto" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jFormattedTextFieldQuarto" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="jButtonRelacionarQuarto" alignment="1" min="-2" pref="24" max="-2" attributes="0"/>
-                              <Component id="jButtonRelacionarProduto" alignment="1" min="-2" pref="24" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="jLabelCadastro" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jFormattedTextFieldCadastro" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="jLabelQuarto" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jFormattedTextFieldQuarto" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="jButtonRelacionarQuarto" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="jLabelProduto" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jFormattedTextFieldProduto" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="jButtonRelacionarProduto" alignment="1" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="jLabelQuantidade" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jTextFieldQuantidade" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="jLabelValorUnitario" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jTextFieldValorUnitario" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="jLabelTotal" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jTextFieldTotal" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Component id="jLabelObservacao" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jTextFieldObservacao" min="-2" pref="75" max="-2" attributes="0"/>
-                  <EmptySpace pref="13" max="32767" attributes="0"/>
+                  <Component id="jTextFieldObservacao" min="-2" pref="60" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -220,9 +254,11 @@
         <Component class="javax.swing.JComboBox" name="jComboBoxStatus">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="2">
-                <StringItem index="0" value="Ativo"/>
-                <StringItem index="1" value="Inativo"/>
+              <StringArray count="4">
+                <StringItem index="0" value="Pendente"/>
+                <StringItem index="1" value="Em Processo"/>
+                <StringItem index="2" value="Finalizado"/>
+                <StringItem index="3" value="Cancelado"/>
               </StringArray>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
@@ -234,17 +270,11 @@
         <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldQuarto">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
-            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-              <Format format="#0.##" subtype="-1" type="4"/>
-            </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFormattedTextFieldQuartoActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelQuarto">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Quarto"/>
+            <Property name="text" type="java.lang.String" value="Quarto (Ocupa&#xe7;&#xe3;o)"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jButtonRelacionarQuarto">
@@ -254,9 +284,6 @@
             </Property>
             <Property name="actionCommand" type="java.lang.String" value="1"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonRelacionarQuartoActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelProduto">
           <Properties>
@@ -266,13 +293,7 @@
         <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldProduto">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
-            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-              <Format format="#0.##" subtype="-1" type="4"/>
-            </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFormattedTextFieldProdutoActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButtonRelacionarProduto">
           <Properties>
@@ -281,28 +302,57 @@
             </Property>
             <Property name="actionCommand" type="java.lang.String" value="1"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonRelacionarProdutoActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldCadastro">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
-            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-              <Format format="##/##/####" subtype="-1" type="5"/>
+            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors2.HtmlFormInfo$JFormattedTextFieldFormatterFactoryEditor">
+              <Format format="##/##/####" type="2"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelCadastro">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Data de Cadastro"/>
+            <Property name="text" type="java.lang.String" value="Data do Pedido"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldId">
           <Properties>
-            <Property name="toolTipText" type="java.lang.String" value=""/>
             <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabelQuantidade">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Quantidade"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jTextFieldQuantidade">
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabelValorUnitario">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Valor Unit&#xe1;rio"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jTextFieldValorUnitario">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabelTotal">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Total"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jTextFieldTotal">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="ff" red="cc" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
           </Properties>
         </Component>
       </SubComponents>
@@ -344,6 +394,24 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Gravar"/>
             <Property name="actionCommand" type="java.lang.String" value="1"/>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButtonStatusAvancar">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/imagens/Next.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Pr&#xf3;ximo Status"/>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButtonStatusCancelar">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/imagens/No.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Anular Pedido"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>

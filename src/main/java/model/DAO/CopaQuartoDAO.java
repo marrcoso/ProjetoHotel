@@ -33,9 +33,13 @@ public class CopaQuartoDAO implements InterfaceDAO<CopaQuarto> {
 
     @Override
     public void AtivarInativar(int id, boolean ativar) throws RuntimeException {
+        mudarStatus(id, ativar ? 'P' : 'C');
+    }
+
+    public void mudarStatus(int id, char status) throws RuntimeException {
         CopaQuarto copa = Retrieve(id);
         if (copa != null) {
-            copa.setStatus(ativar ? 'P' : 'C');
+            copa.setStatus(status);
             Update(copa);
         }
     }

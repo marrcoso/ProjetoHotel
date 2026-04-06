@@ -48,6 +48,14 @@ public class TelaBuscaCopaQuarto extends javax.swing.JDialog {
         return jCBFiltro;
     }
 
+    public JButton getjButtonAvancarStatus() {
+        return jButtonAvancarStatus;
+    }
+
+    public JButton getjButtonCancelarPedido() {
+        return jButtonCancelarPedido;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -69,6 +77,8 @@ public class TelaBuscaCopaQuarto extends javax.swing.JDialog {
         jButtonCarregar = new javax.swing.JButton();
         jButtonSair = new javax.swing.JButton();
         jButtonFiltar = new javax.swing.JButton();
+        jButtonAvancarStatus = new javax.swing.JButton();
+        jButtonCancelarPedido = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Busca de Lançamentos de Copa");
@@ -164,6 +174,14 @@ public class TelaBuscaCopaQuarto extends javax.swing.JDialog {
             }
         });
 
+        jButtonAvancarStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Next.png"))); // NOI18N
+        jButtonAvancarStatus.setText("Próximo Status");
+        jButtonAvancarStatus.setEnabled(false);
+
+        jButtonCancelarPedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Cancel.png"))); // NOI18N
+        jButtonCancelarPedido.setText("Cancelar Pedido");
+        jButtonCancelarPedido.setEnabled(false);
+
         javax.swing.GroupLayout jPanelFiltrosLayout = new javax.swing.GroupLayout(jPanelFiltros);
         jPanelFiltros.setLayout(jPanelFiltrosLayout);
         jPanelFiltrosLayout.setHorizontalGroup(
@@ -173,6 +191,10 @@ public class TelaBuscaCopaQuarto extends javax.swing.JDialog {
                 .addGroup(jPanelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelFiltrosLayout.createSequentialGroup()
                         .addComponent(jButtonCarregar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonAvancarStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonCancelarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonSair))
                     .addGroup(jPanelFiltrosLayout.createSequentialGroup()
@@ -206,7 +228,9 @@ public class TelaBuscaCopaQuarto extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCarregar)
-                    .addComponent(jButtonSair))
+                    .addComponent(jButtonSair)
+                    .addComponent(jButtonAvancarStatus)
+                    .addComponent(jButtonCancelarPedido))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -282,6 +306,8 @@ public class TelaBuscaCopaQuarto extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAvancarStatus;
+    private javax.swing.JButton jButtonCancelarPedido;
     private javax.swing.JButton jButtonCarregar;
     private javax.swing.JButton jButtonFiltar;
     private javax.swing.JButton jButtonSair;

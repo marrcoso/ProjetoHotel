@@ -23,6 +23,16 @@ public final class ControllerBuscaProduto implements ActionListener, InterfaceCo
         this.produtoService = new ProdutoService();
         this.atualizaCodigo = atualizaCodigo;
         initListeners();
+        carregarAtivos();
+    }
+
+    private void carregarAtivos() {
+        DefaultTableModel model = (DefaultTableModel) telaBuscaProduto.getjTableDados().getModel();
+        model.setRowCount(0);
+        List<Produto> ativos = produtoService.Carregar("status", "A");
+        for (Produto p : ativos) {
+            adicionarLinhaTabela(model, p);
+        }
     }
 
     @Override
