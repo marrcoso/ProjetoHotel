@@ -42,8 +42,10 @@ import view.TelaBuscaVaga;
 import view.TelaBuscaVeiculo;
 import view.TelaBuscaReserva;
 import view.TelaCheck;
+import service.ReservaQuartoService;
 import service.ReservaService;
 import model.Reserva;
+import model.ReservaQuarto;
 
 public final class ControllerCadCheck implements ActionListener, InterfaceControllerCad<Check> {
 
@@ -65,6 +67,7 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
     private Hospede hospedeSelecionado;
     private Quarto QuartoSelecionado;
     private final ReservaService reservaService;
+    private final ReservaQuartoService reservaQuartoService;
     private Reserva reservaSelecionada;
     private int codigo;
 
@@ -80,6 +83,7 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
         this.veiculoService = new VeiculoService();
         this.receberService = new ReceberService();
         this.reservaService = new ReservaService();
+        this.reservaQuartoService = new ReservaQuartoService();
         this.hospedesSelecionados = new ArrayList<>();
         this.quartosSelecionados = new ArrayList<>();
         this.alocacoesVagasSelecionadas = new ArrayList<>();
@@ -687,6 +691,11 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
         try {
             Reserva reserva = this.reservaService.Carregar(codigoReserva[0]);
             adicionarReserva(reserva);
+            
+            int prompt = JOptionPane.showConfirmDialog(this.telaCheck, "Deseja importar os quartos desta reserva?", "Importar Quartos", JOptionPane.YES_NO_OPTION);
+            if (prompt == JOptionPane.YES_OPTION) {
+                importarQuartosDaReserva(reserva.getId());
+            }
         } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(this.telaCheck, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
@@ -698,6 +707,40 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
         }
         this.reservaSelecionada = reserva;
         this.telaCheck.getjFormattedTextFieldReserva().setText(String.valueOf(reserva.getId()));
+    }
+
+    private void importarQuartosDaReserva(int reservaId) {
+        try {
+            List<ReservaQuarto> reservaQuartos = this.reservaQuartoService.carregarPorReserva(reservaId);
+            if (reservaQuartos.isEmpty()) {
+                JOptionPane.showMessageDialog(this.telaCheck, "Nenhum quarto encontrado nesta reserva.");
+                return;
+            }
+
+            this.quartosSelecionados.clear();
+            limparTabela(this.telaCheck.getjTableQuartos());
+
+            for (ReservaQuarto rq : reservaQuartos) {
+                CheckQuarto cq = new CheckQuarto();
+                cq.setQuarto(rq.getQuarto());
+                cq.setDataHoraInicio(rq.getDataHoraInicio());
+                cq.setDataHoraFim(rq.getDataHoraFim());
+                cq.setObs(rq.getObs());
+                cq.setStatus('A');
+                
+                this.quartosSelecionados.add(cq);
+                DefaultTableModel tabela = (DefaultTableModel) this.telaCheck.getjTableQuartos().getModel();
+                tabela.addRow(new Object[]{
+                    "",
+                    cq.getQuarto().getDescricao(),
+                    cq.getObs(),
+                    cq.getStatus()
+                });
+            }
+            JOptionPane.showMessageDialog(this.telaCheck, "Quartos importados com sucesso!");
+        } catch (RuntimeException ex) {
+            JOptionPane.showMessageDialog(this.telaCheck, "Erro ao importar quartos: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void carregarCheckNaTela(Check check) {
