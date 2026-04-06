@@ -167,19 +167,20 @@ public final class ControllerBuscaQuarto implements ActionListener, InterfaceCon
             switch (filtro) {
                 case ID: {
                     Quarto quarto = quartoService.Carregar(Integer.parseInt(filtroTexto));
+                    if (quarto == null) {
+                        break;
+                    }
                     if (apenasDisponiveis) {
                         List<Integer> disponiveis = quartoService.carregarQuartosDisponiveis().stream()
                             .map(Quarto::getId)
                             .collect(java.util.stream.Collectors.toList());
-                        boolean disponivel = quarto != null && disponiveis.contains(quarto.getId());
+                        boolean disponivel = disponiveis.contains(quarto.getId());
                         if (!disponivel) {
                             JOptionPane.showMessageDialog(null, "Quarto já está alocado e não pode ser selecionado.");
                             return;
                         }
                     }
-                    if (quarto != null) {
-                        adicionarLinhaTabela(tabela, quarto);
-                    }
+                    adicionarLinhaTabela(tabela, quarto);
                     break;
                 }
                 case DESCRICAO: {

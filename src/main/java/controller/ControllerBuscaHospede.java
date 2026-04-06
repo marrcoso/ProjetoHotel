@@ -162,6 +162,9 @@ public final class ControllerBuscaHospede implements ActionListener, InterfaceCo
             switch (filtro) {
                 case ID: {
                     Hospede hospede = hospedeService.Carregar(Integer.parseInt(filtroTexto));
+                    if (hospede == null) {
+                        break;
+                    }
                     if (apenasDisponiveis) {
                         List<Hospede> disponiveis = hospedeService.carregarHospedesDisponiveis();
                         boolean disponivel = disponiveis.stream().anyMatch(h -> h.getId() == hospede.getId());
@@ -170,9 +173,7 @@ public final class ControllerBuscaHospede implements ActionListener, InterfaceCo
                             return;
                         }
                     }
-                    if (hospede != null) {
-                        adicionarLinhaTabela(tabela, hospede);
-                    }
+                    adicionarLinhaTabela(tabela, hospede);
                     break;
                 }
                 case NOME: {

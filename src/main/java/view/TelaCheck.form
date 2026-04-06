@@ -287,27 +287,27 @@
                 <Property name="text" type="java.lang.String" value="Status"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldDataCadastro">
+            <Component class="view.components.DateTimePicker" name="jFormattedTextFieldDataCadastro">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
-                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-                  <Format format="##/##/####" subtype="-1" type="5"/>
-                </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new view.components.DateTimePicker(false, true)"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelDataCadastro">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Data de Cadastro"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldDataEntrada">
+            <Component class="view.components.DateTimePicker" name="jFormattedTextFieldDataEntrada">
               <Properties>
-                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-                  <Format format="##/##/####" subtype="-1" type="5"/>
-                </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new view.components.DateTimePicker(true, true)"/>
+              </AuxValues>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFormattedTextFieldDataEntradaActionPerformed"/>
               </Events>
@@ -317,13 +317,13 @@
                 <Property name="text" type="java.lang.String" value="Data de Entrada"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldDataSaida">
+            <Component class="view.components.DateTimePicker" name="jFormattedTextFieldDataSaida">
               <Properties>
-                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-                  <Format format="##/##/####" subtype="-1" type="5"/>
-                </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new view.components.DateTimePicker(true, true)"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelDataSaida">
               <Properties>

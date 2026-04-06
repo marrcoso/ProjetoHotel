@@ -244,18 +244,21 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
             return false;
         }
 
-        String dataCadastro = Utilities.formatarDataToSqlData(this.telaCheck.getjFormattedTextFieldDataCadastro().getText());
-        String dataEntrada = Utilities.formatarDataToSqlData(this.telaCheck.getjFormattedTextFieldDataEntrada().getText());
-        String dataSaida = Utilities.formatarDataToSqlData(this.telaCheck.getjFormattedTextFieldDataSaida().getText());
+        String dataCadastroStr = this.telaCheck.getjFormattedTextFieldDataCadastro().getText().trim();
+        String dataEntradaStr = this.telaCheck.getjFormattedTextFieldDataEntrada().getText().trim();
+        String dataCadastroSql = Utilities.formatarDataToSqlData(dataCadastroStr);
+        String dataEntradaSql = Utilities.formatarDataToSqlData(dataEntradaStr);
 
-        if (!ValidadorCampos.compararDatas(dataCadastro, dataEntrada)) {
+        if (!ValidadorCampos.compararDatas(dataCadastroSql, dataEntradaSql)) {
             JOptionPane.showMessageDialog(this.telaCheck, "A data de cadastro não pode ser maior que a data de entrada.");
             this.telaCheck.getjFormattedTextFieldDataEntrada().requestFocus();
             return false;
         }
 
-        if (this.telaCheck.getjFormattedTextFieldDataSaida().getText().trim().length() > 0) {
-            if (!ValidadorCampos.compararDatas(dataEntrada, dataSaida)) {
+        String dataSaidaStr = this.telaCheck.getjFormattedTextFieldDataSaida().getText().trim();
+        if (dataSaidaStr.length() >= 16) {
+            String dataSaidaSql = Utilities.formatarDataToSqlData(dataSaidaStr);
+            if (!ValidadorCampos.compararDatas(dataEntradaSql, dataSaidaSql)) {
                 JOptionPane.showMessageDialog(this.telaCheck, "A data de saída não pode ser menor que a data de entrada.");
                 this.telaCheck.getjFormattedTextFieldDataSaida().requestFocus();
                 return false;
@@ -673,13 +676,13 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
         checkQuarto.setStatus('A');
 
 
-        String dataEntrada = this.telaCheck.getjFormattedTextFieldDataEntrada().getText();
-        String dataSaida = this.telaCheck.getjFormattedTextFieldDataSaida().getText();
+        String dataEntrada = this.telaCheck.getjFormattedTextFieldDataEntrada().getText().trim();
+        String dataSaida = this.telaCheck.getjFormattedTextFieldDataSaida().getText().trim();
         String dataEntradaSql = Utilities.formatarDataToSqlData(dataEntrada);
         String dataSaidaSql = Utilities.formatarDataToSqlData(dataSaida);
 
         if (!ValidadorCampos.validarData(dataEntradaSql) || !ValidadorCampos.validarData(dataSaidaSql)) {
-            JOptionPane.showMessageDialog(this.telaCheck, "As datas de entrada e saída devem ser preenchidas para alocar um quarto.");
+            JOptionPane.showMessageDialog(this.telaCheck, "As datas de entrada e saída devem ser preenchidas corretamente para alocar um quarto.");
             return;
         }
 
@@ -949,12 +952,13 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
     }
 
     private Date parseData(String texto) {
-        if (texto == null || !texto.matches("\\d{2}/\\d{2}/\\d{4}")) {
+        if (texto == null || texto.trim().isEmpty() || texto.trim().length() < 10) {
             return null;
         }
 
         try {
-            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+            String formatPattern = texto.contains(" ") ? "dd/MM/yyyy HH:mm" : "dd/MM/yyyy";
+            SimpleDateFormat format = new SimpleDateFormat(formatPattern, Locale.getDefault());
             format.setLenient(false);
             return format.parse(texto);
         } catch (ParseException ex) {
@@ -967,7 +971,7 @@ public final class ControllerCadCheck implements ActionListener, InterfaceContro
             return "";
         }
 
-        return new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(data);
+        return new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault()).format(data);
     }
 
     private void configurarCalculoRecebimento() {

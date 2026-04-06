@@ -154,19 +154,20 @@ public final class ControllerBuscaVeiculo implements ActionListener, InterfaceCo
             switch (filtro) {
                 case ID: {
                     Veiculo veiculo = veiculoService.Carregar(Integer.parseInt(filtroTexto));
+                    if (veiculo == null) {
+                        break;
+                    }
                     if (apenasDisponiveis) {
                         List<Integer> disponiveis = veiculoService.carregarVeiculosDisponiveis().stream()
                             .map(Veiculo::getId)
                             .collect(java.util.stream.Collectors.toList());
-                        boolean disponivel = veiculo != null && disponiveis.contains(veiculo.getId());
+                        boolean disponivel = disponiveis.contains(veiculo.getId());
                         if (!disponivel) {
                             JOptionPane.showMessageDialog(null, "Veículo já está alocado e não pode ser selecionado.");
                             return;
                         }
                     }
-                    if (veiculo != null) {
-                        adicionarLinhaTabela(tabela, veiculo);
-                    }
+                    adicionarLinhaTabela(tabela, veiculo);
                     break;
                 }
                 case PLACA: {

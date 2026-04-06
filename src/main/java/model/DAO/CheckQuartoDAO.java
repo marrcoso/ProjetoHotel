@@ -116,16 +116,28 @@ public class CheckQuartoDAO implements InterfaceDAO<CheckQuarto> {
                 throw new RuntimeException("Check não encontrado para vincular quartos.");
             }
 
+            // IDs que devem ser mantidos
+            java.util.Set<Integer> idsParaManter = new java.util.HashSet<>();
+            for (CheckQuarto cq : checkQuartos) {
+                if (cq.getId() > 0) {
+                    idsParaManter.add(cq.getId());
+                }
+            }
+
+            // Remove apenas os que não estão na nova lista (órfãos)
             TypedQuery<CheckQuarto> query = em.createQuery(
                 "SELECT cq FROM CheckQuarto cq WHERE cq.check.id = :checkId",
                 CheckQuarto.class
             );
             query.setParameter("checkId", checkId);
 
-            for (CheckQuarto checkQuarto : query.getResultList()) {
-                em.remove(checkQuarto);
+            for (CheckQuarto cqExistente : query.getResultList()) {
+                if (!idsParaManter.contains(cqExistente.getId())) {
+                    em.remove(cqExistente);
+                }
             }
 
+            // Persiste novos ou atualiza existentes
             for (CheckQuarto cq : checkQuartos) {
                 cq.setCheck(check);
                 if (cq.getId() == 0) {

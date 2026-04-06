@@ -60,17 +60,28 @@ public class AlocacaoVagaDAO implements InterfaceDAO<AlocacaoVaga> {
                 throw new RuntimeException("Check não encontrado para vincular vagas.");
             }
 
-            // Remove todas as alocações existentes para o check
+            // IDs que devem ser mantidos
+            java.util.Set<Integer> idsParaManter = new java.util.HashSet<>();
+            for (AlocacaoVaga av : alocacoes) {
+                if (av.getId() > 0) {
+                    idsParaManter.add(av.getId());
+                }
+            }
+
+            // Remove apenas as alocações existentes que não estão na nova lista (órfãos)
             TypedQuery<AlocacaoVaga> query = em.createQuery(
                 "SELECT av FROM AlocacaoVaga av WHERE av.check.id = :checkId",
                 AlocacaoVaga.class
             );
             query.setParameter("checkId", checkId);
 
-            for (AlocacaoVaga aloc : query.getResultList()) {
-                em.remove(aloc);
+            for (AlocacaoVaga alocExistente : query.getResultList()) {
+                if (!idsParaManter.contains(alocExistente.getId())) {
+                    em.remove(alocExistente);
+                }
             }
 
+            // Persiste novas ou atualiza existentes
             for (AlocacaoVaga aloc : alocacoes) {
                 // Garante que as referências estejam gerenciadas pelo EntityManager
                 VagaEstacionamento vaga = em.find(VagaEstacionamento.class, aloc.getVagaEstacionamento().getId());
@@ -78,16 +89,18 @@ public class AlocacaoVagaDAO implements InterfaceDAO<AlocacaoVaga> {
                 if (vaga == null || veiculo == null) {
                     throw new RuntimeException("Vaga ou veículo não encontrado para vincular ao check.");
                 }
-                AlocacaoVaga av = new AlocacaoVaga();
-                av.setCheck(check);
-                av.setVagaEstacionamento(vaga);
-                av.setVeiculo(veiculo);
-                av.setObs(aloc.getObs() != null ? aloc.getObs() : "");
-                av.setStatus(aloc.getStatus());
-                if (av.getId() == 0) {
-                    em.persist(av);
+                
+                aloc.setCheck(check);
+                aloc.setVagaEstacionamento(vaga);
+                aloc.setVeiculo(veiculo);
+                if (aloc.getObs() == null) {
+                    aloc.setObs("");
+                }
+                
+                if (aloc.getId() == 0) {
+                    em.persist(aloc);
                 } else {
-                    em.merge(av);
+                    em.merge(aloc);
                 }
             }
         }, true);

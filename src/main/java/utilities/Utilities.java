@@ -163,18 +163,42 @@ public class Utilities {
     }
 
     public static String formatarDataFromSqlData(String data) {
-        if (data != null && data.matches("\\d{4}-\\d{2}-\\d{2}")) {
+        if (data == null) return null;
+        
+        // yyyy-MM-dd HH:mm
+        if (data.matches("\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}")) {
+            String datePart = data.substring(0, 10);
+            String timePart = data.substring(11, 16);
+            String[] partes = datePart.split("-");
+            return String.format("%s/%s/%s %s", partes[2], partes[1], partes[0], timePart);
+        }
+        
+        // yyyy-MM-dd
+        if (data.matches("\\d{4}-\\d{2}-\\d{2}")) {
             String[] partes = data.split("-");
             return String.format("%s/%s/%s", partes[2], partes[1], partes[0]);
         }
+        
         return data;
     }
 
     public static String formatarDataToSqlData(String data) {
-        if (data != null && data.matches("\\d{2}/\\d{2}/\\d{4}")) {
+        if (data == null) return null;
+        
+        // dd/MM/yyyy HH:mm
+        if (data.matches("\\d{2}/\\d{2}/\\d{4} \\d{2}:\\d{2}")) {
+            String datePart = data.substring(0, 10);
+            String timePart = data.substring(11, 16);
+            String[] partes = datePart.split("/");
+            return String.format("%s-%s-%s %s", partes[2], partes[1], partes[0], timePart);
+        }
+        
+        // dd/MM/yyyy
+        if (data.matches("\\d{2}/\\d{2}/\\d{4}")) {
             String[] partes = data.split("/");
             return String.format("%s-%s-%s", partes[2], partes[1], partes[0]);
         }
+        
         return data;
     }
     public static javax.swing.text.MaskFormatter getMascaraData() {

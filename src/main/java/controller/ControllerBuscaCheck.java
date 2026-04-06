@@ -172,19 +172,20 @@ public final class ControllerBuscaCheck implements ActionListener, InterfaceCont
             switch (filtro) {
                 case ID: {
                     Check check = checkService.Carregar(Integer.parseInt(filtroTexto));
+                    if (check == null) {
+                        break;
+                    }
                     if (apenasDisponiveis) {
                         List<Integer> disponiveis = checkService.carregarChecksDisponiveis().stream()
                             .map(Check::getId)
                             .collect(java.util.stream.Collectors.toList());
-                        boolean disponivel = check != null && disponiveis.contains(check.getId());
+                        boolean disponivel = disponiveis.contains(check.getId());
                         if (!disponivel) {
                             JOptionPane.showMessageDialog(null, "Check indisponivel para seleção.");
                             return;
                         }
                     }
-                    if (check != null) {
-                        adicionarLinhaTabela(tabela, check);
-                    }
+                    adicionarLinhaTabela(tabela, check);
                     break;
                 }
                 case DATA_CADASTRO: {

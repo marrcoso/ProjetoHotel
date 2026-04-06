@@ -103,4 +103,12 @@ public class DateTimePicker extends JPanel {
     public JButton getButton() {
         return button;
     }
+
+    public void setHorizontalAlignment(int alignment) {
+        textField.setHorizontalAlignment(alignment);
+    }
+
+    public int getHorizontalAlignment() {
+        return textField.getHorizontalAlignment();
+    }
 }

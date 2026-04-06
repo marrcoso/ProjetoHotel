@@ -158,15 +158,15 @@ public class TelaCheck extends javax.swing.JDialog {
         return jTextFieldObsVaga;
     }
 
-    public JFormattedTextField getjFormattedTextFieldDataCadastro() {
+    public view.components.DateTimePicker getjFormattedTextFieldDataCadastro() {
         return jFormattedTextFieldDataCadastro;
     }
 
-    public JFormattedTextField getjFormattedTextFieldDataEntrada() {
+    public view.components.DateTimePicker getjFormattedTextFieldDataEntrada() {
         return jFormattedTextFieldDataEntrada;
     }
 
-    public JFormattedTextField getjFormattedTextFieldDataSaida() {
+    public view.components.DateTimePicker getjFormattedTextFieldDataSaida() {
         return jFormattedTextFieldDataSaida;
     }
 
@@ -241,11 +241,11 @@ public class TelaCheck extends javax.swing.JDialog {
         jLabelObs = new javax.swing.JLabel();
         jComboBoxStatus = new javax.swing.JComboBox<>();
         jLabelStatus = new javax.swing.JLabel();
-        jFormattedTextFieldDataCadastro = new javax.swing.JFormattedTextField();
+        jFormattedTextFieldDataCadastro = new view.components.DateTimePicker(false, true);
         jLabelDataCadastro = new javax.swing.JLabel();
-        jFormattedTextFieldDataEntrada = new javax.swing.JFormattedTextField();
+        jFormattedTextFieldDataEntrada = new view.components.DateTimePicker(true, true);
         jLabelDataEntrada = new javax.swing.JLabel();
-        jFormattedTextFieldDataSaida = new javax.swing.JFormattedTextField();
+        jFormattedTextFieldDataSaida = new view.components.DateTimePicker(true, true);
         jLabelDataSaida = new javax.swing.JLabel();
         jButtonRelacionarReserva = new javax.swing.JButton();
         jFormattedTextFieldReserva = new javax.swing.JFormattedTextField();
@@ -364,35 +364,15 @@ public class TelaCheck extends javax.swing.JDialog {
         jLabelStatus.setText("Status");
 
         jFormattedTextFieldDataCadastro.setEditable(false);
-        try {
-            jFormattedTextFieldDataCadastro.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        jFormattedTextFieldDataCadastro.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jFormattedTextFieldDataCadastro.setEnabled(false);
 
         jLabelDataCadastro.setText("Data de Cadastro");
 
-        try {
-            jFormattedTextFieldDataEntrada.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        jFormattedTextFieldDataEntrada.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jFormattedTextFieldDataEntrada.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFormattedTextFieldDataEntradaActionPerformed(evt);
-            }
-        });
+        // jFormattedTextFieldDataEntrada setup is handled by its constructor
 
         jLabelDataEntrada.setText("Data de Entrada");
 
-        try {
-            jFormattedTextFieldDataSaida.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        jFormattedTextFieldDataSaida.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        // jFormattedTextFieldDataSaida setup is handled by its constructor
 
         jLabelDataSaida.setText("Data de Saída");
 
@@ -989,9 +969,6 @@ public class TelaCheck extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonAlocarHospedeActionPerformed
 
-    private void jFormattedTextFieldDataEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldDataEntradaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jFormattedTextFieldDataEntradaActionPerformed
 
     private void jButtonAlocarVagaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlocarVagaActionPerformed
         // TODO add your handling code here:
@@ -1115,9 +1092,9 @@ public class TelaCheck extends javax.swing.JDialog {
     private javax.swing.JButton jButtonSair;
     private javax.swing.JComboBox<String> jComboBoxStatus;
     private javax.swing.JComboBox<String> jComboBoxTipoHospede;
-    private javax.swing.JFormattedTextField jFormattedTextFieldDataCadastro;
-    private javax.swing.JFormattedTextField jFormattedTextFieldDataEntrada;
-    private javax.swing.JFormattedTextField jFormattedTextFieldDataSaida;
+    private view.components.DateTimePicker jFormattedTextFieldDataCadastro;
+    private view.components.DateTimePicker jFormattedTextFieldDataEntrada;
+    private view.components.DateTimePicker jFormattedTextFieldDataSaida;
     private javax.swing.JFormattedTextField jFormattedTextFieldHospede;
     private javax.swing.JFormattedTextField jFormattedTextFieldQuarto;
     private javax.swing.JFormattedTextField jFormattedTextFieldReserva;

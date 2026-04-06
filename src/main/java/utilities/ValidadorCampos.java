@@ -38,10 +38,16 @@ public class ValidadorCampos {
 
     public static boolean validarData(String data) {
         String padraoData = "^\\d{4}-\\d{2}-\\d{2}$";
+        String padraoDataHora = "^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}$";
 
         if (data != null) {
-            if (data.matches(padraoData)) {
-                String[] partes = data.split("-");
+            String datePart = data;
+            if (data.matches(padraoDataHora)) {
+                datePart = data.substring(0, 10);
+            }
+
+            if (data.matches(padraoData) || data.matches(padraoDataHora)) {
+                String[] partes = datePart.split("-");
                 int ano = Integer.parseInt(partes[0]);
                 int mes = Integer.parseInt(partes[1]);
                 int dia = Integer.parseInt(partes[2]);

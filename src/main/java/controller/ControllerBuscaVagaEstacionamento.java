@@ -151,19 +151,20 @@ public final class ControllerBuscaVagaEstacionamento implements ActionListener, 
             switch (filtro) {
                 case ID: {
                     VagaEstacionamento vaga = vagaService.Carregar(Integer.parseInt(filtroTexto));
+                    if (vaga == null) {
+                        break;
+                    }
                     if (apenasDisponiveis) {
                         List<Integer> disponiveis = vagaService.carregarVagasDisponiveis().stream()
                             .map(VagaEstacionamento::getId)
                             .collect(java.util.stream.Collectors.toList());
-                        boolean disponivel = vaga != null && disponiveis.contains(vaga.getId());
+                        boolean disponivel = disponiveis.contains(vaga.getId());
                         if (!disponivel) {
                             JOptionPane.showMessageDialog(null, "Vaga não disponivel para seleção.");
                             return;
                         }
                     }
-                    if (vaga != null) {
-                        adicionarLinhaTabela(tabela, vaga);
-                    }
+                    adicionarLinhaTabela(tabela, vaga);
                     break;
                 }
                 case DESCRICAO: {

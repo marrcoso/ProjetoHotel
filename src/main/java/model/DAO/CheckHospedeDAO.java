@@ -58,16 +58,28 @@ public class CheckHospedeDAO implements InterfaceDAO<CheckHospede> {
                 throw new RuntimeException("Check não encontrado para vincular hóspedes.");
             }
 
+            // IDs que devem ser mantidos
+            java.util.Set<Integer> idsParaManter = new java.util.HashSet<>();
+            for (CheckHospede ch : checkHospedes) {
+                if (ch.getId() > 0) {
+                    idsParaManter.add(ch.getId());
+                }
+            }
+
+            // Remove apenas os que não estão na nova lista (órfãos)
             TypedQuery<CheckHospede> query = em.createQuery(
                 "SELECT ch FROM CheckHospede ch WHERE ch.check.id = :checkId",
                 CheckHospede.class
             );
             query.setParameter("checkId", checkId);
 
-            for (CheckHospede checkHospede : query.getResultList()) {
-                em.remove(checkHospede);
+            for (CheckHospede chExistente : query.getResultList()) {
+                if (!idsParaManter.contains(chExistente.getId())) {
+                    em.remove(chExistente);
+                }
             }
 
+            // Persiste novos ou atualiza existentes
             for (CheckHospede ch : checkHospedes) {
                 ch.setCheck(check);
                 if (ch.getId() == 0) {
