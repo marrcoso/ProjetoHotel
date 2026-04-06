@@ -162,4 +162,19 @@ public class Utilities {
         }
         return data;
     }
+    public static javax.swing.text.MaskFormatter getMascaraData() {
+        try {
+            return new javax.swing.text.MaskFormatter("##/##/####");
+        } catch (java.text.ParseException ex) {
+            return null;
+        }
+    }
+
+    public static javax.swing.text.MaskFormatter getMascaraDataHora() {
+        try {
+            return new javax.swing.text.MaskFormatter("##/##/#### ##:##");
+        } catch (java.text.ParseException ex) {
+            return null;
+        }
+    }
 }

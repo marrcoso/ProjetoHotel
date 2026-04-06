@@ -6,19 +6,20 @@
 package view;
 
 import controller.ControllerCadCheck;
+import controller.ControllerCadCopaQuarto;
 import controller.ControllerCadFornecedor;
 import controller.ControllerCadFuncionario;
 import controller.ControllerCadHospede;
 import controller.ControllerCadMarca;
 import controller.ControllerCadModelo;
+import controller.ControllerCadOrdemServico;
 import controller.ControllerCadProduto;
 import controller.ControllerCadQuarto;
+import controller.ControllerCadReserva;
 import controller.ControllerCadServico;
 import controller.ControllerCadVagaEstacionamento;
 import controller.ControllerCadVeiculo;
-import controller.ControllerCadReserva;
 import controller.ControllerCaixa;
-import controller.ControllerCadCopaQuarto;
 
 /**
  *
@@ -72,6 +73,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         jMenuItemReserva = new javax.swing.JMenuItem();
         jMenuItemCheck = new javax.swing.JMenuItem();
         jMenuItemCopa = new javax.swing.JMenuItem();
+        jMenuItemOrdemServico = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -224,6 +226,15 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItemCopa);
 
+        jMenuItemOrdemServico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Equipment.png"))); // NOI18N
+        jMenuItemOrdemServico.setText("Ordem de Serviço");
+        jMenuItemOrdemServico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemOrdemServicoActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItemOrdemServico);
+
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Relatórios");
@@ -344,6 +355,12 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
         telaCopa.setVisible(true);
     }
 
+    private void jMenuItemOrdemServicoActionPerformed(java.awt.event.ActionEvent evt) {
+        TelaCadastroOrdemServico telaOrdem = new TelaCadastroOrdemServico(null, true);
+        new ControllerCadOrdemServico(telaOrdem);
+        telaOrdem.setVisible(true);
+    }
+
     @SuppressWarnings("unused")
     private void jMenuItemProdutoActionPerformed(java.awt.event.ActionEvent evt) {                                           
         TelaCadastroProduto telaCadastroProduto = new TelaCadastroProduto(null,true);
@@ -395,6 +412,7 @@ public class TelaMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemHospede;
     private javax.swing.JMenuItem jMenuItemMarca;
     private javax.swing.JMenuItem jMenuItemModelo;
+    private javax.swing.JMenuItem jMenuItemOrdemServico;
     private javax.swing.JMenuItem jMenuItemProduto;
     private javax.swing.JMenuItem jMenuItemQuarto;
     private javax.swing.JMenuItem jMenuItemReserva;

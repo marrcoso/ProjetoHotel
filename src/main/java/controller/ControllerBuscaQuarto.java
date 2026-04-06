@@ -29,6 +29,22 @@ public final class ControllerBuscaQuarto implements ActionListener, InterfaceCon
         this.atualizaCodigo = atualizaCodigo;
         this.apenasDisponiveis = apenasDisponiveis;
         initListeners();
+        if (this.apenasDisponiveis) {
+            pesquisarDisponiveis();
+        }
+    }
+
+    private void pesquisarDisponiveis() {
+        DefaultTableModel tabela = (DefaultTableModel) telaBuscaQuarto.getjTableDados().getModel();
+        tabela.setRowCount(0);
+        try {
+            List<Quarto> disponiveis = quartoService.carregarQuartosDisponiveis();
+            for (Quarto q : disponiveis) {
+                adicionarLinhaTabela(tabela, q);
+            }
+        } catch (RuntimeException ex) {
+            JOptionPane.showMessageDialog(telaBuscaQuarto, "Erro ao carregar quartos disponíveis: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     @Override

@@ -17,12 +17,21 @@ public final class ControllerBuscaServico implements ActionListener, InterfaceCo
     private final TelaBuscaServico telaBuscaServico;
     private final ServicoService servicoService;
     private final Consumer<Integer> atualizaCodigo;
+    private final boolean somenteAtivos;
 
     public ControllerBuscaServico(TelaBuscaServico telaBuscaServico, Consumer<Integer> atualizaCodigo) {
+        this(telaBuscaServico, atualizaCodigo, false);
+    }
+
+    public ControllerBuscaServico(TelaBuscaServico telaBuscaServico, Consumer<Integer> atualizaCodigo, boolean somenteAtivos) {
         this.telaBuscaServico = telaBuscaServico;
         this.servicoService = new ServicoService();
         this.atualizaCodigo = atualizaCodigo;
+        this.somenteAtivos = somenteAtivos;
         initListeners();
+        if (this.somenteAtivos) {
+            pesquisarAtivos();
+        }
     }
 
     @Override
@@ -185,6 +194,19 @@ public final class ControllerBuscaServico implements ActionListener, InterfaceCo
 
         } catch (RuntimeException ex) {
             JOptionPane.showMessageDialog(telaBuscaServico, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void pesquisarAtivos() {
+        DefaultTableModel tabela = (DefaultTableModel) telaBuscaServico.getjTableDados().getModel();
+        tabela.setRowCount(0);
+        try {
+            List<Servico> listaServicos = servicoService.Carregar("status", "A");
+            for (Servico s : listaServicos) {
+                adicionarLinhaTabela(tabela, s);
+            }
+        } catch (RuntimeException ex) {
+            JOptionPane.showMessageDialog(telaBuscaServico, "Erro ao carregar serviços ativos: " + ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 }
